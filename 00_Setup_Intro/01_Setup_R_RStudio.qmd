@@ -1,0 +1,75 @@
+# Setting Up Your Environment: R and RStudio
+
+## Why R and RStudio?
+
+-   **R:** A powerful, free programming language specifically designed for statistical computing and graphics. Widely used in academia and industry for data analysis, including genomics and breeding.
+-   **RStudio:** An excellent, free Integrated Development Environment (IDE) for R. It makes using R much easier with features like code highlighting, plot viewing, package management, and project organization.
+
+## Installation Steps
+
+1.  **Install R:** Go to [CRAN (the Comprehensive R Archive Network)](https://cran.r-project.org/) and download the latest version for your operating system (Windows, macOS, Linux). Follow the installation instructions.
+2.  **Install RStudio:** Go to the [Posit website](https://posit.co/download/rstudio-desktop/) and download the free RStudio Desktop version for your operating system. Install it after installing R.
+3.  **Install Quarto:** Go to [Quarto's website](https://quarto.org/docs/get-started/) and download and install Quarto for your system. RStudio often bundles Quarto, but installing the latest version is good practice.
+4.  **(For PDF Output) Install LaTeX:** Open RStudio, go to the Console panel, and type the following commands one by one, pressing Enter after each:
+
+```         
+# Run these lines in the R Console 
+install.packages("tinytex") 
+# Run only once if you don't have it 
+# tinytex::install_tinytex() 
+Run only once to install LaTeX distribution
+# This might take a few minutes. If it fails, consult TinyTeX documentation or ask instructors.
+```
+
+```{r packages}
+# Installing R Packages for the Course
+# We will use several add-on packages in R. You only need to install packages *once*. Use the R Console in RStudio.
+# --- Run this code chunk in the R Console --- List of packages we will likely need:
+
+# Packages in Cran
+cran_packages <- c(
+  "tidyverse", "readxl", "writexl", "qqman", "vcfR", "QBMS", "adegenet",
+  "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
+  "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
+  "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 
+  "ASRgenomics", "statgenGWAS", "gplots"
+)
+
+# Bioconductor Packages
+bioc_packages <- c("rrBLUP", "LEA")
+
+# Installing Cran Packages
+installed <- rownames(installed.packages())
+missing <- setdiff(cran_packages, installed)
+if (length(missing)) {
+  message("Installing missing CRAN packages: ", paste(missing, collapse = ", "))
+  install.packages(missing)
+}
+
+# Installing Bioconductor Packages
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+installed <- rownames(installed.packages())
+missing <- setdiff(bioc_packages, installed)
+if (length(missing)) {
+  message("Installing missing Bioconductor packages: ", paste(missing, collapse = ", "))
+  BiocManager::install(missing)
+}
+```
+
+## Loading Libraries and Functions
+
+```{r libraries, message=FALSE, warning=FALSE}
+# You can use library() to load any single package
+# We will load all libraries using lapply()
+invisible(
+  suppressPackageStartupMessages(
+    lapply(c(cran_packages, bioc_packages), library, character.only = TRUE)
+  )
+)
+```
+
+## Quick RStudio Tour
+
+(We will cover this live, but key windows include: Console, Script Editor/Notebook, Environment/History, Files/Plots/Packages/Help/Viewer/Projects). Familiarize yourself with these panes.

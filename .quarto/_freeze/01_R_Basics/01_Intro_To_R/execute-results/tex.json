@@ -1,0 +1,21 @@
+{
+  "hash": "c871e9e4fc430af78cd143e50a1b1634",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Module 1.1: Introduction to R - Your Breeding Data Analysis Tool\n\n### Introduction to R\n\nR is a powerful language for data manipulation, visualization, and statistical analysis. Think of R as a versatile calculator for data.\n\n-   **What is R?** Think of R as a powerful, specialized calculator combined with a programming language. It's designed specifically for handling data, performing statistical analyses, and creating informative graphs.\n-   **Why R for Breeding?**\n    -   **Free & Open Source:** Anyone can use it without cost.\n    -   **Powerful for Data:** Excellent at handling the types of large datasets we generate in breeding (phenotypes, genotypes).\n    -   **Cutting-Edge Statistics:** Many new statistical methods (like those for genomic selection or GWAS) are first available as R packages.\n    -   **Great Graphics:** Create publication-quality plots to visualize your results.\n    -   **Large Community:** Lots of help available online and specialized packages for genetics and breeding (like `rrBLUP` which we might see later).\n-   **R vs. Excel:** Excel is great for data entry and simple summaries, but R is much better for complex analysis, automation, reproducible research, and handling very large datasets.\n\nTry these examples in the RStudio Console:\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Basic arithmetic\n2 + 5\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 7\n```\n\n\n:::\n\n```{.r .cell-code}\n10 - 3\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 7\n```\n\n\n:::\n\n```{.r .cell-code}\n4 * 8\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 32\n```\n\n\n:::\n\n```{.r .cell-code}\n100 / 4\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 25\n```\n\n\n:::\n\n```{.r .cell-code}\n# Order of operations (like standard math)\n5 + 2 * 3   # Multiplication first\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 11\n```\n\n\n:::\n\n```{.r .cell-code}\n(5 + 2) * 3 # Parentheses first\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 21\n```\n\n\n:::\n\n```{.r .cell-code}\n# Built-in mathematical functions\nsqrt(16)    # Square root\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 4\n```\n\n\n:::\n\n```{.r .cell-code}\nlog(10)     # Natural logarithm\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2.302585\n```\n\n\n:::\n\n```{.r .cell-code}\nlog10(100)  # Base-10 logarithm\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n\n\n\n\n\n\n## Variables: Storing Information\n\nVariables are used to store information in R. You can think of them as containers for data. In R, you can create variables using the assignment operator `<-`. You can also use `=` for assignment, but `<-` is more common in R.\n\nUse the `<-` operator to assign and manipulate variables:\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Assign the value 5 to variable x\nx <- 5\n\n# Assign the result of 10 + 3 to variable y\ny <- 10 + 3\n\n# Print the value of x\nx\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 5\n```\n\n\n:::\n\n```{.r .cell-code}\n# Use variables in calculations\nz <- x + y\n# Print the value of z\nz\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 18\n```\n\n\n:::\n\n```{.r .cell-code}\n# Assign the name of a variety to a variable\nbest_variety <- \"ICARDA_Gold\" # Text needs quotes \"\"\n\n# Print name\nprint(best_variety)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"ICARDA_Gold\"\n```\n\n\n:::\n\n```{.r .cell-code}\n# We can also concatenate text like this\nprint(paste(\"The best variety is\", best_variety))\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"The best variety is ICARDA_Gold\"\n```\n\n\n:::\n:::\n",
+    "supporting": [
+      "01_Intro_To_R_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

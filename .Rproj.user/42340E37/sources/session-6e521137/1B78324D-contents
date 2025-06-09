@@ -1,0 +1,70 @@
+# Module 3.1: Genotype Data
+
+## Introduction
+
+Genotype data refers to the genetic makeup, in this case of crops, at specific loci across the genome. This data allows us to associate genetic differences with traits of agronomic interest and regional information.
+
+-   The **genotype** refers to the specific combination of alleles at a given location. Depending on the ploidy of the crop, we will have two (diploids) or more alleles per locus.
+
+-   **SNPs (Single Nucleotide Polymorphisms)** are positions across the genome where variations exist between individuals.
+
+    -   *Example:* Three different crop variants may have homozygous A/A, heterozygous A/G and homozygous G/G at a specific locus. This can also be coded as 0, 1 and 2. 0 represents homozygous for the reference allele, 1 represents heterozygous, and 2 represents homozygous for the alternate allele.
+
+## Formats
+
+SNP data can be stored in different formats and file types, depending on the platform or program used. We will briefly discuss the most common file types.
+
+-   **VCF (Variant Call Format** - `.vcf`**):** Standard format for SNPs and variants from sequencing. Contains metadata, IDs, calls, positions and other information.
+    -   GT = Genotype
+    -   0 = REF; 1 = ALT
+    -   0/0 or 1/1= homozygous; 0/1 or 1/0 = heterozygous
+
+```{css}
+#CHROM	POS	    ID	          REF	ALT	QUAL	FILTER	INFO	FORMAT  G1  G2  G3
+1H	    7253074	SCRI_RS_1929	A	  C	  .	    PASS		.     GT	    1/1	1/1	0/0
+```
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r vcf, include=FALSE}
+vcf <- read.vcfR(here("data","Barley.vcf"), verbose = FALSE)
+```
+
+```{r vcf, eval=FALSE}
+# Read vcf file
+vcf <- read.vcfR("data/Barley.vcf", verbose = FALSE)
+```
+
+```{r vcf-head}
+# Glimpse vcf
+head(vcf)
+
+# Turn into matrix
+vcfMatrix <- extract.gt(vcf)
+```
+
+-   **PLINK (-`.ped`, `.map`) or Binary PLINK (-.`bed`, `.bim`, `.fam`)**
+    -   `.ped`: Pedigree/genotype data (tab delimited)
+    -   `.map`: SNP mapping information
+    -   `.bed`: Binary genotype matrix
+    -   `.bin`: SNP information
+    -   `.fam`: Sample information
+-   **HapMap (-`.hmp.txt`):** Used in TASSEL, header includes metadata, positions and genotypes encoded as allele pairs (A/A, A/G, etc.).
+-   **Numeric Matrix (-.csv, .txt):** SNPs in columns and genotypes in rows (or vice versa), data encoded as 0, 1 and 2 for homozygous for reference allele, heterozygous, and homozygous for alternate allele.
+
+```{r load-matrix, include=FALSE}
+matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+```
+
+```{r load-matrix, eval=FALSE}
+# Load SNP data matrix
+matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+```
+
+```{r vcf-numeric}
+# The vcf matrix we obtained can also be turned into this type of format
+matrixNum <- vcfToNumericMatrix(vcfMatrix)
+```

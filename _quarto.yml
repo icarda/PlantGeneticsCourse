@@ -1,0 +1,87 @@
+project:
+  type: book
+  output-dir: docs  # Ensures rendered site ends up here for GitHub Actions
+
+book:
+  title: "Plant Genetics Data Analysis with R - Baku"
+  subtitle: "A Practical Guide for Breeders"
+  description: "This book provides a comprehensive introduction to R programming and its application in plant genetic data analysis."
+  page-footer:
+    left: "Copyright 2025, ICARDA"
+    right:
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com/
+  author: "Your Name / Breeding Institute Baku (ICARDA Collaboration)"
+  date: today
+  date-format: "YYYY-MM-DD"
+  chapters:
+    - index.qmd
+    - part: "Introduction and Setup"
+      chapters:
+        - 00_Setup_Intro/00_Welcome.qmd
+        - 00_Setup_Intro/01_Setup_R_RStudio.qmd
+    - part: "R Programming Fundamentals"
+      chapters:
+        - 01_R_Basics/01_Intro_To_R.qmd
+        - 01_R_Basics/02_Data_Types_Structures.qmd
+        - 01_R_Basics/03_Basic_Operations.qmd
+        - 01_R_Basics/04_Reading_Writing_Data.qmd
+        - 01_R_Basics/05_Simple_Plotting.qmd
+    - part: "Handling Breeding Data"
+      chapters:
+        - 02_Data_Handling/01_Loading_Breeding_Data.qmd
+        - 02_Data_Handling/02_Data_QC_Filtering.qmd
+    - part: "Core Genomic Concepts"
+      chapters:
+        - 03_Genomic_Concepts/01_SNPs_Genotypes.qmd
+        - 03_Genomic_Concepts/02_QBMS.qmd
+        - 03_Genomic_Concepts/03_Filtering_SNP_Data.qmd
+    - part: "Population Structure and Relatedness"
+      chapters:
+        - 04_Pop_Structure/01_Kinship_Relatedness.qmd
+        - 04_Pop_Structure/02_Pop_Structure.qmd
+        - 04_Pop_Structure/03_Phylo_Tree.qmd
+    - part: "Marker-Trait Association (GWAS)"
+      chapters:
+        - 05_GWAS_Intro/01_Concept_Simple_Model.qmd
+        - 05_GWAS_Intro/02_Running_Basic_GWAS.qmd
+        - 05_GWAS_Intro/03_Interpreting_Results.qmd
+    - part: "Tools and Advanced Concepts"
+      chapters:
+        - 06_GIGWA_AI/01_GIGWA_Overview.qmd
+        - 06_GIGWA_AI/02_AI_Concepts_Breeders.qmd
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+    toc: true
+    toc-depth: 3
+  revealjs:
+    theme: default
+    # css: custom.css # Also try commenting this out as a test (see step 3)
+    slide-number: true
+    chalkboard: true
+    logo: assets/icarda_logo.png
+  beamer:
+    documentclass: beamer
+    theme: Madrid
+    colortheme: default
+    logo: assets/icarda_logo.png
+    slide-level: 2
+    aspectratio: 169
+
+# bibliography: references.bib
+
+# --- THIS BLOCK MIGHT BE CAUSING ISSUES ---
+# Comment out or delete this entire 'website:' block for testing:
+# website:
+#   page-footer:
+#     left: "International Center for Agricultural Research in the Dry Areas (ICARDA)"
+#     center: "Plant Breeding Data Analysis with R - Baku"
+# -------------------------------------------
+
+editor: visual

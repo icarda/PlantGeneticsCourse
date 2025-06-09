@@ -1,0 +1,64 @@
+# Module 4.1: Kinship and Relatedness
+
+Identifying relatedness between individuals is important to ensure samples are independent, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can help control confounding affects in association studies and can help infer subpopulations when studying structure. Moreover, not only may individuals be related, we can sometimes find duplicates of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.
+
+## Kinship
+
+Kinship refers to the **genetic relatedness between individuals**, and it is a measure of **how much of their genomes two individuals share due to common ancestry**. Kinship is often evaluated by calculating a **kinship matrix**. We can use the `kinshipMatrix()` function from the ICARDA package to do this. This function has the option to choose the method we want to use to calculate the matrix by defining the `method` parameter. By default it it set to `"vanRaden"`, but we can choose between `"astle"`, `"IBS"`, and `"identity"`. We can also choose to save the matrix locally as a text file by defining the `save` parameter, which is set to `FALSE` by default.
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r matrix-run, include=FALSE}
+# Importing our genotypic data
+raw_matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+```
+
+```{r matrix, eval=FALSE}
+# Importing our genotypic data
+raw_matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+```
+
+```{r filter}
+# Filtering
+matrix <- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)
+
+# We transpose our matrix (to have individuals as rows and makers as columns for posterior analyses)
+matrix <- t(matrix)
+
+# Calculating kinship matrix using ICARDA package
+kinshipMat <- kinshipMatrix(matrix, method = "vanRaden", save = FALSE)
+```
+
+```{r heat, include = FALSE}
+# Generating a heatmap from our kinship matrix as an image in our working directory
+kinshipHeatmap(kinshipMat, file = here("output", "figures", "heatmap.png"))
+```
+
+```{r heat, eval = FALSE}
+# Generating a heatmap from our kinship matrix as an image in our working directory
+kinshipHeatmap(kinshipMat, file = "output/figures/heatmap.png")
+```
+
+## Duplicates
+
+We can use the results from our kinship matrix to identify potential duplicates within our data. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses.
+
+```{r dupes}
+# Identifying duplicates by setting a similarity threshold and using the ICARDA package
+duplicates <- kinshipDuplicates(matrix, threshold = 0.99, kinship = kinshipMat)
+
+# Printing potential duplicates along with their kinship and correlation
+duplicates$potentialDuplicates
+
+# Printing histograms with the distribution of diagonal and off-diagonal values
+duplicates$plots
+```
+
+If we decide we want to filter our data according to the potential duplicates we identified, we can use the `kinshipFilter()` function from the ICARDA package. This will give us a filtered version of our SNP matrix and kinship matrix.
+
+```{r filter}
+filteredMatrix <- kinshipFilter(matrix, duplicates$potentialDuplicates, kinshipMat)
+```

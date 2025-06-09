@@ -1,0 +1,15 @@
+{
+  "hash": "69f101a0f087771b0715ce8bd1feffb3",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Kinship and Relatedness\n\nIdentifying relatedness between individuals is important to ensure samples are independent, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can help control confounding affects in association studies and can help infer subpopulations when studying structure. Moreover, not only may individuals be related, we can sometimes find duplicates of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.\n\n## Kinship\n\nKinship refers to the genetic relatedness between individuals, and it is a measure of how much of their genomes two individuals share due to common ancestry. Kinship is often evaluated by calculating a kinship matrix. We can use the `kinshipMatrix()` function from the ICARDA package to do this. This function has the option to choose the method we want to use to calculate the matrix by defining the `method` parameter. By default it it set to `\"vanRaden\"`, but we can choose between `\"astle\"`, `\"IBS\"`, and `\"identity\"`. We can also choose to save the matrix locally as a text file by defining the `save` parameter, which is set to `FALSE` by default.\n\n\n\n\n\n\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Importing our genotypic data\nraw_matrix <- as.matrix(readRDS(file = \"data/BarleyMarkerMatrix.rds\"))\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# Filtering\nmatrix <- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)\n\n# We transpose our matrix (to have individuals as rows and makers as columns for posterior analyses)\nmatrix <- t(matrix)\n\n# Calculating kinship matrix\nkinshipMat <- kinshipMatrix(matrix, method = \"vanRaden\", save = FALSE)\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

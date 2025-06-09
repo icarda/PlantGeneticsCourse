@@ -1,0 +1,65 @@
+{
+  "04_Pop_Structure/01_Kinship_Relatedness.qmd": {
+    "01_Kinship_Relatedness.html": "4501bd5c"
+  },
+  "index.qmd": {
+    "index.html": "02eb96d7"
+  },
+  "00_Setup_Intro/00_Welcome.qmd": {
+    "00_Welcome.html": "a8db9eec"
+  },
+  "00_Setup_Intro/01_Setup_R_RStudio.qmd": {
+    "01_Setup_R_RStudio.html": "e94182a7"
+  },
+  "01_R_Basics/01_Intro_To_R.qmd": {
+    "01_Intro_To_R.html": "377e6dc4"
+  },
+  "01_R_Basics/02_Data_Types_Structures.qmd": {
+    "02_Data_Types_Structures.html": "8ab551bd"
+  },
+  "01_R_Basics/03_Basic_Operations.qmd": {
+    "03_Basic_Operations.html": "bee73b0f"
+  },
+  "01_R_Basics/04_Reading_Writing_Data.qmd": {
+    "04_Reading_Writing_Data.html": "e1e8ce0f"
+  },
+  "01_R_Basics/05_Simple_Plotting.qmd": {
+    "05_Simple_Plotting.html": "26b3d42d"
+  },
+  "02_Data_Handling/01_Loading_Breeding_Data.qmd": {
+    "01_Loading_Breeding_Data.html": "3ccfcf21"
+  },
+  "02_Data_Handling/02_Data_QC_Filtering.qmd": {
+    "02_Data_QC_Filtering.html": "1830b5cf"
+  },
+  "03_Genomic_Concepts/01_SNPs_Genotypes.qmd": {
+    "01_SNPs_Genotypes.html": "cbf9946b"
+  },
+  "03_Genomic_Concepts/02_QBMS.qmd": {
+    "02_QBMS.html": "654320cd"
+  },
+  "03_Genomic_Concepts/03_Filtering_SNP_Data.qmd": {
+    "03_Filtering_SNP_Data.html": "266f2cdb"
+  },
+  "04_Pop_Structure/02_Pop_Structure.qmd": {
+    "02_Pop_Structure.html": "a2ebdaae"
+  },
+  "04_Pop_Structure/03_Phylo_Tree.qmd": {
+    "03_Phylo_Tree.html": "71b75e13"
+  },
+  "05_GWAS_Intro/01_Concept_Simple_Model.qmd": {
+    "01_Concept_Simple_Model.html": "bfa425d1"
+  },
+  "05_GWAS_Intro/02_Running_Basic_GWAS.qmd": {
+    "02_Running_Basic_GWAS.html": "bc5515dd"
+  },
+  "05_GWAS_Intro/03_Interpreting_Results.qmd": {
+    "03_Interpreting_Results.html": "3a06b705"
+  },
+  "06_GIGWA_AI/01_GIGWA_Overview.qmd": {
+    "01_GIGWA_Overview.html": "9364486c"
+  },
+  "06_GIGWA_AI/02_AI_Concepts_Breeders.qmd": {
+    "02_AI_Concepts_Breeders.html": "dc9d72d8"
+  }
+}

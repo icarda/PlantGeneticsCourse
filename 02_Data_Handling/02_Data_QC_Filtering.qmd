@@ -1,0 +1,59 @@
+# Module 2.2: Data Quality Control and Filtering
+
+## Quality Control
+
+In this module we will briefly describe the idea of data quality control, a common practice that allows us to identify errors or anomalies within our data before performing any posterior analyses.
+
+## Filtering Duplicates
+
+In plant breeding we will typically have multi-trait or gene data collected by accession. In a data frame, we may have an ID or Taxa column, followed by columns with the trait or gene information. Before performing any type of analyses, it is important to identify and filter duplicates if there are any, as these could skew our results. For this example we will work with a generated file based on the data set used for Module 9.1. In this case, \* `Taxa` is our genotype identifier column.
+
+```{r setup, include=FALSE}
+library(here)
+```
+
+```{r data-r, include=FALSE}
+barley_pheno_data <- read_csv(here("data","icarda_barley_2019_pheno_raw.csv")) # Loading into data frame
+```
+
+```{r data, eval=FALSE}
+# We start by loading our raw data file
+barley_data_file_path <- "data/icarda_barley_2019_pheno_raw.csv" # Defining our file path
+barley_pheno_data <- read_csv(barley_data_file_path) # Loading into data frame
+```
+
+```{r dupes}
+# We filter the data frame to keep only one entry for each ID
+data <- barley_pheno_data[!duplicated(barley_pheno_data),]
+data
+```
+
+## Filtering by Missing Data
+
+Many times, we will want to remove rows with missing data. Missing values can distort certain calculations. Although some functions in R have an option to automatically remove NA's before performing the calculation, many times it is necessary to remove them beforehand.
+
+```{r missing-data}
+# We will work with our duplicate filtered data frame from last section.
+# complete.cases() allows us to filter any rows with missing values
+data <- data[complete.cases(data),]
+data
+```
+
+## Identifying and Filtering Outliers
+
+Identifying and filtering outliers helps improve the accuracy and reliability of our results. There are many sources of outliers or anomalies, human error, measurement errors, or simply nature doing its thing. However, even if we don't want to remove these data points, it is important to identify them first to then decide what the following steps will be. Outliers can skew important statistical measures and correlations, leading to misleading conclusions. Moreover, many machine learning algorithms, such as regression or PCA, are very sensitive to outliers. For examples, outliers in PCA can influence the principal components and clusterization, leading to misclassification.
+
+For the following example we will analyse the \* `Taxa` in our filtered data set.
+
+```{r outliers}
+# We can use a simple boxplot to explore the overall structure of our data and identify outliers
+areaBP <- boxplot(data$Area, main = "Boxplot for Variable")
+
+# Saving our boxplot in an object allows us to extract the outlier values as a vector
+areaBP$out
+
+# We can then choose to remove these outlier entries from our data frame
+# The idea here is that we keep the rows where the `Area` value is not in our outliers vector
+dataArea <- data[! data$Area %in% areaBP$out,]
+dataArea
+```

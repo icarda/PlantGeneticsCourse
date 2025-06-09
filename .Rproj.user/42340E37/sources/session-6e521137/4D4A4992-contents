@@ -1,0 +1,82 @@
+# Module 3.2: Using the QBMS Package to Query Genotypic Data
+
+We have explored how to import genotypic data from files into R, but we can also retrieve it directly from online databases, such as **Gigwa**, using **ICARDA's QBMS package**.
+
+```{r}
+# Loading QBMS library
+library(QBMS)
+
+# Configuring the connection
+set_qbms_config(url = "https://gigwa.icarda.org:8443/gigwa/", engine = "gigwa")
+
+login_gigwa("Tamara", "-Zy2gn5ijQcW!EE")
+```
+
+Once logged in, we can use the `gigwa_list_dbs()` function to view all available data bases.
+
+```{r}
+gigwa_list_dbs()
+```
+
+For this example we will be choosing the *"BarleySubData"* database.
+
+```{r}
+# To set a data base
+gigwa_set_db("BarleySubData")
+```
+
+Once we have defined a data base, we have to define a project and a run. We can do this the following way.
+
+```{r}
+# To view available projects
+gigwa_list_projects()
+
+# To set a project
+gigwa_set_project("BarleySubData")
+
+# To view available runs
+gigwa_list_runs()
+
+# To set a run
+gigwa_set_run("Run1")
+```
+
+Once we have defined a data base, a project and a run, there are many tools we can use to extract relevant information.
+
+1.  `gigwa_get_samples()`: Retrieves a list of samples associated with defined GIGWA project
+2.  `gigwa_get_sequences()`: Retrieves a list of chromosomes associated with defined GIGWA project
+3.  `gigwa_get_markers()`: Retrieves a list of SNP variants from selected GIGWA run. We can define the following parameters:
+    -   `start`: starting position of query
+
+    -   `end`: ending position of query
+
+    -   `chrom`: chromosome
+
+    -   `simplify`: defaults as TRUE, returns data in HapMap format with columns for rs#, alleles, chromosome and position
+4.  `gigwa_get_allelematrix()`: Retrieves a two-dimensional matrix of genotype data from the defined GIGWA run.
+    -   `samples`: optional list of sample IDs, if NULL, all samples are included
+
+    -   `start`: starting position of query
+
+    -   `end`: ending position of query
+
+    -   `chrom`: chromosome
+
+    -   `snps`: list of SNP variants to filter
+
+    -   `simplify`: defaults as TRUE, returns data in numeric coding (0, 1, 2 for diploids)
+5.  `gigwa_get_metadata()`: Retrieves associated metadata (if available)
+
+```{r}
+# Get a list of all samples in the selected run
+samples <- gigwa_get_samples()
+
+# Get sequence list
+chroms <- gigwa_get_sequences()
+
+# Get markers
+markers <- gigwa_get_markers()
+
+# Get genotypic matrix
+#marker_matrix <- gigwa_get_allelematrix()
+```
