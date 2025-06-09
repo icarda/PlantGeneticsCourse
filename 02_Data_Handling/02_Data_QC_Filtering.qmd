@@ -12,6 +12,12 @@ In plant breeding we will typically have multi-trait or gene data collected by a
 library(here)
 ```
 
+```{r libs}
+# Load the necessary libraries
+# 'tidyverse' includes 'readr' (for read_csv) and 'dplyr' (for glimpse, etc.)
+library(tidyverse) 
+```
+
 ```{r data-r, include=FALSE}
 barley_pheno_data <- read_csv(here("data","icarda_barley_2019_pheno_raw.csv")) # Loading into data frame
 ```

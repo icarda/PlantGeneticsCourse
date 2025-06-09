@@ -29,7 +29,7 @@ library(here)
 source(here("code","setup.R"))
 ```
 
-```{r vcf, include=FALSE}
+```{r vcf-read, include=FALSE}
 vcf <- read.vcfR(here("data","Barley.vcf"), verbose = FALSE)
 ```
 
@@ -59,7 +59,7 @@ vcfMatrix <- extract.gt(vcf)
 matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
 ```
 
-```{r load-matrix, eval=FALSE}
+```{r matrix, eval=FALSE}
 # Load SNP data matrix
 matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
 ```

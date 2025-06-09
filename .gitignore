@@ -1,4 +1,6 @@
-*.rds
-*.csv
-*.pdf
-output/
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/

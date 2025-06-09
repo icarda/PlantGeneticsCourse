@@ -32,7 +32,7 @@ matrix <- t(matrix)
 kinshipMat <- kinshipMatrix(matrix, method = "vanRaden", save = FALSE)
 ```
 
-```{r heat, include = FALSE}
+```{r heat-create, include = FALSE}
 # Generating a heatmap from our kinship matrix as an image in our working directory
 kinshipHeatmap(kinshipMat, file = here("output", "figures", "heatmap.png"))
 ```
@@ -59,6 +59,6 @@ duplicates$plots
 
 If we decide we want to filter our data according to the potential duplicates we identified, we can use the `kinshipFilter()` function from the ICARDA package. This will give us a filtered version of our SNP matrix and kinship matrix.
 
-```{r filter}
+```{r filter-kinship}
 filteredMatrix <- kinshipFilter(matrix, duplicates$potentialDuplicates, kinshipMat)
 ```

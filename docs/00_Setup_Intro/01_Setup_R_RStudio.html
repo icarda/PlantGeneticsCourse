@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="This book provides a comprehensive introduction to R programming and its application in plant breeding data analysis.">
+<meta name="description" content="This book provides a comprehensive introduction to R programming and its application in plant genetic data analysis.">
 
-<title>3&nbsp; Setting Up Your Environment: R and RStudio – Plant Breeding Data Analysis with R - Baku</title>
+<title>3&nbsp; Setting Up Your Environment: R and RStudio – Plant Genetics Data Analysis with R - Baku</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Plant Breeding Data Analysis with R - Baku</a> 
+      <a href="../">Plant Genetics Data Analysis with R - Baku</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -144,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Welcome – Plant Breeding Data Analysis with R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Welcome – Plant Genetics Data Analysis with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -275,13 +275,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/01_Kinship_Relatedness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Kinship and Relatedness</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Module 4.1: Kinship and Relatedness</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/02_Pop_Structure.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">02_Pop_Structure.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Module 4.2: Population Structure</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -411,11 +411,11 @@ Run only once to install LaTeX distribution
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages in Cran</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>cran_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"readxl"</span>, <span class="st">"writexl"</span>, <span class="st">"qqman"</span>, <span class="st">"vcfR"</span>, <span class="st">"QBMS"</span>, <span class="st">"adegenet"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"readxl"</span>, <span class="st">"writexl"</span>, <span class="st">"readr"</span>, <span class="st">"qqman"</span>, <span class="st">"vcfR"</span>, <span class="st">"QBMS"</span>, <span class="st">"adegenet"</span>,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ade4"</span>, <span class="st">"ggiraph"</span>, <span class="st">"ggpubr"</span>, <span class="st">"plotly"</span>, <span class="st">"poppr"</span>, <span class="st">"reactable"</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rnaturalearth"</span>, <span class="st">"scatterpie"</span>, <span class="st">"snpReady"</span>, <span class="st">"viridis"</span>, <span class="st">"tibble"</span>,</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"reshape2"</span>, <span class="st">"forcats"</span>, <span class="st">"dplyr"</span>, <span class="st">"sp"</span>, <span class="st">"scales"</span>, <span class="st">"htmltools"</span>, </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ASRgenomics"</span>, <span class="st">"statgenGWAS"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ASRgenomics"</span>, <span class="st">"statgenGWAS"</span>, <span class="st">"gplots"</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bioconductor Packages</span></span>
@@ -446,284 +446,11 @@ Run only once to install LaTeX distribution
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use library() to load any single package</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We will load all libraries using lapply()</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">c</span>(cran_packages, bioc_packages), library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
- [1] "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"     "readr"    
- [7] "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"     "graphics" 
-[13] "grDevices" "utils"     "datasets"  "methods"   "base"     
-
-[[2]]
- [1] "readxl"    "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"    
- [7] "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"    
-[13] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     
-
-[[3]]
- [1] "writexl"   "readxl"    "lubridate" "forcats"   "stringr"   "dplyr"    
- [7] "purrr"     "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse"
-[13] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
-[19] "base"     
-
-[[4]]
- [1] "qqman"     "writexl"   "readxl"    "lubridate" "forcats"   "stringr"  
- [7] "dplyr"     "purrr"     "readr"     "tidyr"     "tibble"    "ggplot2"  
-[13] "tidyverse" "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-[19] "methods"   "base"     
-
-[[5]]
- [1] "vcfR"      "qqman"     "writexl"   "readxl"    "lubridate" "forcats"  
- [7] "stringr"   "dplyr"     "purrr"     "readr"     "tidyr"     "tibble"   
-[13] "ggplot2"   "tidyverse" "stats"     "graphics"  "grDevices" "utils"    
-[19] "datasets"  "methods"   "base"     
-
-[[6]]
- [1] "QBMS"      "vcfR"      "qqman"     "writexl"   "readxl"    "lubridate"
- [7] "forcats"   "stringr"   "dplyr"     "purrr"     "readr"     "tidyr"    
-[13] "tibble"    "ggplot2"   "tidyverse" "stats"     "graphics"  "grDevices"
-[19] "utils"     "datasets"  "methods"   "base"     
-
-[[7]]
- [1] "adegenet"  "ade4"      "QBMS"      "vcfR"      "qqman"     "writexl"  
- [7] "readxl"    "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"    
-[13] "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"    
-[19] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     
-
-[[8]]
- [1] "adegenet"  "ade4"      "QBMS"      "vcfR"      "qqman"     "writexl"  
- [7] "readxl"    "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"    
-[13] "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"    
-[19] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     
-
-[[9]]
- [1] "ggiraph"   "adegenet"  "ade4"      "QBMS"      "vcfR"      "qqman"    
- [7] "writexl"   "readxl"    "lubridate" "forcats"   "stringr"   "dplyr"    
-[13] "purrr"     "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse"
-[19] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
-[25] "base"     
-
-[[10]]
- [1] "ggpubr"    "ggiraph"   "adegenet"  "ade4"      "QBMS"      "vcfR"     
- [7] "qqman"     "writexl"   "readxl"    "lubridate" "forcats"   "stringr"  
-[13] "dplyr"     "purrr"     "readr"     "tidyr"     "tibble"    "ggplot2"  
-[19] "tidyverse" "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-[25] "methods"   "base"     
-
-[[11]]
- [1] "plotly"    "ggpubr"    "ggiraph"   "adegenet"  "ade4"      "QBMS"     
- [7] "vcfR"      "qqman"     "writexl"   "readxl"    "lubridate" "forcats"  
-[13] "stringr"   "dplyr"     "purrr"     "readr"     "tidyr"     "tibble"   
-[19] "ggplot2"   "tidyverse" "stats"     "graphics"  "grDevices" "utils"    
-[25] "datasets"  "methods"   "base"     
-
-[[12]]
- [1] "poppr"     "plotly"    "ggpubr"    "ggiraph"   "adegenet"  "ade4"     
- [7] "QBMS"      "vcfR"      "qqman"     "writexl"   "readxl"    "lubridate"
-[13] "forcats"   "stringr"   "dplyr"     "purrr"     "readr"     "tidyr"    
-[19] "tibble"    "ggplot2"   "tidyverse" "stats"     "graphics"  "grDevices"
-[25] "utils"     "datasets"  "methods"   "base"     
-
-[[13]]
- [1] "reactable" "poppr"     "plotly"    "ggpubr"    "ggiraph"   "adegenet" 
- [7] "ade4"      "QBMS"      "vcfR"      "qqman"     "writexl"   "readxl"   
-[13] "lubridate" "forcats"   "stringr"   "dplyr"     "purrr"     "readr"    
-[19] "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"     "graphics" 
-[25] "grDevices" "utils"     "datasets"  "methods"   "base"     
-
-[[14]]
- [1] "rnaturalearth" "reactable"     "poppr"         "plotly"       
- [5] "ggpubr"        "ggiraph"       "adegenet"      "ade4"         
- [9] "QBMS"          "vcfR"          "qqman"         "writexl"      
-[13] "readxl"        "lubridate"     "forcats"       "stringr"      
-[17] "dplyr"         "purrr"         "readr"         "tidyr"        
-[21] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[25] "graphics"      "grDevices"     "utils"         "datasets"     
-[29] "methods"       "base"         
-
-[[15]]
- [1] "scatterpie"    "rnaturalearth" "reactable"     "poppr"        
- [5] "plotly"        "ggpubr"        "ggiraph"       "adegenet"     
- [9] "ade4"          "QBMS"          "vcfR"          "qqman"        
-[13] "writexl"       "readxl"        "lubridate"     "forcats"      
-[17] "stringr"       "dplyr"         "purrr"         "readr"        
-[21] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[25] "stats"         "graphics"      "grDevices"     "utils"        
-[29] "datasets"      "methods"       "base"         
-
-[[16]]
- [1] "snpReady"      "impute"        "rgl"           "matrixcalc"   
- [5] "Matrix"        "scatterpie"    "rnaturalearth" "reactable"    
- [9] "poppr"         "plotly"        "ggpubr"        "ggiraph"      
-[13] "adegenet"      "ade4"          "QBMS"          "vcfR"         
-[17] "qqman"         "writexl"       "readxl"        "lubridate"    
-[21] "forcats"       "stringr"       "dplyr"         "purrr"        
-[25] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[29] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[33] "utils"         "datasets"      "methods"       "base"         
-
-[[17]]
- [1] "viridis"       "viridisLite"   "snpReady"      "impute"       
- [5] "rgl"           "matrixcalc"    "Matrix"        "scatterpie"   
- [9] "rnaturalearth" "reactable"     "poppr"         "plotly"       
-[13] "ggpubr"        "ggiraph"       "adegenet"      "ade4"         
-[17] "QBMS"          "vcfR"          "qqman"         "writexl"      
-[21] "readxl"        "lubridate"     "forcats"       "stringr"      
-[25] "dplyr"         "purrr"         "readr"         "tidyr"        
-[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[33] "graphics"      "grDevices"     "utils"         "datasets"     
-[37] "methods"       "base"         
-
-[[18]]
- [1] "viridis"       "viridisLite"   "snpReady"      "impute"       
- [5] "rgl"           "matrixcalc"    "Matrix"        "scatterpie"   
- [9] "rnaturalearth" "reactable"     "poppr"         "plotly"       
-[13] "ggpubr"        "ggiraph"       "adegenet"      "ade4"         
-[17] "QBMS"          "vcfR"          "qqman"         "writexl"      
-[21] "readxl"        "lubridate"     "forcats"       "stringr"      
-[25] "dplyr"         "purrr"         "readr"         "tidyr"        
-[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[33] "graphics"      "grDevices"     "utils"         "datasets"     
-[37] "methods"       "base"         
-
-[[19]]
- [1] "viridis"       "viridisLite"   "snpReady"      "impute"       
- [5] "rgl"           "matrixcalc"    "Matrix"        "scatterpie"   
- [9] "rnaturalearth" "reactable"     "poppr"         "plotly"       
-[13] "ggpubr"        "ggiraph"       "adegenet"      "ade4"         
-[17] "QBMS"          "vcfR"          "qqman"         "writexl"      
-[21] "readxl"        "lubridate"     "forcats"       "stringr"      
-[25] "dplyr"         "purrr"         "readr"         "tidyr"        
-[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[33] "graphics"      "grDevices"     "utils"         "datasets"     
-[37] "methods"       "base"         
-
-[[20]]
- [1] "reshape2"      "viridis"       "viridisLite"   "snpReady"     
- [5] "impute"        "rgl"           "matrixcalc"    "Matrix"       
- [9] "scatterpie"    "rnaturalearth" "reactable"     "poppr"        
-[13] "plotly"        "ggpubr"        "ggiraph"       "adegenet"     
-[17] "ade4"          "QBMS"          "vcfR"          "qqman"        
-[21] "writexl"       "readxl"        "lubridate"     "forcats"      
-[25] "stringr"       "dplyr"         "purrr"         "readr"        
-[29] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[33] "stats"         "graphics"      "grDevices"     "utils"        
-[37] "datasets"      "methods"       "base"         
-
-[[21]]
- [1] "reshape2"      "viridis"       "viridisLite"   "snpReady"     
- [5] "impute"        "rgl"           "matrixcalc"    "Matrix"       
- [9] "scatterpie"    "rnaturalearth" "reactable"     "poppr"        
-[13] "plotly"        "ggpubr"        "ggiraph"       "adegenet"     
-[17] "ade4"          "QBMS"          "vcfR"          "qqman"        
-[21] "writexl"       "readxl"        "lubridate"     "forcats"      
-[25] "stringr"       "dplyr"         "purrr"         "readr"        
-[29] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[33] "stats"         "graphics"      "grDevices"     "utils"        
-[37] "datasets"      "methods"       "base"         
-
-[[22]]
- [1] "reshape2"      "viridis"       "viridisLite"   "snpReady"     
- [5] "impute"        "rgl"           "matrixcalc"    "Matrix"       
- [9] "scatterpie"    "rnaturalearth" "reactable"     "poppr"        
-[13] "plotly"        "ggpubr"        "ggiraph"       "adegenet"     
-[17] "ade4"          "QBMS"          "vcfR"          "qqman"        
-[21] "writexl"       "readxl"        "lubridate"     "forcats"      
-[25] "stringr"       "dplyr"         "purrr"         "readr"        
-[29] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[33] "stats"         "graphics"      "grDevices"     "utils"        
-[37] "datasets"      "methods"       "base"         
-
-[[23]]
- [1] "sp"            "reshape2"      "viridis"       "viridisLite"  
- [5] "snpReady"      "impute"        "rgl"           "matrixcalc"   
- [9] "Matrix"        "scatterpie"    "rnaturalearth" "reactable"    
-[13] "poppr"         "plotly"        "ggpubr"        "ggiraph"      
-[17] "adegenet"      "ade4"          "QBMS"          "vcfR"         
-[21] "qqman"         "writexl"       "readxl"        "lubridate"    
-[25] "forcats"       "stringr"       "dplyr"         "purrr"        
-[29] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[33] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[37] "utils"         "datasets"      "methods"       "base"         
-
-[[24]]
- [1] "scales"        "sp"            "reshape2"      "viridis"      
- [5] "viridisLite"   "snpReady"      "impute"        "rgl"          
- [9] "matrixcalc"    "Matrix"        "scatterpie"    "rnaturalearth"
-[13] "reactable"     "poppr"         "plotly"        "ggpubr"       
-[17] "ggiraph"       "adegenet"      "ade4"          "QBMS"         
-[21] "vcfR"          "qqman"         "writexl"       "readxl"       
-[25] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[29] "purrr"         "readr"         "tidyr"         "tibble"       
-[33] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[37] "grDevices"     "utils"         "datasets"      "methods"      
-[41] "base"         
-
-[[25]]
- [1] "htmltools"     "scales"        "sp"            "reshape2"     
- [5] "viridis"       "viridisLite"   "snpReady"      "impute"       
- [9] "rgl"           "matrixcalc"    "Matrix"        "scatterpie"   
-[13] "rnaturalearth" "reactable"     "poppr"         "plotly"       
-[17] "ggpubr"        "ggiraph"       "adegenet"      "ade4"         
-[21] "QBMS"          "vcfR"          "qqman"         "writexl"      
-[25] "readxl"        "lubridate"     "forcats"       "stringr"      
-[29] "dplyr"         "purrr"         "readr"         "tidyr"        
-[33] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[37] "graphics"      "grDevices"     "utils"         "datasets"     
-[41] "methods"       "base"         
-
-[[26]]
- [1] "ASRgenomics"   "htmltools"     "scales"        "sp"           
- [5] "reshape2"      "viridis"       "viridisLite"   "snpReady"     
- [9] "impute"        "rgl"           "matrixcalc"    "Matrix"       
-[13] "scatterpie"    "rnaturalearth" "reactable"     "poppr"        
-[17] "plotly"        "ggpubr"        "ggiraph"       "adegenet"     
-[21] "ade4"          "QBMS"          "vcfR"          "qqman"        
-[25] "writexl"       "readxl"        "lubridate"     "forcats"      
-[29] "stringr"       "dplyr"         "purrr"         "readr"        
-[33] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[37] "stats"         "graphics"      "grDevices"     "utils"        
-[41] "datasets"      "methods"       "base"         
-
-[[27]]
- [1] "statgenGWAS"   "ASRgenomics"   "htmltools"     "scales"       
- [5] "sp"            "reshape2"      "viridis"       "viridisLite"  
- [9] "snpReady"      "impute"        "rgl"           "matrixcalc"   
-[13] "Matrix"        "scatterpie"    "rnaturalearth" "reactable"    
-[17] "poppr"         "plotly"        "ggpubr"        "ggiraph"      
-[21] "adegenet"      "ade4"          "QBMS"          "vcfR"         
-[25] "qqman"         "writexl"       "readxl"        "lubridate"    
-[29] "forcats"       "stringr"       "dplyr"         "purrr"        
-[33] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[37] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[41] "utils"         "datasets"      "methods"       "base"         
-
-[[28]]
- [1] "rrBLUP"        "statgenGWAS"   "ASRgenomics"   "htmltools"    
- [5] "scales"        "sp"            "reshape2"      "viridis"      
- [9] "viridisLite"   "snpReady"      "impute"        "rgl"          
-[13] "matrixcalc"    "Matrix"        "scatterpie"    "rnaturalearth"
-[17] "reactable"     "poppr"         "plotly"        "ggpubr"       
-[21] "ggiraph"       "adegenet"      "ade4"          "QBMS"         
-[25] "vcfR"          "qqman"         "writexl"       "readxl"       
-[29] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[33] "purrr"         "readr"         "tidyr"         "tibble"       
-[37] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[41] "grDevices"     "utils"         "datasets"      "methods"      
-[45] "base"         
-
-[[29]]
- [1] "LEA"           "rrBLUP"        "statgenGWAS"   "ASRgenomics"  
- [5] "htmltools"     "scales"        "sp"            "reshape2"     
- [9] "viridis"       "viridisLite"   "snpReady"      "impute"       
-[13] "rgl"           "matrixcalc"    "Matrix"        "scatterpie"   
-[17] "rnaturalearth" "reactable"     "poppr"         "plotly"       
-[21] "ggpubr"        "ggiraph"       "adegenet"      "ade4"         
-[25] "QBMS"          "vcfR"          "qqman"         "writexl"      
-[29] "readxl"        "lubridate"     "forcats"       "stringr"      
-[33] "dplyr"         "purrr"         "readr"         "tidyr"        
-[37] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[41] "graphics"      "grDevices"     "utils"         "datasets"     
-[45] "methods"       "base"         </code></pre>
-</div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">suppressPackageStartupMessages</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lapply</span>(<span class="fu">c</span>(cran_packages, bioc_packages), library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="quick-rstudio-tour" class="level2" data-number="3.4">

@@ -1,7 +1,7 @@
 # libraries ----
 # Packages in Cran
 cran_packages <- c(
-  "tidyverse", "readxl", "writexl", "qqman", "vcfR", "QBMS", "adegenet",
+  "tidyverse", "readxl", "writexl", "readr", "qqman", "vcfR", "QBMS", "adegenet",
   "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
   "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
   "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 

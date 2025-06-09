@@ -4,7 +4,21 @@ Filtering SNP data is important for genetic and genomic studies in order to impr
 
 ## Call Rate
 
-Call rate refers to the **percentage of non-missing data for a specific SNP marker**. It is calculated by dividing the number of non-missing individuals / total number of individuals for each marker. The filtering threshold will depend on the specific data set or investigation; however, common thresholds tend to be 0.9 or 0.95.
+Call rate refers to the **percentage of non-missing data for a specific SNP marker**. It is calculated by dividing the number of non-missing individuals / total number of individuals for each marker. The filtering threshold will depend on the specific data set or investigation; however, common thresholds tend to be 0.9 or 0.95.\]
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r load-matrix, include=FALSE}
+matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+```
+
+```{r matrix, eval=FALSE}
+# Load SNP data matrix
+matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+```
 
 ```{r call-rate}
 # considering our n x m matrix with n markers and m individuals
