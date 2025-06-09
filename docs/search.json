@@ -2,29 +2,550 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome – Plant Genetics Data Analysis with R",
+    "title": "Plant Genetics Data Analysis with R - Baku",
     "section": "",
-    "text": "Welcome to the Plant Genetics Data Analysis Course\nTarget Audience: Breeders in Baku, Azerbaijan with minimal prior data analysis or programming experience. Collaboration with ICARDA.\nGoal: To provide a practical and understandable introduction to analyzing common breeding and genomic data types using the R programming language.\nThis course covers fundamental concepts in genetics and statistics relevant to breeding programs, alongside hands-on R coding sessions. We aim to build your confidence in handling your own data and interpreting results.\nPlease use the navigation menu (Table of Contents) to move through the course modules.\nLet’s begin!\n\n\n\nMeet Your Instructors & the ICARDA Bioinformatics Unit\nThe ICARDA Bioinformatics Unit is at the forefront of applying cutting-edge computational biology to address agricultural challenges in dry areas. Our multidisciplinary team specializes in genomics, data science, AI, and high-performance computing to empower your data analysis journey.\n\n\n\n\n\n\n\n\nPhoto\nName\nDetails\n\n\n\n\n\nZakaria Kehel\nResearch Team Leader – Genetic Resources (GRS) & Morocco Interim Country Manager Genetic Innovation  Ph.D. from the School of Agricultural and Forestry Engineering at the University of Córdoba in Spain.\n\n\n\nTamara Ortiz\nBioinformatician, started February 2024  MS in Bioinformatics, NYU Tandon School of Engineering (2025–2026)  BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología (2018–2023)\n\n\n\nAlsamman M. Alsamman\nBioinformatician, started January 2021  PhD in Genetics, Faculty of Agriculture, Ain Shams University;  MSc in Genetics, Faculty of Agriculture, Cairo University;  BSc in Biotechnology with a Bioinformatics Minor, Faculty of Agriculture, Al-Azhar University."
+    "text": "1 Welcome to the Plant Genetics Data Analysis Course\nTarget Audience: Breeders in Baku, Azerbaijan with minimal prior data analysis or programming experience. Collaboration with ICARDA.\nGoal: To provide a practical and understandable introduction to analyzing common breeding and genomic data types using the R programming language.\nThis course covers fundamental concepts in genetics and statistics relevant to breeding programs, alongside hands-on R coding sessions. We aim to build your confidence in handling your own data and interpreting results.\nPlease use the navigation menu (Table of Contents) to move through the course modules.\nLet’s begin!\n\n\n\n2 Meet Your Instructors & the ICARDA Bioinformatics Unit\nThe ICARDA Bioinformatics Unit is at the forefront of applying cutting-edge computational biology to address agricultural challenges in dry areas. Our multidisciplinary team specializes in genomics, data science, AI, and high-performance computing to empower your data analysis journey.\n\n\n\n\n\n\n\n\nPhoto\nName\nDetails\n\n\n\n\n\nZakaria Kehel\nResearch Team Leader – Genetic Resources (GRS) & Morocco Interim Country Manager Genetic Innovation  Ph.D. from the School of Agricultural and Forestry Engineering at the University of Córdoba in Spain.\n\n\n\nTamara Ortiz\nBioinformatician, started February 2024  MS in Bioinformatics, NYU Tandon School of Engineering (2025–2026)  BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología (2018–2023)\n\n\n\nAlsamman M. Alsamman\nBioinformatician, started January 2021  PhD in Genetics, Faculty of Agriculture, Ain Shams University;  MSc in Genetics, Faculty of Agriculture, Cairo University;  BSc in Biotechnology with a Bioinformatics Minor, Faculty of Agriculture, Al-Azhar University.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome – Plant Genetics Data Analysis with R</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/00_Welcome.html",
+    "href": "00_Setup_Intro/00_Welcome.html",
+    "title": "2  Welcome and Course Overview",
+    "section": "",
+    "text": "2.1 Hello Baku Breeders!\nWelcome to this introductory course on data analysis for plant genetics, a collaboration with ICARDA. We are excited to guide you through the essential tools and concepts needed to make sense of your valuable breeding data using R.",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/00_Welcome.html#course-objectives",
+    "href": "00_Setup_Intro/00_Welcome.html#course-objectives",
+    "title": "2  Welcome and Course Overview",
+    "section": "2.2 Course Objectives",
+    "text": "2.2 Course Objectives\n\nLearn the fundamentals of the R programming language for data tasks.\nUnderstand basic concepts of genomic data.\nPerform basic data loading, cleaning, and quality control.\nGrasp key genetic concepts like allele frequency and relatedness (kinship).\nUnderstand the idea behind marker-trait association studies (GWAS).\nGet introduced to tools like GIGWA and basic AI applications.",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/00_Welcome.html#course-structure",
+    "href": "00_Setup_Intro/00_Welcome.html#course-structure",
+    "title": "2  Welcome and Course Overview",
+    "section": "2.3 Course Structure",
+    "text": "2.3 Course Structure\nThis course is divided into several modules, starting with setup and R basics, moving through data handling and genetic concepts, and ending with analysis methods and tools. Each module includes explanations and practical R exercises.\nNo prior programming experience is required!",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "",
+    "text": "3.1 Why R and RStudio?",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#why-r-and-rstudio",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#why-r-and-rstudio",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "",
+    "text": "R: A powerful, free programming language specifically designed for statistical computing and graphics. Widely used in academia and industry for data analysis, including genomics and breeding.\nRStudio: An excellent, free Integrated Development Environment (IDE) for R. It makes using R much easier with features like code highlighting, plot viewing, package management, and project organization.",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#installation-steps",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#installation-steps",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "3.2 Installation Steps",
+    "text": "3.2 Installation Steps\n\nInstall R: Go to CRAN (the Comprehensive R Archive Network) and download the latest version for your operating system (Windows, macOS, Linux). Follow the installation instructions.\nInstall RStudio: Go to the Posit website and download the free RStudio Desktop version for your operating system. Install it after installing R.\nInstall Quarto: Go to Quarto’s website and download and install Quarto for your system. RStudio often bundles Quarto, but installing the latest version is good practice.\n(For PDF Output) Install LaTeX: Open RStudio, go to the Console panel, and type the following commands one by one, pressing Enter after each:\n\n# Run these lines in the R Console \ninstall.packages(\"tinytex\") \n# Run only once if you don't have it \n# tinytex::install_tinytex() \nRun only once to install LaTeX distribution\n# This might take a few minutes. If it fails, consult TinyTeX documentation or ask instructors.\n\n# Installing R Packages for the Course\n# We will use several add-on packages in R. You only need to install packages *once*. Use the R Console in RStudio.\n# --- Run this code chunk in the R Console --- List of packages we will likely need:\n\n# Packages in Cran\ncran_packages &lt;- c(\n  \"tidyverse\", \"readxl\", \"writexl\", \"readr\", \"qqman\", \"vcfR\", \"QBMS\", \"adegenet\",\n  \"ade4\", \"ggiraph\", \"ggpubr\", \"plotly\", \"poppr\", \"reactable\",\n  \"rnaturalearth\", \"scatterpie\", \"snpReady\", \"viridis\", \"tibble\",\n  \"ggplot2\", \"reshape2\", \"forcats\", \"dplyr\", \"sp\", \"scales\", \"htmltools\", \n  \"ASRgenomics\", \"statgenGWAS\", \"gplots\"\n)\n\n# Bioconductor Packages\nbioc_packages &lt;- c(\"rrBLUP\", \"LEA\")\n\n# Installing Cran Packages\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(cran_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing CRAN packages: \", paste(missing, collapse = \", \"))\n  install.packages(missing)\n}\n\n# Installing Bioconductor Packages\nif (!requireNamespace(\"BiocManager\", quietly = TRUE)) {\n  install.packages(\"BiocManager\")\n}\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(bioc_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing Bioconductor packages: \", paste(missing, collapse = \", \"))\n  BiocManager::install(missing)\n}",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#loading-libraries-and-functions",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#loading-libraries-and-functions",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "3.3 Loading Libraries and Functions",
+    "text": "3.3 Loading Libraries and Functions\n\n# You can use library() to load any single package\n# We will load all libraries using lapply()\ninvisible(\n  suppressPackageStartupMessages(\n    lapply(c(cran_packages, bioc_packages), library, character.only = TRUE)\n  )\n)",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#quick-rstudio-tour",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#quick-rstudio-tour",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "3.4 Quick RStudio Tour",
+    "text": "3.4 Quick RStudio Tour\n(We will cover this live, but key windows include: Console, Script Editor/Notebook, Environment/History, Files/Plots/Packages/Help/Viewer/Projects). Familiarize yourself with these panes.",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/01_Intro_To_R.html",
+    "href": "01_R_Basics/01_Intro_To_R.html",
+    "title": "4  Module 1.1: Introduction to R - Your Breeding Data Analysis Tool",
+    "section": "",
+    "text": "4.0.1 Introduction to R\nR is a powerful language for data manipulation, visualization, and statistical analysis. Think of R as a versatile calculator for data.\nTry these examples in the RStudio Console:\n# Basic arithmetic\n2 + 5\n\n[1] 7\n\n10 - 3\n\n[1] 7\n\n4 * 8\n\n[1] 32\n\n100 / 4\n\n[1] 25\n\n# Order of operations (like standard math)\n5 + 2 * 3   # Multiplication first\n\n[1] 11\n\n(5 + 2) * 3 # Parentheses first\n\n[1] 21\n\n# Built-in mathematical functions\nsqrt(16)    # Square root\n\n[1] 4\n\nlog(10)     # Natural logarithm\n\n[1] 2.302585\n\nlog10(100)  # Base-10 logarithm\n\n[1] 2",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Module 1.1: Introduction to R - Your Breeding Data Analysis Tool</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/01_Intro_To_R.html#variables-storing-information",
+    "href": "01_R_Basics/01_Intro_To_R.html#variables-storing-information",
+    "title": "4  Module 1.1: Introduction to R - Your Breeding Data Analysis Tool",
+    "section": "4.1 Variables: Storing Information",
+    "text": "4.1 Variables: Storing Information\nVariables are used to store information in R. You can think of them as containers for data. In R, you can create variables using the assignment operator &lt;-. You can also use = for assignment, but &lt;- is more common in R.\nUse the &lt;- operator to assign and manipulate variables:\n\n# Assign the value 5 to variable x\nx &lt;- 5\n\n# Assign the result of 10 + 3 to variable y\ny &lt;- 10 + 3\n\n# Print the value of x\nx\n\n[1] 5\n\n# Use variables in calculations\nz &lt;- x + y\n# Print the value of z\nz\n\n[1] 18\n\n# Assign the name of a variety to a variable\nbest_variety &lt;- \"ICARDA_Gold\" # Text needs quotes \"\"\n\n# Print name\nprint(best_variety)\n\n[1] \"ICARDA_Gold\"\n\n# We can also concatenate text like this\nprint(paste(\"The best variety is\", best_variety))\n\n[1] \"The best variety is ICARDA_Gold\"",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Module 1.1: Introduction to R - Your Breeding Data Analysis Tool</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/02_Data_Types_Structures.html",
+    "href": "01_R_Basics/02_Data_Types_Structures.html",
+    "title": "5  Module 1.2: R Data Types and Structures - The Building Blocks",
+    "section": "",
+    "text": "5.1 Introduction: Types and Structures\nThink of data like building blocks:\nUnderstanding these is fundamental to working with data in R.",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Module 1.2: R Data Types and Structures - The Building Blocks</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/02_Data_Types_Structures.html#introduction-types-and-structures",
+    "href": "01_R_Basics/02_Data_Types_Structures.html#introduction-types-and-structures",
+    "title": "5  Module 1.2: R Data Types and Structures - The Building Blocks",
+    "section": "",
+    "text": "Data Types: The kind of block (e.g., numeric brick, text brick, true/false switch).\nData Structures: How you organize those blocks (e.g., a single row of bricks, a flat grid, a complex box holding different things).",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Module 1.2: R Data Types and Structures - The Building Blocks</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/02_Data_Types_Structures.html#basic-data-types",
+    "href": "01_R_Basics/02_Data_Types_Structures.html#basic-data-types",
+    "title": "5  Module 1.2: R Data Types and Structures - The Building Blocks",
+    "section": "5.2 Basic Data Types",
+    "text": "5.2 Basic Data Types\nR needs to know what kind of information it’s dealing with.\n\nNumeric: Represents numbers. Can be integers (whole numbers) or doubles (with decimals). Used for measurements like yield, height, counts.\n\n\nyield &lt;- 75.5     # Double (decimal)\nnum_plots &lt;- 120  # Integer (whole number)\nclass(yield)      # Check the type\n\n[1] \"numeric\"\n\nclass(num_plots)  # Often stored as 'numeric' (double) by default\n\n[1] \"numeric\"\n\n\n\nCharacter: Represents text (strings). Always enclose text in double (\") or single (') quotes. Used for IDs, names, descriptions.\n\n\nvariety_name &lt;- \"ICARDA_RustResist\"\nplot_id &lt;- 'Plot_A101'\nclass(variety_name)\n\n[1] \"character\"\n\n\n\nLogical: Represents TRUE or FALSE values. Often the result of comparisons. Crucial for filtering data.\n\n\nis_resistant &lt;- TRUE\nyield &gt; 80 # This comparison results in a logical value\n\n[1] FALSE\n\nclass(is_resistant)\n\n[1] \"logical\"\n\n\n\nFactor: Special type for categorical data (variables with distinct levels or groups). R stores them efficiently using underlying numbers but displays the text labels. Very important for statistical models and plotting.\n\n\n# Example: Different locations in a trial\nlocations &lt;- c(\"Baku\", \"Ganja\", \"Baku\", \"Sheki\", \"Ganja\")\nlocation_factor &lt;- factor(locations)\n\nprint(location_factor) # Shows levels\n\n[1] Baku  Ganja Baku  Sheki Ganja\nLevels: Baku Ganja Sheki\n\nclass(location_factor)\n\n[1] \"factor\"\n\nlevels(location_factor) # See the unique categories\n\n[1] \"Baku\"  \"Ganja\" \"Sheki\"",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Module 1.2: R Data Types and Structures - The Building Blocks</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/02_Data_Types_Structures.html#key-data-structures",
+    "href": "01_R_Basics/02_Data_Types_Structures.html#key-data-structures",
+    "title": "5  Module 1.2: R Data Types and Structures - The Building Blocks",
+    "section": "5.3 Key Data Structures",
+    "text": "5.3 Key Data Structures\nHow R organizes collections of data:\n\nVector: The most basic structure! A sequence (ordered list) containing elements of the same data type. Created using c() (combine function).\n\n\n# Vector of plot yields (numeric)\nplot_yields &lt;- c(75.5, 81.2, 78.9, 85.0)\n# Vector of variety names (character)\nplot_varieties &lt;- c(\"ICARDA_Gold\", \"Local_Check\", \"ICARDA_Gold\", \"ICARDA_RustResist\")\n# Vector of resistance status (logical)\nplot_resistance &lt;- c(TRUE, FALSE, TRUE, TRUE)\n\nplot_yields[1]       # Access the first element (Indexing starts at 1!)\n\n[1] 75.5\n\nplot_yields[2:4]     # Access elements 2 through 4\n\n[1] 81.2 78.9 85.0\n\nlength(plot_yields)  # Get the number of elements\n\n[1] 4\n\n\nImportant: If you mix types in c(), R will force them into a single common type (usually character).\n\nmixed_vector &lt;- c(10, \"VarietyA\", TRUE)\nprint(mixed_vector) # All become character strings!\n\n[1] \"10\"       \"VarietyA\" \"TRUE\"    \n\nclass(mixed_vector)# Example: Small genotype matrix (Individuals x SNPs)\n\n[1] \"character\"\n\n\n\nMatrix: A two-dimensional grid (rows and columns) where all elements must be of the same data type. Useful for genotype data (0,1,2 are all numeric).\n\n\n# Example: Small genotype matrix (Individuals x SNPs)\n genotype_data &lt;- matrix(c(0, 1, 2, 1, 1, 0), nrow = 2, ncol = 3, byrow = TRUE)\n rownames(genotype_data) &lt;- c(\"Line1\", \"Line2\")\n colnames(genotype_data) &lt;- c(\"SNP1\", \"SNP2\", \"SNP3\")\n print(genotype_data)\n\n      SNP1 SNP2 SNP3\nLine1    0    1    2\nLine2    1    1    0\n\n class(genotype_data)\n\n[1] \"matrix\" \"array\" \n\n dim(genotype_data) # Get dimensions (rows, columns)\n\n[1] 2 3\n\n genotype_data[1, 2] # Access element row 1, column 2\n\n[1] 1\n\n\n\nData Frame: The most important data structure for breeders! Like a spreadsheet or table in R.\n\nIt’s a collection of vectors (columns) of equal length.\nCrucially, columns can be of different data types! (e.g., character ID, numeric yield, factor location).\nRows represent observations (e.g., plots, plants, samples).\nColumns represent variables (e.g., ID, traits, treatments).\n\n\n\n# Create a simple breeding trial data frame\ntrial_data &lt;- data.frame(\n PlotID = c(\"A101\", \"A102\", \"B101\", \"B102\"),\n Variety = factor(c(\"ICARDA_Gold\", \"Local_Check\", \"ICARDA_RustResist\", \"ICARDA_Gold\")),\n Yield_kg_plot = c(5.2, 4.5, 6.1, 5.5),\n Is_Resistant = c(TRUE, FALSE, TRUE, TRUE)\n)\n\nprint(trial_data)\n\n  PlotID           Variety Yield_kg_plot Is_Resistant\n1   A101       ICARDA_Gold           5.2         TRUE\n2   A102       Local_Check           4.5        FALSE\n3   B101 ICARDA_RustResist           6.1         TRUE\n4   B102       ICARDA_Gold           5.5         TRUE\n\nclass(trial_data)\n\n[1] \"data.frame\"\n\nstr(trial_data)       # Structure: Shows types of each column - VERY USEFUL!\n\n'data.frame':   4 obs. of  4 variables:\n $ PlotID       : chr  \"A101\" \"A102\" \"B101\" \"B102\"\n $ Variety      : Factor w/ 3 levels \"ICARDA_Gold\",..: 1 3 2 1\n $ Yield_kg_plot: num  5.2 4.5 6.1 5.5\n $ Is_Resistant : logi  TRUE FALSE TRUE TRUE\n\nhead(trial_data)      # Show first few rows\n\n  PlotID           Variety Yield_kg_plot Is_Resistant\n1   A101       ICARDA_Gold           5.2         TRUE\n2   A102       Local_Check           4.5        FALSE\n3   B101 ICARDA_RustResist           6.1         TRUE\n4   B102       ICARDA_Gold           5.5         TRUE\n\nsummary(trial_data)   # Summary statistics for each column\n\n    PlotID                       Variety  Yield_kg_plot   Is_Resistant   \n Length:4           ICARDA_Gold      :2   Min.   :4.500   Mode :logical  \n Class :character   ICARDA_RustResist:1   1st Qu.:5.025   FALSE:1        \n Mode  :character   Local_Check      :1   Median :5.350   TRUE :3        \n                                          Mean   :5.325                  \n                                          3rd Qu.:5.650                  \n                                          Max.   :6.100                  \n\n# Access columns using $\ntrial_data$Yield_kg_plot\n\n[1] 5.2 4.5 6.1 5.5\n\nmean(trial_data$Yield_kg_plot) # Calculate mean of a column\n\n[1] 5.325\n\n\n(We will work extensively with data frames).\n\nList: A very flexible container that can hold any collection of R objects (vectors, matrices, data frames, even other lists), and they don’t have to be the same type or length. Often used to return complex results from functions.\n\n\nanalysis_results &lt;- list(\n   description = \"Yield Trial - Baku 2023\",\n   raw_data = trial_data, # Include the data frame\n   significant_snps = c(\"SNP101\", \"SNP504\"), # A character vector\n   model_parameters = list(threshold = 0.05, method = \"MLM\") # A nested list\n)\nprint(analysis_results$description)\n\n[1] \"Yield Trial - Baku 2023\"\n\nprint(analysis_results$raw_data) # Access the data frame inside the list\n\n  PlotID           Variety Yield_kg_plot Is_Resistant\n1   A101       ICARDA_Gold           5.2         TRUE\n2   A102       Local_Check           4.5        FALSE\n3   B101 ICARDA_RustResist           6.1         TRUE\n4   B102       ICARDA_Gold           5.5         TRUE",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Module 1.2: R Data Types and Structures - The Building Blocks</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/03_Basic_Operations.html",
+    "href": "01_R_Basics/03_Basic_Operations.html",
+    "title": "6  Module 1.3: Basic Operations in R",
+    "section": "",
+    "text": "6.1 Arithmetic Operations (Review)\nNow that we know about data types and structures, let’s see how to manipulate them.\nWorks on numbers and numeric vectors/matrices element-wise.\nmixed_vector &lt;- c(10, \"VarietyA\", TRUE)\nprint(mixed_vector) # All become character strings!\n\n[1] \"10\"       \"VarietyA\" \"TRUE\"    \n\nclass(mixed_vector)\n\n[1] \"character\"",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Module 1.3: Basic Operations in R</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/03_Basic_Operations.html#logical-comparisons-and-operators",
+    "href": "01_R_Basics/03_Basic_Operations.html#logical-comparisons-and-operators",
+    "title": "6  Module 1.3: Basic Operations in R",
+    "section": "6.2 Logical Comparisons and Operators",
+    "text": "6.2 Logical Comparisons and Operators\nUsed to ask TRUE/FALSE questions about our data. Essential for filtering.\n\nComparison Operators:\n\n&gt; : Greater than\n&lt; : Less than\n&gt;=: Greater than or equal to\n&lt;=: Less than or equal to\n==: Exactly equal to (TWO equal signs! Very common mistake to use just one =)\n!=: Not equal to\n\nLogical Operators (Combine TRUE/FALSE):\n\n& : AND (both sides must be TRUE)\n| : OR (at least one side must be TRUE)\n! : NOT (reverses TRUE to FALSE, FALSE to TRUE)\n\n\n\nyield &lt;- 5.2\nmin_acceptable_yield &lt;- 5.0\nvariety &lt;- \"ICARDA_Gold\"\n\n# Comparisons\nyield &gt; min_acceptable_yield # Is yield acceptable? TRUE\n\n[1] TRUE\n\nvariety == \"Local_Check\"    # Is it the local check? FALSE\n\n[1] FALSE\n\nvariety != \"Local_Check\"    # Is it NOT the local check? TRUE\n\n[1] TRUE\n\n# On vectors\nplot_yields &lt;- c(5.2, 4.5, 6.1, 5.5)\nplot_yields &gt; 5.0 # Which plots yielded above 5.0? [TRUE FALSE TRUE TRUE]\n\n[1]  TRUE FALSE  TRUE  TRUE\n\nplot_varieties &lt;- c(\"ICARDA_Gold\", \"Local_Check\", \"ICARDA_RustResist\", \"ICARDA_Gold\")\nplot_varieties == \"ICARDA_Gold\" # Which plots are ICARDA_Gold? [TRUE FALSE FALSE TRUE]\n\n[1]  TRUE FALSE FALSE  TRUE\n\n# Combining conditions\n# Find plots where yield &gt; 5.0 AND variety is ICARDA_Gold\n(plot_yields &gt; 5.0) & (plot_varieties == \"ICARDA_Gold\") # [TRUE FALSE FALSE TRUE]\n\n[1]  TRUE FALSE FALSE  TRUE\n\n# Find plots where yield &gt; 6.0 OR variety is Local_Check\n(plot_yields &gt; 6.0) | (plot_varieties == \"Local_Check\") # [FALSE TRUE TRUE FALSE]\n\n[1] FALSE  TRUE  TRUE FALSE",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Module 1.3: Basic Operations in R</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/03_Basic_Operations.html#vectorization-rs-superpower",
+    "href": "01_R_Basics/03_Basic_Operations.html#vectorization-rs-superpower",
+    "title": "6  Module 1.3: Basic Operations in R",
+    "section": "6.3 Vectorization: R’s Superpower",
+    "text": "6.3 Vectorization: R’s Superpower\nMany R operations are vectorized, meaning they automatically apply to each element of a vector without needing you to write a loop. This makes R code concise and efficient. We’ve already seen this with arithmetic (plot_yields + 0.5) and comparisons (plot_yields &gt; 5.0).\nFunctions like mean(), sum(), min(), max(), sd() (standard deviation), length() also work naturally on vectors:\n\nplot_yields &lt;- c(5.2, 4.5, 6.1, 5.5)\n\nmean(plot_yields)\n\n[1] 5.325\n\nsd(plot_yields)\n\n[1] 0.6652067\n\nsum(plot_yields &gt; 5.0) # How many plots yielded &gt; 5.0? (TRUE=1, FALSE=0)\n\n[1] 3\n\nlength(plot_yields) # How many plots?\n\n[1] 4",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Module 1.3: Basic Operations in R</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/03_Basic_Operations.html#working-with-data-frames-indexing-and-filtering",
+    "href": "01_R_Basics/03_Basic_Operations.html#working-with-data-frames-indexing-and-filtering",
+    "title": "6  Module 1.3: Basic Operations in R",
+    "section": "6.4 Working with Data Frames (Indexing and Filtering)",
+    "text": "6.4 Working with Data Frames (Indexing and Filtering)\nThis is crucial for selecting specific data from your tables.\nLet’s use the trial_data data frame from the previous section:\n\ntrial_data &lt;- data.frame(\n  PlotID = c(\"A101\", \"A102\", \"B101\", \"B102\"),\n  Variety = factor(c(\"ICARDA_Gold\", \"Local_Check\", \"ICARDA_RustResist\", \"ICARDA_Gold\")),\n  Yield_kg_plot = c(5.2, 4.5, 6.1, 5.5),\n  Is_Resistant = c(TRUE, FALSE, TRUE, TRUE)\n)\n\n\nAccessing Columns: Use $ (most common) or [[ ]]. trial_data$Variety or trial_data[[\"Variety\"]]\nAccessing Rows/Columns/Cells using [row, column]:\n\n\n# Get the value in Row 2, Column 3\ntrial_data[2, 3] # Should be 4.5\n\n[1] 4.5\n\n# Get the entire Row 1 (returns a data frame)\ntrial_data[1, ]\n\n  PlotID     Variety Yield_kg_plot Is_Resistant\n1   A101 ICARDA_Gold           5.2         TRUE\n\n# Get the entire Column 2 (Variety column, returns a vector/factor)\ntrial_data[, 2]\n\n[1] ICARDA_Gold       Local_Check       ICARDA_RustResist ICARDA_Gold      \nLevels: ICARDA_Gold ICARDA_RustResist Local_Check\n\n# Get Columns 1 and 3 (PlotID and Yield)\ntrial_data[, c(1, 3)] # Use c() for multiple column indices\n\n  PlotID Yield_kg_plot\n1   A101           5.2\n2   A102           4.5\n3   B101           6.1\n4   B102           5.5\n\ntrial_data[, c(\"PlotID\", \"Yield_kg_plot\")] # Can also use column names\n\n  PlotID Yield_kg_plot\n1   A101           5.2\n2   A102           4.5\n3   B101           6.1\n4   B102           5.5\n\n\n\nFiltering Rows Based on Conditions (VERY IMPORTANT): Use a logical condition inside the row part of the square brackets.\n\n\n# Select rows where Yield_kg_plot is greater than 5.0\nhigh_yield_plots &lt;- trial_data[trial_data$Yield_kg_plot &gt; 5.0, ]\nprint(high_yield_plots)\n\n  PlotID           Variety Yield_kg_plot Is_Resistant\n1   A101       ICARDA_Gold           5.2         TRUE\n3   B101 ICARDA_RustResist           6.1         TRUE\n4   B102       ICARDA_Gold           5.5         TRUE\n\n# Select rows where Variety is \"ICARDA_Gold\"\nicarda_gold_plots &lt;- trial_data[trial_data$Variety == \"ICARDA_Gold\", ]\nprint(icarda_gold_plots)\n\n  PlotID     Variety Yield_kg_plot Is_Resistant\n1   A101 ICARDA_Gold           5.2         TRUE\n4   B102 ICARDA_Gold           5.5         TRUE\n\n# Select rows where Variety is \"ICARDA_Gold\" AND yield &gt; 5.0\n# (We generated the logical vector for this earlier)\ncondition &lt;- (trial_data$Variety == \"ICARDA_Gold\") & (trial_data$Yield_kg_plot &gt; 5.0)\nprint(condition) # Shows [TRUE FALSE FALSE TRUE]\n\n[1]  TRUE FALSE FALSE  TRUE\n\nselected_plots &lt;- trial_data[condition, ]\nprint(selected_plots)\n\n  PlotID     Variety Yield_kg_plot Is_Resistant\n1   A101 ICARDA_Gold           5.2         TRUE\n4   B102 ICARDA_Gold           5.5         TRUE\n\n# Select rows where the variety is resistant\nresistant_plots &lt;- trial_data[trial_data$Is_Resistant == TRUE, ] # Or just trial_data[trial_data$Is_Resistant, ]\nprint(resistant_plots)\n\n  PlotID           Variety Yield_kg_plot Is_Resistant\n1   A101       ICARDA_Gold           5.2         TRUE\n3   B101 ICARDA_RustResist           6.1         TRUE\n4   B102       ICARDA_Gold           5.5         TRUE",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Module 1.3: Basic Operations in R</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/03_Basic_Operations.html#apply-collection",
+    "href": "01_R_Basics/03_Basic_Operations.html#apply-collection",
+    "title": "6  Module 1.3: Basic Operations in R",
+    "section": "6.5 apply() collection",
+    "text": "6.5 apply() collection\nThe apply() family of functions lets us apply a function to the rows or columns in a matrix or data frame, a list or a vector.\n\n# Imagine we have a data matrix of plot yield values for different varieties.\n# Each row represents a variety and each column a yield measurement for each trial\nplot_trials &lt;- matrix(c(5.2, 4.5, 6.1, 5.5, 4, 6.6, 7, 5.1, 5.3), nrow = 3, ncol = 3)\n\n# We calculate the mean for each variety (each row), 1 means function is run on rows, 2 would mean function is run on columns\napply(plot_trials, 1, mean)\n\n[1] 5.900000 4.533333 6.000000\n\n\nExercise: Select the data for the ‘Local_Check’ variety from the trial_data data frame. Calculate its yield.",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Module 1.3: Basic Operations in R</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/04_Reading_Writing_Data.html",
+    "href": "01_R_Basics/04_Reading_Writing_Data.html",
+    "title": "7  Module 1.4: Reading and Writing Data",
+    "section": "",
+    "text": "7.1 Common Data File Formats\nSo far, we’ve created data inside R. But usually, your breeding data exists in external files, like Excel spreadsheets or CSV files. We need to get this data into R and save our results out of R.",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Module 1.4: Reading and Writing Data</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/04_Reading_Writing_Data.html#common-data-file-formats",
+    "href": "01_R_Basics/04_Reading_Writing_Data.html#common-data-file-formats",
+    "title": "7  Module 1.4: Reading and Writing Data",
+    "section": "",
+    "text": "CSV (Comma Separated Values - .csv): Plain text file where columns are separated by commas. Very common, easily readable by many programs (including R and Excel). Often the best format for sharing data.\nTSV (Tab Separated Values - .tsv): Similar to CSV, but uses tabs to separate columns.\nExcel Files (.xls, .xlsx): Native Microsoft Excel format. Can contain multiple sheets, formatting, formulas. Requires specific R packages to read/write.\nText Files(.txt): Additionally, data can be saved as a simple text file. This file type can support comma or tab separated values. You would simply need to specify your separator when reading the file.",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Module 1.4: Reading and Writing Data</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/04_Reading_Writing_Data.html#paths-working-directory-and-rstudio-projects-best-practice",
+    "href": "01_R_Basics/04_Reading_Writing_Data.html#paths-working-directory-and-rstudio-projects-best-practice",
+    "title": "7  Module 1.4: Reading and Writing Data",
+    "section": "7.2 Paths, Working Directory, and RStudio Projects (Best Practice!)",
+    "text": "7.2 Paths, Working Directory, and RStudio Projects (Best Practice!)\nR needs to know where to find your files.\n\nWorking Directory: The default folder location R looks in. You can see it with getwd() and set it with setwd(\"path/to/folder\"), but setting it manually is usually bad practice because it makes your code non-portable.\nAbsolute Path: The full path from the root of your computer (e.g., \"C:/Users/YourName/Documents/BreedingData/trial1.csv\"). Avoid this! It breaks if you move folders or share your code.\nRelative Path & RStudio Projects (RECOMMENDED):\n\nOrganize your work using an RStudio Project. Create one via File -&gt; New Project -&gt; Existing Directory... and select your main course folder (course_project_baku).\nWhen you open the .Rproj file, RStudio automatically sets the working directory to that project folder.\nKeep your data files inside the project folder, ideally in subdirectories like data/raw (original data) or data/example (cleaned data for examples).\nRefer to files using relative paths starting from the project root, like \"data/example/phenotypes.csv\". This makes your analysis reproducible and easy to share!",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Module 1.4: Reading and Writing Data</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/04_Reading_Writing_Data.html#reading-data-into-r",
+    "href": "01_R_Basics/04_Reading_Writing_Data.html#reading-data-into-r",
+    "title": "7  Module 1.4: Reading and Writing Data",
+    "section": "7.3 Reading Data into R",
+    "text": "7.3 Reading Data into R\nWe’ll use functions from the readr (for CSV/TSV) and readxl (for Excel) packages. Make sure they are installed (see Module 1.1).\n\n# Load the necessary libraries\nlibrary(readr)\nlibrary(readxl)\nlibrary(dplyr) # for glimpse\n\n# --- Reading a CSV file ---\n# Assumes you have a file 'sample_phenotypes.csv' in the 'data/example' folder\n# relative to your project root.\npheno_file_path &lt;- \"data/sample_phenotypes.csv\"\n\n# Check if file exists before trying to read (good habit)\nif (file.exists(pheno_file_path)) {\n  # Use read_csv from the readr package (generally preferred)\n  phenotype_data &lt;- read_csv(pheno_file_path)\n\n  print(\"CSV data loaded successfully:\")\n  head(phenotype_data)   # Look at the first 6 rows\n  glimpse(phenotype_data) # See column names and data types\n\n} else {\n  print(paste(\"Error: Phenotype file not found at\", pheno_file_path))\n  phenotype_data &lt;- NULL # Set to NULL if file not found\n}\n\n# Note: Base R has read.csv() - it works but readr::read_csv() is often faster\n# and handles data types more consistently (e.g., doesn't default strings to factors).\n\n# --- Reading an Excel file ---\n# Assumes you have 'sample_trial.xlsx' in 'data/example'\nexcel_file_path &lt;- \"data/sample_trial.xlsx\" # You'll need to create this file\n\nif (file.exists(excel_file_path)) {\n  # See what sheets are in the workbook\n  excel_sheets(excel_file_path)\n\n  # Read data from a specific sheet (e.g., \"YieldData\")\n  # yield_data_excel &lt;- read_excel(excel_file_path, sheet = \"YieldData\")\n\n  # Or read by sheet number (first sheet is 1)\n  # yield_data_excel &lt;- read_excel(excel_file_path, sheet = 1)\n\n  # print(\"Excel data loaded:\")\n  # glimpse(yield_data_excel)\n\n} else {\n  print(paste(\"Warning: Example Excel file not found at\", excel_file_path))\n}\n\n\nAlways inspect your data after loading! Use head(), str(), glimpse(), summary(). Did R read the column names correctly? Are the data types what you expected (numeric, character, etc.)?",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Module 1.4: Reading and Writing Data</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/04_Reading_Writing_Data.html#writing-data-out-of-r",
+    "href": "01_R_Basics/04_Reading_Writing_Data.html#writing-data-out-of-r",
+    "title": "7  Module 1.4: Reading and Writing Data",
+    "section": "7.4 Writing Data out of R",
+    "text": "7.4 Writing Data out of R\nAfter cleaning data or performing analysis, you’ll want to save results.\n\n# Load the necessary libraries\nlibrary(readr)\nlibrary(readxl)\nlibrary(dplyr) # for glimpse\n\n# --- Reading a CSV file ---\n# Assumes you have a file 'sample_phenotypes.csv' in the 'data/example' folder\n# relative to your project root.\npheno_file_path &lt;- \"data/sample_phenotypes.csv\"\n\n# Check if file exists before trying to read (good habit)\nif (file.exists(pheno_file_path)) {\n  # Use read_csv from the readr package (generally preferred)\n  phenotype_data &lt;- read_csv(pheno_file_path)\n\n  print(\"CSV data loaded successfully:\")\n  head(phenotype_data)   # Look at the first 6 rows\n  glimpse(phenotype_data) # See column names and data types\n\n} else {\n  print(paste(\"Error: Phenotype file not found at\", pheno_file_path))\n  phenotype_data &lt;- NULL # Set to NULL if file not found\n}\n\n# Note: Base R has read.csv() - it works but readr::read_csv() is often faster\n# and handles data types more consistently (e.g., doesn't default strings to factors).\n\n# --- Reading an Excel file ---\n# Assumes you have 'sample_trial.xlsx' in 'data/example'\nexcel_file_path &lt;- \"data/sample_trial.xlsx\" # You'll need to create this file\n\nif (file.exists(excel_file_path)) {\n  # See what sheets are in the workbook\n  excel_sheets(excel_file_path)\n\n  # Read data from a specific sheet (e.g., \"YieldData\")\n  # yield_data_excel &lt;- read_excel(excel_file_path, sheet = \"YieldData\")\n\n  # Or read by sheet number (first sheet is 1)\n  # yield_data_excel &lt;- read_excel(excel_file_path, sheet = 1)\n\n  # print(\"Excel data loaded:\")\n  # glimpse(yield_data_excel)\n\n} else {\n  print(paste(\"Warning: Example Excel file not found at\", excel_file_path))\n}\n\nExercise: If you have a simple Excel file with some breeding data (e.g., Plot ID, Variety, Yield), try reading it into R using read_excel(). Inspect the loaded data frame using glimpse().",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Module 1.4: Reading and Writing Data</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/05_Simple_Plotting.html",
+    "href": "01_R_Basics/05_Simple_Plotting.html",
+    "title": "8  Why Visualize Your Data?",
+    "section": "",
+    "text": "8.1 Introducing ggplot2: The Grammar of Graphics\n“A picture is worth a thousand words” - this is especially true for data! Plots help us to:\nR has basic plotting functions, but we will focus on the ggplot2 package, which is part of the tidyverse. It’s extremely powerful and flexible for creating beautiful, publication-quality graphics.\nggplot2 is based on the Grammar of Graphics. The idea is to build plots layer by layer:",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Why Visualize Your Data?</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/05_Simple_Plotting.html#introducing-ggplot2-the-grammar-of-graphics",
+    "href": "01_R_Basics/05_Simple_Plotting.html#introducing-ggplot2-the-grammar-of-graphics",
+    "title": "8  Why Visualize Your Data?",
+    "section": "",
+    "text": "ggplot() function: Start the plot. You provide:\n\ndata: The data frame containing your variables.\nmapping = aes(...): Aesthetic mappings. This tells ggplot how variables in your data map to visual properties of the plot (e.g., map Yield to the y-axis, Height to the x-axis, Variety to color).\n\ngeom_ functions: Add geometric layers to actually display the data. Examples:\n\ngeom_point(): Creates a scatter plot.\ngeom_histogram(): Creates a histogram.\ngeom_boxplot(): Creates box-and-whisker plots.\ngeom_line(): Creates lines.\ngeom_bar(): Creates bar charts.\n\nOther functions: Add labels (labs()), change themes (theme_bw(), theme_minimal()), split plots into facets (facet_wrap()), customize scales, etc. Each function also allows you to edit aesthetic characteristics such as size, color, etc.",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Why Visualize Your Data?</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/05_Simple_Plotting.html#lets-make-some-plots",
+    "href": "01_R_Basics/05_Simple_Plotting.html#lets-make-some-plots",
+    "title": "8  Why Visualize Your Data?",
+    "section": "8.2 Let’s Make Some Plots!",
+    "text": "8.2 Let’s Make Some Plots!\nFirst, load the necessary libraries:\n\n# Load necessary libraries\nlibrary(ggplot2)\nlibrary(dplyr) # Often used with ggplot2 for data prep\n\nNow, let’s create a sample breeding data frame for plotting.\n\nset.seed(123) # for reproducible random numbers\nbreeding_plot_data &lt;-\n  tibble(\n    PlotID = paste0(\"P\", 101:120),\n    Variety = factor(rep(c(\"ICARDA_A\", \"ICARDA_B\", \"Check_1\", \"Check_2\"), each = 5)),\n    Location = factor(rep(c(\"Baku\", \"Ganja\"), each = 10)),\n    Yield = rnorm(20, mean = rep(c(6, 7, 5, 5.5), each = 5), sd = 0.8),\n    Height = rnorm(20, mean = rep(c(90, 110, 85, 88), each = 5), sd = 5)\n  )\n\n# Take a quick look at the data structure\nglimpse(breeding_plot_data)\n\nRows: 20\nColumns: 5\n$ PlotID   &lt;chr&gt; \"P101\", \"P102\", \"P103\", \"P104\", \"P105\", \"P106\", \"P107\", \"P108…\n$ Variety  &lt;fct&gt; ICARDA_A, ICARDA_A, ICARDA_A, ICARDA_A, ICARDA_A, ICARDA_B, I…\n$ Location &lt;fct&gt; Baku, Baku, Baku, Baku, Baku, Baku, Baku, Baku, Baku, Baku, G…\n$ Yield    &lt;dbl&gt; 5.551619, 5.815858, 7.246967, 6.056407, 6.103430, 8.372052, 7…\n$ Height   &lt;dbl&gt; 84.66088, 88.91013, 84.86998, 86.35554, 86.87480, 101.56653, …\n\n\n\n8.2.1 1. Scatter Plot: Relationship between Yield and Height\nSee if taller plants tend to have higher yield in this dataset.\n\n# 1. ggplot(): data is breeding_plot_data, map Height to x, Yield to y\n# 2. geom_point(): Add points layer\n# 3. labs() and theme_bw(): Add labels and theme\nplot1 &lt;-\n  ggplot(data = breeding_plot_data, mapping = aes(x = Height, y = Yield)) +\n  geom_point() +\n  labs(\n    title = \"Relationship between Plant Height and Yield\",\n    x = \"Plant Height (cm)\",\n    y = \"Yield (kg/plot)\",\n    caption = \"Sample Data\"\n  ) +\n  theme_bw() # Use a clean black and white theme\n\n# Display the plot\nplot1\n\n\n\n\nRelationship between Plant Height and Yield.\n\n\n\n\nLet’s color the points by Variety:\n\n# Map 'color' aesthetic to the Variety column\n# Adjust point size and transparency for better visibility\nplot2 &lt;-\n  ggplot(data = breeding_plot_data, mapping = aes(x = Height, y = Yield, color = Variety)) +\n  geom_point(size = 2.5, alpha = 0.8) + # Make points slightly bigger, semi-transparent\n  labs(\n    title = \"Height vs. Yield by Variety\",\n    x = \"Plant Height (cm)\",\n    y = \"Yield (kg/plot)\"\n  ) +\n  theme_minimal() # Use a different theme\n\n# Display the plot\nplot2\n\n\n\n\nHeight vs. Yield by Variety, colored by Variety.\n\n\n\n\n\n\n8.2.2 2. Histogram: Distribution of Yield\nSee the frequency of different yield values.\n\n# 1. ggplot(): data, map Yield to x-axis\n# 2. geom_histogram(): Add histogram layer. Adjust 'binwidth' or 'bins'.\n# 3. labs() and theme_classic(): Add labels and theme\nplot3 &lt;-\n  ggplot(data = breeding_plot_data, mapping = aes(x = Yield)) +\n  geom_histogram(binwidth = 0.5, fill = \"lightblue\", color = \"black\") + # Specify binwidth, fill, and outline color\n  labs(\n    title = \"Distribution of Plot Yields\",\n    x = \"Yield (kg/plot)\",\n    y = \"Frequency (Number of Plots)\"\n  ) +\n  theme_classic()\n\n# Display the plot\nplot3\n\n\n\n\nDistribution of Plot Yields.\n\n\n\n\n\n\n8.2.3 3. Box Plot: Compare Yield across Locations\nAre yields different in Baku vs. Ganja? Box plots are great for comparing distributions across groups.\n\n# 1. ggplot(): data, map Location (categorical) to x, Yield (numeric) to y\n# 2. geom_boxplot(): Add boxplot layer. Map 'fill' to Location for color.\n# 3. labs() and theme_light(): Add labels and theme\n# 4. theme(): Customize theme elements (e.g., remove legend)\nplot4 &lt;-\n  ggplot(data = breeding_plot_data, mapping = aes(x = Location, y = Yield, fill = Location)) +\n  geom_boxplot() +\n  labs(\n    title = \"Yield Comparison by Location\",\n    x = \"Location\",\n    y = \"Yield (kg/plot)\"\n  ) +\n  theme_light() +\n  theme(legend.position = \"none\") # Hide legend if coloring is obvious from x-axis\n\n# Display the plot\nplot4\n\n\n\n\nYield Comparison by Location.\n\n\n\n\nBox plot anatomy: The box shows the interquartile range (IQR, middle 50% of data), the line inside is the median, whiskers extend typically 1.5*IQR, points beyond are potential outliers.",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Why Visualize Your Data?</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/05_Simple_Plotting.html#saving-your-plots",
+    "href": "01_R_Basics/05_Simple_Plotting.html#saving-your-plots",
+    "title": "8  Why Visualize Your Data?",
+    "section": "8.3 Saving Your Plots",
+    "text": "8.3 Saving Your Plots\nUse the ggsave() function after you’ve created a ggplot object (like plot1, plot2, etc.).\n\n# Make sure the 'output/figures' directory exists\n# The 'recursive = TRUE' creates parent directories if needed\noutput_dir &lt;- \"output/figures\"\nif (!dir.exists(output_dir)) {\n  dir.create(output_dir, recursive = TRUE)\n}\n\n# Save the height vs yield scatter plot (plot2)\nggsave(\n  filename = file.path(output_dir, \"height_yield_scatter.png\"), # Use file.path for robust paths\n  plot = plot2,                               # The plot object to save\n  width = 7,                                  # Width in inches\n  height = 5,                                 # Height in inches\n  dpi = 300                                   # Resolution (dots per inch)\n)\n\n# You can save in other formats too, like PDF:\n# ggsave(\n#   filename = file.path(output_dir, \"yield_distribution.pdf\"),\n#   plot = plot3,\n#   width = 6,\n#   height = 4\n# )",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Why Visualize Your Data?</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/05_Simple_Plotting.html#exercise",
+    "href": "01_R_Basics/05_Simple_Plotting.html#exercise",
+    "title": "8  Why Visualize Your Data?",
+    "section": "8.4 Exercise",
+    "text": "8.4 Exercise\nCreate a box plot comparing Plant Height (Height) across the different Varieties (Variety) in the breeding_plot_data. Save the plot as a PNG file named height_variety_boxplot.png in the output/figures directory.\n\n# Exercise: Box plot comparing Plant Height across Varieties\nplot5 &lt;-\n  ggplot(data = breeding_plot_data, mapping = aes(x = Variety, y = Height, fill = Variety)) +\n  geom_boxplot() +\n  labs(\n    title = \"Plant Height Comparison by Variety\",\n    x = \"Variety\",\n    y = \"Plant Height (cm)\"\n   ) +\n  theme_light() +\n  theme(legend.position = \"none\")\n\n# Display the new plot\nplot5\n\n\n\n\nPlant Height Comparison by Variety.\n\n\n\n\n\n# Ensure output directory exists\noutput_dir &lt;- \"output/figures\"\nif (!dir.exists(output_dir)) {\n  dir.create(output_dir, recursive = TRUE)\n}\n\n# Save the box plot as a PNG file\nggsave(\n  filename = file.path(output_dir, \"height_variety_boxplot.png\"),\n  plot = plot5,\n  width = 7,\n  height = 5,\n  dpi = 300\n)",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Why Visualize Your Data?</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/01_Loading_Breeding_Data.html",
+    "href": "02_Data_Handling/01_Loading_Breeding_Data.html",
+    "title": "9  Module 2.1: Loading Breeding Data - ICARDA Barley Example",
+    "section": "",
+    "text": "9.1 Introduction to the Dataset\nIn this module, we’ll learn how to load typical phenotypic data into R. We’ll use a real-world example: data from a study on 275 barley accessions conducted at ICARDA in 2019. This dataset contains various measurements related to agronomic traits, grain quality, and morphological characteristics.\nWhy this dataset? * It’s representative of the kind of multi-trait data breeders work with. * It allows us to practice loading, inspecting, and performing basic summaries on realistic data. * This data comes from ICARDA’s valuable work in crop improvement for dry areas.\nColumn Descriptions (Partial List - full list would be in a data dictionary): * Taxa: The identifier for each barley accession (genotype). * Area: Grain area (e.g., mm²). * B_glucan: Beta-glucan content (%), a quality trait. * DTH: Days to Heading (days), an agronomic trait. * Fe: Iron content in grain (ppm), a nutritional trait. * FLA: Flag Leaf Area (cm²). * GY: Grain Yield (e.g., t/ha or kg/plot - units should always be known!). * PH: Plant Height (cm). * Protein: Grain protein content (%). * TKW: Thousand Kernel Weight (grams). * Zn: Zinc content in grain (ppm). * (And many others related to grain morphology and plant characteristics…)\nOur goal is to load this data (which is typically stored in a file like a CSV or Excel sheet) into an R data frame so we can start analyzing it.",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Module 2.1: Loading Breeding Data - ICARDA Barley Example</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/01_Loading_Breeding_Data.html#setting-up-libraries-and-file-path",
+    "href": "02_Data_Handling/01_Loading_Breeding_Data.html#setting-up-libraries-and-file-path",
+    "title": "9  Module 2.1: Loading Breeding Data - ICARDA Barley Example",
+    "section": "9.2 Setting Up: Libraries and File Path",
+    "text": "9.2 Setting Up: Libraries and File Path\nFirst, we need to load the R packages that help us read data. Even though we have previously installed and loaded all packages we will need, in case you are only focusing on reading data, the readr package (part of tidyverse) is excellent for reading text files like CSVs.\nRemember our RStudio Project setup! We will assume the data file is saved in the data/ subfolder of our project.\n\n# Load the necessary libraries\n# 'tidyverse' includes 'readr' (for read_csv) and 'dplyr' (for glimpse, etc.)\nlibrary(tidyverse) \n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Module 2.1: Loading Breeding Data - ICARDA Barley Example</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/01_Loading_Breeding_Data.html#reading-the-csv-file",
+    "href": "02_Data_Handling/01_Loading_Breeding_Data.html#reading-the-csv-file",
+    "title": "9  Module 2.1: Loading Breeding Data - ICARDA Barley Example",
+    "section": "9.3 Reading the CSV File",
+    "text": "9.3 Reading the CSV File\nLet’s say our barley data is stored in a CSV file named icarda_barley_2019_pheno.csv.\n\n# Define the path to our data file (relative to the project root)\nbarley_data_file_path &lt;- \"data/icarda_barley_2019_pheno.csv\"\n\n# Check if the file exists (good practice!)\nif (file.exists(barley_data_file_path)) {\n  # Use read_csv() from the readr package to load the data\n  barley_pheno_data &lt;- read_csv(barley_data_file_path)\n  \n  print(\"ICARDA Barley Phenotype data loaded successfully!\")\n} else {\n  print(paste(\"ERROR: File not found at:\", barley_data_file_path))\n  print(\"Please make sure 'icarda_barley_2019_pheno.csv' is in the 'data/example' folder.\")\n  # If the file isn't found, we'll create an empty placeholder to avoid later errors in the document\n  barley_pheno_data &lt;- tibble() # Creates an empty tibble (tidyverse data frame)\n}",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Module 2.1: Loading Breeding Data - ICARDA Barley Example</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/01_Loading_Breeding_Data.html#first-look-inspecting-the-loaded-data",
+    "href": "02_Data_Handling/01_Loading_Breeding_Data.html#first-look-inspecting-the-loaded-data",
+    "title": "9  Module 2.1: Loading Breeding Data - ICARDA Barley Example",
+    "section": "9.4 First Look: Inspecting the Loaded Data",
+    "text": "9.4 First Look: Inspecting the Loaded Data\nIt’s CRUCIAL to always inspect your data immediately after loading it to make sure it looks correct.\n\nhead(): Shows the first few rows (default is 6).\ndim(): Shows the dimensions (number of rows, number of columns).\nglimpse() (from dplyr): A great way to see column names, their data types, and the first few values. Better than str() for tibbles.\nsummary(): Provides basic summary statistics for each column (Min, Max, Mean, Median, Quartiles for numeric; counts for character/factor).",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Module 2.1: Loading Breeding Data - ICARDA Barley Example</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/01_Loading_Breeding_Data.html#understanding-data-types-in-our-barley-data",
+    "href": "02_Data_Handling/01_Loading_Breeding_Data.html#understanding-data-types-in-our-barley-data",
+    "title": "9  Module 2.1: Loading Breeding Data - ICARDA Barley Example",
+    "section": "9.5 Understanding Data Types in Our Barley Data",
+    "text": "9.5 Understanding Data Types in Our Barley Data\nWhen glimpse() runs, you’ll see types like: * Taxa: Should be &lt;chr&gt; (character) as it’s an identifier. * Area, B_glucan, DTH, GY, PH, etc.: Should mostly be &lt;dbl&gt; (double-precision numeric) as they are measurements.\nIf read_csv misinterprets a numeric column as character (e.g., if there’s a text entry like “missing” in a numeric column), you’ll need to clean that data or specify column types during import using the col_types argument in read_csv(). (We’ll cover data cleaning later).",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Module 2.1: Loading Breeding Data - ICARDA Barley Example</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/01_Loading_Breeding_Data.html#quick-summary-of-a-specific-trait",
+    "href": "02_Data_Handling/01_Loading_Breeding_Data.html#quick-summary-of-a-specific-trait",
+    "title": "9  Module 2.1: Loading Breeding Data - ICARDA Barley Example",
+    "section": "9.6 Quick Summary of a Specific Trait",
+    "text": "9.6 Quick Summary of a Specific Trait\nLet’s say we are interested in Grain Yield (GY).\n\n# Make sure the data and the 'GY' column exist\nif (nrow(barley_pheno_data) &gt; 0 && \"GY\" %in% names(barley_pheno_data)) {\n  # Access the GY column\n  yield_values &lt;- barley_pheno_data$GY\n  \n  # Calculate some basic statistics\n  mean_yield &lt;- mean(yield_values, na.rm = TRUE) # na.rm=TRUE ignores missing values in calculation\n  min_yield &lt;- min(yield_values, na.rm = TRUE)\n  max_yield &lt;- max(yield_values, na.rm = TRUE)\n  sd_yield &lt;- sd(yield_values, na.rm = TRUE)\n\n  print(paste(\"Average Grain Yield (GY):\", round(mean_yield, 2)))\n  print(paste(\"Minimum Grain Yield (GY):\", round(min_yield, 2)))\n  print(paste(\"Maximum Grain Yield (GY):\", round(max_yield, 2)))\n  print(paste(\"Standard Deviation of GY:\", round(sd_yield, 2)))\n\n  # How many accessions do we have yield data for (non-missing)?\n  num_yield_obs &lt;- sum(!is.na(yield_values))\n  print(paste(\"Number of accessions with GY data:\", num_yield_obs))\n} else if (nrow(barley_pheno_data) &gt; 0) {\n  print(\"Column 'GY' not found in the loaded data.\")\n}\n\n[1] \"Average Grain Yield (GY): 1.19\"\n[1] \"Minimum Grain Yield (GY): 0.5\"\n[1] \"Maximum Grain Yield (GY): 2.47\"\n[1] \"Standard Deviation of GY: 0.31\"\n[1] \"Number of accessions with GY data: 275\"\n\n\nExercise: 1. Load the icarda_barley_2019_pheno.csv file into R. 2. Use glimpse() to check the column names and data types. 3. Calculate and print the average Plant Height (PH) from the dataset. Remember to handle potential missing values (na.rm = TRUE).\nThis module has shown you the first critical step: getting your valuable field data into R. In the next modules, we’ll learn how to clean, manipulate, and visualize this data.\n\n# Exercise\n# Inspect data and data types\nglimpse(barley_pheno_data)\n\nRows: 275\nColumns: 24\n$ Taxa        &lt;chr&gt; \"G1\", \"G2\", \"G3\", \"G4\", \"G5\", \"G7\", \"G8\", \"G9\", \"G12\", \"G1…\n$ Area        &lt;dbl&gt; 22.72177, 23.07877, 19.93612, 23.32083, 19.54859, 22.96829…\n$ B_glucan    &lt;dbl&gt; 6.848584, 7.430943, 4.012621, 6.091926, 7.307811, 7.267738…\n$ Circularity &lt;dbl&gt; 1.887915, 1.780070, 1.555492, 2.300471, 1.896487, 1.752493…\n$ Diameter    &lt;dbl&gt; 5.366522, 5.403555, 5.034355, 5.420909, 4.981714, 5.422541…\n$ DTH         &lt;dbl&gt; 75.89584, 70.17532, 74.19461, 74.39462, 77.66037, 72.65420…\n$ Fe          &lt;dbl&gt; 29.67685, 31.59088, 34.15825, 31.44544, 30.31127, 30.61605…\n$ FLA         &lt;dbl&gt; 16.586760, 7.966124, 7.592350, 18.753322, 16.532845, 18.40…\n$ FLH         &lt;dbl&gt; 82.77116, 62.36145, 61.81653, 69.77661, 64.38496, 78.08801…\n$ GpS         &lt;dbl&gt; 44.70886, 25.25222, 25.72167, 66.23116, 54.63221, 26.63211…\n$ GWS         &lt;dbl&gt; 1.6156277, 1.0563208, 0.9516462, 2.5202010, 1.2044795, 1.0…\n$ GY          &lt;dbl&gt; 1.3747605, 1.3735596, 0.9054266, 0.7614383, 0.8827177, 2.0…\n$ HW          &lt;dbl&gt; 57.65487, 64.41055, 69.41048, 55.35590, 53.65940, 64.98411…\n$ Length      &lt;dbl&gt; 10.542981, 10.106793, 8.565790, 11.920853, 9.781558, 9.968…\n$ Length_Wid  &lt;dbl&gt; 3.313525, 3.013035, 2.524445, 3.833381, 3.305421, 2.978634…\n$ PdH         &lt;dbl&gt; 91.09761, 63.65600, 68.75482, 69.50663, 64.10002, 80.59519…\n$ PdL         &lt;dbl&gt; 8.1320940, 1.0341930, 6.5555050, 0.9639243, -0.6416490, 2.…\n$ Perimeter   &lt;dbl&gt; 29.07010, 28.33654, 24.57919, 32.21194, 27.02846, 28.03643…\n$ PH          &lt;dbl&gt; 96.76140, 70.56720, 77.16486, 79.22446, 71.78375, 88.70248…\n$ Protein     &lt;dbl&gt; 14.06372, 14.16090, 15.23294, 14.34877, 14.46224, 14.31356…\n$ SL          &lt;dbl&gt; 5.343668, 6.804813, 8.074976, 10.039594, 7.526454, 8.31457…\n$ TKW         &lt;dbl&gt; 28.48964, 35.00164, 31.95561, 27.27054, 24.64983, 33.83401…\n$ width       &lt;dbl&gt; 3.251696, 3.439623, 3.455571, 3.204069, 3.000305, 3.429043…\n$ Zn          &lt;dbl&gt; 31.21179, 34.21217, 25.50724, 32.24918, 33.58773, 33.92710…\n\n# Calculating average Plant Height\nplant_heights &lt;- barley_pheno_data$PH # extracting plant height column\nmean_height &lt;- mean(plant_heights, na.rm = TRUE)\n\n# Printing average Plant Height\nprint(paste(\"Average Plant Height (PH):\", round(mean_height, 2)))\n\n[1] \"Average Plant Height (PH): 74.63\"",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Module 2.1: Loading Breeding Data - ICARDA Barley Example</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/02_Data_QC_Filtering.html",
+    "href": "02_Data_Handling/02_Data_QC_Filtering.html",
+    "title": "10  Module 2.2: Data Quality Control and Filtering",
+    "section": "",
+    "text": "10.1 Quality Control\nIn this module we will briefly describe the idea of data quality control, a common practice that allows us to identify errors or anomalies within our data before performing any posterior analyses.",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Module 2.2: Data Quality Control and Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/02_Data_QC_Filtering.html#filtering-duplicates",
+    "href": "02_Data_Handling/02_Data_QC_Filtering.html#filtering-duplicates",
+    "title": "10  Module 2.2: Data Quality Control and Filtering",
+    "section": "10.2 Filtering Duplicates",
+    "text": "10.2 Filtering Duplicates\nIn plant breeding we will typically have multi-trait or gene data collected by accession. In a data frame, we may have an ID or Taxa column, followed by columns with the trait or gene information. Before performing any type of analyses, it is important to identify and filter duplicates if there are any, as these could skew our results. For this example we will work with a generated file based on the data set used for Module 9.1. In this case, * Taxa is our genotype identifier column.\n\n# Load the necessary libraries\n# 'tidyverse' includes 'readr' (for read_csv) and 'dplyr' (for glimpse, etc.)\nlibrary(tidyverse) \n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n# We start by loading our raw data file\nbarley_data_file_path &lt;- \"data/icarda_barley_2019_pheno_raw.csv\" # Defining our file path\nbarley_pheno_data &lt;- read_csv(barley_data_file_path) # Loading into data frame\n\n\n# We filter the data frame to keep only one entry for each ID\ndata &lt;- barley_pheno_data[!duplicated(barley_pheno_data),]\ndata\n\n# A tibble: 275 × 24\n   Taxa   Area B_glucan Circularity Diameter   DTH    Fe   FLA   FLH   GpS   GWS\n   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 G1     22.7     6.85        1.89     5.37  75.9  29.7 16.6   82.8  44.7 1.62 \n 2 G2     23.1     7.43        1.78     5.40  70.2  31.6  7.97  62.4  25.3 1.06 \n 3 G3     19.9     4.01        1.56     5.03  74.2  34.2  7.59  61.8  25.7 0.952\n 4 G4     23.3     6.09        2.30     5.42  74.4  31.4 18.8   69.8  66.2 2.52 \n 5 G5     19.5     7.31        1.90     4.98  77.7  30.3 16.5   64.4  54.6 1.20 \n 6 G7     23.0     7.27        1.75     5.42  72.7  30.6 18.4   78.1  26.6 1.08 \n 7 G8     24.2     6.52        1.90     5.51  73.1  34.5 13.2   66.8  51.4 2.46 \n 8 G9     22.5     6.61        1.90     5.34  74.0  33.5 12.7   70.0  38.2 1.39 \n 9 G12    21.5     7.12        1.62     5.23  77.2  32.3 11.6   61.3  31.3 1.20 \n10 G13    19.3     7.07        1.88     4.98  76.6  31.7 17.3   62.8  43.5 1.31 \n# ℹ 265 more rows\n# ℹ 13 more variables: GY &lt;dbl&gt;, HW &lt;dbl&gt;, Length &lt;dbl&gt;, Length_Wid &lt;dbl&gt;,\n#   PdH &lt;dbl&gt;, PdL &lt;dbl&gt;, Perimeter &lt;dbl&gt;, PH &lt;dbl&gt;, Protein &lt;dbl&gt;, SL &lt;dbl&gt;,\n#   TKW &lt;dbl&gt;, width &lt;dbl&gt;, Zn &lt;dbl&gt;",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Module 2.2: Data Quality Control and Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/02_Data_QC_Filtering.html#filtering-by-missing-data",
+    "href": "02_Data_Handling/02_Data_QC_Filtering.html#filtering-by-missing-data",
+    "title": "10  Module 2.2: Data Quality Control and Filtering",
+    "section": "10.3 Filtering by Missing Data",
+    "text": "10.3 Filtering by Missing Data\nMany times, we will want to remove rows with missing data. Missing values can distort certain calculations. Although some functions in R have an option to automatically remove NA’s before performing the calculation, many times it is necessary to remove them beforehand.\n\n# We will work with our duplicate filtered data frame from last section.\n# complete.cases() allows us to filter any rows with missing values\ndata &lt;- data[complete.cases(data),]\ndata\n\n# A tibble: 266 × 24\n   Taxa   Area B_glucan Circularity Diameter   DTH    Fe   FLA   FLH   GpS   GWS\n   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 G1     22.7     6.85        1.89     5.37  75.9  29.7 16.6   82.8  44.7 1.62 \n 2 G2     23.1     7.43        1.78     5.40  70.2  31.6  7.97  62.4  25.3 1.06 \n 3 G3     19.9     4.01        1.56     5.03  74.2  34.2  7.59  61.8  25.7 0.952\n 4 G4     23.3     6.09        2.30     5.42  74.4  31.4 18.8   69.8  66.2 2.52 \n 5 G5     19.5     7.31        1.90     4.98  77.7  30.3 16.5   64.4  54.6 1.20 \n 6 G7     23.0     7.27        1.75     5.42  72.7  30.6 18.4   78.1  26.6 1.08 \n 7 G8     24.2     6.52        1.90     5.51  73.1  34.5 13.2   66.8  51.4 2.46 \n 8 G9     22.5     6.61        1.90     5.34  74.0  33.5 12.7   70.0  38.2 1.39 \n 9 G12    21.5     7.12        1.62     5.23  77.2  32.3 11.6   61.3  31.3 1.20 \n10 G13    19.3     7.07        1.88     4.98  76.6  31.7 17.3   62.8  43.5 1.31 \n# ℹ 256 more rows\n# ℹ 13 more variables: GY &lt;dbl&gt;, HW &lt;dbl&gt;, Length &lt;dbl&gt;, Length_Wid &lt;dbl&gt;,\n#   PdH &lt;dbl&gt;, PdL &lt;dbl&gt;, Perimeter &lt;dbl&gt;, PH &lt;dbl&gt;, Protein &lt;dbl&gt;, SL &lt;dbl&gt;,\n#   TKW &lt;dbl&gt;, width &lt;dbl&gt;, Zn &lt;dbl&gt;",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Module 2.2: Data Quality Control and Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "02_Data_Handling/02_Data_QC_Filtering.html#identifying-and-filtering-outliers",
+    "href": "02_Data_Handling/02_Data_QC_Filtering.html#identifying-and-filtering-outliers",
+    "title": "10  Module 2.2: Data Quality Control and Filtering",
+    "section": "10.4 Identifying and Filtering Outliers",
+    "text": "10.4 Identifying and Filtering Outliers\nIdentifying and filtering outliers helps improve the accuracy and reliability of our results. There are many sources of outliers or anomalies, human error, measurement errors, or simply nature doing its thing. However, even if we don’t want to remove these data points, it is important to identify them first to then decide what the following steps will be. Outliers can skew important statistical measures and correlations, leading to misleading conclusions. Moreover, many machine learning algorithms, such as regression or PCA, are very sensitive to outliers. For examples, outliers in PCA can influence the principal components and clusterization, leading to misclassification.\nFor the following example we will analyse the * Taxa in our filtered data set.\n\n# We can use a simple boxplot to explore the overall structure of our data and identify outliers\nareaBP &lt;- boxplot(data$Area, main = \"Boxplot for Variable\")\n\n\n\n\n\n\n\n# Saving our boxplot in an object allows us to extract the outlier values as a vector\nareaBP$out\n\n[1] 31.16480 28.96363 29.90218 29.84108 29.00766 15.57887\n\n# We can then choose to remove these outlier entries from our data frame\n# The idea here is that we keep the rows where the `Area` value is not in our outliers vector\ndataArea &lt;- data[! data$Area %in% areaBP$out,]\ndataArea\n\n# A tibble: 260 × 24\n   Taxa   Area B_glucan Circularity Diameter   DTH    Fe   FLA   FLH   GpS   GWS\n   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 G1     22.7     6.85        1.89     5.37  75.9  29.7 16.6   82.8  44.7 1.62 \n 2 G2     23.1     7.43        1.78     5.40  70.2  31.6  7.97  62.4  25.3 1.06 \n 3 G3     19.9     4.01        1.56     5.03  74.2  34.2  7.59  61.8  25.7 0.952\n 4 G4     23.3     6.09        2.30     5.42  74.4  31.4 18.8   69.8  66.2 2.52 \n 5 G5     19.5     7.31        1.90     4.98  77.7  30.3 16.5   64.4  54.6 1.20 \n 6 G7     23.0     7.27        1.75     5.42  72.7  30.6 18.4   78.1  26.6 1.08 \n 7 G8     24.2     6.52        1.90     5.51  73.1  34.5 13.2   66.8  51.4 2.46 \n 8 G9     22.5     6.61        1.90     5.34  74.0  33.5 12.7   70.0  38.2 1.39 \n 9 G12    21.5     7.12        1.62     5.23  77.2  32.3 11.6   61.3  31.3 1.20 \n10 G13    19.3     7.07        1.88     4.98  76.6  31.7 17.3   62.8  43.5 1.31 \n# ℹ 250 more rows\n# ℹ 13 more variables: GY &lt;dbl&gt;, HW &lt;dbl&gt;, Length &lt;dbl&gt;, Length_Wid &lt;dbl&gt;,\n#   PdH &lt;dbl&gt;, PdL &lt;dbl&gt;, Perimeter &lt;dbl&gt;, PH &lt;dbl&gt;, Protein &lt;dbl&gt;, SL &lt;dbl&gt;,\n#   TKW &lt;dbl&gt;, width &lt;dbl&gt;, Zn &lt;dbl&gt;",
+    "crumbs": [
+      "Handling Breeding Data",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Module 2.2: Data Quality Control and Filtering</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html",
+    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html",
+    "title": "11  Module 3.1: Genotype Data",
+    "section": "",
+    "text": "11.1 Introduction\nGenotype data refers to the genetic makeup, in this case of crops, at specific loci across the genome. This data allows us to associate genetic differences with traits of agronomic interest and regional information.",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html#introduction",
+    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html#introduction",
+    "title": "11  Module 3.1: Genotype Data",
+    "section": "",
+    "text": "The genotype refers to the specific combination of alleles at a given location. Depending on the ploidy of the crop, we will have two (diploids) or more alleles per locus.\nSNPs (Single Nucleotide Polymorphisms) are positions across the genome where variations exist between individuals.\n\nExample: Three different crop variants may have homozygous A/A, heterozygous A/G and homozygous G/G at a specific locus. This can also be coded as 0, 1 and 2. 0 represents homozygous for the reference allele, 1 represents heterozygous, and 2 represents homozygous for the alternate allele.",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html#formats",
+    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html#formats",
+    "title": "11  Module 3.1: Genotype Data",
+    "section": "11.2 Formats",
+    "text": "11.2 Formats\nSNP data can be stored in different formats and file types, depending on the platform or program used. We will briefly discuss the most common file types.\n\nVCF (Variant Call Format - .vcf): Standard format for SNPs and variants from sequencing. Contains metadata, IDs, calls, positions and other information.\n\nGT = Genotype\n0 = REF; 1 = ALT\n0/0 or 1/1= homozygous; 0/1 or 1/0 = heterozygous\n\n\n\n#CHROM  POS     ID            REF   ALT QUAL    FILTER  INFO    FORMAT  G1  G2  G3\n1H      7253074 SCRI_RS_1929    A     C   .     PASS        .     GT        1/1 1/1 0/0\n\n\n\n# Read vcf file\nvcf &lt;- read.vcfR(\"data/Barley.vcf\", verbose = FALSE)\n\n\n# Glimpse vcf\nhead(vcf)\n\n[1] \"***** Object of class 'vcfR' *****\"\n[1] \"***** Meta section *****\"\n[1] \"##fileformat=VCFv4.1\"\n[1] \"##FILTER=&lt;ID=PASS,Description=\\\"All filters passed\\\"&gt;\"\n[1] \"##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=\\\"Approximate read  [Truncated]\"\n[1] \"##FORMAT=&lt;ID=DV,Number=.,Type=Integer,Description=\\\"Read depth of the [Truncated]\"\n[1] \"##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=\\\"Genotype\\\"&gt;\"\n[1] \"##INFO=&lt;ID=MQ,Number=1,Type=Float,Description=\\\"RMS Mapping Quality\\\"&gt;\"\n[1] \"First 6 rows.\"\n[1] \n[1] \"***** Fixed section *****\"\n     CHROM POS      ID REF ALT QUAL  FILTER\n[1,] \"1H\"  \"144018\" NA \"A\" \"G\" \"999\" \"NA\"  \n[2,] \"1H\"  \"147155\" NA \"T\" \"C\" \"999\" \"NA\"  \n[3,] \"1H\"  \"166336\" NA \"C\" \"T\" \"999\" \"NA\"  \n[4,] \"1H\"  \"173286\" NA \"T\" \"C\" \"999\" \"NA\"  \n[5,] \"1H\"  \"253434\" NA \"C\" \"T\" \"999\" \"NA\"  \n[6,] \"1H\"  \"253481\" NA \"C\" \"T\" \"999\" \"NA\"  \n[1] \n[1] \"***** Genotype section *****\"\n     FORMAT     ICARDA_G0011 ICARDA_G0012 ICARDA_G0013 ICARDA_G0014\n[1,] \"GT:DP:DV\" \"0/0:33:0\"   \"0/0:23:0\"   \"0/0:18:0\"   \"0/0:23:0\"  \n[2,] \"GT:DP:DV\" \"0/0:8:0\"    \"0/0:8:0\"    \"0/0:10:0\"   \"0/0:6:0\"   \n[3,] \"GT:DP:DV\" \"0/0:16:0\"   \"0/0:9:0\"    \"0/0:9:0\"    \"0/0:5:0\"   \n[4,] \"GT:DP:DV\" \"0/0:18:0\"   \"0/0:18:0\"   \"0/0:14:0\"   \"0/0:10:0\"  \n[5,] \"GT:DP:DV\" \"1/1:12:12\"  \"1/1:19:19\"  \"1/1:12:11\"  \"1/1:10:10\" \n[6,] \"GT:DP:DV\" \"0/0:12:0\"   \"0/0:17:0\"   \"0/0:12:0\"   \"0/0:10:0\"  \n     ICARDA_G0015\n[1,] \"0/0:15:0\"  \n[2,] \"0/0:8:0\"   \n[3,] \"0/0:9:0\"   \n[4,] \"0/0:10:0\"  \n[5,] \"1/1:12:12\" \n[6,] \"0/0:11:0\"  \n[1] \"First 6 columns only.\"\n[1] \n[1] \"Unique GT formats:\"\n[1] \"GT:DP:DV\"\n[1] \n\n# Turn into matrix\nvcfMatrix &lt;- extract.gt(vcf)\n\n\nPLINK (-.ped, .map) or Binary PLINK (-.bed, .bim, .fam)\n\n.ped: Pedigree/genotype data (tab delimited)\n.map: SNP mapping information\n.bed: Binary genotype matrix\n.bin: SNP information\n.fam: Sample information\n\nHapMap (-.hmp.txt): Used in TASSEL, header includes metadata, positions and genotypes encoded as allele pairs (A/A, A/G, etc.).\nNumeric Matrix (-.csv, .txt): SNPs in columns and genotypes in rows (or vice versa), data encoded as 0, 1 and 2 for homozygous for reference allele, heterozygous, and homozygous for alternate allele.\n\n\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n\n\n# The vcf matrix we obtained can also be turned into this type of format\nmatrixNum &lt;- vcfToNumericMatrix(vcfMatrix)",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/02_QBMS.html",
+    "href": "03_Genomic_Concepts/02_QBMS.html",
+    "title": "12  Module 3.2: Using the QBMS Package to Query Genotypic Data",
+    "section": "",
+    "text": "We have explored how to import genotypic data from files into R, but we can also retrieve it directly from online databases, such as Gigwa, using ICARDA’s QBMS package.\n\n# Loading QBMS library\nlibrary(QBMS)\n\n# Configuring the connection\nset_qbms_config(url = \"https://gigwa.icarda.org:8443/gigwa/\", engine = \"gigwa\")\n\nlogin_gigwa(\"Tamara\", \"-Zy2gn5ijQcW!EE\")\n\nOnce logged in, we can use the gigwa_list_dbs() function to view all available data bases.\n\ngigwa_list_dbs()\n\n [1] \"BarleySubData\"              \"Barley_Hvulgare2\"          \n [3] \"Barley_Hvulgare3\"           \"Barley_Hvulgare4\"          \n [5] \"Barley_Hvulgare5\"           \"Barley_MegaProject1\"       \n [7] \"Barley_MegaProject1_public\" \"Cactus_Copuntia1\"          \n [9] \"Chickpea_Carietinum1\"       \"Chickpea_Carietinum2\"      \n[11] \"Chickpea_Carietinum3\"       \"Chickpea_Carietinum4\"      \n[13] \"Faba_Vfaba1\"                \"GrassPea_Lsativus1\"        \n[15] \"GrassPea_Lsativus2\"         \"Musa_Macuminata1\"          \n[17] \"WheatDurum_Tdurum1\"         \"WheatDurum_Tdurum2\"        \n[19] \"WheatDurum_Tdurum3\"         \"WheatDurum_Tdurum4\"        \n[21] \"WheatDurum_Tdurum5\"         \"WheatDurum_Tdurum6\"        \n[23] \"WheatDurum_Tdurum7\"         \"WheatDurum_Tdurum8\"        \n[25] \"WheatWild_Tspp1\"            \"Wheat_Taestivum1\"          \n[27] \"Wheat_Taestivum2\"           \"Wheat_Taestivum3\"          \n[29] \"Wheat_Taestivum4\"           \"Wheat_Taestivum5\"          \n\n\nFor this example we will be choosing the “BarleySubData” database.\n\n# To set a data base\ngigwa_set_db(\"BarleySubData\")\n\nOnce we have defined a data base, we have to define a project and a run. We can do this the following way.\n\n# To view available projects\ngigwa_list_projects()\n\n      studyName\n1 BarleySubData\n\n# To set a project\ngigwa_set_project(\"BarleySubData\")\n\n# To view available runs\ngigwa_list_runs()\n\n  variantSetName\n1           Run1\n\n# To set a run\ngigwa_set_run(\"Run1\")\n\nOnce we have defined a data base, a project and a run, there are many tools we can use to extract relevant information.\n\ngigwa_get_samples(): Retrieves a list of samples associated with defined GIGWA project\ngigwa_get_sequences(): Retrieves a list of chromosomes associated with defined GIGWA project\ngigwa_get_markers(): Retrieves a list of SNP variants from selected GIGWA run. We can define the following parameters:\n\nstart: starting position of query\nend: ending position of query\nchrom: chromosome\nsimplify: defaults as TRUE, returns data in HapMap format with columns for rs#, alleles, chromosome and position\n\ngigwa_get_allelematrix(): Retrieves a two-dimensional matrix of genotype data from the defined GIGWA run.\n\nsamples: optional list of sample IDs, if NULL, all samples are included\nstart: starting position of query\nend: ending position of query\nchrom: chromosome\nsnps: list of SNP variants to filter\nsimplify: defaults as TRUE, returns data in numeric coding (0, 1, 2 for diploids)\n\ngigwa_get_metadata(): Retrieves associated metadata (if available)\n\n\n# Get a list of all samples in the selected run\nsamples &lt;- gigwa_get_samples()\n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |======================================================================| 100%\n\n# Get sequence list\nchroms &lt;- gigwa_get_sequences()\n\n# Get markers\nmarkers &lt;- gigwa_get_markers()\n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |====                                                                  |   5%\n  |                                                                            \n  |=======                                                               |  11%\n  |                                                                            \n  |===========                                                           |  16%\n  |                                                                            \n  |===============                                                       |  21%\n  |                                                                            \n  |==================                                                    |  26%\n  |                                                                            \n  |======================                                                |  32%\n  |                                                                            \n  |==========================                                            |  37%\n  |                                                                            \n  |=============================                                         |  42%\n  |                                                                            \n  |=================================                                     |  47%\n  |                                                                            \n  |=====================================                                 |  53%\n  |                                                                            \n  |=========================================                             |  58%\n  |                                                                            \n  |============================================                          |  63%\n  |                                                                            \n  |================================================                      |  68%\n  |                                                                            \n  |====================================================                  |  74%\n  |                                                                            \n  |=======================================================               |  79%\n  |                                                                            \n  |===========================================================           |  84%\n  |                                                                            \n  |===============================================================       |  89%\n  |                                                                            \n  |==================================================================    |  95%\n  |                                                                            \n  |======================================================================| 100%\n\n# Get genotypic matrix\n#marker_matrix &lt;- gigwa_get_allelematrix()",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Module 3.2: Using the QBMS Package to Query Genotypic Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html",
+    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html",
+    "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
+    "section": "",
+    "text": "13.1 Call Rate\nFiltering SNP data is important for genetic and genomic studies in order to improve data quality, optimize resources and avoid noise by removing non-informative markers, and account for missing data. The most common filtering criteria we will focus on is call rate, missing data and MAF (Minor Allele Frequency).\nCall rate refers to the percentage of non-missing data for a specific SNP marker. It is calculated by dividing the number of non-missing individuals / total number of individuals for each marker. The filtering threshold will depend on the specific data set or investigation; however, common thresholds tend to be 0.9 or 0.95.]\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# considering our n x m matrix with n markers and m individuals\n# defining our threshold\ncall_rate &lt;- 0.9\n\n# filtering our matrix\nfiltered_matrix &lt;- matrix[which(rowMeans(!is.na(matrix)) &gt; call_rate),]",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#missing-data",
+    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#missing-data",
+    "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
+    "section": "13.2 Missing data",
+    "text": "13.2 Missing data\nJust as we can filter markers with too much missing data, we can filter individuals with too many missing values. Our missing data threshold will refer to the percentage of non-missing data for each individual.\n\n# defining our threshold\nna_ind &lt;- 0.8\n\n# filtering our matrix\nfiltered_matrix &lt;- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) &gt; na_ind)]",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#maf",
+    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#maf",
+    "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
+    "section": "13.3 MAF",
+    "text": "13.3 MAF\nMinor allele frequency refers to the frequency of the least common allele for a particular SNP marker in a given population. It is commonly used as a filtering criteria as it allows you to exclude markers that contribute little to population-level analyses and helps reduce noise.\nFor example, if I have a marker which is homozygous 0 (AA), heterozygous 1 (AG), and homozygous 2 (GG), each individual contributes 2 alleles. We then count the minor alleles across all individuals to obtain MAF.\n\n# calculating MAF for all markers\nmafFreq &lt;- apply(filtered_matrix, 1, function(row) {\n  row &lt;- row[!is.na(row)]\n  maf &lt;- sum(row) / (2 * length(row))\n  maf &lt;- min(maf, 1 - maf)\n  maf\n})\n\n# filtering matrix according to maf\nfiltered_matrix &lt;- filtered_matrix[mafFreq &gt; 0.01,]",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#general-filtering",
+    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#general-filtering",
+    "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
+    "section": "13.4 General Filtering",
+    "text": "13.4 General Filtering\nTo simplify all previous steps, we can use the filterData() function from our package. The function allows you to define thresholds for call rate, MAF and missing individuals. By setting stats = TRUE, you can also get a data frame with statistics for the number of filtered markers and individuals by criteria.\n\nfilter &lt;- filterData(matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
+    ]
   },
   {
     "objectID": "04_Pop_Structure/01_Kinship_Relatedness.html",
     "href": "04_Pop_Structure/01_Kinship_Relatedness.html",
-    "title": "Module 4.1: Kinship and Relatedness",
+    "title": "14  Module 4.1: Kinship and Relatedness",
     "section": "",
-    "text": "Identifying relatedness between individuals is important to ensure samples are independent, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can help control confounding affects in association studies and can help infer subpopulations when studying structure. Moreover, not only may individuals be related, we can sometimes find duplicates of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.\n\n\nKinship refers to the genetic relatedness between individuals, and it is a measure of how much of their genomes two individuals share due to common ancestry. Kinship is often evaluated by calculating a kinship matrix. We can use the kinshipMatrix() function from the ICARDA package to do this. This function has the option to choose the method we want to use to calculate the matrix by defining the method parameter. By default it it set to \"vanRaden\", but we can choose between \"astle\", \"IBS\", and \"identity\". We can also choose to save the matrix locally as a text file by defining the save parameter, which is set to FALSE by default.\n\n# Importing our genotypic data\nraw_matrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n\n\n# Filtering\nmatrix &lt;- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)\n\n# We transpose our matrix (to have individuals as rows and makers as columns for posterior analyses)\nmatrix &lt;- t(matrix)\n\n# Calculating kinship matrix using ICARDA package\nkinshipMat &lt;- kinshipMatrix(matrix, method = \"vanRaden\", save = FALSE)\n\n\n# Generating a heatmap from our kinship matrix as an image in our working directory\nkinshipHeatmap(kinshipMat, file = \"output/figures/heatmap.png\")\n\n\n\n\nWe can use the results from our kinship matrix to identify potential duplicates within our data. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses.\n\n# Identifying duplicates by setting a similarity threshold and using the ICARDA package\nduplicates &lt;- kinshipDuplicates(matrix, threshold = 0.99, kinship = kinshipMat)\n\n# Printing potential duplicates along with their kinship and correlation\nduplicates$potentialDuplicates\n\n        Indiv.A      Indiv.B    Value      Corr\n1  ICARDA_G1416 ICARDA_G0226 1.623916 0.9988232\n2  ICARDA_G0052 ICARDA_G0043 1.784647 0.9984566\n3  ICARDA_G0140 ICARDA_G0059 1.840917 0.9983279\n4  ICARDA_G0110 ICARDA_G0098 1.808388 0.9982951\n5  ICARDA_G0119 ICARDA_G0098 1.807323 0.9980452\n6  ICARDA_G0291 ICARDA_G0217 1.622423 0.9979949\n7  ICARDA_G0298 ICARDA_G0296 1.606878 0.9979506\n8  ICARDA_G0258 ICARDA_G0234 1.897229 0.9979442\n9  ICARDA_G1421 ICARDA_G0301 1.613681 0.9979219\n10 ICARDA_G0119 ICARDA_G0110 1.805239 0.9976256\n11 ICARDA_G0232 ICARDA_G0230 1.658003 0.9976119\n12 ICARDA_G1418 ICARDA_G0014 1.632860 0.9971155\n13 ICARDA_G0473 ICARDA_G0137 1.973008 0.9971065\n14 ICARDA_G0588 ICARDA_G0097 1.918720 0.9967419\n15 ICARDA_G0887 ICARDA_G0146 1.833113 0.9966084\n16 ICARDA_G1420 ICARDA_G0278 1.623460 0.9957251\n17 ICARDA_G0257 ICARDA_G0218 1.672619 0.9955905\n18 ICARDA_G0275 ICARDA_G0259 1.590987 0.9953467\n19 ICARDA_G1201 ICARDA_G0627 1.816801 0.9951241\n20 ICARDA_G0301 ICARDA_G0245 1.601896 0.9947260\n21 ICARDA_G1421 ICARDA_G0245 1.601728 0.9947013\n22 ICARDA_G0244 ICARDA_G0234 1.884887 0.9945220\n23 ICARDA_G0297 ICARDA_G0242 1.618348 0.9942201\n24 ICARDA_G0814 ICARDA_G0146 1.825129 0.9938527\n25 ICARDA_G1423 ICARDA_G0297 1.616111 0.9937178\n26 ICARDA_G0258 ICARDA_G0244 1.879864 0.9935735\n27 ICARDA_G1409 ICARDA_G0214 1.624520 0.9935612\n28 ICARDA_G0889 ICARDA_G0146 1.820499 0.9934813\n29 ICARDA_G0846 ICARDA_G0146 1.817510 0.9926027\n30 ICARDA_G0889 ICARDA_G0887 1.816931 0.9924443\n31 ICARDA_G0207 ICARDA_G0034 1.604201 0.9923286\n32 ICARDA_G0501 ICARDA_G0500 1.862038 0.9923112\n33 ICARDA_G0863 ICARDA_G0146 1.814894 0.9920920\n34 ICARDA_G0503 ICARDA_G0498 2.504639 0.9920558\n35 ICARDA_G0887 ICARDA_G0814 1.820125 0.9920372\n36 ICARDA_G1383 ICARDA_G0983 1.692738 0.9916451\n37 ICARDA_G0887 ICARDA_G0846 1.813754 0.9914600\n38 ICARDA_G0887 ICARDA_G0863 1.811138 0.9909474\n39 ICARDA_G1377 ICARDA_G0884 1.992010 0.9904147\n40 ICARDA_G0795 ICARDA_G0146 1.808636 0.9903712\n41 ICARDA_G1269 ICARDA_G0067 2.228613 0.9901741\n\n# Printing histograms with the distribution of diagonal and off-diagonal values\nduplicates$plots\n\n[[1]]\n\n\n\n\n\n\n\n\n\n\n[[2]]\n\n\n\n\n\n\n\n\n\nIf we decide we want to filter our data according to the potential duplicates we identified, we can use the kinshipFilter() function from the ICARDA package. This will give us a filtered version of our SNP matrix and kinship matrix.\n\nfilteredMatrix &lt;- kinshipFilter(matrix, duplicates$potentialDuplicates, kinshipMat)"
+    "text": "14.1 Kinship\nIdentifying relatedness between individuals is important to ensure samples are independent, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can help control confounding affects in association studies and can help infer subpopulations when studying structure. Moreover, not only may individuals be related, we can sometimes find duplicates of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.\nKinship refers to the genetic relatedness between individuals, and it is a measure of how much of their genomes two individuals share due to common ancestry. Kinship is often evaluated by calculating a kinship matrix. We can use the kinshipMatrix() function from the ICARDA package to do this. This function has the option to choose the method we want to use to calculate the matrix by defining the method parameter. By default it it set to \"vanRaden\", but we can choose between \"astle\", \"IBS\", and \"identity\". We can also choose to save the matrix locally as a text file by defining the save parameter, which is set to FALSE by default.\n# Importing our genotypic data\nraw_matrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# Filtering\nmatrix &lt;- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)\n\n# We transpose our matrix (to have individuals as rows and makers as columns for posterior analyses)\nmatrix &lt;- t(matrix)\n\n# Calculating kinship matrix using ICARDA package\nkinshipMat &lt;- kinshipMatrix(matrix, method = \"vanRaden\", save = FALSE)\n# Generating a heatmap from our kinship matrix as an image in our working directory\nkinshipHeatmap(kinshipMat, file = \"output/figures/heatmap.png\")",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 4.1: Kinship and Relatedness</span>"
+    ]
   },
   {
     "objectID": "04_Pop_Structure/01_Kinship_Relatedness.html#duplicates",
     "href": "04_Pop_Structure/01_Kinship_Relatedness.html#duplicates",
-    "title": "Module 4.1: Kinship and Relatedness",
-    "section": "",
-    "text": "We can use the results from our kinship matrix to identify potential duplicates within our data. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses.\n\n# Identifying duplicates by setting a similarity threshold and using the ICARDA package\nduplicates &lt;- kinshipDuplicates(matrix, threshold = 0.99, kinship = kinshipMat)\n\n# Printing potential duplicates along with their kinship and correlation\nduplicates$potentialDuplicates\n\n        Indiv.A      Indiv.B    Value      Corr\n1  ICARDA_G1416 ICARDA_G0226 1.623916 0.9988232\n2  ICARDA_G0052 ICARDA_G0043 1.784647 0.9984566\n3  ICARDA_G0140 ICARDA_G0059 1.840917 0.9983279\n4  ICARDA_G0110 ICARDA_G0098 1.808388 0.9982951\n5  ICARDA_G0119 ICARDA_G0098 1.807323 0.9980452\n6  ICARDA_G0291 ICARDA_G0217 1.622423 0.9979949\n7  ICARDA_G0298 ICARDA_G0296 1.606878 0.9979506\n8  ICARDA_G0258 ICARDA_G0234 1.897229 0.9979442\n9  ICARDA_G1421 ICARDA_G0301 1.613681 0.9979219\n10 ICARDA_G0119 ICARDA_G0110 1.805239 0.9976256\n11 ICARDA_G0232 ICARDA_G0230 1.658003 0.9976119\n12 ICARDA_G1418 ICARDA_G0014 1.632860 0.9971155\n13 ICARDA_G0473 ICARDA_G0137 1.973008 0.9971065\n14 ICARDA_G0588 ICARDA_G0097 1.918720 0.9967419\n15 ICARDA_G0887 ICARDA_G0146 1.833113 0.9966084\n16 ICARDA_G1420 ICARDA_G0278 1.623460 0.9957251\n17 ICARDA_G0257 ICARDA_G0218 1.672619 0.9955905\n18 ICARDA_G0275 ICARDA_G0259 1.590987 0.9953467\n19 ICARDA_G1201 ICARDA_G0627 1.816801 0.9951241\n20 ICARDA_G0301 ICARDA_G0245 1.601896 0.9947260\n21 ICARDA_G1421 ICARDA_G0245 1.601728 0.9947013\n22 ICARDA_G0244 ICARDA_G0234 1.884887 0.9945220\n23 ICARDA_G0297 ICARDA_G0242 1.618348 0.9942201\n24 ICARDA_G0814 ICARDA_G0146 1.825129 0.9938527\n25 ICARDA_G1423 ICARDA_G0297 1.616111 0.9937178\n26 ICARDA_G0258 ICARDA_G0244 1.879864 0.9935735\n27 ICARDA_G1409 ICARDA_G0214 1.624520 0.9935612\n28 ICARDA_G0889 ICARDA_G0146 1.820499 0.9934813\n29 ICARDA_G0846 ICARDA_G0146 1.817510 0.9926027\n30 ICARDA_G0889 ICARDA_G0887 1.816931 0.9924443\n31 ICARDA_G0207 ICARDA_G0034 1.604201 0.9923286\n32 ICARDA_G0501 ICARDA_G0500 1.862038 0.9923112\n33 ICARDA_G0863 ICARDA_G0146 1.814894 0.9920920\n34 ICARDA_G0503 ICARDA_G0498 2.504639 0.9920558\n35 ICARDA_G0887 ICARDA_G0814 1.820125 0.9920372\n36 ICARDA_G1383 ICARDA_G0983 1.692738 0.9916451\n37 ICARDA_G0887 ICARDA_G0846 1.813754 0.9914600\n38 ICARDA_G0887 ICARDA_G0863 1.811138 0.9909474\n39 ICARDA_G1377 ICARDA_G0884 1.992010 0.9904147\n40 ICARDA_G0795 ICARDA_G0146 1.808636 0.9903712\n41 ICARDA_G1269 ICARDA_G0067 2.228613 0.9901741\n\n# Printing histograms with the distribution of diagonal and off-diagonal values\nduplicates$plots\n\n[[1]]\n\n\n\n\n\n\n\n\n\n\n[[2]]\n\n\n\n\n\n\n\n\n\nIf we decide we want to filter our data according to the potential duplicates we identified, we can use the kinshipFilter() function from the ICARDA package. This will give us a filtered version of our SNP matrix and kinship matrix.\n\nfilteredMatrix &lt;- kinshipFilter(matrix, duplicates$potentialDuplicates, kinshipMat)"
-  },
-  {
-    "objectID": "04_Pop_Structure/01_Kinship_Relatedness.html#kinship",
-    "href": "04_Pop_Structure/01_Kinship_Relatedness.html#kinship",
-    "title": "Module 4.1: Kinship and Relatedness",
-    "section": "",
-    "text": "Kinship refers to the genetic relatedness between individuals, and it is a measure of how much of their genomes two individuals share due to common ancestry. Kinship is often evaluated by calculating a kinship matrix. We can use the kinshipMatrix() function from the ICARDA package to do this. This function has the option to choose the method we want to use to calculate the matrix by defining the method parameter. By default it it set to \"vanRaden\", but we can choose between \"astle\", \"IBS\", and \"identity\". We can also choose to save the matrix locally as a text file by defining the save parameter, which is set to FALSE by default.\n\n# Importing our genotypic data\nraw_matrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n\n\n# Filtering\nmatrix &lt;- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)\n\n# We transpose our matrix (to have individuals as rows and makers as columns for posterior analyses)\nmatrix &lt;- t(matrix)\n\n# Calculating kinship matrix using ICARDA package\nkinshipMat &lt;- kinshipMatrix(matrix, method = \"vanRaden\", save = FALSE)\n\n\n# Generating a heatmap from our kinship matrix as an image in our working directory\nkinshipHeatmap(kinshipMat, file = \"output/figures/heatmap.png\")"
+    "title": "14  Module 4.1: Kinship and Relatedness",
+    "section": "14.2 Duplicates",
+    "text": "14.2 Duplicates\nWe can use the results from our kinship matrix to identify potential duplicates within our data. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses.\n\n# Identifying duplicates by setting a similarity threshold and using the ICARDA package\nduplicates &lt;- kinshipDuplicates(matrix, threshold = 0.99, kinship = kinshipMat)\n\n# Printing potential duplicates along with their kinship and correlation\nduplicates$potentialDuplicates\n\n        Indiv.A      Indiv.B    Value      Corr\n1  ICARDA_G1416 ICARDA_G0226 1.623916 0.9988232\n2  ICARDA_G0052 ICARDA_G0043 1.784647 0.9984566\n3  ICARDA_G0140 ICARDA_G0059 1.840917 0.9983279\n4  ICARDA_G0110 ICARDA_G0098 1.808388 0.9982951\n5  ICARDA_G0119 ICARDA_G0098 1.807323 0.9980452\n6  ICARDA_G0291 ICARDA_G0217 1.622423 0.9979949\n7  ICARDA_G0298 ICARDA_G0296 1.606878 0.9979506\n8  ICARDA_G0258 ICARDA_G0234 1.897229 0.9979442\n9  ICARDA_G1421 ICARDA_G0301 1.613681 0.9979219\n10 ICARDA_G0119 ICARDA_G0110 1.805239 0.9976256\n11 ICARDA_G0232 ICARDA_G0230 1.658003 0.9976119\n12 ICARDA_G1418 ICARDA_G0014 1.632860 0.9971155\n13 ICARDA_G0473 ICARDA_G0137 1.973008 0.9971065\n14 ICARDA_G0588 ICARDA_G0097 1.918720 0.9967419\n15 ICARDA_G0887 ICARDA_G0146 1.833113 0.9966084\n16 ICARDA_G1420 ICARDA_G0278 1.623460 0.9957251\n17 ICARDA_G0257 ICARDA_G0218 1.672619 0.9955905\n18 ICARDA_G0275 ICARDA_G0259 1.590987 0.9953467\n19 ICARDA_G1201 ICARDA_G0627 1.816801 0.9951241\n20 ICARDA_G0301 ICARDA_G0245 1.601896 0.9947260\n21 ICARDA_G1421 ICARDA_G0245 1.601728 0.9947013\n22 ICARDA_G0244 ICARDA_G0234 1.884887 0.9945220\n23 ICARDA_G0297 ICARDA_G0242 1.618348 0.9942201\n24 ICARDA_G0814 ICARDA_G0146 1.825129 0.9938527\n25 ICARDA_G1423 ICARDA_G0297 1.616111 0.9937178\n26 ICARDA_G0258 ICARDA_G0244 1.879864 0.9935735\n27 ICARDA_G1409 ICARDA_G0214 1.624520 0.9935612\n28 ICARDA_G0889 ICARDA_G0146 1.820499 0.9934813\n29 ICARDA_G0846 ICARDA_G0146 1.817510 0.9926027\n30 ICARDA_G0889 ICARDA_G0887 1.816931 0.9924443\n31 ICARDA_G0207 ICARDA_G0034 1.604201 0.9923286\n32 ICARDA_G0501 ICARDA_G0500 1.862038 0.9923112\n33 ICARDA_G0863 ICARDA_G0146 1.814894 0.9920920\n34 ICARDA_G0503 ICARDA_G0498 2.504639 0.9920558\n35 ICARDA_G0887 ICARDA_G0814 1.820125 0.9920372\n36 ICARDA_G1383 ICARDA_G0983 1.692738 0.9916451\n37 ICARDA_G0887 ICARDA_G0846 1.813754 0.9914600\n38 ICARDA_G0887 ICARDA_G0863 1.811138 0.9909474\n39 ICARDA_G1377 ICARDA_G0884 1.992010 0.9904147\n40 ICARDA_G0795 ICARDA_G0146 1.808636 0.9903712\n41 ICARDA_G1269 ICARDA_G0067 2.228613 0.9901741\n\n# Printing histograms with the distribution of diagonal and off-diagonal values\nduplicates$plots\n\n[[1]]\n\n\n\n\n\n\n\n\n\n\n[[2]]\n\n\n\n\n\n\n\n\n\nIf we decide we want to filter our data according to the potential duplicates we identified, we can use the kinshipFilter() function from the ICARDA package. This will give us a filtered version of our SNP matrix and kinship matrix.\n\nfilteredMatrix &lt;- kinshipFilter(matrix, duplicates$potentialDuplicates, kinshipMat)",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 4.1: Kinship and Relatedness</span>"
+    ]
   }
 ]
