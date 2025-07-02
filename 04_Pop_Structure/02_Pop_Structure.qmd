@@ -75,16 +75,16 @@ pca$plot
 
 ```{r spca, eval=FALSE}
 # Running sPCA
-spca <- sPCA(matrix, subgroups = popSet, xy = metadata[,c("LON","LAT")], eigenPlot = TRUE, tests = FALSE)
+spca <- sPCA(matrix, subgroups = popSet, xy = metadata[,c("LON","LAT")], eigenPlot = TRUE, tests = TRUE)
 
 # Plotting our obtained eigenvalues
 spca$eigenPlot
 
 # Plotting global test results
-#spca$globalTest
+spca$globalTest
 
 # Plotting local test results
-#spca$localTest
+spca$localTest
 
 # Plotting our results in a map
 sPCAMapPlot(spca$spca, matrix, xy = metadata[,c("LON","LAT")], axis = 1, pos = TRUE)
