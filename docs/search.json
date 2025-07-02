@@ -487,7 +487,7 @@
     "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html",
     "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
     "section": "",
-    "text": "13.1 Call Rate\nFiltering SNP data is important for genetic and genomic studies in order to improve data quality, optimize resources and avoid noise by removing non-informative markers, and account for missing data. The most common filtering criteria we will focus on is call rate, missing data and MAF (Minor Allele Frequency).\nCall rate refers to the percentage of non-missing data for a specific SNP marker. It is calculated by dividing the number of non-missing individuals / total number of individuals for each marker. The filtering threshold will depend on the specific data set or investigation; however, common thresholds tend to be 0.9 or 0.95.]\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# considering our n x m matrix with n markers and m individuals\n# defining our threshold\ncall_rate &lt;- 0.9\n\n# filtering our matrix\nfiltered_matrix &lt;- matrix[which(rowMeans(!is.na(matrix)) &gt; call_rate),]",
+    "text": "13.1 Call Rate\nFiltering SNP data is important for genetic and genomic studies in order to improve data quality, optimize resources and avoid noise by removing non-informative markers, and account for missing data. The most common filtering criteria we will focus on is call rate, missing data and MAF (Minor Allele Frequency).\nCall rate refers to the percentage of non-missing data for a specific SNP marker. It is calculated by dividing the number of non-missing individuals / total number of individuals for each marker. The filtering threshold will depend on the specific data set or investigation; however, common thresholds tend to be 0.9 or 0.95.]\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# Considering our n x m matrix with n markers and m individuals\n# Defining our threshold\ncall_rate &lt;- 0.9\n\n# Filtering our matrix\nfiltered_matrix &lt;- matrix[which(rowMeans(!is.na(matrix)) &gt; call_rate),]",
     "crumbs": [
       "Core Genomic Concepts",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
@@ -498,7 +498,7 @@
     "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#missing-data",
     "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
     "section": "13.2 Missing data",
-    "text": "13.2 Missing data\nJust as we can filter markers with too much missing data, we can filter individuals with too many missing values. Our missing data threshold will refer to the percentage of non-missing data for each individual.\n\n# defining our threshold\nna_ind &lt;- 0.8\n\n# filtering our matrix\nfiltered_matrix &lt;- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) &gt; na_ind)]",
+    "text": "13.2 Missing data\nJust as we can filter markers with too much missing data, we can filter individuals with too many missing values. Our missing data threshold will refer to the percentage of non-missing data for each individual.\n\n# Defining our threshold\nna_ind &lt;- 0.8\n\n# Filtering our matrix\nfiltered_matrix &lt;- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) &gt; na_ind)]",
     "crumbs": [
       "Core Genomic Concepts",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
@@ -509,7 +509,7 @@
     "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#maf",
     "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
     "section": "13.3 MAF",
-    "text": "13.3 MAF\nMinor allele frequency refers to the frequency of the least common allele for a particular SNP marker in a given population. It is commonly used as a filtering criteria as it allows you to exclude markers that contribute little to population-level analyses and helps reduce noise.\nFor example, if I have a marker which is homozygous 0 (AA), heterozygous 1 (AG), and homozygous 2 (GG), each individual contributes 2 alleles. We then count the minor alleles across all individuals to obtain MAF.\n\n# calculating MAF for all markers\nmafFreq &lt;- apply(filtered_matrix, 1, function(row) {\n  row &lt;- row[!is.na(row)]\n  maf &lt;- sum(row) / (2 * length(row))\n  maf &lt;- min(maf, 1 - maf)\n  maf\n})\n\n# filtering matrix according to maf\nfiltered_matrix &lt;- filtered_matrix[mafFreq &gt; 0.01,]",
+    "text": "13.3 MAF\nMinor allele frequency refers to the frequency of the least common allele for a particular SNP marker in a given population. It is commonly used as a filtering criteria as it allows you to exclude markers that contribute little to population-level analyses and helps reduce noise.\nFor example, if I have a marker which is homozygous 0 (AA), heterozygous 1 (AG), and homozygous 2 (GG), each individual contributes 2 alleles. We then count the minor alleles across all individuals to obtain MAF.\n\n# Calculating MAF for all markers\nmafFreq &lt;- apply(filtered_matrix, 1, function(row) {\n  row &lt;- row[!is.na(row)]\n  maf &lt;- sum(row) / (2 * length(row))\n  maf &lt;- min(maf, 1 - maf)\n  maf\n})\n\n# Filtering matrix according to maf\nfiltered_matrix &lt;- filtered_matrix[mafFreq &gt; 0.01,]",
     "crumbs": [
       "Core Genomic Concepts",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
@@ -553,7 +553,7 @@
     "href": "03_Genomic_Concepts/04_Genetic_Diversity.html",
     "title": "14  Module 3.4: Genetic Diversity",
     "section": "",
-    "text": "SNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a sample group and between subgroups. These can later be used for diversity-based breeding,",
+    "text": "14.1 Diversity parameters\nSNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.\nWe can easily calculate the most relevant diversity parameters using the genDivSNPReady() from our package.\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# SNP matrix has to have individuals in rows and markers as columns for the posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n# Obtaining genetic diversity parameters\nSNPReadyParams &lt;- genDivSNPReady(matrix, plots = TRUE)\n\n# Printing marker diversity parameters\nSNPReadyParams$markers\n\nDownload as CSV\n\n\n\n# Printing individual's diversity parameters\nSNPReadyParams$accessions\n\nDownload as CSV\n\n\n\n# Diversity plots\nSNPReadyParams$plots",
     "crumbs": [
       "Core Genomic Concepts",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.4: Genetic Diversity</span>"
@@ -634,6 +634,39 @@
     "crumbs": [
       "Population Structure and Relatedness",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#visualization-of-marker-information",
+    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#visualization-of-marker-information",
+    "title": "13  Module 3.3: Data Quality Control and Filtering for SNP Data",
+    "section": "13.5 Visualization of marker information",
+    "text": "13.5 Visualization of marker information\nOnce we have filtered our matrix, we can visualize marker information. We first need to import our marker information.\n\n# Importing our marker information\nmarkers &lt;- read.table(\"data/markers.tsv\", sep = \"\\t\", header = TRUE, \n                     check.names = FALSE)\n\nWe can then generate our plots using the markerPlots() function from our ICARDA package.\n\n# Generating our plots (our SNP marker matrix needs to be transposed for this function)\n# Individuals as rows and markers as columns\nmarkerplots &lt;- markerPlots(markers, t(filter))\n\n# Marker plot\nmarkerplots$markerPlot\n\n\n\n\n# MAF plot\nmarkerplots$mafPlot\n\n\n\n\n# Missing Data\nmarkerplots$missingData",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/04_Genetic_Diversity.html#by-population",
+    "href": "03_Genomic_Concepts/04_Genetic_Diversity.html#by-population",
+    "title": "14  Module 3.4: Genetic Diversity",
+    "section": "14.2 By population",
+    "text": "14.2 By population\nThese parameters can also be calculated by population in order to compare the diversity between them.\n\n# Defining our populations from country information\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])\n\n# Calculating parameters by population\nHe &lt;- HeBySubgroups(matrix, popSet, plot = TRUE)\n\n# Plotting results\nHe$plot\n\n\n\n\n# Printing results\nHe$df\n\nDownload as CSV",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.4: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/04_Genetic_Diversity.html#amova",
+    "href": "03_Genomic_Concepts/04_Genetic_Diversity.html#amova",
+    "title": "14  Module 3.4: Genetic Diversity",
+    "section": "14.3 AMOVA",
+    "text": "14.3 AMOVA\nAMOVA or Analysis of Molecular Variance can be run from a genetic distance matrix to evaluate genetic variation within populations, between populations and among populations. It helps us understand the structure of variation in our sample.\n\n# Calculating our genetic distance matrix\ngenDist &lt;- genDistPop(matrix, popSet)\n\n\n Converting data from a genind to a genpop object... \n\n...done.\n\n# Running AMOVA\namovaResult &lt;- AMOVA(matrix, popSet)\n\n\n Replaced 248144 missing values.\n\n\nWarning in validityMethod(object): @tab does not contain integers; as of\nadegenet_2.0-0, numeric values are no longer used\nWarning in validityMethod(object): @tab does not contain integers; as of\nadegenet_2.0-0, numeric values are no longer used\n\n\n\n No missing values detected.\n\n# Printing results\namovaResult\n\n$call\nade4::amova(samples = xtab, distances = xdist, structures = xstruct)\n\n$results\n                 Df    Sum Sq    Mean Sq\nBetween samples   2  92405.09 46202.5455\nWithin samples  485 346712.00   714.8701\nTotal           487 439117.09   901.6778\n\n$componentsofcovariance\n                                Sigma         %\nVariations  Between samples  291.6988  28.97952\nVariations  Within samples   714.8701  71.02048\nTotal variations            1006.5689 100.00000\n\n$statphi\n                        Phi\nPhi-samples-total 0.2897952",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.4: Genetic Diversity</span>"
     ]
   }
 ]

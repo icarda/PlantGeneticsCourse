@@ -2,7 +2,11 @@
 
 We have explored how to import genotypic data from files into R, but we can also retrieve it directly from online databases, such as **Gigwa**, using **ICARDA's QBMS package**.
 
-```{r}
+```{r setup, include=FALSE}
+library(here)
+```
+
+```{r qbms}
 # Loading QBMS library
 library(QBMS)
 
@@ -14,20 +18,20 @@ login_gigwa("Tamara", "-Zy2gn5ijQcW!EE")
 
 Once logged in, we can use the `gigwa_list_dbs()` function to view all available data bases.
 
-```{r}
+```{r dbs}
 gigwa_list_dbs()
 ```
 
 For this example we will be choosing the *"BarleySubData"* database.
 
-```{r}
+```{r set-db}
 # To set a data base
 gigwa_set_db("BarleySubData")
 ```
 
 Once we have defined a data base, we have to define a project and a run. We can do this the following way.
 
-```{r}
+```{r proj}
 # To view available projects
 gigwa_list_projects()
 
@@ -67,7 +71,7 @@ Once we have defined a data base, a project and a run, there are many tools we c
     -   `simplify`: defaults as TRUE, returns data in numeric coding (0, 1, 2 for diploids)
 5.  `gigwa_get_metadata()`: Retrieves associated metadata (if available)
 
-```{r}
+```{r misc}
 # Get a list of all samples in the selected run
 samples <- gigwa_get_samples()
 

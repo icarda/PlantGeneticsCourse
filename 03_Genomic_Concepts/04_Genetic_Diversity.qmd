@@ -1,3 +1,80 @@
 # Module 3.4: Genetic Diversity
 
-SNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a sample group and between subgroups. These can later be used for diversity-based breeding,
+SNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.
+
+## Diversity parameters
+
+We can easily calculate the most relevant diversity parameters using the `genDivSNPReady()` from our package.
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r data-import-run, include=FALSE}
+# Importing filtered genotypic data
+matrix <- read.table(here("data", "FilteredBarley.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+# SNP matrix has to have individuals in rows and markers as columns for the posterior functions
+matrix <- t(matrix)
+
+# Importing metadata
+metadata <- read_excel(here("data", "BarleyMetadata.xlsx"))
+metadata <- metadata[metadata$Individual %in% rownames(matrix),] #Ensuring IDs match
+```
+
+```{r data-import, eval=FALSE}
+# Importing filtered genotypic data
+matrix <- read.table("data/FilteredBarley.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+# SNP matrix has to have individuals in rows and markers as columns for the posterior functions
+matrix <- t(matrix)
+
+# Importing metadata
+metadata <- read_excel("data/BarleyMetadata.xlsx")
+```
+
+```{r gendiv}
+# Obtaining genetic diversity parameters
+SNPReadyParams <- genDivSNPReady(matrix, plots = TRUE)
+
+# Printing marker diversity parameters
+SNPReadyParams$markers
+
+# Printing individual's diversity parameters
+SNPReadyParams$accessions
+
+# Diversity plots
+SNPReadyParams$plots
+```
+
+## By population
+
+These parameters can also be calculated by population in order to compare the diversity between them.
+
+```{r pop}
+# Defining our populations from country information
+popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])
+
+# Calculating parameters by population
+He <- HeBySubgroups(matrix, popSet, plot = TRUE)
+
+# Plotting results
+He$plot
+
+# Printing results
+He$df
+```
+
+## AMOVA
+
+AMOVA or Analysis of Molecular Variance can be run from a genetic distance matrix to evaluate genetic variation within populations, between populations and among populations. It helps us understand the structure of variation in our sample.
+
+```{r amova}
+# Calculating our genetic distance matrix
+genDist <- genDistPop(matrix, popSet)
+
+# Running AMOVA
+amovaResult <- AMOVA(matrix, popSet)
+
+# Printing results
+amovaResult
+```

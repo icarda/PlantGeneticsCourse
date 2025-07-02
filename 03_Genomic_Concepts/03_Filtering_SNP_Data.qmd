@@ -67,3 +67,36 @@ To simplify all previous steps, we can use the `filterData()` function from our 
 ```{r filter}
 filter <- filterData(matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)
 ```
+
+## Visualization of marker information
+
+Once we have filtered our matrix, we can visualize marker information. We first need to import our marker information.
+
+```{r markers-run, include=FALSE}
+# Importing our marker information
+markers <- read.table(here("data","markers.tsv"), sep = "\t", header = TRUE, 
+                     check.names = FALSE)
+```
+
+```{r markers, eval=FALSE}
+# Importing our marker information
+markers <- read.table("data/markers.tsv", sep = "\t", header = TRUE, 
+                     check.names = FALSE)
+```
+
+We can then generate our plots using the `markerPlots()` function from our ICARDA package.
+
+```{r marker-plots}
+# Generating our plots (our SNP marker matrix needs to be transposed for this function)
+# Individuals as rows and markers as columns
+markerplots <- markerPlots(markers, t(filter))
+
+# Marker plot
+markerplots$markerPlot
+
+# MAF plot
+markerplots$mafPlot
+
+# Missing Data
+markerplots$missingData
+```

@@ -3,7 +3,11 @@
         {
             "columnIndex": 2,
             "ascending": true
+        },
+        {
+            "columnIndex": 4,
+            "ascending": true
         }
     ],
-    "path": "~/Desktop/ICARDA/PlantGeneticsCourse"
+    "path": "~/Desktop/ICARDA/PlantGeneticsCourse/04_Pop_Structure"
 }
