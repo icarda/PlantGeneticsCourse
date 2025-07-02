@@ -547,5 +547,93 @@
       "Population Structure and Relatedness",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 4.1: Kinship and Relatedness</span>"
     ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/04_Genetic_Diversity.html",
+    "href": "03_Genomic_Concepts/04_Genetic_Diversity.html",
+    "title": "14  Module 3.4: Genetic Diversity",
+    "section": "",
+    "text": "SNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a sample group and between subgroups. These can later be used for diversity-based breeding,",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.4: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Pop_Structure.html",
+    "href": "04_Pop_Structure/02_Pop_Structure.html",
+    "title": "16  Module 4.2: Population Structure",
+    "section": "",
+    "text": "16.1 Why is it important?\nPopulation structure in crop breeding refers to the presence of clusters or subpopulations that are genetically distinct from each other. The subpopulations may reflect geography, breeding history, natural selection, or other differentiating factors. The subgroups are identified by differences in allele frequencies.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Pop_Structure.html#why-is-it-important",
+    "href": "04_Pop_Structure/02_Pop_Structure.html#why-is-it-important",
+    "title": "16  Module 4.2: Population Structure",
+    "section": "",
+    "text": "Allows us to detect subpopulations and understand genetic diversity\nCan be used to control bias in GWAS or other genomic prediction models (by including structure information as covariates), as not accounting for structure may lead to spurious associations (false-positives)\nAcknowledging structure can help guide breeding programs",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Pop_Structure.html#common-methods",
+    "href": "04_Pop_Structure/02_Pop_Structure.html#common-methods",
+    "title": "16  Module 4.2: Population Structure",
+    "section": "16.2 Common methods",
+    "text": "16.2 Common methods\n\nSTRUCTURE / ADMIXTURE: Uses Bayesian clustering or Maximum Likelihood (ML) estimation to assign individuals into subpopulations, including admixture proportions for each individual.\nPrincipal Component Analysis (PCA): Used to reduce dimencionality of large data sets and to visualize major genetic groupings.\nSpatial Principal Component Analysis (sPCA): Incorporates spatial information intro traditional PCA (allows to account for geographic location).\nDiscriminant Analysis of Principal Components (DAPC): Used to assign individuals to groups, provide a visual assessment of between-population differentiation and the contribution of individual alleles to the population structure.\nSparse Non-negative Matrix Factorization (sNMF): Fast algorithm used to infer structure by estimating ancestry coefficients. More efficient than STRUCTURE for large data sets.\nPhylogenetic Analysis: Uses Neighbour Joining (NJ) or Unweighted Pair Group Method with Arithmetic Mean (UPGMA) based on genetic distance for clustering.\n\nWe will be using functions from our package to carry out and visualize most of these analyses.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Pop_Structure.html#pca",
+    "href": "04_Pop_Structure/02_Pop_Structure.html#pca",
+    "title": "16  Module 4.2: Population Structure",
+    "section": "16.3 PCA",
+    "text": "16.3 PCA\n\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# SNP matrix has to have individuals in rows and markers as columns for the posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n\n\n# We will be guiding our analysis by the 'countryOfOriginCode' column from our metadata\n# Defining our subgroups\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])\n# Running our pca\npca &lt;- PCAFromMatrix(matrix, popSet)\n\n# Printing pca object\npca$pca\n\nDuality diagramm\nclass: pca dudi\n$call: dudi.pca(df = x.genInd, center = FALSE, scale = FALSE, scannf = FALSE, \n    nf = round(ncol(geno)/3, 0))\n\n$nf: 487 axis-components saved\n$rank: 487\neigen values: 288 231.5 102.3 71 37.18 ...\n  vector length mode    content       \n1 $cw    12141  numeric column weights\n2 $lw    488    numeric row weights   \n3 $eig   487    numeric eigen values  \n\n  data.frame nrow  ncol  content             \n1 $tab       488   12141 modified array      \n2 $li        488   487   row coordinates     \n3 $l1        488   487   row normed scores   \n4 $co        12141 487   column coordinates  \n5 $c1        12141 487   column normed scores\nother elements: cent norm \n\n# Printing PC variation\nhead(pca$var)\n\n  PC  Variance CumulativeVar\n1  1 17.004415      17.00442\n2  2 13.666554      30.67097\n3  3  6.040506      36.71148\n4  4  4.191208      40.90268\n5  5  2.195083      43.09777\n6  6  1.665563      44.76333\n\n# Plotting pca results\npca$plot",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Pop_Structure.html#spca",
+    "href": "04_Pop_Structure/02_Pop_Structure.html#spca",
+    "title": "16  Module 4.2: Population Structure",
+    "section": "16.4 sPCA",
+    "text": "16.4 sPCA\n\n# Running sPCA\nspca &lt;- sPCA(matrix, subgroups = popSet, xy = metadata[,c(\"LON\",\"LAT\")], eigenPlot = TRUE, tests = TRUE)\n\n# Plotting our obtained eigenvalues\nspca$eigenPlot\n\n# Plotting global test results\nspca$globalTest\n\n# Plotting local test results\nspca$localTest\n\n# Plotting our results in a map\nsPCAMapPlot(spca$spca, matrix, xy = metadata[,c(\"LON\",\"LAT\")], axis = 1, pos = TRUE)",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Pop_Structure.html#dapc",
+    "href": "04_Pop_Structure/02_Pop_Structure.html#dapc",
+    "title": "16  Module 4.2: Population Structure",
+    "section": "16.5 DAPC",
+    "text": "16.5 DAPC\n\nThe kMeansStats() function allows the user to calculate k-statistics between “BIC”, “AIC” or “WCC”, in order to choose the optimum number of subpopulations.\n\n\n# Calculating our K statistics\nBICDAPC &lt;- kMeansStats(matrix, pca$pca, 10, \"BIC\")\n\n# PLotting K statistic\nBICDAPC$statPlot\n\n\n\n\n\n\n\n# Running DAPC\nDAPC &lt;- DAPC(matrix, krange = 3:6, pca = pca$pca, subgroups = popSet, dapcPlot = TRUE)\n\n# Plotting DAPC results\nDAPC$dapcPlot\n\n\n\n\n\nThe DAPC results can also be visualized as a composition plot.\n\nDAPCCompoPlot(DAPC$dapc, matrix, krange = 3:6, subgroups = popSet)\n\n\n\n\n\n\n\n\nWe can also produce a frequency plot from our DAPC.\n\n# For k = 3, which is our first object in our DAPC object\nDAPCFreqPlot(DAPC$dapc[[1]], subgroups = popSet)",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Pop_Structure.html#snmf",
+    "href": "04_Pop_Structure/02_Pop_Structure.html#snmf",
+    "title": "16  Module 4.2: Population Structure",
+    "section": "16.6 sNMF",
+    "text": "16.6 sNMF\n\n# Creating 'geno' object needed to run sNMF\nwrite.geno.mod(matrix, \"Data/sNMFgenoBarley.geno\")\n\n# Running sNMF\nsNMF &lt;- sNMFFunction(matrix, subgroups = popSet, \"Data/sNMFgenoBarley.geno\", maxK = 6, cePlot = TRUE)\n\nWe can visualize the sNMF results as a composition plot.\n\nsNMFCompoPlot(sNMF$qmatrix, matrix, krange = 2:6, subgroups = popSet)\n\n\n\n\n\n\n\n\nFinally, we can also visualize our sNMF results on a map.\n\nsNMFMapPlot(matrix, sNMF$snmf, xy = metadata[,c(\"LON\",\"LAT\")], 3)",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Population Structure</span>"
+    ]
   }
 ]
