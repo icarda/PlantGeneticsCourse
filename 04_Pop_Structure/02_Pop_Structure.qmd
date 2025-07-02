@@ -1,1 +1,152 @@
 # Module 4.2: Population Structure
+
+Population structure in crop breeding refers to the presence of clusters or subpopulations that are genetically distinct from each other. The subpopulations may reflect geography, breeding history, natural selection, or other differentiating factors. The subgroups are identified by differences in allele frequencies.
+
+## Why is it important?
+
+-   Allows us to **detect subpopulations** and understand **genetic diversity**
+
+-   Can be used **to control bias in GWAS** or other **genomic prediction models** (by including structure information as covariates), as not accounting for structure may lead to spurious associations (false-positives)
+
+-   Acknowledging structure can help **guide breeding programs**
+
+## Common methods
+
+-   **STRUCTURE / ADMIXTURE:** Uses Bayesian clustering or Maximum Likelihood (ML) estimation to assign individuals into subpopulations, including admixture proportions for each individual.
+
+-   **Principal Component Analysis (PCA):** Used to reduce dimencionality of large data sets and to visualize major genetic groupings.
+
+-   **Spatial Principal Component Analysis (sPCA):** Incorporates spatial information intro traditional PCA (allows to account for geographic location).
+
+-   **Discriminant Analysis of Principal Components (DAPC)**: Used to assign individuals to groups, provide a visual assessment of between-population differentiation and the contribution of individual alleles to the population structure.
+
+-   **Sparse Non-negative Matrix Factorization (sNMF):** Fast algorithm used to infer structure by estimating ancestry coefficients. More efficient than STRUCTURE for large data sets.
+
+-   **Phylogenetic Analysis:** Uses Neighbour Joining (NJ) or Unweighted Pair Group Method with Arithmetic Mean (UPGMA) based on genetic distance for clustering.
+
+We will be using functions from our package to carry out and visualize most of these analyses.
+
+## PCA
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r data-import-run, include=FALSE}
+# Importing filtered genotypic data
+matrix <- read.table(here("data", "FilteredBarley.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+# SNP matrix has to have individuals in rows and markers as columns for the posterior functions
+matrix <- t(matrix)
+
+# Importing metadata
+metadata <- read_excel(here("data", "BarleyMetadata.xlsx"))
+metadata <- metadata[metadata$Individual %in% rownames(matrix),] #Ensuring IDs match
+```
+
+```{r data-import, eval=FALSE}
+# Importing filtered genotypic data
+matrix <- read.table("data/FilteredBarley.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+# SNP matrix has to have individuals in rows and markers as columns for the posterior functions
+matrix <- t(matrix)
+
+# Importing metadata
+metadata <- read_excel("data/BarleyMetadata.xlsx")
+```
+
+```{r pca}
+# We will be guiding our analysis by the 'countryOfOriginCode' column from our metadata
+# Defining our subgroups
+popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])
+# Running our pca
+pca <- PCAFromMatrix(matrix, popSet)
+
+# Printing pca object
+pca$pca
+
+# Printing PC variation
+head(pca$var)
+
+# Plotting pca results
+pca$plot
+```
+
+## sPCA
+
+```{r spca, eval=FALSE}
+# Running sPCA
+spca <- sPCA(matrix, subgroups = popSet, xy = metadata[,c("LON","LAT")], eigenPlot = TRUE, tests = FALSE)
+
+# Plotting our obtained eigenvalues
+spca$eigenPlot
+
+# Plotting global test results
+#spca$globalTest
+
+# Plotting local test results
+#spca$localTest
+
+# Plotting our results in a map
+sPCAMapPlot(spca$spca, matrix, xy = metadata[,c("LON","LAT")], axis = 1, pos = TRUE)
+```
+
+## DAPC
+
+-   The *kMeansStats()* function allows the user to calculate k-statistics between "BIC", "AIC" or "WCC", in order to choose the optimum number of subpopulations.
+
+```{r dapc}
+# Calculating our K statistics
+BICDAPC <- kMeansStats(matrix, pca$pca, 10, "BIC")
+
+# PLotting K statistic
+BICDAPC$statPlot
+
+# Running DAPC
+DAPC <- DAPC(matrix, krange = 3:6, pca = pca$pca, subgroups = popSet, dapcPlot = TRUE)
+
+# Plotting DAPC results
+DAPC$dapcPlot
+```
+
+The DAPC results can also be visualized as a composition plot.
+
+```{r DAPC-compo, warning=FALSE, message = FALSE, fig.width=8, fig.height=4}
+DAPCCompoPlot(DAPC$dapc, matrix, krange = 3:6, subgroups = popSet)
+```
+
+We can also produce a frequency plot from our DAPC.
+
+```{r freq-plot, warning=FALSE, message = FALSE}
+# For k = 3, which is our first object in our DAPC object
+DAPCFreqPlot(DAPC$dapc[[1]], subgroups = popSet)
+```
+
+## sNMF
+
+```{r sNMF-run, include=FALSE}
+# Creating 'geno' object needed to run sNMF
+write.geno.mod(matrix, here("data","sNMFgenoBarley.geno"))
+
+# Running sNMF
+sNMF <- sNMFFunction(matrix, subgroups = popSet, here("data","sNMFgenoBarley.geno"), maxK = 6, cePlot = TRUE)
+```
+
+```{r sNMF, eval=FALSE}
+# Creating 'geno' object needed to run sNMF
+write.geno.mod(matrix, "Data/sNMFgenoBarley.geno")
+
+# Running sNMF
+sNMF <- sNMFFunction(matrix, subgroups = popSet, "Data/sNMFgenoBarley.geno", maxK = 6, cePlot = TRUE)
+```
+
+We can visualize the sNMF results as a composition plot.
+
+```{r sNMF-compo}
+sNMFCompoPlot(sNMF$qmatrix, matrix, krange = 2:6, subgroups = popSet)
+```
+
+Finally, we can also visualize our sNMF results on a map.
+
+```{r}
+sNMFMapPlot(matrix, sNMF$snmf, xy = metadata[,c("LON","LAT")], 3)
+```

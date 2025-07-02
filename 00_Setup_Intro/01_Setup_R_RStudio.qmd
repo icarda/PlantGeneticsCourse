@@ -23,8 +23,10 @@ Run only once to install LaTeX distribution
 
 ```{r packages}
 # Installing R Packages for the Course
-# We will use several add-on packages in R. You only need to install packages *once*. Use the R Console in RStudio.
-# --- Run this code chunk in the R Console --- List of packages we will likely need:
+# We will use several add-on packages in R. 
+# You only need to install packages *once*.
+# --- Run this code chunk in the R Console --- 
+# List of packages we will likely need:
 
 # Packages in Cran
 cran_packages <- c(
@@ -32,7 +34,7 @@ cran_packages <- c(
   "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
   "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
   "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 
-  "ASRgenomics", "statgenGWAS", "gplots"
+  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial"
 )
 
 # Bioconductor Packages
@@ -53,7 +55,8 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
 installed <- rownames(installed.packages())
 missing <- setdiff(bioc_packages, installed)
 if (length(missing)) {
-  message("Installing missing Bioconductor packages: ", paste(missing, collapse = ", "))
+  message("Installing missing Bioconductor packages: ", paste(missing, 
+                                                              collapse = ", "))
   BiocManager::install(missing)
 }
 ```

@@ -42,8 +42,10 @@ variety != "Local_Check"    # Is it NOT the local check? TRUE
 plot_yields <- c(5.2, 4.5, 6.1, 5.5)
 plot_yields > 5.0 # Which plots yielded above 5.0? [TRUE FALSE TRUE TRUE]
 
-plot_varieties <- c("ICARDA_Gold", "Local_Check", "ICARDA_RustResist", "ICARDA_Gold")
-plot_varieties == "ICARDA_Gold" # Which plots are ICARDA_Gold? [TRUE FALSE FALSE TRUE]
+plot_varieties <- c("ICARDA_Gold", "Local_Check", "ICARDA_RustResist", 
+                    "ICARDA_Gold")
+# Which plots are ICARDA_Gold? [TRUE FALSE FALSE TRUE]
+plot_varieties == "ICARDA_Gold"
 
 # Combining conditions
 # Find plots where yield > 5.0 AND variety is ICARDA_Gold
@@ -77,7 +79,8 @@ Let's use the `trial_data` data frame from the previous section:
 ```{r data-frames}
 trial_data <- data.frame(
   PlotID = c("A101", "A102", "B101", "B102"),
-  Variety = factor(c("ICARDA_Gold", "Local_Check", "ICARDA_RustResist", "ICARDA_Gold")),
+  Variety = factor(c("ICARDA_Gold", "Local_Check", "ICARDA_RustResist", 
+                     "ICARDA_Gold")),
   Yield_kg_plot = c(5.2, 4.5, 6.1, 5.5),
   Is_Resistant = c(TRUE, FALSE, TRUE, TRUE)
 )
@@ -114,13 +117,15 @@ print(icarda_gold_plots)
 
 # Select rows where Variety is "ICARDA_Gold" AND yield > 5.0
 # (We generated the logical vector for this earlier)
-condition <- (trial_data$Variety == "ICARDA_Gold") & (trial_data$Yield_kg_plot > 5.0)
+condition <- (trial_data$Variety == "ICARDA_Gold") & 
+             (trial_data$Yield_kg_plot > 5.0)
 print(condition) # Shows [TRUE FALSE FALSE TRUE]
 selected_plots <- trial_data[condition, ]
 print(selected_plots)
 
 # Select rows where the variety is resistant
-resistant_plots <- trial_data[trial_data$Is_Resistant == TRUE, ] # Or just trial_data[trial_data$Is_Resistant, ]
+resistant_plots <- trial_data[trial_data$Is_Resistant == TRUE, ] 
+# Or just trial_data[trial_data$Is_Resistant, ]
 print(resistant_plots)
 ```
 
@@ -131,9 +136,11 @@ The apply() family of functions lets us apply a function to the rows or columns 
 ```{r apply}
 # Imagine we have a data matrix of plot yield values for different varieties.
 # Each row represents a variety and each column a yield measurement for each trial
-plot_trials <- matrix(c(5.2, 4.5, 6.1, 5.5, 4, 6.6, 7, 5.1, 5.3), nrow = 3, ncol = 3)
+plot_trials <- matrix(c(5.2, 4.5, 6.1, 5.5, 4, 6.6, 7, 5.1, 5.3), 
+                      nrow = 3, ncol = 3)
 
-# We calculate the mean for each variety (each row), 1 means function is run on rows, 2 would mean function is run on columns
+# We calculate the mean for each variety (each row)
+# 1 means function is run on rows, 2 would mean function is run on columns
 apply(plot_trials, 1, mean)
 ```
 

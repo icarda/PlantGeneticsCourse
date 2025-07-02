@@ -5,7 +5,7 @@ cran_packages <- c(
   "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
   "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
   "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 
-  "ASRgenomics", "statgenGWAS", "gplots"
+  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial"
 )
 
 # Bioconductor Packages
@@ -557,10 +557,11 @@ DAPCCompoPlotInt <- function(DAPC, geno, krange, subgroups = NULL){
 # DAPC is DAPC object
 # subgroups is factor vector of n length
 # k is number of clusters to plot
-DAPCFreqPlot <- function(DAPC, subgroups, k){
+DAPCFreqPlot <- function(DAPC, subgroups){
   dapc <- DAPC
+  k <- dapc[["n.da"]]
   par(mar=c(1,1,1,1))
-  return(table.value(table(subgroups, dapc[[k-1]][["assign"]]), row.labels = rownames(table(subgroups, dapc[[k-1]][["assign"]])), col.labels = 1:k, clabel.row = 0.5, clabel.col = 0.7, clegend = 0.7))
+  return(table.value(table(subgroups, dapc[["assign"]]), row.labels = rownames(table(subgroups, dapc[["assign"]])), col.labels = 1:k, clabel.row = 0.5, clabel.col = 0.7, clegend = 0.7))
 }
 
 ## sPCA
@@ -600,7 +601,7 @@ sPCA <- function(geno, subgroups = NULL, xy, eigenPlot = TRUE, tests = TRUE){
     sp::coordinates(df) <- c("x", "y")
     hemisphere <- find_UTM_hemisphere(lat)
     zone <- find_UTM_zone(long, lat)
-    sp::proj4string(df) <- sp::CRS("+init=epsg:4326") 
+    sp::proj4string(df) <- sp::CRS("EPSG:4326")
     CRSstring <- paste0(
       "+proj=utm +zone=", zone,
       " +ellps=WGS84",
@@ -610,7 +611,7 @@ sPCA <- function(geno, subgroups = NULL, xy, eigenPlot = TRUE, tests = TRUE){
       stop("multiple zone/hemisphere detected")
     
     res <- sp::spTransform(df, sp::CRS(CRSstring[1L])) %>%
-      tibble::as_data_frame()
+      as.data.frame()
     
     res
   }
@@ -919,7 +920,7 @@ sNMFMapPlot <- function(geno, sNMFObjectVar, xy, k, Xlim = NULL, Ylim = NULL){
   sNMFmatrix <- Q(sNMFObjectVar, K = k)
   LEAplotDF<- cbind(LEAplotDF, sNMFmatrix)
   groups <- paste("G", 1:k, sep = "")
-  names(LEAplotDF)[4:(3+k)] <- groups
+  names(LEAplotDF)<- c("id", "longitude", "latitude", groups)
   
   if(is.null(Xlim) & is.null(Ylim)){
     mapPlot <- ggplot(data = ne_countries(scale = "medium", returnclass = "sf")) +

@@ -60,7 +60,8 @@ How R organizes collections of data:
 # Vector of plot yields (numeric)
 plot_yields <- c(75.5, 81.2, 78.9, 85.0)
 # Vector of variety names (character)
-plot_varieties <- c("ICARDA_Gold", "Local_Check", "ICARDA_Gold", "ICARDA_RustResist")
+plot_varieties <- c("ICARDA_Gold", "Local_Check", "ICARDA_Gold", 
+                    "ICARDA_RustResist")
 # Vector of resistance status (logical)
 plot_resistance <- c(TRUE, FALSE, TRUE, TRUE)
 
@@ -101,7 +102,8 @@ class(mixed_vector)# Example: Small genotype matrix (Individuals x SNPs)
 # Create a simple breeding trial data frame
 trial_data <- data.frame(
  PlotID = c("A101", "A102", "B101", "B102"),
- Variety = factor(c("ICARDA_Gold", "Local_Check", "ICARDA_RustResist", "ICARDA_Gold")),
+ Variety = factor(c("ICARDA_Gold", "Local_Check", "ICARDA_RustResist", 
+                    "ICARDA_Gold")),
  Yield_kg_plot = c(5.2, 4.5, 6.1, 5.5),
  Is_Resistant = c(TRUE, FALSE, TRUE, TRUE)
 )

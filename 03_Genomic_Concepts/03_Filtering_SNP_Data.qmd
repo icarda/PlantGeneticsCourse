@@ -21,11 +21,11 @@ matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row.nam
 ```
 
 ```{r call-rate}
-# considering our n x m matrix with n markers and m individuals
-# defining our threshold
+# Considering our n x m matrix with n markers and m individuals
+# Defining our threshold
 call_rate <- 0.9
 
-# filtering our matrix
+# Filtering our matrix
 filtered_matrix <- matrix[which(rowMeans(!is.na(matrix)) > call_rate),]
 ```
 
@@ -34,10 +34,10 @@ filtered_matrix <- matrix[which(rowMeans(!is.na(matrix)) > call_rate),]
 Just as we can filter markers with too much missing data, we can filter individuals with too many missing values. Our missing data threshold will refer to the **percentage of non-missing data for each individual**.
 
 ```{r na-ind}
-# defining our threshold
+# Defining our threshold
 na_ind <- 0.8
 
-# filtering our matrix
+# Filtering our matrix
 filtered_matrix <- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) > na_ind)]
 ```
 
@@ -48,7 +48,7 @@ Minor allele frequency refers to the **frequency of the least common allele for 
 For example, if I have a marker which is homozygous 0 (`AA`), heterozygous 1 (`AG`), and homozygous 2 (`GG`), each individual contributes 2 alleles. We then count the minor alleles across all individuals to obtain MAF.
 
 ```{r maf}
-# calculating MAF for all markers
+# Calculating MAF for all markers
 mafFreq <- apply(filtered_matrix, 1, function(row) {
   row <- row[!is.na(row)]
   maf <- sum(row) / (2 * length(row))
@@ -56,7 +56,7 @@ mafFreq <- apply(filtered_matrix, 1, function(row) {
   maf
 })
 
-# filtering matrix according to maf
+# Filtering matrix according to maf
 filtered_matrix <- filtered_matrix[mafFreq > 0.01,]
 ```
 

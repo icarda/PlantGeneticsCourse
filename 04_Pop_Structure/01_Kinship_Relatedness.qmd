@@ -51,7 +51,7 @@ We can use the results from our kinship matrix to identify potential duplicates 
 duplicates <- kinshipDuplicates(matrix, threshold = 0.99, kinship = kinshipMat)
 
 # Printing potential duplicates along with their kinship and correlation
-duplicates$potentialDuplicates
+head(duplicates$potentialDuplicates)
 
 # Printing histograms with the distribution of diagonal and off-diagonal values
 duplicates$plots

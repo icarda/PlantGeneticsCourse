@@ -38,6 +38,7 @@ book:
         - 03_Genomic_Concepts/01_SNPs_Genotypes.qmd
         - 03_Genomic_Concepts/02_QBMS.qmd
         - 03_Genomic_Concepts/03_Filtering_SNP_Data.qmd
+        - 03_Genomic_Concepts/04_Genetic_Diversity.qmd
     - part: "Population Structure and Relatedness"
       chapters:
         - 04_Pop_Structure/01_Kinship_Relatedness.qmd
@@ -48,10 +49,6 @@ book:
         - 05_GWAS_Intro/01_Concept_Simple_Model.qmd
         - 05_GWAS_Intro/02_Running_Basic_GWAS.qmd
         - 05_GWAS_Intro/03_Interpreting_Results.qmd
-    - part: "Tools and Advanced Concepts"
-      chapters:
-        - 06_GIGWA_AI/01_GIGWA_Overview.qmd
-        - 06_GIGWA_AI/02_AI_Concepts_Breeders.qmd
 
 format:
   html:

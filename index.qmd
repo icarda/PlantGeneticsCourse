@@ -25,8 +25,8 @@ The [ICARDA Bioinformatics Unit](https://www.icarda.org) is at the forefront of 
 
 | Photo | Name | Details |
 |:--:|:---|:---|
-| ![](./assets/zakaria.png){width="200px"} | **Zakaria Kehel** | Research Team Leader – Genetic Resources (GRS) & Morocco Interim Country Manager Genetic Innovation <br> Ph.D. from the School of Agricultural and Forestry Engineering at the University of Córdoba in Spain. |
-| ![](./assets/tamara.png){width="200px"} | **Tamara Ortiz** | Bioinformatician, started February 2024 <br> MS in Bioinformatics, NYU Tandon School of Engineering (2025–2026) <br> BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología (2018–2023) |
-| ![](./assets/alsamman.png){width="200px"} | **Alsamman M. Alsamman** | Bioinformatician, started January 2021 <br> PhD in Genetics, Faculty of Agriculture, Ain Shams University; <br> MSc in Genetics, Faculty of Agriculture, Cairo University; <br> BSc in Biotechnology with a Bioinformatics Minor, Faculty of Agriculture, Al-Azhar University. |
+| ![](./assets/zakaria.png){width="200px"} | **Zakaria Kehel** | Research Team Leader – Genetic Resources (GRS) & Morocco Interim Country Manager Genetic Innovation <br> Ph.D. from the School of Agricultural and Forestry Engineering at the University of Córdoba in Spain |
+| ![](assets/khaled.png) | **Khaled Al-Sham'aa** | Research Database Manager and Senior Biometrics Analyst <br> B.S.c in Computer Engineering, Aleppo University <br> Certificates from Johns Hopkins University & Oxford |
+| ![](assets/tamara.png) | **Tamara Ortiz** | Bioinformatician, started February 2024 <br> MS in Bioinformatics, NYU Tandon School of Engineering (Currently enrolled) <br> BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología |
 
 <!-- End merged cover content -->
