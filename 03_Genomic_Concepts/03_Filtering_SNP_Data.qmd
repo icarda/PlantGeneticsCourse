@@ -62,7 +62,7 @@ filtered_matrix <- filtered_matrix[mafFreq > 0.01,]
 
 ## General Filtering
 
-To simplify all previous steps, we can use the `filterData()` function from our package. The function allows you to define thresholds for call rate, MAF and missing individuals. By setting `stats = TRUE`, you can also get a data frame with statistics for the number of filtered markers and individuals by criteria.
+To simplify all previous steps, we can use the `filterData()` function from our package. The function allows you to define thresholds for call rate, MAF and missing individuals. There is an additional parameter called `stats`, it is set to FALSE by default but by setting it to TRUE you can get a data frame with statistics for the number of filtered markers and individuals by criteria.
 
 ```{r filter}
 filter <- filterData(matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)
@@ -84,7 +84,7 @@ markers <- read.table("data/markers.tsv", sep = "\t", header = TRUE,
                      check.names = FALSE)
 ```
 
-We can then generate our plots using the `markerPlots()` function from our ICARDA package.
+We can then generate our plots using the `markerPlots()` function from our ICARDA package. This function requires the markers and genotype matrix data. It allows for a third parameter called `chrom`, where you can define the specific chromosome you wish to plot your data for.
 
 ```{r marker-plots}
 # Generating our plots (our SNP marker matrix needs to be transposed for this function)

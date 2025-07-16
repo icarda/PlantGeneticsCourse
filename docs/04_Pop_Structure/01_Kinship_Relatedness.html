@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01_R_Basics/05_Simple_Plotting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Why Visualize Your Data?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></span></a>
   </div>
 </li>
       </ul>
@@ -293,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/03_Phylo_Tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">03_Phylo_Tree.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Module 4.3: Phylogenetic Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -364,10 +364,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Identifying relatedness between individuals is important to ensure samples are independent, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can help control confounding affects in association studies and can help infer subpopulations when studying structure. Moreover, not only may individuals be related, we can sometimes find duplicates of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.</p>
+<p>Identifying relatedness between individuals is important to <strong>ensure samples are independent</strong>, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can <strong>help control confounding affects in association studies</strong> and can <strong>help infer subpopulations when studying structure</strong>. Moreover, not only may individuals be related, we can sometimes <strong>find</strong> <strong>duplicates</strong> of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.</p>
 <section id="kinship" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="kinship"><span class="header-section-number">15.1</span> Kinship</h2>
-<p>Kinship refers to the <strong>genetic relatedness between individuals</strong>, and it is a measure of <strong>how much of their genomes two individuals share due to common ancestry</strong>. Kinship is often evaluated by calculating a <strong>kinship matrix</strong>. We can use the <code>kinshipMatrix()</code> function from the ICARDA package to do this. This function has the option to choose the method we want to use to calculate the matrix by defining the <code>method</code> parameter. By default it it set to <code>"vanRaden"</code>, but we can choose between <code>"astle"</code>, <code>"IBS"</code>, and <code>"identity"</code>. We can also choose to save the matrix locally as a text file by defining the <code>save</code> parameter, which is set to <code>FALSE</code> by default.</p>
+<p>Kinship refers to the <strong>genetic relatedness between individuals</strong>, and it is a measure of <strong>how much of their genomes two individuals share due to common ancestry</strong>. Kinship is often evaluated by calculating a <strong>kinship matrix</strong>. We can use the <code>kinshipMatrix()</code> function from our package to do this. This function requires our genotype matrix. It has the option to choose the method we want to use to calculate the matrix by defining the <code>method</code> parameter. By default it it set to <code>"vanRaden"</code>, but we can choose between <code>"astle"</code>, <code>"IBS"</code>, and <code>"identity"</code>. We can also choose to save the matrix locally as a text file by setting the <code>save</code> parameter as TRUE, which is set to FALSE by default.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing our genotypic data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>raw_matrix <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/BarleyMatrix.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -382,6 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating kinship matrix using ICARDA package</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>kinshipMat <span class="ot">&lt;-</span> <span class="fu">kinshipMatrix</span>(matrix, <span class="at">method =</span> <span class="st">"vanRaden"</span>, <span class="at">save =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>We can also create a heatmap from our kinship matrix using the <code>kinshipHeatmap()</code> function from our package. It requires our kinship matrix obtained using our previous function. It also has a <code>file</code> parameter to define the file path were we want to save our heatmap in.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generating a heatmap from our kinship matrix as an image in our working directory</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kinshipHeatmap</span>(kinshipMat, <span class="at">file =</span> <span class="st">"output/figures/heatmap.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -389,7 +390,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="duplicates" class="level2" data-number="15.2">
 <h2 data-number="15.2" class="anchored" data-anchor-id="duplicates"><span class="header-section-number">15.2</span> Duplicates</h2>
-<p>We can use the results from our kinship matrix to identify potential duplicates within our data. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses.</p>
+<p>We can use the results from our kinship matrix to <strong>identify potential duplicates within our data</strong>. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses. We will use the <code>kinshipDuplicates()</code> function from our package, which returns a list object with our kinship matrix, a data frame with our potential duplicates, and plots of the distribution of diagonal and off-diagonal values from our kinship matrix.</p>
+<p><code>kinshipDuplicates(geno, threshold, method = "vanRaden", save = FALSE, kinship = NULL)</code></p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>threshold</code>: a similarity threshold to differentiate our duplicates</p></li>
+<li><p><code>method</code>: set to <code>"vanRaden"</code> by default, accepts <code>"astle"</code>, <code>"IBS"</code>, and <code>"identity"</code></p></li>
+<li><p><code>save</code>: defaults to FALSE, if TRUE, saves as a text file</p></li>
+<li><p><code>kinship</code>: defaults to NULL, if we have already produced a kinship matrix we can define this parameter with it</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identifying duplicates by setting a similarity threshold and using the ICARDA package</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> <span class="fu">kinshipDuplicates</span>(matrix, <span class="at">threshold =</span> <span class="fl">0.99</span>, <span class="at">kinship =</span> kinshipMat)</span>
@@ -429,7 +438,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>If we decide we want to filter our data according to the potential duplicates we identified, we can use the <code>kinshipFilter()</code> function from the ICARDA package. This will give us a filtered version of our SNP matrix and kinship matrix.</p>
+<p>If we decide we want to filter our data according to the potential duplicates we identified, we can use the <code>kinshipFilter()</code> function from the ICARDA package. This function requires our genotype matrix, our data frame with potential duplicates, and our kinship matrix. This will give us a filtered version of our SNP matrix and kinship matrix. We can also choose to save the matrix locally as a text file by setting the <code>save</code> parameter as TRUE, which is set to FALSE by default.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>filteredMatrix <span class="ot">&lt;-</span> <span class="fu">kinshipFilter</span>(matrix, duplicates<span class="sc">$</span>potentialDuplicates, kinshipMat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

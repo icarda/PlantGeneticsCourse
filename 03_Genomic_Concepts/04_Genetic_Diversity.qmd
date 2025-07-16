@@ -1,10 +1,18 @@
 # Module 3.4: Genetic Diversity
 
-SNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.
+SNP data provides us with a genome-wide view of **variation within individuals and populations**. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.
 
 ## Diversity parameters
 
 We can easily calculate the most relevant diversity parameters using the `genDivSNPReady()` from our package.
+
+`genDivSNPReady(geno, plots = FALSE)`: Returns diversity parameters calculated with `snpReady` package.
+
+-   `geno`: our genotype matrix
+
+-   `plots`: defaults to FALSE, if TRUE, a graphical output of the results is produced
+
+The function returns a list object with two data frames, one with the diversity parameters for each **marker**, and one with the diversity parameters for each **accession**. If `plots = TRUE`, a third object is generated with the different plots.
 
 ```{r setup, include=FALSE}
 library(here)
@@ -48,7 +56,15 @@ SNPReadyParams$plots
 
 ## By population
 
-These parameters can also be calculated by population in order to compare the diversity between them.
+These parameters can also be calculated by population in order to compare the diversity between them. We will use the `HeBySubgroups()` function from our package.
+
+`HeBySubgroups(geno, subgroups, plot = FALSE)`: returns **expected heterozygosity (He)** by groups, including an optional plot
+
+-   `geno`: our genotype matrix
+
+-   `subgroups`: a vector with our factor information
+
+-   `plots`: defaults to FALSE, if TRUE, a graphical output of the results is produced
 
 ```{r pop}
 # Defining our populations from country information
@@ -66,11 +82,30 @@ He$df
 
 ## AMOVA
 
-AMOVA or Analysis of Molecular Variance can be run from a genetic distance matrix to evaluate genetic variation within populations, between populations and among populations. It helps us understand the structure of variation in our sample.
+AMOVA or Analysis of Molecular Variance can be run from a genetic distance matrix to evaluate genetic variation within populations, between populations and among populations. It helps us understand the structure of variation in our sample. We will be using the `genDistPop()` and `AMOVA()` functions from our package for this. They use frameworks from `adegenet` and `poppr` to carry out the AMOVA.
+
+`genDistPop(geno, subgroups, method = 1, PCoA = FALSE)`: returns a genetic distance matrix and optional Principal Coordinate Analysis from the distance matrix.
+
+-   `geno`: our genotype matrix
+
+-   `subgroups`: a vector with our factor information
+
+-   `method`: defaults to 1 (Nei's distance), allows for values 1-5 (Nei, Edwards, Reynolds, Rogers, Provesti)
+
+-   `PCoA`: defaults to FALSE, if TRUE, performs a principal coordinates analysis of a Euclidean distance matrix
+
+`AMOVA()`:
+
+-   `geno`: our genotype matrix
+
+-   `subgroups`: a vector with our factor information
 
 ```{r amova}
-# Calculating our genetic distance matrix
-genDist <- genDistPop(matrix, popSet)
+# Calculating our genetic distance matrix and PCoA
+genDist <- genDistPop(matrix, popSet, PCoA = TRUE)
+
+# Printing results
+genDist
 
 # Running AMOVA
 amovaResult <- AMOVA(matrix, popSet)

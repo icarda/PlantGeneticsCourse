@@ -1,4 +1,4 @@
-## Why Visualize Your Data?
+# Module 1.5: Why Visualize Your Data?
 
 "A picture is worth a thousand words" - this is especially true for data! Plots help us to:
 

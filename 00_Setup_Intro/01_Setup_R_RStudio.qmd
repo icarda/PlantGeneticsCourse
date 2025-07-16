@@ -75,4 +75,4 @@ invisible(
 
 ## Quick RStudio Tour
 
-(We will cover this live, but key windows include: Console, Script Editor/Notebook, Environment/History, Files/Plots/Packages/Help/Viewer/Projects). Familiarize yourself with these panes.
+(We will cover this live, but key windows include: *Console, Script Editor/Notebook, Environment/History, Files/Plots/Packages/Help/Viewer/Projects*). Familiarize yourself with these panes. More in depth information on any of the functions we use can be found by searching for the function in the *Help* panel.

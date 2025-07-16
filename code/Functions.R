@@ -238,11 +238,11 @@ genDivSNPReady <- function(geno, plots = FALSE){
 }
 
 ## He by subgroups
-# matrix is nxm matrix with n individuals and m markers in "1/1" format
+# geno is nxm matrix with n individuals and m markers in "1/1" format
 # subgroups is factor vector of n length
 # returns He by groups, including optional plot
-HeBySubgroups <- function(matrix, subgroups, plot = FALSE){
-  genInd <- df2genind(matrix, sep = "/", ploidy = 2, type = "codom", pop = subgroups)
+HeBySubgroups <- function(geno, subgroups, plot = FALSE){
+  genInd <- df2genind(geno, sep = "/", ploidy = 2, type = "codom", pop = subgroups)
   
   # expected heterozygosity within populations
   HePop <- Hs(genInd)
@@ -701,7 +701,7 @@ sPCAMapPlot <- function(spca, geno, xy, axis = 1, pos = TRUE){
                          breaks = c("-1", "0", "1")) +
       coord_sf(xlim = range(xy$longitude), ylim = range(xy$latitude), expand = TRUE) +
       theme_classic() +
-      labs(title = "sPCA - Negativa Principal Component", x = "Longitude", y = "Latitude") +
+      labs(title = "sPCA - Negative Principal Component", x = "Longitude", y = "Latitude") +
       theme(plot.title = element_text(hjust = 0.5, size = 10), axis.line = element_line(color = "black", linewidth = 0.4), 
             panel.grid.major = element_line(color = "grey", linewidth = 0.2), axis.title = element_text(size = 10), 
             legend.key.size = unit(0.4, 'cm'), legend.title = element_text(size = 8), legend.text = element_text(size = 6), 
@@ -760,7 +760,7 @@ write.geno.mod <- function(geno, output.file)
 # maxK is a numerical value (maximum number of K groups)
 # geno is nxm numeric matrix with n individuals and m markers
 # file is the geno type file address
-sNMFFunction <- function(geno, file, maxK, subgroups = NULL, cePlot = TRUE, compoPlot = TRUE){
+sNMFFunction <- function(geno, file, maxK, subgroups = NULL, cePlot = TRUE){
   
   snmfObjectKvar <- snmf(file, K=1:maxK, ploidy = 2, alpha = 100, entropy = TRUE, project = "new")
   snmfCrossEntr <- data.frame(matrix(nrow = maxK, ncol = 2))
@@ -1254,7 +1254,7 @@ kinshipDuplicates <- function(geno, threshold, method = "vanRaden", save = FALSE
 }
 
 
-kinshipHeatmap <- function(kinship, file = NULL){
+kinshipHeatmap <- function(kinship, file){
   png(file, width = 3000, height = 3000)
   par(mar=c(1,1,1,1))
   heatmap.2(kinship, trace = "none", keysize = 0.5)
@@ -1273,3 +1273,10 @@ kinshipFilter <- function(matrix, duplicatesdf, kinship, save = FALSE){
   return(list(markerMatrix = kMatrix, kinship = cKinship))
 }
 
+phyloTree <- function(geno, treeType, distanceType, samples, path){
+  glSNP <- new("genlight", geno, indNames = rownames(geno), locNames = colnames(geno), parallel=FALSE)
+  alleleFreq <- tab(glSNP, freq = TRUE)
+  tree <- aboot(alleleFreq, tree = treeType, distance = distanceType, sample = samples, showtree = FALSE)
+  ape::write.tree(tree, file = path)
+  return(tree)
+}

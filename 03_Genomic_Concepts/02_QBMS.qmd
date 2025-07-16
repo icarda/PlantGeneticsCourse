@@ -49,7 +49,7 @@ Once we have defined a data base, a project and a run, there are many tools we c
 
 1.  `gigwa_get_samples()`: Retrieves a list of samples associated with defined GIGWA project
 2.  `gigwa_get_sequences()`: Retrieves a list of chromosomes associated with defined GIGWA project
-3.  `gigwa_get_markers()`: Retrieves a list of SNP variants from selected GIGWA run. We can define the following parameters:
+3.  `gigwa_get_markers(start = NULL, end = NULL, chrom = NULL, simplify = TRUE)`: Retrieves a list of SNP variants from selected GIGWA run. We can define the following parameters:
     -   `start`: starting position of query
 
     -   `end`: ending position of query
@@ -57,7 +57,7 @@ Once we have defined a data base, a project and a run, there are many tools we c
     -   `chrom`: chromosome
 
     -   `simplify`: defaults as TRUE, returns data in HapMap format with columns for rs#, alleles, chromosome and position
-4.  `gigwa_get_allelematrix()`: Retrieves a two-dimensional matrix of genotype data from the defined GIGWA run.
+4.  `gigwa_get_allelematrix(samples = NULL, start = 0, end = "", chrom = NULL, snps = NULL, simplify = TRUE)`: Retrieves a two-dimensional matrix of genotype data from the defined GIGWA run.
     -   `samples`: optional list of sample IDs, if NULL, all samples are included
 
     -   `start`: starting position of query

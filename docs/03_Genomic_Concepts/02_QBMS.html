@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01_R_Basics/05_Simple_Plotting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Why Visualize Your Data?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></span></a>
   </div>
 </li>
       </ul>
@@ -293,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/03_Phylo_Tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">03_Phylo_Tree.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Module 4.3: Phylogenetic Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -417,14 +417,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><code>gigwa_get_samples()</code>: Retrieves a list of samples associated with defined GIGWA project</li>
 <li><code>gigwa_get_sequences()</code>: Retrieves a list of chromosomes associated with defined GIGWA project</li>
-<li><code>gigwa_get_markers()</code>: Retrieves a list of SNP variants from selected GIGWA run. We can define the following parameters:
+<li><code>gigwa_get_markers(start = NULL, end = NULL, chrom = NULL, simplify = TRUE)</code>: Retrieves a list of SNP variants from selected GIGWA run. We can define the following parameters:
 <ul>
 <li><p><code>start</code>: starting position of query</p></li>
 <li><p><code>end</code>: ending position of query</p></li>
 <li><p><code>chrom</code>: chromosome</p></li>
 <li><p><code>simplify</code>: defaults as TRUE, returns data in HapMap format with columns for rs#, alleles, chromosome and position</p></li>
 </ul></li>
-<li><code>gigwa_get_allelematrix()</code>: Retrieves a two-dimensional matrix of genotype data from the defined GIGWA run.
+<li><code>gigwa_get_allelematrix(samples = NULL, start = 0, end = "", chrom = NULL, snps = NULL, simplify = TRUE)</code>: Retrieves a two-dimensional matrix of genotype data from the defined GIGWA run.
 <ul>
 <li><p><code>samples</code>: optional list of sample IDs, if NULL, all samples are included</p></li>
 <li><p><code>start</code>: starting position of query</p></li>
