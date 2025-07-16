@@ -44,11 +44,13 @@ book:
         - 04_Pop_Structure/01_Kinship_Relatedness.qmd
         - 04_Pop_Structure/02_Pop_Structure.qmd
         - 04_Pop_Structure/03_Phylo_Tree.qmd
-    - part: "Marker-Trait Association (GWAS)"
+    - part: "Genome Wide Association Studies (GWAS)"
       chapters:
-        - 05_GWAS_Intro/01_Concept_Simple_Model.qmd
-        - 05_GWAS_Intro/02_Running_Basic_GWAS.qmd
-        - 05_GWAS_Intro/03_Interpreting_Results.qmd
+        - 05_GWAS/01_Initial_Concepts.qmd
+        - 05_GWAS/02_Single_Trait_GWAS.qmd
+    - part: "Genomic Selection"
+      chapters:
+        - 06_GS/01_Genomic_Selection.qmd
 
 format:
   html:
@@ -59,7 +61,6 @@ format:
     toc-depth: 3
   revealjs:
     theme: default
-    # css: custom.css # Also try commenting this out as a test (see step 3)
     slide-number: true
     chalkboard: true
     logo: assets/icarda_logo.png
@@ -71,14 +72,7 @@ format:
     slide-level: 2
     aspectratio: 169
 
-# bibliography: references.bib
-
-# --- THIS BLOCK MIGHT BE CAUSING ISSUES ---
-# Comment out or delete this entire 'website:' block for testing:
-# website:
-#   page-footer:
-#     left: "International Center for Agricultural Research in the Dry Areas (ICARDA)"
-#     center: "Plant Breeding Data Analysis with R - Baku"
-# -------------------------------------------
+bibliography: references.bib
+csl: apa.csl
 
 editor: visual

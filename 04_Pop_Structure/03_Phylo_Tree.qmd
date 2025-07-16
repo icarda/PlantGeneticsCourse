@@ -1,5 +1,45 @@
 # Module 4.3: Phylogenetic Trees
 
+Besides exploring population structure, we may want to **explore evolutionary relationships between individuals**. We can use phylogenetic trees to **infer common ancestry**, **track lineage divergence**, and **reconstruct evolutionary and adaptation history**. We will focus on distance-based methods. These require us to construct a genetic distance matrix, from which a tree is constructed by clustering similar individuals.
+
+## Tree Methods
+
+-   **Neighbor Joining (NJ)**: builds an **unrooted** tree by minimizing the total branch length. It is fast and scaleable, often used for SNP data.
+
+-   **Unweighted Pair Group Method with Arithmetic Mean (UPGMA)**: builds a **rooted**, ultrametric tree, meaning all leaves are at an equal distance from the root. It clusters taxa based on average pairwise distances and assumes a constant rate of evolution.
+
+## Distance types
+
+-   **Nei's distance** \[`nei.dist()`\]: Measures genetic divergence based on allele frequencies. Very common in population genetics.
+
+-   **Euclidean** **distance** \[`bitwise.dist()`\]: Based on geometric distance in multidimensional space.
+
+-   **Reynolds' distance** \[`reynolds.dist()`\]: Reynolds' distance measures genetic differentiation due to drift and it as the main evolutionary force. Good for closely related populations.
+
+-   **Rogers' distance** \[`rogers.dist()`\]: Scaled version of the standard Euclidean distance applied to allele frequency data.
+
+-   **Edwards' distance** \[`edwards.dist()`\]: Measures the cosine of the angle between allele frequency vectors.
+
+-   **Prevosti's distance** \[`provesti.dist()`\]: Based on the absolute difference in allele frequencies between two populations.
+
+## Creating our tree
+
+We will be using the `phyloTree()` function from our package to create our phylogenetic tree. This function uses framework from the `poppr` package to construct the phylogenetic tree.
+
+`phyloTree(geno, treeType, distanceType, samples, path)`: returns a phylo type object
+
+-   `geno`: our genotype matrix
+
+-   `treeType`: a text or function that can calculate a tree from a distance matrix, defaults to "upgma"
+
+-   `distanceType`: a character or function defining the distance to be applied, defaults to `nei.dist()`
+
+-   **`samples`**: a number of bootstrap replicates, defaults to 100
+
+-   path: file path to save tree in Newick format
+
+The output tree can be plotted using the `plot()` function. We can define the type of visualization in the type parameter, which defaults to `"phylogram"` and accepts `"cladogram"`, `"fan"`, `"unrooted"`, `"radial"` or `"tidy"`. The produced Newick file can be visualized better with tools such as [iTOL](https://itol.embl.de/), which allows for more visualization and annotation options.
+
 ```{r setup, include=FALSE}
 library(here)
 source(here("code","setup.R"))
@@ -14,6 +54,9 @@ matrix <- t(matrix)
 # Importing metadata
 metadata <- read_excel(here("data", "BarleyMetadata.xlsx"))
 metadata <- metadata[metadata$Individual %in% rownames(matrix),] #Ensuring IDs match
+
+# Defining our subgroups
+popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])
 ```
 
 ```{r data-import, eval=FALSE}
@@ -24,10 +67,30 @@ matrix <- t(matrix)
 
 # Importing metadata
 metadata <- read_excel("data/BarleyMetadata.xlsx")
+metadata <- metadata[metadata$Individual %in% rownames(matrix),] #Ensuring IDs match
+
+# Defining our subgroups
+popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])
 ```
 
-```{r}
-tree <- phyloTree(matrix, treeType = "upgma", distanceType = nei.dist, samples = 1, path = here("output", "tree.txt"))
+```{r tree-run}
+# Creating NJ tree from Nei's distance (1 sample for time purposes) 
+tree <- phyloTree(matrix, treeType = "nj", distanceType = nei.dist, samples = 1, path = here("output", "tree.txt"))
 
-plot(tree, main = "UPGMA Tree with Bootstrap", cex = 0.1)
+# Creating vector of colors for better visualization
+popColors <- rainbow(nlevels(popSet))[as.numeric(popSet)]
+
+# Plotting tree
+plot(tree, main = "NJ Tree with Bootstrap", type = "phylogram", tip.color = popColors, cex = 0.1)
+```
+
+```{r tree, eval=FALSE}
+# Creating NJ tree from Nei's distance (1 sample for time purposes) 
+tree <- phyloTree(matrix, treeType = "upgma", distanceType = nei.dist, samples = 1, path = "output/tree.txt")
+
+# Creating vector of colors for better visualization
+popColors <- rainbow(nlevels(popSet))[as.numeric(popSet)]
+
+# Plotting tree
+plot(tree, main = "NJ Tree with Bootstrap", type = "phylogram", tip.color = popColors, cex = 0.1)
 ```

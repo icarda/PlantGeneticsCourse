@@ -1,6 +1,6 @@
 # Module 4.2: Population Structure
 
-Population structure in crop breeding refers to the **presence of clusters or subpopulations that are genetically distinct** from each other. The subpopulations may reflect geography, breeding history, natural selection, or other differentiating factors. The subgroups are identified by differences in allele frequencies.
+Population structure in crop breeding refers to the **presence of clusters or subpopulations that are genetically distinct** from each other. The subpopulations may reflect geography, breeding history, natural selection, gene pools, or other differentiating factors. The subgroups are identified by differences in allele frequencies.
 
 ## Why is it important?
 
@@ -240,7 +240,7 @@ sNMF <- sNMFFunction(matrix, subgroups = popSet, "output/sNMFgenoBarley.geno", m
 
 We can visualize our membership probability results using a composition plot.
 
-sNMFCompoPlot(sNMFmatrix, geno, krange, subgroups = NULL):
+`sNMFCompoPlot(sNMFmatrix, geno, krange, subgroups = NULL)`: returns a composition plot of admixture results
 
 -   `sNMFmatrix`: ancestry coefficient matrix
 
