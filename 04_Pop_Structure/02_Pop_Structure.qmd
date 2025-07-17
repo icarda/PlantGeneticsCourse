@@ -37,7 +37,7 @@ We will be using functions from our package to carry out and visualize most of t
 
 PCA reduces our large genotype matrix into principal components which capture the variation in our data. We will use the `PCAFromMatrix()` function from our package. This function uses the PCA framework from the `ade4` package. This function returns a list with three objects, the first one being a PCA, the second one being a data frame with the variance explained by each component, and the third one being a plot of the PCA results (1st and 2nd PCs).
 
-`PCAFromMatrix(geno, subgroups = NULL)`: returns a PCA object from genotype matrix
+`PCAFromMatrix(geno, subgroups = NULL)`: returns a *pca* object from genotype matrix
 
 -   `geno`: our genotype matrix
 
@@ -104,7 +104,7 @@ We will be using the `sPCA()` function from our package. This function uses the 
 
 `sPCAMapPlot(spca, geno, xy, axis = 1, pos = TRUE`): plots our sPCA results on a map
 
--   `spca`: our sPCA object
+-   `spca`: our *spca* object
 
 -   `geno`: our genotype matrix
 
@@ -133,13 +133,13 @@ sPCAMapPlot(spca$spca, matrix, xy = metadata[,c("LON","LAT")], axis = 1, pos = T
 
 ## DAPC
 
-DAPC requires the user to define a range of subpopulation numbers for which to perform the analyses. To do this, we can calculate different k-statistics to guide our choice of this range. We will be using our `kMeansStats()` function, which allows us to choose between `"BIC"`, `"AIC"` or `"WCC"` for our desired k-statistic. This function outputs a data frame with our k-statistic values, and a plot. We will then use our `DAPC()` function on our genotype data, which uses the DAPC framework from the `adegenet` package. This function outputs a list with the DAPC object and a data frame with the explained variances. An additional plot can also be produced.
+DAPC requires the user to define a range of subpopulation numbers for which to perform the analyses. To do this, we can calculate different k-statistics to guide our choice of this range. We will be using our `kMeansStats()` function, which allows us to choose between `"BIC"`, `"AIC"` or `"WCC"` for our desired k-statistic. This function outputs a data frame with our k-statistic values, and a plot. We will then use our `DAPC()` function on our genotype data, which uses the DAPC framework from the `adegenet` package. This function outputs a list with the *dapc* object and a data frame with the explained variances. An additional plot can also be produced.
 
 `kMeansStats(geno, pca = NULL, maxK, stat)`: returns test statistic results for different K values
 
 -   `geno`: our genotype matrix
 
--   `pca`: defaults to NULL, can be replaced by a PCA object to skip over creating a new PCA
+-   `pca`: defaults to NULL, can be replaced by a *pca* object to skip over creating a new PCA
 
 -   `maxK`: the maximum number of K subpopulations for which to calculate k-statistics
 
@@ -153,7 +153,7 @@ DAPC(geno, krange, subgroups = NULL, pca = NULL, dapcPlot = FALSE): performs DAP
 
 -   `subgroups`: defaults to NULL, can be replaced with a vector of our factor information
 
--   `pca`: defaults to NULL, can be replaced by a PCA object to skip over creating a new PCA
+-   `pca`: defaults to NULL, can be replaced by a *pca* object to skip over creating a new PCA
 
 -   `dapcPlot`: defaults to FALSE, if TRUE, an output plot is produced
 
@@ -175,7 +175,7 @@ Our resulting DAPC outputs group assignments for each individual, which can be v
 
 `DAPCCompoPlot(DAPC, geno, krange, subgroups = NULL)`: returns a composition plot of DAPC results
 
--   `DAPC`: a DAPC object
+-   `DAPC`: a *dapc* object
 
 -   `geno`: our genotype matrix
 
@@ -191,7 +191,7 @@ We can also produce a frequency plot from our DAPC. This helps us understand the
 
 `DAPCFreqPlot(DAPC, subgroups)`: produced a frequency plot of our DAPC results
 
--   `DAPC`: a DAPC object
+-   `DAPC`: a *dapc* object
 
 -   `subgroups`: a vector of our factor information
 
@@ -202,9 +202,9 @@ DAPCFreqPlot(DAPC$dapc[[1]], subgroups = popSet)
 
 ## sNMF
 
-sNMF is used to estimate admixture proportions: how much of an individual’s genome comes from different ancestral populations. This means that individuals are not just assigned to a population, instead membership probabilities (admixture coefficients) are calculated. We will be using functions from our package to carry out these analyses. The framework they use comes from the `LEA` package. Prior to estimating ancestry coefficients, this package requires us to create a `geno` type object, which we will create using the `write.geno.mod()` function. We can then run our main function using `sNMFFunction()`, which outputs a list with our sNMF object, a matrix with the produced ancestry coefficients, and a data frame with cross-entropy values. The latter can guide our choice of best K value.
+sNMF is used to estimate admixture proportions: how much of an individual’s genome comes from different ancestral populations. This means that individuals are not just assigned to a population, instead membership probabilities (admixture coefficients) are calculated. We will be using functions from our package to carry out these analyses. The framework they use comes from the `LEA` package. Prior to estimating ancestry coefficients, this package requires us to create a *geno* type object, which we will create using the `write.geno.mod()` function. We can then run our main function using `sNMFFunction()`, which outputs a list with our *snmf* object, a matrix with the produced ancestry coefficients, and a data frame with cross-entropy values. The latter can guide our choice of best K value.
 
-`write.geno.mod(geno, output.file)`: creates geno type object from genotype matrix
+`write.geno.mod(geno, output.file)`: creates *geno* type object from genotype matrix
 
 -   `geno`: our genotype matrix
 
@@ -214,7 +214,7 @@ sNMF is used to estimate admixture proportions: how much of an individual’s ge
 
 -   `geno`: our genotype matrix
 
--   `file`: file path of geno object
+-   `file`: file path of *geno* object
 
 -   `maxK`: the maximum number of K subpopulations
 
@@ -261,7 +261,7 @@ Finally, we can also visualize our sNMF results on a map by incorporating spatia
 
 -   `geno`: our genotype matrix
 
--   `sNMFObjectVar`: a sNMF object
+-   `sNMFObjectVar`: a *snmf* object
 
 -   `xy`: a two column longitude - latitude vector or data frame
 

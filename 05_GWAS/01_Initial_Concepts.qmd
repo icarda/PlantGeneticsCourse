@@ -1,0 +1,177 @@
+# Module 6.1: Introduction to GWAS
+
+The purpose of **Genome-Wide Association Studies (GWAS)** is to **identify genetic variants associated with specific traits**. We will be using the `statgenGWAS` package, which has been designed for performing single trait GWAS.
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r data-import-run, include=FALSE}
+geno_file  <- here('data', 'Raw_SNPS_80_Present_5_MAF.hmp.txt')
+pheno_file <- here('data', 'Pheno_REML.csv')
+trait_name <- 'ASC_Score'
+```
+
+```{r data-import, eval=FALSE}
+# File paths for data import
+geno_file  <- 'data/Raw_SNPS_80_Present_5_MAF.hmp.txt'
+pheno_file <- 'data/Pheno_REML.csv'
+trait_name <- 'ASC_Score'
+```
+
+## Reading the Marker Matrix
+
+Markers can either be coded as character strings or as numerical values. Common coding styles include the following options:
+
+-   AA, AB, BA, BB -\> 0, 1, 1, 2 (A is reference allele, and B is alternative allele)
+
+-   CC, CT, TC, TT -\> 0, 1, 1, 2 (e.g., ref. allele is C)
+
+-   C, Y, Y, T -\> 0, 1, 1, 2 ([Nucleic Acid Notation](https://en.wikipedia.org/wiki/Nucleic_acid_notation))
+
+-   numerical code: 0, 1, 1, 2 (0 ref./major allele, 2 alt./minor allele, and 1 is heterozygous) statgenGWAS
+
+-   numerical code: -1, 0, 0, 1 (-1 ref./major allele, 1 alt./minor allele, and 0 is heterozygous) rrBLUP
+
+```{r marker}
+genotypic_data <- read.table(geno_file, 
+                             header = TRUE, 
+                             comment.char = '')
+
+# Show the first 50 rows/columns only
+create_dt(genotypic_data[1:50,1:50])
+```
+
+### Marker Map
+
+The *data.frame* map is used to describe the physical positions of the markers on the chromosomes. The data consists of two columns, `chr` for the name or number of the chromosome and `pos` for the position of the marker on the chromosome. The position can be in basepair or in centimorgan. The names of the markers should be the row names of the *data.frame*.
+
+```{r marker-map}
+marker_map <- genotypic_data[, 3:4]
+colnames(marker_map) <- c('chr', 'pos')
+rownames(marker_map) <- genotypic_data[, 1]
+
+create_dt(marker_map)
+```
+
+### Marker Matrix
+
+The marker matrix is stored in the matrix marker within the *gData* object. It has the names of the markers in its column names and the genotypes in its row names. Markers can either be coded as character strings or as numerical values. Important note, before performing any analysis, the marker matrix has to be converted to a numerical matrix. This can be do using the function codeMarkers.
+
+```{r marker-mat}
+marker_matrix <- genotypic_data[, -c(1:11)]
+rownames(marker_matrix) <- genotypic_data[, 1]
+marker_matrix <- t(marker_matrix)
+
+# show the first 50 rows/columns only
+create_dt(marker_matrix[1:50,1:50])
+```
+
+We can use the marker map and marker matrix to create a *gData* object.
+
+```{r gData}
+gData <- createGData(geno = marker_matrix, map = marker_map)
+```
+
+### Recording and Cleaning of Data
+
+Marker data has to be numerical and without missing values in order to do GWAS analysis. This can be achieved using the `codeMarkers()` function. In this example our marker matrix is not numerical; however, the function also allows us to input an already numerical matrix for filtering and the imputation of missing values.
+
+`codeMarkers(gData, naStrings = NA, impute = TRUE, verbose = TRUE, nMiss = 1, nMissGeno = 1, MAF = NULL, imputeType)`: returens a copy of the input *gData* object with markers replaced by coded and imputed markers
+
+-   `naStings`: character vector of strings to be treated as NA
+
+-   `impute`: defaults to TRUE, performs imputation of missing values
+
+-   `verbose`: defaults to TRUE, prints a summary of performed steps
+
+-   `nMiss`: a numerical value between 0 and 1, SNPs with a fraction of missing values higher than this value will be removed
+
+-   `nMissgeno`: a numerical value between 0 and 1, genotypes with a fraction missing values higher than this value will be removed
+
+-   `MAF`: a numerical value between 0 and 1, SNPs with a MAF below this value will be removed
+
+-   `imputeType`: indicates type of imputation (`"fixed"`, `"random"`, `"beagle"`)
+
+```{r filter}
+# Remove duplicate SNPs from gData
+gData <- codeMarkers(gData, 
+                     naStrings = 'N', 
+                     removeDuplicates = TRUE, 
+                     impute = FALSE, 
+                     verbose = TRUE)
+
+
+# SNPs with a fraction of missing values higher than nMiss will be removed.
+gData <- codeMarkers(gData, 
+                     impute = FALSE, 
+                     verbose = TRUE, 
+                     nMiss = 0.1)
+
+# Genotypes with a fraction of missing values higher than nMissGeno will be removed.
+gData <- codeMarkers(gData, 
+                     impute = FALSE, 
+                     verbose = TRUE, 
+                     nMissGeno = 0.2)
+
+# SNPs with a Minor Allele Frequency (MAF) below this value will be removed.
+gData <- codeMarkers(gData, 
+                     impute = FALSE, 
+                     verbose = TRUE, 
+                     MAF = 0.05)
+```
+
+To decide how we wish to impute our data we can evaluate the total number of remaining missing values and their ratio. We can choose between the following imputation types:
+
+-   **fixed**: Impute all missing values by a single fixed value. Use the parameter fixedValue to set this value
+
+-   **random**: Impute missing values with a random value based on the non-missing values for a SNP, OK when ratio of missing values is less than 5%.
+
+-   **beagle**: Impute missing values using the independent beagle software (Browning and Browning 2007)
+
+```{r dim}
+(d <- dim(gData$markers))
+(n <- sum(is.na(gData$markers)))
+(r <- n/(d[1]*d[2]))
+```
+
+In this case we will carry out our missing value imputation using the beagle method.
+
+```{r NA-imputation}
+gData <- codeMarkers(gData, 
+                     impute = TRUE, 
+                     imputeType = 'beagle', 
+                     verbose = TRUE) 
+```
+
+### Plot Genetic Map
+
+```{r plot-marker}
+plot(gData)
+```
+
+## Reading the Phenotypic Data
+
+Phenotypic data, either directly from field trials or after summarizing can be stored in pheno in the *gData* object. Pheno can either be a single *data.frame* or a list of *data.frames* for storing data for different trials or different summarizations of the original data. The first column of all elements of pheno should be genotype and all the other columns should represent different traits. Storing additional variables should be done in covar.
+
+```{r pheno}
+# Import phenotypic data
+phenotypic_data <- read.csv(pheno_file)
+colnames(phenotypic_data) <- c('genotype', trait_name)
+
+# Add phenotypic data to gData
+gData <- createGData(gData, pheno = phenotypic_data)
+```
+
+```{r save, include=FALSE}
+# Save gData object for simplicity
+saveRDS(gData, here("data", "gData.rds"))
+```
+
+
+## Summarize gData
+
+```{r summary}
+summary(gData)
+```

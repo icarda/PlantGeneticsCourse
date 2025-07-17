@@ -5,7 +5,7 @@ cran_packages <- c(
   "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
   "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
   "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 
-  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial"
+  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial", "DT"
 )
 
 # Bioconductor Packages
@@ -49,6 +49,13 @@ csvDownloadButton <- function(tableId, label = "Download as CSV", filename = "da
     label,
     onclick = sprintf("Reactable.downloadDataCSV('%s', '%s')", tableId, filename)
   )
+}
+
+create_dt <- function(data, caption = NULL) {
+  DT::datatable(data,
+                caption = caption,
+                options = list(pageLength = 10,
+                               autoWidth = TRUE))
 }
 
 # functions R----

@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This book provides a comprehensive introduction to R programming and its application in plant genetic data analysis.">
+
+<title>16&nbsp; Module 4.2: Population Structure – Plant Genetics Data Analysis with R - Baku</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../04_Pop_Structure/03_Phylo_Tree.html" rel="next">
+<link href="../04_Pop_Structure/01_Kinship_Relatedness.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_Pop_Structure/01_Kinship_Relatedness.html">Population Structure and Relatedness</a></li><li class="breadcrumb-item"><a href="../04_Pop_Structure/02_Pop_Structure.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Module 4.2: Population Structure</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Plant Genetics Data Analysis with R - Baku</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Welcome – Plant Genetics Data Analysis with R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction and Setup</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../00_Setup_Intro/00_Welcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Welcome and Course Overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../00_Setup_Intro/01_Setup_R_RStudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Setting Up Your Environment: R and RStudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">R Programming Fundamentals</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_R_Basics/01_Intro_To_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Module 1.1: Introduction to R - Your Breeding Data Analysis Tool</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_R_Basics/02_Data_Types_Structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Module 1.2: R Data Types and Structures - The Building Blocks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_R_Basics/03_Basic_Operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Module 1.3: Basic Operations in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_R_Basics/04_Reading_Writing_Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Module 1.4: Reading and Writing Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_R_Basics/05_Simple_Plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Handling Breeding Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02_Data_Handling/01_Loading_Breeding_Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Module 2.1: Loading Breeding Data - ICARDA Barley Example</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02_Data_Handling/02_Data_QC_Filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Module 2.2: Data Quality Control and Filtering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Core Genomic Concepts</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03_Genomic_Concepts/01_SNPs_Genotypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Module 3.1: Genotype Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03_Genomic_Concepts/02_QBMS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Module 3.2: Using the QBMS Package to Query Genotypic Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03_Genomic_Concepts/03_Filtering_SNP_Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Module 3.3: Data Quality Control and Filtering for SNP Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03_Genomic_Concepts/04_Genetic_Diversity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Module 3.4: Genetic Diversity</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Population Structure and Relatedness</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04_Pop_Structure/01_Kinship_Relatedness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Module 4.1: Kinship and Relatedness</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04_Pop_Structure/02_Pop_Structure.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Module 4.2: Population Structure</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04_Pop_Structure/03_Phylo_Tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Module 4.3: Phylogenetic Trees</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Genome Wide Association Studies (GWAS)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05_GWAS/01_Initial_Concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Module 6.1: Introduction to GWAS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05_GWAS/02_Single_Trait_GWAS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Module 6.2: <strong>Single trait GWAS</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Genomic Selection</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../06_GS/01_Genomic_Selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">01_Genomic_Selection.html</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-is-it-important" id="toc-why-is-it-important" class="nav-link active" data-scroll-target="#why-is-it-important"><span class="header-section-number">16.1</span> Why is it important?</a></li>
+  <li><a href="#common-methods" id="toc-common-methods" class="nav-link" data-scroll-target="#common-methods"><span class="header-section-number">16.2</span> Common methods</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">16.3</span> PCA</a></li>
+  <li><a href="#spca" id="toc-spca" class="nav-link" data-scroll-target="#spca"><span class="header-section-number">16.4</span> sPCA</a></li>
+  <li><a href="#dapc" id="toc-dapc" class="nav-link" data-scroll-target="#dapc"><span class="header-section-number">16.5</span> DAPC</a></li>
+  <li><a href="#snmf" id="toc-snmf" class="nav-link" data-scroll-target="#snmf"><span class="header-section-number">16.6</span> sNMF</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_Pop_Structure/01_Kinship_Relatedness.html">Population Structure and Relatedness</a></li><li class="breadcrumb-item"><a href="../04_Pop_Structure/02_Pop_Structure.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Module 4.2: Population Structure</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Module 4.2: Population Structure</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Population structure in crop breeding refers to the <strong>presence of clusters or subpopulations that are genetically distinct</strong> from each other. The subpopulations may reflect geography, breeding history, natural selection, gene pools, or other differentiating factors. The subgroups are identified by differences in allele frequencies.</p>
+<section id="why-is-it-important" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="why-is-it-important"><span class="header-section-number">16.1</span> Why is it important?</h2>
+<ul>
+<li><p>Allows us to <strong>detect subpopulations</strong> and understand <strong>genetic diversity</strong></p></li>
+<li><p>Can be used <strong>to control bias in GWAS</strong> or other <strong>genomic prediction models</strong> (by including structure information as covariates), as not accounting for structure may lead to spurious associations (false-positives)</p></li>
+<li><p>Acknowledging structure can help <strong>guide breeding programs</strong></p></li>
+</ul>
+</section>
+<section id="common-methods" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="common-methods"><span class="header-section-number">16.2</span> Common methods</h2>
+<ul>
+<li><p><strong>STRUCTURE / ADMIXTURE:</strong> Uses Bayesian clustering or Maximum Likelihood (ML) estimation to assign individuals into subpopulations, including admixture proportions for each individual.</p></li>
+<li><p><strong>Principal Component Analysis (PCA):</strong> Used to reduce dimentionality of large data sets, and to visualize overall diversity and major genetic groupings.</p></li>
+<li><p><strong>Spatial Principal Component Analysis (sPCA):</strong> Incorporates spatial information (geographic location) intro traditional PCA, meaning it seeks to maximize spatial autocorrelation along with variation. It allows us to identify global and local trends.</p></li>
+<li><p><strong>Discriminant Analysis of Principal Components (DAPC)</strong>: Used to assign individuals to groups, provide a visual assessment of between-population differentiation and the contribution of individual alleles to the population structure.</p></li>
+<li><p><strong>Sparse Non-negative Matrix Factorization (sNMF):</strong> Fast algorithm used to infer structure by estimating ancestry coefficients. Allows us to evaluate levels of admixture. More efficient than STRUCTURE for large data sets.</p></li>
+</ul>
+<p>All methods are complementary to each other and using them in combination can help us fully understand structure in our data.</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Want to <strong>explore structure</strong> quickly?</td>
+<td>PCA</td>
+</tr>
+<tr class="even">
+<td>Want to <strong>analyze spatial genetic variation</strong>?</td>
+<td>sPCA</td>
+</tr>
+<tr class="odd">
+<td>Need to <strong>classify individuals into groups</strong>?</td>
+<td>DAPC</td>
+</tr>
+<tr class="even">
+<td>Need to <strong>estimate admixture proportions</strong>?</td>
+<td>sNMF</td>
+</tr>
+</tbody>
+</table>
+<p>We will be using functions from our package to carry out and visualize most of these analyses.</p>
+</section>
+<section id="pca" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="pca"><span class="header-section-number">16.3</span> PCA</h2>
+<p>PCA reduces our large genotype matrix into principal components which capture the variation in our data. We will use the <code>PCAFromMatrix()</code> function from our package. This function uses the PCA framework from the <code>ade4</code> package. This function returns a list with three objects, the first one being a PCA, the second one being a data frame with the variance explained by each component, and the third one being a plot of the PCA results (1st and 2nd PCs).</p>
+<p><code>PCAFromMatrix(geno, subgroups = NULL)</code>: returns a <em>pca</em> object from genotype matrix</p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>subgroups</code>: defaults to NULL, can be replaced with a vector of our factor information</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing filtered genotypic data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/FilteredBarley.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># SNP matrix has to have individuals in rows and markers as columns for the posterior functions</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(matrix)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing metadata</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/BarleyMetadata.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will be guiding our analysis by the 'countryOfOriginCode' column from our metadata</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining our subgroups</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>popSet <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(metadata<span class="sc">$</span>countryOfOriginCode[metadata<span class="sc">$</span>Individual <span class="sc">%in%</span> <span class="fu">rownames</span>(matrix)])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Running our pca using our genotype data and groups</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">PCAFromMatrix</span>(matrix, popSet)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing pca object</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>pca<span class="sc">$</span>pca</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Duality diagramm
+class: pca dudi
+$call: dudi.pca(df = x.genInd, center = FALSE, scale = FALSE, scannf = FALSE, 
+    nf = round(ncol(geno)/3, 0))
+
+$nf: 487 axis-components saved
+$rank: 487
+eigen values: 288 231.5 102.3 71 37.18 ...
+  vector length mode    content       
+1 $cw    12141  numeric column weights
+2 $lw    488    numeric row weights   
+3 $eig   487    numeric eigen values  
+
+  data.frame nrow  ncol  content             
+1 $tab       488   12141 modified array      
+2 $li        488   487   row coordinates     
+3 $l1        488   487   row normed scores   
+4 $co        12141 487   column coordinates  
+5 $c1        12141 487   column normed scores
+other elements: cent norm </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing PC variation</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pca<span class="sc">$</span>var)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PC  Variance CumulativeVar
+1  1 17.004415      17.00442
+2  2 13.666554      30.67097
+3  3  6.040506      36.71148
+4  4  4.191208      40.90268
+5  5  2.195083      43.09777
+6  6  1.665563      44.76333</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting pca results</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pca<span class="sc">$</span>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-160969a28e049495b67f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-160969a28e049495b67f">{"x":{"data":[{"x":[7.1893524319884881,5.1446580278208254,5.608136010229078,5.7718880095916907,14.756987801408462,5.5620321003074817,8.4376570195368608,7.7497999843110019,8.2439093975791611,5.726430654025279,10.095934783750462,5.4834956148167366,5.5994561917356309,5.8187363576721838,4.5537792440259395,11.881154709809314,5.6707473552925372,5.238001079924171,8.9376626278287095,5.8454527239277123,7.764178224580486,4.7137668088220428,4.6635691476218533,5.2359384779299614,8.3872190494149326,5.0387573826788641,5.0756920807050401,6.3416988017246068,7.8072680746147647,5.5907326468343035,5.4293278677003487,5.7890473616078877,6.1681564858429025,5.7712263266606998,5.0946047701508892,5.7476763127937813,10.550533111610358,5.0049205647864419,14.239036851727287,14.754565038876937,10.914211661532864,15.004529746393901,14.638192098817996,14.301507542186901,7.4732129320367822,14.747050412362348,3.144762863242113,11.504485690408966,12.443272641188646,15.572994966424089,5.6171261523577325,14.161855763341086,14.172434233444546,5.668299817888375,5.6273520846620206,14.531831495172145,4.2457820461748303,6.0545737681744169,5.624622970761548,10.388395220099765,5.3240869914846884,4.9440121915593034,10.000356611129478,3.9090355129808954,5.6349143900124261,5.0406036684824054,11.211546588683817,5.1481597699159964,6.5076465448920553,4.402987515492776,6.9775936131312415,6.2995912740482822,6.3156377299633277,5.3957234186446632,6.1397041960672603,6.1900511267188696,5.6715411292076592,5.5066891766299513,3.9399595583362403,5.5674407115115674,6.2395090947832426,7.3156161786758505,5.6171633435478974,5.7768168043484236,6.2016134156066762,4.8091848136458664,5.3720131065499857,5.7377317581639149,3.4365111620950208,3.8625410648243017,6.0811062833893468,7.6244338918369632,5.3284234078964285,5.6191011276962994,5.8375548325222315,6.1371620491609669,5.8876751033639136,3.7596289658017685,4.4191348673658926,5.8410025554206833,5.1680172500739907,6.571770217544314,5.6328756049061726,5.6647210335169023,7.960482165477905,6.0327943677134899,4.8974313156324003,5.8997467956626366,10.271859308742453,4.3773061020405075,8.4226501514633423,3.2235364736125618,3.5376148051332321,4.8395869873023081,4.642301934191468,8.5390460985438068,4.6759356425259559,1.2005047234769541,4.314765730969949,4.4850321535568209,7.275667546332615],"y":[6.2605136602851257,1.0377747789666709,-37.180719689437566,-32.655368725084472,4.1271960733899533,-13.409815630400056,3.1280894804750372,4.9098976109105914,5.6012271706777748,-37.135662271218358,6.1388423318950487,-35.166552999075471,-35.42832181753225,-33.236952979335079,-23.995449615047168,-11.607922178270401,-36.191344498772885,-35.381142419337792,3.248878204037684,-38.184440611554159,5.8771308454063185,-32.130523766435942,-32.57523184963599,-34.692637069764309,-7.4824683191550383,-34.010708817724847,-34.60618055622728,5.2758764897391242,4.8785176302266722,-37.744658972692001,-36.350863232494518,-36.413211200511149,-37.135324133693068,-36.682702509723093,-37.400166961765699,-33.347588298155109,8.0502397578714895,-34.111047052515183,5.5687936840175505,5.38101018198061,-3.9031778606896883,9.7025348581875566,4.2912129837376707,8.5008306407958312,5.9494938694274371,4.5113136721103064,-21.120000427741612,4.6164717265257611,7.3988374594309043,10.569440638110667,-35.476544170197407,9.2840763324976905,9.2254936169862969,-36.890554797768615,-35.801709959080128,6.0768916433199589,-16.6698884919631,-38.847680725198529,-14.061519264009272,7.4407094694162312,-30.332865373172986,-34.236913592752046,0.99740999255623652,-25.009048678152343,-37.37272800926052,-14.048481090709876,4.9435757744035964,-35.107739721703823,-32.211305671253321,-27.400113012796595,-35.067949095691738,-35.816196690855342,-36.352216612259419,-32.467922567121022,-37.175747553795048,-35.767685698828863,-34.944062641206713,-35.56247364710164,-23.646760072456662,-37.810909724850461,-36.028844149345659,-14.148591832382438,-36.534033267900547,-35.531624299147644,-35.239059311184825,-20.03037189561395,-35.439636670086422,-35.634965478543236,-23.177628531953026,3.2726512158062535,-35.97312231348775,-5.0805808672239507,-37.510095506967289,-36.62232808477475,-36.097013799694913,-35.525760717611895,-36.459559099475449,-28.615017938085188,-23.118920639672297,5.4778487471231925,-36.784330474220333,-35.672644788048622,-37.548118822483538,-37.945042169296705,-4.1973305924026425,-33.412788700225164,-33.925273388246069,-36.043333877948562,5.1362664932380619,0.89472086404328843,0.1352716850181509,-21.408963987136538,-26.573437134719896,-29.337976470861591,-25.720381294554144,4.7921848477585245,-21.929049506170223,-12.87179111373451,-20.988363206672513,-20.511181745771431,-2.8087566669023847],"text":["ICARDA_G0035<br />Subgroups: CHN","ICARDA_G0113<br />Subgroups: CHN","ICARDA_G0115<br />Subgroups: CHN","ICARDA_G0116<br />Subgroups: CHN","ICARDA_G0117<br />Subgroups: CHN","ICARDA_G0121<br />Subgroups: CHN","ICARDA_G0136<br />Subgroups: CHN","ICARDA_G0137<br />Subgroups: CHN","ICARDA_G0310<br />Subgroups: CHN","ICARDA_G0376<br />Subgroups: CHN","ICARDA_G0384<br />Subgroups: CHN","ICARDA_G0395<br />Subgroups: CHN","ICARDA_G0397<br />Subgroups: CHN","ICARDA_G0398<br />Subgroups: CHN","ICARDA_G0399<br />Subgroups: CHN","ICARDA_G0400<br />Subgroups: CHN","ICARDA_G0401<br />Subgroups: CHN","ICARDA_G0402<br />Subgroups: CHN","ICARDA_G0403<br />Subgroups: CHN","ICARDA_G0404<br />Subgroups: CHN","ICARDA_G0405<br />Subgroups: CHN","ICARDA_G0406<br />Subgroups: CHN","ICARDA_G0407<br />Subgroups: CHN","ICARDA_G0408<br />Subgroups: CHN","ICARDA_G0417<br />Subgroups: CHN","ICARDA_G0468<br />Subgroups: CHN","ICARDA_G0469<br />Subgroups: CHN","ICARDA_G0472<br />Subgroups: CHN","ICARDA_G0473<br />Subgroups: CHN","ICARDA_G0474<br />Subgroups: CHN","ICARDA_G0475<br />Subgroups: CHN","ICARDA_G0476<br />Subgroups: CHN","ICARDA_G0477<br />Subgroups: CHN","ICARDA_G0478<br />Subgroups: CHN","ICARDA_G0479<br />Subgroups: CHN","ICARDA_G0480<br />Subgroups: CHN","ICARDA_G0482<br />Subgroups: CHN","ICARDA_G0483<br />Subgroups: CHN","ICARDA_G0484<br />Subgroups: CHN","ICARDA_G0486<br />Subgroups: CHN","ICARDA_G0487<br />Subgroups: CHN","ICARDA_G0488<br />Subgroups: CHN","ICARDA_G0489<br />Subgroups: CHN","ICARDA_G0490<br />Subgroups: CHN","ICARDA_G0492<br />Subgroups: CHN","ICARDA_G0493<br />Subgroups: CHN","ICARDA_G0494<br />Subgroups: CHN","ICARDA_G0495<br />Subgroups: CHN","ICARDA_G0496<br />Subgroups: CHN","ICARDA_G0497<br />Subgroups: CHN","ICARDA_G0498<br />Subgroups: CHN","ICARDA_G0500<br />Subgroups: CHN","ICARDA_G0501<br />Subgroups: CHN","ICARDA_G0502<br />Subgroups: CHN","ICARDA_G0503<br />Subgroups: CHN","ICARDA_G0504<br />Subgroups: CHN","ICARDA_G0517<br />Subgroups: CHN","ICARDA_G0518<br />Subgroups: CHN","ICARDA_G0546<br />Subgroups: CHN","ICARDA_G0576<br />Subgroups: CHN","ICARDA_G0577<br />Subgroups: CHN","ICARDA_G0600<br />Subgroups: CHN","ICARDA_G0630<br />Subgroups: CHN","ICARDA_G0904<br />Subgroups: CHN","ICARDA_G0907<br />Subgroups: CHN","ICARDA_G0913<br />Subgroups: CHN","ICARDA_G0918<br />Subgroups: CHN","ICARDA_G1008<br />Subgroups: CHN","ICARDA_G1009<br />Subgroups: CHN","ICARDA_G1010<br />Subgroups: CHN","ICARDA_G1011<br />Subgroups: CHN","ICARDA_G1012<br />Subgroups: CHN","ICARDA_G1013<br />Subgroups: CHN","ICARDA_G1014<br />Subgroups: CHN","ICARDA_G1015<br />Subgroups: CHN","ICARDA_G1016<br />Subgroups: CHN","ICARDA_G1017<br />Subgroups: CHN","ICARDA_G1018<br />Subgroups: CHN","ICARDA_G1019<br />Subgroups: CHN","ICARDA_G1020<br />Subgroups: CHN","ICARDA_G1021<br />Subgroups: CHN","ICARDA_G1022<br />Subgroups: CHN","ICARDA_G1023<br />Subgroups: CHN","ICARDA_G1024<br />Subgroups: CHN","ICARDA_G1025<br />Subgroups: CHN","ICARDA_G1026<br />Subgroups: CHN","ICARDA_G1027<br />Subgroups: CHN","ICARDA_G1028<br />Subgroups: CHN","ICARDA_G1029<br />Subgroups: CHN","ICARDA_G1030<br />Subgroups: CHN","ICARDA_G1031<br />Subgroups: CHN","ICARDA_G1032<br />Subgroups: CHN","ICARDA_G1033<br />Subgroups: CHN","ICARDA_G1034<br />Subgroups: CHN","ICARDA_G1035<br />Subgroups: CHN","ICARDA_G1037<br />Subgroups: CHN","ICARDA_G1038<br />Subgroups: CHN","ICARDA_G1039<br />Subgroups: CHN","ICARDA_G1040<br />Subgroups: CHN","ICARDA_G1041<br />Subgroups: CHN","ICARDA_G1042<br />Subgroups: CHN","ICARDA_G1043<br />Subgroups: CHN","ICARDA_G1044<br />Subgroups: CHN","ICARDA_G1045<br />Subgroups: CHN","ICARDA_G1046<br />Subgroups: CHN","ICARDA_G1047<br />Subgroups: CHN","ICARDA_G1048<br />Subgroups: CHN","ICARDA_G1049<br />Subgroups: CHN","ICARDA_G1050<br />Subgroups: CHN","ICARDA_G1051<br />Subgroups: CHN","ICARDA_G1052<br />Subgroups: CHN","ICARDA_G1068<br />Subgroups: CHN","ICARDA_G1069<br />Subgroups: CHN","ICARDA_G1071<br />Subgroups: CHN","ICARDA_G1072<br />Subgroups: CHN","ICARDA_G1073<br />Subgroups: CHN","ICARDA_G1074<br />Subgroups: CHN","ICARDA_G1216<br />Subgroups: CHN","ICARDA_G1217<br />Subgroups: CHN","ICARDA_G1218<br />Subgroups: CHN","ICARDA_G1465<br />Subgroups: CHN"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(253,231,37,1)"}},"hoveron":"points","name":"CHN","legendgroup":"CHN","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-12.99992520202747,-30.09163055362464,-31.552168051411524,-31.387223276538506,-30.781421553706242,-31.211363459950853,-28.495668098585686,-29.332071546718907,-28.84609763106851,-28.769948262127357,-28.665507744439257,-27.087904044839789,-24.502078730173956,-23.982833566099583,-26.182382798527865,-30.100081517938694,-30.737391429135229,-31.10239783003205,-30.873906873760031,-28.793887424341275,-28.987614585256178,-26.376393681096367,-26.681648975233706,-30.983698011547709,-30.442733496661823,-26.882793694048576,-30.121399189771605,-31.008474230502294,-31.107069857510911,-30.272403808108045,-30.175290580483271,-29.611861981942702,-30.718363045363205,-30.403701987043188,-30.682815682077219,-31.238098572724297,-28.133849577901692,-27.484713273030366,-28.144366126562236,-11.587312238536027,-12.331075358251647,-30.833257642800525,-29.462304936338242,-28.972184198153908,-29.250252804967587,-29.562858402309018,-30.972611868242751,-12.175708940597886,-30.663557146704822,-26.780333329839657,-26.538460865541147,-28.60335289317463,-30.185815729260217,-30.466613566651688,-28.926740587550306,-28.571716410338006,-29.418803439231233,-26.596418700398882,-27.0027318817422,-12.329802304835646,-30.452732619842763,-30.207372593024786,10.553314590941245,-27.945997368572517,-30.6127075555506,-30.923573961819006,-20.771612809491444,-27.270522960522204,-30.82695683768268,-30.467382145110371,-28.882091265190539,-31.187768301745894,-30.899585509933036,-30.730538183530925,-30.302716017289573,-31.088804815160398,-30.427757114949223,-31.02524002606167,-30.289603030749014,9.7599102344740221,11.293068681032235,-31.230398371103966,-30.63544696217253,-30.690692843595485,-28.185701274970928,10.729260614988561,-28.440601583595324,-29.817596195319872,-28.335130430544549,-30.373723580463512,-29.685637568685827,-28.827394402288874,-30.952349932363049,-29.886274152511842,-30.93381193596629,-31.184152477450727,-30.926449331383719,11.553729917851509,-31.266226995607461,-30.912943236245916,-28.713998006293298,-10.956849756428939,-30.577999264184932,-4.7550461133908932,-30.297270445082166,-29.512281630139576,11.362176952920358,11.142360875331297,-26.919930219769434,-29.75837649474585,-30.609967354920229,-20.893920168759109,5.0288139518000285,9.3870605838682586,5.7909132830429577,-0.45106090981230257,7.2305916916560768,-10.080129948164625,-20.797731653311764,8.5923043519601539,-30.427160596326086,-30.380525816303685,-26.820597892416458,-28.254006991264735,-29.012739701185613,-29.930214164977734,-9.3098990235173709,10.950588544781642,-30.355038725626475,-30.443760276611826,-31.389124698625771,-6.9416723365909387,-30.223035703397027,-30.932074558207351,-30.600043617395023,-30.850980278560268,-28.673820786074192,5.1977016636419071,15.598017617948889],"y":[5.3161304419029065,4.0620929510484336,4.4590706077392186,4.1804760542246688,4.4785002942576693,4.4510952556359289,4.2822496127764653,4.0994272116791155,4.6692504958538823,3.4391525962737211,4.5841786204011798,4.1724867095996379,3.2986587117106483,3.313365764196226,4.7103198569246416,3.7633959062951923,5.0963895918910316,4.4601549987572664,4.2595320180004288,3.743839296923019,3.785512475810362,3.9902234908846821,4.0167669211256536,4.3660055966854028,4.4960509055118578,3.9515453011490815,5.2824480154576667,5.1548137392340934,3.8405111565126329,4.3636203111156648,4.2248172379740376,3.8199396583026695,5.0718505323869909,3.7931104558884154,4.5346576837171089,5.0710865371149989,3.9464927439628155,3.8423214042156073,3.9226340159575552,5.6487335947171404,6.0670022030733106,4.3331841847642876,4.7592369021564664,4.70805851343263,4.4748465948791454,4.3226639187356026,5.1612045983771386,6.0879965831169862,4.6094169160286267,4.1791542205001093,3.8857576543487968,3.4222920518053659,3.6929160455676877,4.6155862144181592,4.4804829470653562,3.9301885250574697,4.134693199120548,3.6406043357109406,4.0001546587249663,6.0953765125305761,4.3946368697533842,4.7802931677172822,0.77806578810326188,4.6754113507565753,4.6368679371803845,4.3347022499422074,1.6404302756596276,3.8098081136671755,4.9505776957146947,4.7582360676170659,3.2400086086891093,4.3125826570732908,4.5160307702439466,4.6392197669971393,4.749475934946866,4.4648552003286008,4.4242812320908929,3.9751319372732299,4.309940208496041,7.2990389621250129,8.4644876088977323,3.881706626934271,5.0517895725423907,4.0356900643400548,4.0744450296170047,7.7078421096292073,3.4751552276531092,4.4957235389214985,3.2961810041881652,4.4975360192599254,4.8185014013700034,4.1152894786316772,5.0882303048339983,4.4289348222495448,5.4272885094521932,5.1359262771877443,5.4223489868454919,9.1963278322079702,4.3596969796152587,4.6579868957032504,4.3400195909537835,6.3132734073636643,5.0869229439066759,4.2674046387169167,4.0243533186293661,4.9470809265750519,6.6345793434743587,4.5173138365156831,3.501256417280405,3.6885017100945499,4.7685295507580179,1.3822925988664307,-13.986778392991855,5.725466247327418,5.8419544807147812,-12.778725476621041,5.9567415654442506,5.7210698823450077,1.3531853664667224,6.5708848974531016,4.525162918317009,4.9281121455262316,3.9905998712047048,3.9536345210641013,3.4498418734992931,4.034185663936837,-3.4213128254852672,4.1354951869386598,3.7986268419353366,4.2172246118586925,4.2074430014114492,7.4922106424270183,4.3255895301233416,4.653824889369484,4.4684516850465403,5.1138378327234015,3.7863787093642616,-14.90923939326507,12.409722386174236],"text":["ICARDA_G0011<br />Subgroups: ETH","ICARDA_G0012<br />Subgroups: ETH","ICARDA_G0013<br />Subgroups: ETH","ICARDA_G0014<br />Subgroups: ETH","ICARDA_G0015<br />Subgroups: ETH","ICARDA_G0034<br />Subgroups: ETH","ICARDA_G0147<br />Subgroups: ETH","ICARDA_G0148<br />Subgroups: ETH","ICARDA_G0149<br />Subgroups: ETH","ICARDA_G0199<br />Subgroups: ETH","ICARDA_G0200<br />Subgroups: ETH","ICARDA_G0201<br />Subgroups: ETH","ICARDA_G0202<br />Subgroups: ETH","ICARDA_G0203<br />Subgroups: ETH","ICARDA_G0204<br />Subgroups: ETH","ICARDA_G0205<br />Subgroups: ETH","ICARDA_G0206<br />Subgroups: ETH","ICARDA_G0207<br />Subgroups: ETH","ICARDA_G0208<br />Subgroups: ETH","ICARDA_G0209<br />Subgroups: ETH","ICARDA_G0210<br />Subgroups: ETH","ICARDA_G0212<br />Subgroups: ETH","ICARDA_G0214<br />Subgroups: ETH","ICARDA_G0216<br />Subgroups: ETH","ICARDA_G0217<br />Subgroups: ETH","ICARDA_G0218<br />Subgroups: ETH","ICARDA_G0219<br />Subgroups: ETH","ICARDA_G0220<br />Subgroups: ETH","ICARDA_G0221<br />Subgroups: ETH","ICARDA_G0222<br />Subgroups: ETH","ICARDA_G0223<br />Subgroups: ETH","ICARDA_G0224<br />Subgroups: ETH","ICARDA_G0225<br />Subgroups: ETH","ICARDA_G0226<br />Subgroups: ETH","ICARDA_G0227<br />Subgroups: ETH","ICARDA_G0228<br />Subgroups: ETH","ICARDA_G0230<br />Subgroups: ETH","ICARDA_G0231<br />Subgroups: ETH","ICARDA_G0232<br />Subgroups: ETH","ICARDA_G0233<br />Subgroups: ETH","ICARDA_G0234<br />Subgroups: ETH","ICARDA_G0236<br />Subgroups: ETH","ICARDA_G0237<br />Subgroups: ETH","ICARDA_G0238<br />Subgroups: ETH","ICARDA_G0239<br />Subgroups: ETH","ICARDA_G0240<br />Subgroups: ETH","ICARDA_G0242<br />Subgroups: ETH","ICARDA_G0244<br />Subgroups: ETH","ICARDA_G0245<br />Subgroups: ETH","ICARDA_G0246<br />Subgroups: ETH","ICARDA_G0247<br />Subgroups: ETH","ICARDA_G0248<br />Subgroups: ETH","ICARDA_G0249<br />Subgroups: ETH","ICARDA_G0250<br />Subgroups: ETH","ICARDA_G0251<br />Subgroups: ETH","ICARDA_G0252<br />Subgroups: ETH","ICARDA_G0254<br />Subgroups: ETH","ICARDA_G0256<br />Subgroups: ETH","ICARDA_G0257<br />Subgroups: ETH","ICARDA_G0258<br />Subgroups: ETH","ICARDA_G0259<br />Subgroups: ETH","ICARDA_G0260<br />Subgroups: ETH","ICARDA_G0261<br />Subgroups: ETH","ICARDA_G0262<br />Subgroups: ETH","ICARDA_G0263<br />Subgroups: ETH","ICARDA_G0264<br />Subgroups: ETH","ICARDA_G0265<br />Subgroups: ETH","ICARDA_G0266<br />Subgroups: ETH","ICARDA_G0267<br />Subgroups: ETH","ICARDA_G0268<br />Subgroups: ETH","ICARDA_G0269<br />Subgroups: ETH","ICARDA_G0270<br />Subgroups: ETH","ICARDA_G0271<br />Subgroups: ETH","ICARDA_G0272<br />Subgroups: ETH","ICARDA_G0273<br />Subgroups: ETH","ICARDA_G0274<br />Subgroups: ETH","ICARDA_G0275<br />Subgroups: ETH","ICARDA_G0276<br />Subgroups: ETH","ICARDA_G0278<br />Subgroups: ETH","ICARDA_G0279<br />Subgroups: ETH","ICARDA_G0280<br />Subgroups: ETH","ICARDA_G0282<br />Subgroups: ETH","ICARDA_G0283<br />Subgroups: ETH","ICARDA_G0284<br />Subgroups: ETH","ICARDA_G0285<br />Subgroups: ETH","ICARDA_G0286<br />Subgroups: ETH","ICARDA_G0287<br />Subgroups: ETH","ICARDA_G0288<br />Subgroups: ETH","ICARDA_G0289<br />Subgroups: ETH","ICARDA_G0291<br />Subgroups: ETH","ICARDA_G0292<br />Subgroups: ETH","ICARDA_G0293<br />Subgroups: ETH","ICARDA_G0294<br />Subgroups: ETH","ICARDA_G0295<br />Subgroups: ETH","ICARDA_G0296<br />Subgroups: ETH","ICARDA_G0297<br />Subgroups: ETH","ICARDA_G0298<br />Subgroups: ETH","ICARDA_G0299<br />Subgroups: ETH","ICARDA_G0300<br />Subgroups: ETH","ICARDA_G0301<br />Subgroups: ETH","ICARDA_G0302<br />Subgroups: ETH","ICARDA_G0304<br />Subgroups: ETH","ICARDA_G0305<br />Subgroups: ETH","ICARDA_G0306<br />Subgroups: ETH","ICARDA_G0308<br />Subgroups: ETH","ICARDA_G0470<br />Subgroups: ETH","ICARDA_G0471<br />Subgroups: ETH","ICARDA_G0571<br />Subgroups: ETH","ICARDA_G0623<br />Subgroups: ETH","ICARDA_G0625<br />Subgroups: ETH","ICARDA_G0626<br />Subgroups: ETH","ICARDA_G0627<br />Subgroups: ETH","ICARDA_G0905<br />Subgroups: ETH","ICARDA_G1084<br />Subgroups: ETH","ICARDA_G1085<br />Subgroups: ETH","ICARDA_G1198<br />Subgroups: ETH","ICARDA_G1199<br />Subgroups: ETH","ICARDA_G1200<br />Subgroups: ETH","ICARDA_G1201<br />Subgroups: ETH","ICARDA_G1202<br />Subgroups: ETH","ICARDA_G1407<br />Subgroups: ETH","ICARDA_G1408<br />Subgroups: ETH","ICARDA_G1409<br />Subgroups: ETH","ICARDA_G1410<br />Subgroups: ETH","ICARDA_G1412<br />Subgroups: ETH","ICARDA_G1413<br />Subgroups: ETH","ICARDA_G1414<br />Subgroups: ETH","ICARDA_G1415<br />Subgroups: ETH","ICARDA_G1416<br />Subgroups: ETH","ICARDA_G1417<br />Subgroups: ETH","ICARDA_G1418<br />Subgroups: ETH","ICARDA_G1419<br />Subgroups: ETH","ICARDA_G1420<br />Subgroups: ETH","ICARDA_G1421<br />Subgroups: ETH","ICARDA_G1422<br />Subgroups: ETH","ICARDA_G1423<br />Subgroups: ETH","ICARDA_G1448<br />Subgroups: ETH","ICARDA_G1457<br />Subgroups: ETH","ICARDA_G1459<br />Subgroups: ETH"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(33,144,140,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(33,144,140,1)"}},"hoveron":"points","name":"ETH","legendgroup":"ETH","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[17.306294515564748,12.041654321606908,11.396114771471508,17.085397833480453,14.144142047636384,14.310396132219227,10.001302958582949,15.65161348586237,18.593795799290042,18.027782434923314,17.68019093015646,18.040016823228243,18.410221102112533,11.864312180359919,17.349410535297935,18.832115316723396,15.660129360881578,17.386795682322287,18.189661015039068,18.537788541574226,18.940120138050048,16.712695197623319,18.099400092253642,6.280190355196229,18.392742345770881,18.009628558781063,17.670699095796255,17.597575420950029,18.631062604570737,15.58009635614359,10.595765611479971,5.8669809898802878,17.093327315317211,16.747238548903635,3.7722563802747437,11.236303928082847,4.268932354572982,18.246215061733903,12.527233485660927,7.1316159815470925,6.2005826406532893,17.121003717275574,14.472919245910999,11.089466328913428,18.733999168909449,12.058796102908422,17.124807702752413,16.484520774527756,17.083620694551151,11.443980208177781,9.6418878979941542,7.6238214790502141,11.044500126258528,12.869269364737072,10.63347331526707,11.492179248947643,10.280007241873268,4.4462765457400062,5.7830243063018756,6.280477359326853,3.5700454799033503,6.3419821671027572,4.0515395222376771,18.525310761347402,18.175021337576592,5.7799275493571844,18.261052954752003,6.3606123684330438,6.199212346690973,16.732508184298656,2.432547690992179,2.2317570746433359,3.4001756424653573,15.619984184502432,18.050926204320675,6.5192746560799533,18.35325522337655,7.998413306506702,7.5036426478263145,18.257408934319201,3.2225049069159208,16.905835376964845,4.0098315861603382,14.303968660813153,18.070354948132291,4.463390923831418,11.591841294022414,4.6348424896727307,16.504055972983469,16.928642542273469,5.6405329299683942,5.6999015402161968,12.674621186999099,3.9268706890842937,9.4245992690965164,12.863793616700946,10.464998842926763,10.753854712730602,5.7382077545814756,9.3486821271715161,11.018122624120252,3.6268980150304033,5.6578421627123134,12.350717057305349,11.320253322827831,6.9993448127693432,11.317559189771773,7.1985506812119491,3.6315759790012239,13.093066086921702,9.3038008130362329,9.290389550663761,9.2564309654300292,10.923202196746173,11.080232568249555,11.694295561458009,10.888906877096927,3.9789082800813604,11.695691919163117,11.432839251055224,5.7810584227704922,14.96066076692097,17.676964311188733,5.4176089110487951,18.047411722335433,18.71483826113678,17.468631074589901,17.94297121865181,17.006065831221239,17.667633947299233,12.274561014471971,18.288181970727258,16.636319921046827,11.918703652548395,11.933636883583642,16.549030763484733,18.114325080932367,16.497467718739724,17.874932780629891,17.88904855641449,2.4498570112028943,13.299205170586296,5.7331048186598297,5.7550830964302291,9.3693873992514352,7.4768926720829798,4.2751487338282903,3.9657668249369591,7.6486928512391623,2.6953421685813517,5.822677824090996,5.7782648045824994,7.2837605425995724,4.2192228034593731,5.7276212999352794,13.821916910808811,5.9078308392040242,5.7171327653614652,5.6810129497877346,4.4199554689411915,2.471218249423687,2.6956166888933537,5.5254192650286225,3.466798780341072,6.8658894211964059,12.202251626170037,12.097471836253968,7.3045925614537692,17.121649620969613,17.554318210287963,5.2929409761530035,13.233238023298975,3.4621427614870619,3.1099273035725297,1.8325362594923007,2.7178663026303207,2.0856102406525712,5.8824385260249192,5.8156818876108964,5.9322156282092964,5.7777985316317624,3.2209844461488055,17.21961771622674,3.8826326063536025,16.599024107508654,16.592065070707374,5.8062558464422276,10.446632523806427,16.181670748965324,18.047464312213599,2.6561633719591411,17.994060043763636,3.100418184524687,3.1895278360836272,3.2327060626706139,11.447720432300549,2.6691747822039908,4.4333597818458932,10.482890412005892,10.536874720634321,17.977027172069224,17.342748024747603,8.580362067892791,11.322075937627016,17.378722156530038,11.900209729910788,12.11291184568042,11.780456822056781,16.122601146580298,14.70277945174603,14.621177194686307,5.9123464401389603,2.1740851053823307,18.047520054158696,18.047884123212583,10.301296370636743,14.144103308582064,4.5187337581038269,4.1653909740864474,3.4896865914136104,4.619598857405717,4.1588831430143385,4.1674759117788804,4.2303813277044764,5.6462829450208085,5.1551949351453867,4.1911854819305105,4.6791946374391111],"y":[15.190294652372827,8.9095809876926939,8.9205914705449061,15.213864770463521,12.598645416714094,10.633244490424234,7.6859645006217212,15.067791642865107,15.388860537523678,15.369784660925047,14.721881116230749,14.345419013826225,14.749123535820267,8.1590500569839026,14.012885879725452,14.644882069206455,15.023748721641104,13.971282917020163,14.843635339927674,14.546851754834073,15.560807991421045,14.825239611872265,15.271992775962969,6.8572706048262253,13.959068301451,14.97814659868517,15.351288561413407,14.390489861539285,15.690503499471887,14.609844703753351,7.3746473446852105,6.259961401016513,14.524560069051335,13.503869232685998,5.0216416656060954,8.3067613211552018,4.0175951674394836,15.419127702926538,6.963457767126032,7.9873823408783826,6.0589085801978042,13.495412661205973,13.409033194062463,6.239804559785429,15.450900643183447,6.7693197574009432,13.500271927176261,14.752879363490848,13.479191624741773,8.4536659943908194,4.8777642121960971,5.9675740855865813,8.8258910972366778,9.036718231510374,7.3934668774117105,8.1478952481846427,7.8366304469634791,4.4480034930973638,6.2374766337352314,6.8782239621910142,4.6334414061940716,7.249545100565685,2.8809064835827649,15.009881441298342,15.715909409699035,6.2626753134418047,14.595474136909049,7.1266156566072043,6.1018732423259738,13.902232317433025,2.7818439734258797,3.3244598438372064,4.1466599888012396,13.407671283391897,15.382508287734112,7.0790571908427165,14.788769440052276,7.0462261340011478,4.7947124086815345,14.051248874573016,1.623791253111037,14.804015986478159,3.4447710637794797,2.7139051320101131,14.923844612521087,4.3522124185933704,9.0537180630398524,6.1943168958709922,13.259973660628187,14.69961903604815,5.9846112018637134,6.1341901816641222,8.4761248260887978,4.7035624600150863,5.6300817179843055,11.815215103431784,6.8782089581050894,6.4173174269746251,6.0246726111501099,5.3749125181868607,6.708804719376019,2.4931716898963181,6.0117428641367603,8.9260060443560505,8.2091736473043397,8.0200566884416702,8.5800502373385612,7.0825907337413003,2.939185124122806,8.1097943010930411,7.2442995511004398,7.0407613370323912,7.7104495367264727,7.9417528481774902,9.0717330009868906,8.4806905292135717,7.7087768591009382,3.6935118095164694,8.0690265064001299,10.148413438320622,6.2563083795243575,8.969050446712389,14.113285119144273,6.5458133884405694,14.95502728602748,14.699836918739379,14.767199768169291,14.042029739004901,14.397105112369577,14.232664750310025,6.7060979346616438,14.793154646728798,13.660558497415728,9.0558247907761338,7.7131206145571376,13.52472012893038,14.425518521957297,13.946762148789958,13.94954592122448,14.809212197647712,3.0803726142423606,9.7855521086074599,6.0755760533550527,6.0998581024173157,6.9467717462258785,5.610824726228385,3.516556037504202,2.3582126594294843,2.001626449260268,3.37852830171341,5.9838651380154646,5.5604515566815751,6.7325811148029784,2.7986166925227058,6.3759804807772298,8.198498880648204,6.2396412119298086,6.1710701433735542,6.470632489827012,4.2660643761181323,3.2508968658463773,0.53740602355059097,6.5049069654492868,3.9621888250313342,7.132672145571858,6.825045749973949,8.5700093195462852,6.0608343365243496,15.45233201101065,14.26427664752987,6.3363016037334443,11.081634305464963,1.6276343920386136,1.1275705585531981,-11.26261467398928,0.18985315090767554,3.5766224907406889,6.2868710963142753,6.2339573690522752,6.3363372772556019,6.1342426075115659,1.354183504716796,14.082695428074462,2.440614338161144,14.316994230730165,14.548411852067293,6.0384902712393602,6.6719733388578257,12.928304598808698,15.088744864427984,0.81707898277614821,15.3265771208338,2.2185972990935978,-9.1226600527244912,-9.2034256543724808,8.2727379033215911,0.6497264949690652,6.0246454139933334,8.0019312891997689,7.3382726974445758,14.592489607065003,14.642449115970162,6.6993670940934775,6.4770743394338535,13.885570341931722,6.929761568189841,9.1755803206680735,8.4011260722523922,14.150474817882941,10.139757143779841,12.922722478328067,6.2483772149544468,3.6825859702474752,15.26113945394164,15.525500359803289,7.9499012027365605,12.510205066721712,-6.9812301537097907,-8.4247225952966147,-1.4198755566004184,-7.4659543233519461,-7.7016249171828939,-6.334195819809902,-5.3464588550235046,-5.7493001185624957,-6.0877155081080163,-5.7278574621350149,-5.1186085664537062],"text":["ICARDA_G0036<br />Subgroups: TUR","ICARDA_G0037<br />Subgroups: TUR","ICARDA_G0038<br />Subgroups: TUR","ICARDA_G0039<br />Subgroups: TUR","ICARDA_G0040<br />Subgroups: TUR","ICARDA_G0041<br />Subgroups: TUR","ICARDA_G0042<br />Subgroups: TUR","ICARDA_G0043<br />Subgroups: TUR","ICARDA_G0044<br />Subgroups: TUR","ICARDA_G0045<br />Subgroups: TUR","ICARDA_G0046<br />Subgroups: TUR","ICARDA_G0047<br />Subgroups: TUR","ICARDA_G0048<br />Subgroups: TUR","ICARDA_G0049<br />Subgroups: TUR","ICARDA_G0050<br />Subgroups: TUR","ICARDA_G0051<br />Subgroups: TUR","ICARDA_G0052<br />Subgroups: TUR","ICARDA_G0053<br />Subgroups: TUR","ICARDA_G0054<br />Subgroups: TUR","ICARDA_G0055<br />Subgroups: TUR","ICARDA_G0056<br />Subgroups: TUR","ICARDA_G0057<br />Subgroups: TUR","ICARDA_G0058<br />Subgroups: TUR","ICARDA_G0059<br />Subgroups: TUR","ICARDA_G0060<br />Subgroups: TUR","ICARDA_G0061<br />Subgroups: TUR","ICARDA_G0063<br />Subgroups: TUR","ICARDA_G0064<br />Subgroups: TUR","ICARDA_G0065<br />Subgroups: TUR","ICARDA_G0066<br />Subgroups: TUR","ICARDA_G0067<br />Subgroups: TUR","ICARDA_G0069<br />Subgroups: TUR","ICARDA_G0070<br />Subgroups: TUR","ICARDA_G0072<br />Subgroups: TUR","ICARDA_G0073<br />Subgroups: TUR","ICARDA_G0074<br />Subgroups: TUR","ICARDA_G0075<br />Subgroups: TUR","ICARDA_G0087<br />Subgroups: TUR","ICARDA_G0095<br />Subgroups: TUR","ICARDA_G0096<br />Subgroups: TUR","ICARDA_G0097<br />Subgroups: TUR","ICARDA_G0098<br />Subgroups: TUR","ICARDA_G0106<br />Subgroups: TUR","ICARDA_G0107<br />Subgroups: TUR","ICARDA_G0108<br />Subgroups: TUR","ICARDA_G0109<br />Subgroups: TUR","ICARDA_G0110<br />Subgroups: TUR","ICARDA_G0114<br />Subgroups: TUR","ICARDA_G0119<br />Subgroups: TUR","ICARDA_G0123<br />Subgroups: TUR","ICARDA_G0124<br />Subgroups: TUR","ICARDA_G0125<br />Subgroups: TUR","ICARDA_G0126<br />Subgroups: TUR","ICARDA_G0127<br />Subgroups: TUR","ICARDA_G0128<br />Subgroups: TUR","ICARDA_G0129<br />Subgroups: TUR","ICARDA_G0132<br />Subgroups: TUR","ICARDA_G0138<br />Subgroups: TUR","ICARDA_G0139<br />Subgroups: TUR","ICARDA_G0140<br />Subgroups: TUR","ICARDA_G0141<br />Subgroups: TUR","ICARDA_G0142<br />Subgroups: TUR","ICARDA_G0143<br />Subgroups: TUR","ICARDA_G0144<br />Subgroups: TUR","ICARDA_G0145<br />Subgroups: TUR","ICARDA_G0146<br />Subgroups: TUR","ICARDA_G0556<br />Subgroups: TUR","ICARDA_G0587<br />Subgroups: TUR","ICARDA_G0588<br />Subgroups: TUR","ICARDA_G0589<br />Subgroups: TUR","ICARDA_G0590<br />Subgroups: TUR","ICARDA_G0591<br />Subgroups: TUR","ICARDA_G0592<br />Subgroups: TUR","ICARDA_G0593<br />Subgroups: TUR","ICARDA_G0594<br />Subgroups: TUR","ICARDA_G0595<br />Subgroups: TUR","ICARDA_G0596<br />Subgroups: TUR","ICARDA_G0597<br />Subgroups: TUR","ICARDA_G0598<br />Subgroups: TUR","ICARDA_G0601<br />Subgroups: TUR","ICARDA_G0603<br />Subgroups: TUR","ICARDA_G0604<br />Subgroups: TUR","ICARDA_G0605<br />Subgroups: TUR","ICARDA_G0606<br />Subgroups: TUR","ICARDA_G0607<br />Subgroups: TUR","ICARDA_G0608<br />Subgroups: TUR","ICARDA_G0668<br />Subgroups: TUR","ICARDA_G0669<br />Subgroups: TUR","ICARDA_G0688<br />Subgroups: TUR","ICARDA_G0781<br />Subgroups: TUR","ICARDA_G0782<br />Subgroups: TUR","ICARDA_G0784<br />Subgroups: TUR","ICARDA_G0785<br />Subgroups: TUR","ICARDA_G0786<br />Subgroups: TUR","ICARDA_G0787<br />Subgroups: TUR","ICARDA_G0788<br />Subgroups: TUR","ICARDA_G0789<br />Subgroups: TUR","ICARDA_G0790<br />Subgroups: TUR","ICARDA_G0791<br />Subgroups: TUR","ICARDA_G0792<br />Subgroups: TUR","ICARDA_G0793<br />Subgroups: TUR","ICARDA_G0794<br />Subgroups: TUR","ICARDA_G0795<br />Subgroups: TUR","ICARDA_G0796<br />Subgroups: TUR","ICARDA_G0797<br />Subgroups: TUR","ICARDA_G0798<br />Subgroups: TUR","ICARDA_G0800<br />Subgroups: TUR","ICARDA_G0801<br />Subgroups: TUR","ICARDA_G0802<br />Subgroups: TUR","ICARDA_G0803<br />Subgroups: TUR","ICARDA_G0804<br />Subgroups: TUR","ICARDA_G0805<br />Subgroups: TUR","ICARDA_G0806<br />Subgroups: TUR","ICARDA_G0807<br />Subgroups: TUR","ICARDA_G0808<br />Subgroups: TUR","ICARDA_G0809<br />Subgroups: TUR","ICARDA_G0810<br />Subgroups: TUR","ICARDA_G0811<br />Subgroups: TUR","ICARDA_G0812<br />Subgroups: TUR","ICARDA_G0813<br />Subgroups: TUR","ICARDA_G0814<br />Subgroups: TUR","ICARDA_G0815<br />Subgroups: TUR","ICARDA_G0816<br />Subgroups: TUR","ICARDA_G0817<br />Subgroups: TUR","ICARDA_G0818<br />Subgroups: TUR","ICARDA_G0821<br />Subgroups: TUR","ICARDA_G0822<br />Subgroups: TUR","ICARDA_G0823<br />Subgroups: TUR","ICARDA_G0824<br />Subgroups: TUR","ICARDA_G0825<br />Subgroups: TUR","ICARDA_G0827<br />Subgroups: TUR","ICARDA_G0829<br />Subgroups: TUR","ICARDA_G0830<br />Subgroups: TUR","ICARDA_G0831<br />Subgroups: TUR","ICARDA_G0832<br />Subgroups: TUR","ICARDA_G0833<br />Subgroups: TUR","ICARDA_G0834<br />Subgroups: TUR","ICARDA_G0837<br />Subgroups: TUR","ICARDA_G0838<br />Subgroups: TUR","ICARDA_G0839<br />Subgroups: TUR","ICARDA_G0840<br />Subgroups: TUR","ICARDA_G0842<br />Subgroups: TUR","ICARDA_G0845<br />Subgroups: TUR","ICARDA_G0846<br />Subgroups: TUR","ICARDA_G0847<br />Subgroups: TUR","ICARDA_G0848<br />Subgroups: TUR","ICARDA_G0849<br />Subgroups: TUR","ICARDA_G0850<br />Subgroups: TUR","ICARDA_G0853<br />Subgroups: TUR","ICARDA_G0854<br />Subgroups: TUR","ICARDA_G0855<br />Subgroups: TUR","ICARDA_G0857<br />Subgroups: TUR","ICARDA_G0858<br />Subgroups: TUR","ICARDA_G0859<br />Subgroups: TUR","ICARDA_G0860<br />Subgroups: TUR","ICARDA_G0861<br />Subgroups: TUR","ICARDA_G0862<br />Subgroups: TUR","ICARDA_G0863<br />Subgroups: TUR","ICARDA_G0865<br />Subgroups: TUR","ICARDA_G0866<br />Subgroups: TUR","ICARDA_G0867<br />Subgroups: TUR","ICARDA_G0868<br />Subgroups: TUR","ICARDA_G0869<br />Subgroups: TUR","ICARDA_G0870<br />Subgroups: TUR","ICARDA_G0871<br />Subgroups: TUR","ICARDA_G0872<br />Subgroups: TUR","ICARDA_G0874<br />Subgroups: TUR","ICARDA_G0875<br />Subgroups: TUR","ICARDA_G0876<br />Subgroups: TUR","ICARDA_G0877<br />Subgroups: TUR","ICARDA_G0878<br />Subgroups: TUR","ICARDA_G0879<br />Subgroups: TUR","ICARDA_G0880<br />Subgroups: TUR","ICARDA_G0881<br />Subgroups: TUR","ICARDA_G0882<br />Subgroups: TUR","ICARDA_G0883<br />Subgroups: TUR","ICARDA_G0884<br />Subgroups: TUR","ICARDA_G0885<br />Subgroups: TUR","ICARDA_G0887<br />Subgroups: TUR","ICARDA_G0888<br />Subgroups: TUR","ICARDA_G0889<br />Subgroups: TUR","ICARDA_G0890<br />Subgroups: TUR","ICARDA_G0891<br />Subgroups: TUR","ICARDA_G0892<br />Subgroups: TUR","ICARDA_G0893<br />Subgroups: TUR","ICARDA_G0894<br />Subgroups: TUR","ICARDA_G0895<br />Subgroups: TUR","ICARDA_G0896<br />Subgroups: TUR","ICARDA_G0897<br />Subgroups: TUR","ICARDA_G0898<br />Subgroups: TUR","ICARDA_G0982<br />Subgroups: TUR","ICARDA_G0983<br />Subgroups: TUR","ICARDA_G0984<br />Subgroups: TUR","ICARDA_G0985<br />Subgroups: TUR","ICARDA_G0986<br />Subgroups: TUR","ICARDA_G0987<br />Subgroups: TUR","ICARDA_G1059<br />Subgroups: TUR","ICARDA_G1061<br />Subgroups: TUR","ICARDA_G1075<br />Subgroups: TUR","ICARDA_G1269<br />Subgroups: TUR","ICARDA_G1270<br />Subgroups: TUR","ICARDA_G1271<br />Subgroups: TUR","ICARDA_G1272<br />Subgroups: TUR","ICARDA_G1273<br />Subgroups: TUR","ICARDA_G1274<br />Subgroups: TUR","ICARDA_G1286<br />Subgroups: TUR","ICARDA_G1287<br />Subgroups: TUR","ICARDA_G1288<br />Subgroups: TUR","ICARDA_G1289<br />Subgroups: TUR","ICARDA_G1290<br />Subgroups: TUR","ICARDA_G1291<br />Subgroups: TUR","ICARDA_G1376<br />Subgroups: TUR","ICARDA_G1377<br />Subgroups: TUR","ICARDA_G1378<br />Subgroups: TUR","ICARDA_G1383<br />Subgroups: TUR","ICARDA_G1463<br />Subgroups: TUR","ICARDA_G1464<br />Subgroups: TUR","ICARDA_GW063<br />Subgroups: TUR","ICARDA_GW064<br />Subgroups: TUR","ICARDA_GW065<br />Subgroups: TUR","ICARDA_GW066<br />Subgroups: TUR","ICARDA_GW067<br />Subgroups: TUR","ICARDA_GW068<br />Subgroups: TUR","ICARDA_GW070<br />Subgroups: TUR","ICARDA_GW071<br />Subgroups: TUR","ICARDA_GW072<br />Subgroups: TUR","ICARDA_GW073<br />Subgroups: TUR","ICARDA_GW074<br />Subgroups: TUR"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(68,1,84,1)"}},"hoveron":"points","name":"TUR","legendgroup":"TUR","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":43.105022831050235},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"PCA","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-34.076782460884601,21.464734547523129],"tickmode":"array","ticktext":["-30","-20","-10","0","10","20"],"tickvals":[-30,-20,-10,0,10,20],"categoryorder":"array","categoryarray":["-30","-20","-10","0","10","20"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"PC1 ( 17 )","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-41.575860231943409,18.444088916443913],"tickmode":"array","ticktext":["-40","-20","0"],"tickvals":[-40,-20,0],"categoryorder":"array","categoryarray":["-40","-20","0"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"PC2 ( 13.67 )","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":7.9701120797011207},"title":{"text":"Subgroups","font":{"color":"rgba(0,0,0,1)","family":"","size":10.62681610626816}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"d412bf01b63":{"x":{},"y":{},"text":{},"colour":{},"type":"scatter"}},"cur_data":"d412bf01b63","visdat":{"d412bf01b63":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="spca" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="spca"><span class="header-section-number">16.4</span> sPCA</h2>
+<p>We will be using the <code>sPCA()</code> function from our package. This function uses the sPCA framework from the <code>adegenet</code> package. It returns a list with our sPCA object, a plot of the obtained eigenvalues, results and plots for the global test and results and plots for the local test. The obtained sPCA result can be plotted using the <code>sPCAMapPlot()</code> function.</p>
+<p><code>sPCA(geno, subgroups = NULL, xy, eigenPlot = TRUE, tests = TRUE)</code>: returns sPCA from genotype data</p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>subgroups</code>: defaults to NULL, can be replaced with a vector of our factor information</p></li>
+<li><p><code>xy</code>: a two column longitude - latitude vector or data frame</p></li>
+<li><p><code>eigenPlot</code>: defaults to TRUE, plots the resulting eigenvalues</p></li>
+<li><p><code>tests</code>: defaults to TRUE, carries out global and local tests</p></li>
+</ul>
+<p><code>sPCAMapPlot(spca, geno, xy, axis = 1, pos = TRUE</code>): plots our sPCA results on a map</p>
+<ul>
+<li><p><code>spca</code>: our <em>spca</em> object</p></li>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>xy</code>: a two column longitude - latitude vector or data frame</p></li>
+<li><p><code>axis</code>: defaults to 1 (our first axis), we can choose any other axis to plot</p></li>
+<li><p><code>pos</code>: defaults to TRUE to plot the positive values, can be set to FALSE to plot the negative values</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Running sPCA</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>spca <span class="ot">&lt;-</span> <span class="fu">sPCA</span>(matrix, <span class="at">subgroups =</span> popSet, <span class="at">xy =</span> metadata[,<span class="fu">c</span>(<span class="st">"LON"</span>,<span class="st">"LAT"</span>)], <span class="at">eigenPlot =</span> <span class="cn">TRUE</span>, <span class="at">tests =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting our obtained eigenvalues</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>spca<span class="sc">$</span>eigenPlot</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting global test results</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>spca<span class="sc">$</span>globalTest</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting local test results</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>spca<span class="sc">$</span>localTest</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting our results in a map</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sPCAMapPlot</span>(spca<span class="sc">$</span>spca, matrix, <span class="at">xy =</span> metadata[,<span class="fu">c</span>(<span class="st">"LON"</span>,<span class="st">"LAT"</span>)], <span class="at">axis =</span> <span class="dv">1</span>, <span class="at">pos =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dapc" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="dapc"><span class="header-section-number">16.5</span> DAPC</h2>
+<p>DAPC requires the user to define a range of subpopulation numbers for which to perform the analyses. To do this, we can calculate different k-statistics to guide our choice of this range. We will be using our <code>kMeansStats()</code> function, which allows us to choose between <code>"BIC"</code>, <code>"AIC"</code> or <code>"WCC"</code> for our desired k-statistic. This function outputs a data frame with our k-statistic values, and a plot. We will then use our <code>DAPC()</code> function on our genotype data, which uses the DAPC framework from the <code>adegenet</code> package. This function outputs a list with the <em>dapc</em> object and a data frame with the explained variances. An additional plot can also be produced.</p>
+<p><code>kMeansStats(geno, pca = NULL, maxK, stat)</code>: returns test statistic results for different K values</p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>pca</code>: defaults to NULL, can be replaced by a <em>pca</em> object to skip over creating a new PCA</p></li>
+<li><p><code>maxK</code>: the maximum number of K subpopulations for which to calculate k-statistics</p></li>
+<li><p><code>stat</code>: type of k-statistic to calculate</p></li>
+</ul>
+<p>DAPC(geno, krange, subgroups = NULL, pca = NULL, dapcPlot = FALSE): performs DAPC</p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>krange</code>: a range of K values</p></li>
+<li><p><code>subgroups</code>: defaults to NULL, can be replaced with a vector of our factor information</p></li>
+<li><p><code>pca</code>: defaults to NULL, can be replaced by a <em>pca</em> object to skip over creating a new PCA</p></li>
+<li><p><code>dapcPlot</code>: defaults to FALSE, if TRUE, an output plot is produced</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating our K statistics</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>BICDAPC <span class="ot">&lt;-</span> <span class="fu">kMeansStats</span>(matrix, pca<span class="sc">$</span>pca, <span class="dv">10</span>, <span class="st">"BIC"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting K statistic</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>BICDAPC<span class="sc">$</span>statPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Pop_Structure_files/figure-html/dapc-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Running DAPC</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>DAPC <span class="ot">&lt;-</span> <span class="fu">DAPC</span>(matrix, <span class="at">krange =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">pca =</span> pca<span class="sc">$</span>pca, <span class="at">subgroups =</span> popSet, <span class="at">dapcPlot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting DAPC results</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>DAPC<span class="sc">$</span>dapcPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-de585c2ecdcac5fbb234" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-de585c2ecdcac5fbb234">{"x":{"data":[{"x":[-7626515079840202,-7626515079840237,-7626515079840175,-7626515079840372,-7626515079840226,-7626515079840232,-7626515079840277,-7626515079840255,-7626515079840296,-7626515079840283,-7626515079840282,-7626515079840229,-7626515079840285,-7626515079840281,-7626515079840267,-7626515079840258,-7626515079840247,-7626515079840275,-7626515079840246,-7626515079840262,-7626515079840255,-7626515079840264,-7626515079840287,-7626515079840259,-7626515079840226,-7626515079840275,-7626515079840238,-7626515079840248,-7626515079840234,-7626515079840276,-7626515079840260,-7626515079840312,-7626515079840225,-7626515079840279,-7626515079840260,-7626515079840269,-7626515079840238,-7626515079840255,-7626515079840228,-7626515079840232,-7626515079840238,-7626515079840286,-7626515079840249,-7626515079840244,-7626515079840301,-7626515079840271,-7626515079840247,-7626515079840249,-7626515079840245,-7626515079840262,-7626515079840289,-7626515079840237,-7626515079840268,-7626515079840277,-7626515079840258,-7626515079840248,-7626515079840272,-7626515079840246,-7626515079840266,-7626515079840229,-7626515079840254,-7626515079840253,-7626515079840240,-7626515079840232,-7626515079840270,-7626515079840280,-7626515079840274,-7626515079840223,-7626515079840203,-7626515079840286,-7626515079840244,-7626515079840233,-7626515079840247,-7626515079840239,-7626515079840247,-7626515079840310,-7626515079840273,-7626515079840284,-7626515079840278,-7626515079840257,-7626515079840296,-7626515079840259,-7626515079840226,-7626515079840268,-7626515079840211,-7626515079840236,-7626515079840232,-7626515079840266,-7626515079840289,-7626515079840260,-7626515079840257,-7626515079840250,-7626515079840231,-7626515079840253,-7626515079840248,-7626515079840291,-7626515079840272,-7626515079840258,-7626515079840239,-7626515079840255,-7626515079840280,-7626515079840291,-7626515079840285,-7626515079840311,-7626515079840276,-7626515079840318,-7626515079840285,-7626515079840250,-7626515079840252,-7626515079840223,-7626515079840264,-7626515079840266,-7626515079840332,-7626515079840287,-7626515079840289,-7626515079840272,-7626515079840246,-7626515079840279,-7626515079840252,-7626515079840258,-7626515079840223,-7626515079840290],"y":[-35203332805628540,-35203332805628504,-35203332805628560,-35203332805628440,-35203332805628476,-35203332805628452,-35203332805628532,-35203332805628484,-35203332805628520,-35203332805628544,-35203332805628544,-35203332805628488,-35203332805628508,-35203332805628548,-35203332805628520,-35203332805628528,-35203332805628520,-35203332805628484,-35203332805628556,-35203332805628524,-35203332805628504,-35203332805628504,-35203332805628508,-35203332805628500,-35203332805628540,-35203332805628504,-35203332805628528,-35203332805628568,-35203332805628516,-35203332805628492,-35203332805628504,-35203332805628468,-35203332805628496,-35203332805628516,-35203332805628536,-35203332805628512,-35203332805628508,-35203332805628460,-35203332805628540,-35203332805628516,-35203332805628504,-35203332805628560,-35203332805628528,-35203332805628520,-35203332805628476,-35203332805628540,-35203332805628536,-35203332805628572,-35203332805628500,-35203332805628492,-35203332805628448,-35203332805628568,-35203332805628616,-35203332805628484,-35203332805628560,-35203332805628500,-35203332805628484,-35203332805628528,-35203332805628448,-35203332805628528,-35203332805628484,-35203332805628552,-35203332805628564,-35203332805628532,-35203332805628508,-35203332805628508,-35203332805628512,-35203332805628552,-35203332805628564,-35203332805628504,-35203332805628524,-35203332805628528,-35203332805628556,-35203332805628532,-35203332805628560,-35203332805628500,-35203332805628532,-35203332805628512,-35203332805628508,-35203332805628508,-35203332805628500,-35203332805628572,-35203332805628540,-35203332805628556,-35203332805628520,-35203332805628492,-35203332805628528,-35203332805628508,-35203332805628472,-35203332805628536,-35203332805628476,-35203332805628540,-35203332805628536,-35203332805628532,-35203332805628552,-35203332805628508,-35203332805628540,-35203332805628500,-35203332805628480,-35203332805628488,-35203332805628524,-35203332805628528,-35203332805628480,-35203332805628544,-35203332805628468,-35203332805628524,-35203332805628544,-35203332805628532,-35203332805628584,-35203332805628536,-35203332805628480,-35203332805628568,-35203332805628496,-35203332805628636,-35203332805628504,-35203332805628484,-35203332805628532,-35203332805628500,-35203332805628596,-35203332805628520,-35203332805628540,-35203332805628516],"text":["ICARDA_G0011","ICARDA_G0012","ICARDA_G0013","ICARDA_G0014","ICARDA_G0015","ICARDA_G0034","ICARDA_G0147","ICARDA_G0148","ICARDA_G0149","ICARDA_G0199","ICARDA_G0200","ICARDA_G0201","ICARDA_G0202","ICARDA_G0203","ICARDA_G0204","ICARDA_G0205","ICARDA_G0206","ICARDA_G0207","ICARDA_G0208","ICARDA_G0209","ICARDA_G0210","ICARDA_G0212","ICARDA_G0214","ICARDA_G0216","ICARDA_G0217","ICARDA_G0218","ICARDA_G0219","ICARDA_G0220","ICARDA_G0221","ICARDA_G0222","ICARDA_G0223","ICARDA_G0224","ICARDA_G0225","ICARDA_G0226","ICARDA_G0227","ICARDA_G0228","ICARDA_G0230","ICARDA_G0231","ICARDA_G0232","ICARDA_G0233","ICARDA_G0234","ICARDA_G0236","ICARDA_G0237","ICARDA_G0238","ICARDA_G0239","ICARDA_G0240","ICARDA_G0242","ICARDA_G0244","ICARDA_G0245","ICARDA_G0246","ICARDA_G0247","ICARDA_G0248","ICARDA_G0249","ICARDA_G0250","ICARDA_G0251","ICARDA_G0252","ICARDA_G0254","ICARDA_G0256","ICARDA_G0257","ICARDA_G0258","ICARDA_G0259","ICARDA_G0260","ICARDA_G0262","ICARDA_G0263","ICARDA_G0264","ICARDA_G0265","ICARDA_G0266","ICARDA_G0267","ICARDA_G0268","ICARDA_G0269","ICARDA_G0270","ICARDA_G0271","ICARDA_G0272","ICARDA_G0273","ICARDA_G0274","ICARDA_G0275","ICARDA_G0276","ICARDA_G0278","ICARDA_G0282","ICARDA_G0283","ICARDA_G0284","ICARDA_G0285","ICARDA_G0287","ICARDA_G0288","ICARDA_G0289","ICARDA_G0291","ICARDA_G0292","ICARDA_G0293","ICARDA_G0294","ICARDA_G0295","ICARDA_G0296","ICARDA_G0297","ICARDA_G0298","ICARDA_G0300","ICARDA_G0301","ICARDA_G0302","ICARDA_G0304","ICARDA_G0305","ICARDA_G0308","ICARDA_G0470","ICARDA_G0623","ICARDA_G0625","ICARDA_G0626","ICARDA_G0627","ICARDA_G1200","ICARDA_G1201","ICARDA_G1407","ICARDA_G1408","ICARDA_G1409","ICARDA_G1410","ICARDA_G1412","ICARDA_G1413","ICARDA_G1414","ICARDA_G1416","ICARDA_G1417","ICARDA_G1418","ICARDA_G1419","ICARDA_G1420","ICARDA_G1421","ICARDA_G1422","ICARDA_G1423","ICARDA_G1448"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(29,114,245,0.4)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(29,114,245,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[42587191089527088,42587191089526952,42587191089526912,42587191089527088,42587191089526904,42587191089526912,42587191089526896,42587191089527072,42587191089526920,42587191089527048,42587191089526912,42587191089526824,42587191089527024,42587191089526944,42587191089526952,42587191089527000,42587191089526992,42587191089527064,42587191089527096,42587191089527048,42587191089526936,42587191089526952,42587191089526936,42587191089526976,42587191089527048,42587191089527080,42587191089527024,42587191089527048,42587191089527024,42587191089526992,42587191089527112,42587191089527048,42587191089527144,42587191089527024,42587191089526848,42587191089527016,42587191089527064,42587191089527072,42587191089526896,42587191089527000,42587191089526936,42587191089526992,42587191089526944,42587191089526944,42587191089527000,42587191089527008,42587191089526928,42587191089526984,42587191089526904,42587191089527120,42587191089527016,42587191089526936,42587191089526888,42587191089527064,42587191089527016,42587191089527008,42587191089526896,42587191089527120,42587191089526936,42587191089527080,42587191089526928,42587191089527000,42587191089526992,42587191089527032,42587191089526992,42587191089526984,42587191089527040,42587191089526992,42587191089527008,42587191089527000,42587191089526944,42587191089527136,42587191089526952,42587191089527040,42587191089527016,42587191089527128,42587191089527000,42587191089527080,42587191089527056,42587191089526992,42587191089527000,42587191089526968,42587191089527032,42587191089526992,42587191089527024,42587191089526952,42587191089526992,42587191089526976,42587191089526984,42587191089526976,42587191089527072,42587191089526984,42587191089527136,42587191089526992,42587191089527064],"y":[3418659632382312,3418659632382311.5,3418659632382282,3418659632382277.5,3418659632382381.5,3418659632382352.5,3418659632382293,3418659632382335.5,3418659632382318.5,3418659632382283,3418659632382330.5,3418659632382349,3418659632382309.5,3418659632382340.5,3418659632382309.5,3418659632382286.5,3418659632382321.5,3418659632382318,3418659632382293,3418659632382327.5,3418659632382315.5,3418659632382334.5,3418659632382333,3418659632382318.5,3418659632382304,3418659632382350,3418659632382329.5,3418659632382301,3418659632382319,3418659632382318,3418659632382307,3418659632382352,3418659632382302,3418659632382366.5,3418659632382340.5,3418659632382311,3418659632382312.5,3418659632382295,3418659632382322,3418659632382325.5,3418659632382342.5,3418659632382329,3418659632382316.5,3418659632382314.5,3418659632382325,3418659632382300.5,3418659632382340.5,3418659632382329,3418659632382332,3418659632382318.5,3418659632382322.5,3418659632382292.5,3418659632382299.5,3418659632382315,3418659632382317.5,3418659632382280,3418659632382321.5,3418659632382285,3418659632382351,3418659632382288.5,3418659632382345.5,3418659632382319,3418659632382322,3418659632382333,3418659632382319,3418659632382313,3418659632382324.5,3418659632382318.5,3418659632382307,3418659632382323.5,3418659632382319,3418659632382340.5,3418659632382337,3418659632382320,3418659632382304,3418659632382259.5,3418659632382289.5,3418659632382287.5,3418659632382297,3418659632382304.5,3418659632382295.5,3418659632382287,3418659632382315,3418659632382310,3418659632382297,3418659632382309.5,3418659632382299.5,3418659632382352.5,3418659632382323,3418659632382349,3418659632382296.5,3418659632382298,3418659632382285.5,3418659632382308,3418659632382318],"text":["ICARDA_G0036","ICARDA_G0039","ICARDA_G0040","ICARDA_G0041","ICARDA_G0043","ICARDA_G0044","ICARDA_G0045","ICARDA_G0046","ICARDA_G0047","ICARDA_G0048","ICARDA_G0050","ICARDA_G0051","ICARDA_G0052","ICARDA_G0053","ICARDA_G0054","ICARDA_G0055","ICARDA_G0056","ICARDA_G0057","ICARDA_G0058","ICARDA_G0060","ICARDA_G0061","ICARDA_G0063","ICARDA_G0064","ICARDA_G0065","ICARDA_G0066","ICARDA_G0070","ICARDA_G0072","ICARDA_G0087","ICARDA_G0098","ICARDA_G0106","ICARDA_G0108","ICARDA_G0110","ICARDA_G0114","ICARDA_G0117","ICARDA_G0119","ICARDA_G0144","ICARDA_G0145","ICARDA_G0280","ICARDA_G0484","ICARDA_G0486","ICARDA_G0487","ICARDA_G0488","ICARDA_G0489","ICARDA_G0490","ICARDA_G0493","ICARDA_G0497","ICARDA_G0500","ICARDA_G0501","ICARDA_G0504","ICARDA_G0556","ICARDA_G0589","ICARDA_G0593","ICARDA_G0594","ICARDA_G0596","ICARDA_G0601","ICARDA_G0604","ICARDA_G0606","ICARDA_G0607","ICARDA_G0688","ICARDA_G0781","ICARDA_G0788","ICARDA_G0816","ICARDA_G0818","ICARDA_G0821","ICARDA_G0822","ICARDA_G0823","ICARDA_G0824","ICARDA_G0825","ICARDA_G0829","ICARDA_G0830","ICARDA_G0833","ICARDA_G0834","ICARDA_G0837","ICARDA_G0838","ICARDA_G0839","ICARDA_G0861","ICARDA_G0876","ICARDA_G0877","ICARDA_G0879","ICARDA_G0891","ICARDA_G0893","ICARDA_G0894","ICARDA_G0897","ICARDA_G0898","ICARDA_G0983","ICARDA_G1270","ICARDA_G1271","ICARDA_G1274","ICARDA_G1289","ICARDA_G1290","ICARDA_G1291","ICARDA_G1378","ICARDA_G1383","ICARDA_G1459","ICARDA_G1464"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(223,1,1,0.4)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(223,1,1,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4537925732907491,4537925732907424,4537925732907360,4537925732907430,4537925732907410,4537925732907388,4537925732907414,4537925732907399,4537925732907383,4537925732907301,4537925732907409,4537925732907446,4537925732907359,4537925732907355,4537925732907386,4537925732907397,4537925732907428,4537925732907415,4537925732907381,4537925732907402,4537925732907369,4537925732907355,4537925732907362,4537925732907378,4537925732907424,4537925732907369,4537925732907435,4537925732907429,4537925732907355,4537925732907344,4537925732907415,4537925732907332,4537925732907419,4537925732907304,4537925732907403,4537925732907349,4537925732907382,4537925732907361,4537925732907371,4537925732907410,4537925732907364,4537925732907417,4537925732907404,4537925732907313,4537925732907377,4537925732907404,4537925732907372,4537925732907426,4537925732907420,4537925732907499,4537925732907417,4537925732907399,4537925732907365,4537925732907356,4537925732907342,4537925732907431,4537925732907348,4537925732907354,4537925732907349,4537925732907379,4537925732907393,4537925732907387,4537925732907421,4537925732907383,4537925732907394,4537925732907334,4537925732907309,4537925732907402,4537925732907417,4537925732907335,4537925732907378,4537925732907438,4537925732907356,4537925732907375,4537925732907376,4537925732907361,4537925732907402,4537925732907395,4537925732907388,4537925732907396,4537925732907434,4537925732907481,4537925732907315,4537925732907410],"y":[8894349680868803,8894349680868788,8894349680868790,8894349680868775,8894349680868757,8894349680868769,8894349680868820,8894349680868780,8894349680868786,8894349680868806,8894349680868810,8894349680868803,8894349680868826,8894349680868810,8894349680868786,8894349680868781,8894349680868780,8894349680868768,8894349680868773,8894349680868798,8894349680868813,8894349680868799,8894349680868828,8894349680868816,8894349680868808,8894349680868774,8894349680868797,8894349680868780,8894349680868788,8894349680868788,8894349680868805,8894349680868792,8894349680868793,8894349680868812,8894349680868784,8894349680868819,8894349680868806,8894349680868835,8894349680868802,8894349680868793,8894349680868793,8894349680868766,8894349680868791,8894349680868791,8894349680868775,8894349680868804,8894349680868829,8894349680868824,8894349680868815,8894349680868834,8894349680868782,8894349680868773,8894349680868797,8894349680868807,8894349680868811,8894349680868805,8894349680868817,8894349680868807,8894349680868825,8894349680868822,8894349680868843,8894349680868800,8894349680868765,8894349680868812,8894349680868791,8894349680868794,8894349680868808,8894349680868821,8894349680868803,8894349680868807,8894349680868800,8894349680868766,8894349680868819,8894349680868767,8894349680868753,8894349680868790,8894349680868759,8894349680868763,8894349680868773,8894349680868796,8894349680868760,8894349680868722,8894349680868796,8894349680868776],"text":["ICARDA_G0035","ICARDA_G0073","ICARDA_G0075","ICARDA_G0113","ICARDA_G0121","ICARDA_G0136","ICARDA_G0137","ICARDA_G0138","ICARDA_G0141","ICARDA_G0143","ICARDA_G0310","ICARDA_G0403","ICARDA_G0405","ICARDA_G0417","ICARDA_G0472","ICARDA_G0473","ICARDA_G0492","ICARDA_G0517","ICARDA_G0546","ICARDA_G0590","ICARDA_G0591","ICARDA_G0592","ICARDA_G0598","ICARDA_G0603","ICARDA_G0605","ICARDA_G0608","ICARDA_G0786","ICARDA_G0794","ICARDA_G0802","ICARDA_G0811","ICARDA_G0840","ICARDA_G0849","ICARDA_G0850","ICARDA_G0853","ICARDA_G0854","ICARDA_G0857","ICARDA_G0859","ICARDA_G0866","ICARDA_G0867","ICARDA_G0868","ICARDA_G0870","ICARDA_G0880","ICARDA_G0881","ICARDA_G0882","ICARDA_G0883","ICARDA_G0884","ICARDA_G0890","ICARDA_G0892","ICARDA_G0905","ICARDA_G0913","ICARDA_G0982","ICARDA_G0984","ICARDA_G0985","ICARDA_G0986","ICARDA_G1022","ICARDA_G1030","ICARDA_G1032","ICARDA_G1041","ICARDA_G1046","ICARDA_G1050","ICARDA_G1051","ICARDA_G1052","ICARDA_G1059","ICARDA_G1061","ICARDA_G1073","ICARDA_G1085","ICARDA_G1198","ICARDA_G1199","ICARDA_G1202","ICARDA_G1216","ICARDA_G1377","ICARDA_G1457","ICARDA_G1465","ICARDA_GW063","ICARDA_GW064","ICARDA_GW065","ICARDA_GW066","ICARDA_GW067","ICARDA_GW068","ICARDA_GW070","ICARDA_GW071","ICARDA_GW072","ICARDA_GW073","ICARDA_GW074"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(119,206,97,0.4)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(119,206,97,1)"}},"hoveron":"points","name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[5899510281366057,5899510281366055,5899510281366035,5899510281366074,5899510281366063,5899510281366060,5899510281366085,5899510281366058,5899510281366053,5899510281366034,5899510281366103,5899510281366006,5899510281366072,5899510281366075,5899510281366047,5899510281366052,5899510281366039,5899510281366030,5899510281366043,5899510281366034,5899510281366048,5899510281366068,5899510281366054,5899510281366073,5899510281366046,5899510281366019,5899510281366052,5899510281366028,5899510281366049,5899510281366101,5899510281366058,5899510281366031,5899510281366025,5899510281366043,5899510281366071,5899510281366027,5899510281366043,5899510281366072,5899510281366043],"y":[17983060306469908,17983060306469866,17983060306469914,17983060306469904,17983060306469878,17983060306469914,17983060306469894,17983060306469902,17983060306469898,17983060306469924,17983060306469894,17983060306469930,17983060306469862,17983060306469860,17983060306469878,17983060306469924,17983060306469938,17983060306469904,17983060306469940,17983060306469890,17983060306469944,17983060306469896,17983060306469918,17983060306469894,17983060306469896,17983060306469906,17983060306469904,17983060306469898,17983060306469880,17983060306469870,17983060306469880,17983060306469906,17983060306469916,17983060306469884,17983060306469906,17983060306469934,17983060306469914,17983060306469906,17983060306469932],"text":["ICARDA_G0059","ICARDA_G0069","ICARDA_G0096","ICARDA_G0097","ICARDA_G0139","ICARDA_G0140","ICARDA_G0142","ICARDA_G0146","ICARDA_G0587","ICARDA_G0588","ICARDA_G0595","ICARDA_G0597","ICARDA_G0669","ICARDA_G0782","ICARDA_G0784","ICARDA_G0791","ICARDA_G0795","ICARDA_G0798","ICARDA_G0801","ICARDA_G0813","ICARDA_G0814","ICARDA_G0817","ICARDA_G0845","ICARDA_G0846","ICARDA_G0855","ICARDA_G0858","ICARDA_G0860","ICARDA_G0862","ICARDA_G0863","ICARDA_G0865","ICARDA_G0869","ICARDA_G0871","ICARDA_G0878","ICARDA_G0885","ICARDA_G0887","ICARDA_G0888","ICARDA_G0889","ICARDA_G0895","ICARDA_G1376"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,147,38,0.4)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,147,38,1)"}},"hoveron":"points","name":"4","legendgroup":"4","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7079029129120405,7079029129120283,7079029129120390,7079029129120280,7079029129120247,7079029129120268,7079029129120331,7079029129120350,7079029129120277,7079029129120294,7079029129120313,7079029129120343,7079029129120339,7079029129120211,7079029129120418,7079029129120219,7079029129120311,7079029129120223,7079029129120343,7079029129120339,7079029129120349,7079029129120285,7079029129120381,7079029129120334,7079029129120378,7079029129120276,7079029129120406,7079029129120268,7079029129120358,7079029129120354,7079029129120290,7079029129120311,7079029129120263,7079029129120349,7079029129120305,7079029129120377,7079029129120281,7079029129120314,7079029129120346,7079029129120358,7079029129120330,7079029129120399,7079029129120317,7079029129120318,7079029129120298,7079029129120330,7079029129120281,7079029129120335,7079029129120305,7079029129120311,7079029129120262,7079029129120330,7079029129120341,7079029129120328,7079029129120356,7079029129120274,7079029129120262,7079029129120298,7079029129120316,7079029129120196,7079029129120289,7079029129120284,7079029129120331,7079029129120336,7079029129120385,7079029129120270,7079029129120343,7079029129120334,7079029129120285,7079029129120303,7079029129120266,7079029129120380],"y":[19111275521070372,19111275521070412,19111275521070328,19111275521070456,19111275521070460,19111275521070444,19111275521070356,19111275521070436,19111275521070432,19111275521070428,19111275521070428,19111275521070496,19111275521070408,19111275521070448,19111275521070400,19111275521070400,19111275521070460,19111275521070408,19111275521070380,19111275521070456,19111275521070432,19111275521070400,19111275521070436,19111275521070380,19111275521070412,19111275521070408,19111275521070400,19111275521070384,19111275521070376,19111275521070408,19111275521070464,19111275521070424,19111275521070460,19111275521070444,19111275521070460,19111275521070400,19111275521070440,19111275521070452,19111275521070416,19111275521070408,19111275521070408,19111275521070428,19111275521070444,19111275521070460,19111275521070380,19111275521070444,19111275521070436,19111275521070468,19111275521070480,19111275521070416,19111275521070428,19111275521070400,19111275521070444,19111275521070436,19111275521070428,19111275521070440,19111275521070420,19111275521070372,19111275521070444,19111275521070448,19111275521070384,19111275521070424,19111275521070432,19111275521070416,19111275521070432,19111275521070484,19111275521070416,19111275521070424,19111275521070420,19111275521070448,19111275521070388,19111275521070412],"text":["ICARDA_G0037","ICARDA_G0038","ICARDA_G0042","ICARDA_G0049","ICARDA_G0067","ICARDA_G0074","ICARDA_G0095","ICARDA_G0107","ICARDA_G0109","ICARDA_G0123","ICARDA_G0124","ICARDA_G0125","ICARDA_G0126","ICARDA_G0127","ICARDA_G0128","ICARDA_G0129","ICARDA_G0132","ICARDA_G0261","ICARDA_G0279","ICARDA_G0286","ICARDA_G0299","ICARDA_G0306","ICARDA_G0384","ICARDA_G0471","ICARDA_G0482","ICARDA_G0495","ICARDA_G0496","ICARDA_G0571","ICARDA_G0576","ICARDA_G0630","ICARDA_G0668","ICARDA_G0785","ICARDA_G0787","ICARDA_G0789","ICARDA_G0790","ICARDA_G0792","ICARDA_G0793","ICARDA_G0796","ICARDA_G0797","ICARDA_G0800","ICARDA_G0803","ICARDA_G0804","ICARDA_G0805","ICARDA_G0806","ICARDA_G0807","ICARDA_G0808","ICARDA_G0809","ICARDA_G0810","ICARDA_G0812","ICARDA_G0815","ICARDA_G0827","ICARDA_G0831","ICARDA_G0832","ICARDA_G0842","ICARDA_G0847","ICARDA_G0848","ICARDA_G0872","ICARDA_G0874","ICARDA_G0875","ICARDA_G0896","ICARDA_G0918","ICARDA_G0987","ICARDA_G1075","ICARDA_G1084","ICARDA_G1269","ICARDA_G1272","ICARDA_G1273","ICARDA_G1286","ICARDA_G1287","ICARDA_G1288","ICARDA_G1415","ICARDA_G1463"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(169,69,255,0.4)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(169,69,255,1)"}},"hoveron":"points","name":"5","legendgroup":"5","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-55740856231562056,-55740856231561904,-55740856231562048,-55740856231561992,-55740856231561920,-55740856231561936,-55740856231562032,-55740856231562032,-55740856231562000,-55740856231562008,-55740856231562008,-55740856231562024,-55740856231561952,-55740856231562000,-55740856231561992,-55740856231562016,-55740856231561952,-55740856231562024,-55740856231561936,-55740856231561944,-55740856231562128,-55740856231562000,-55740856231562016,-55740856231562000,-55740856231561944,-55740856231561992,-55740856231562016,-55740856231561936,-55740856231562000,-55740856231562024,-55740856231561992,-55740856231562112,-55740856231562104,-55740856231561976,-55740856231562008,-55740856231562024,-55740856231561936,-55740856231562024,-55740856231562024,-55740856231562128,-55740856231561976,-55740856231562016,-55740856231561992,-55740856231562072,-55740856231562016,-55740856231562064,-55740856231561872,-55740856231561976,-55740856231561952,-55740856231562024,-55740856231561984,-55740856231561984,-55740856231562024,-55740856231561920,-55740856231561976,-55740856231561984,-55740856231562008,-55740856231562056,-55740856231562072,-55740856231562048,-55740856231562032,-55740856231562064,-55740856231561992,-55740856231561936,-55740856231561824,-55740856231562032,-55740856231562080,-55740856231562048,-55740856231561984,-55740856231561944,-55740856231562096,-55740856231562088,-55740856231562088,-55740856231561952,-55740856231561944,-55740856231562008],"y":[15073123349315578,15073123349315596,15073123349315582,15073123349315574,15073123349315592,15073123349315584,15073123349315610,15073123349315624,15073123349315582,15073123349315582,15073123349315580,15073123349315590,15073123349315568,15073123349315584,15073123349315582,15073123349315566,15073123349315554,15073123349315594,15073123349315552,15073123349315566,15073123349315596,15073123349315580,15073123349315594,15073123349315592,15073123349315546,15073123349315560,15073123349315556,15073123349315584,15073123349315548,15073123349315584,15073123349315578,15073123349315602,15073123349315586,15073123349315578,15073123349315574,15073123349315586,15073123349315548,15073123349315576,15073123349315576,15073123349315580,15073123349315554,15073123349315568,15073123349315578,15073123349315578,15073123349315574,15073123349315552,15073123349315582,15073123349315574,15073123349315572,15073123349315564,15073123349315606,15073123349315592,15073123349315582,15073123349315574,15073123349315568,15073123349315584,15073123349315568,15073123349315576,15073123349315594,15073123349315572,15073123349315554,15073123349315594,15073123349315570,15073123349315584,15073123349315546,15073123349315570,15073123349315588,15073123349315564,15073123349315586,15073123349315564,15073123349315630,15073123349315628,15073123349315602,15073123349315584,15073123349315582,15073123349315540],"text":["ICARDA_G0115","ICARDA_G0116","ICARDA_G0376","ICARDA_G0395","ICARDA_G0397","ICARDA_G0398","ICARDA_G0399","ICARDA_G0400","ICARDA_G0401","ICARDA_G0402","ICARDA_G0404","ICARDA_G0406","ICARDA_G0407","ICARDA_G0408","ICARDA_G0468","ICARDA_G0469","ICARDA_G0474","ICARDA_G0475","ICARDA_G0476","ICARDA_G0477","ICARDA_G0478","ICARDA_G0479","ICARDA_G0480","ICARDA_G0483","ICARDA_G0494","ICARDA_G0498","ICARDA_G0502","ICARDA_G0503","ICARDA_G0518","ICARDA_G0577","ICARDA_G0600","ICARDA_G0904","ICARDA_G0907","ICARDA_G1008","ICARDA_G1009","ICARDA_G1010","ICARDA_G1011","ICARDA_G1012","ICARDA_G1013","ICARDA_G1014","ICARDA_G1015","ICARDA_G1016","ICARDA_G1017","ICARDA_G1018","ICARDA_G1019","ICARDA_G1020","ICARDA_G1021","ICARDA_G1023","ICARDA_G1024","ICARDA_G1025","ICARDA_G1026","ICARDA_G1027","ICARDA_G1028","ICARDA_G1029","ICARDA_G1031","ICARDA_G1033","ICARDA_G1034","ICARDA_G1035","ICARDA_G1037","ICARDA_G1038","ICARDA_G1039","ICARDA_G1040","ICARDA_G1042","ICARDA_G1043","ICARDA_G1044","ICARDA_G1045","ICARDA_G1047","ICARDA_G1048","ICARDA_G1049","ICARDA_G1068","ICARDA_G1069","ICARDA_G1071","ICARDA_G1072","ICARDA_G1074","ICARDA_G1217","ICARDA_G1218"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,137,178,0.4)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,137,178,1)"}},"hoveron":"points","name":"6","legendgroup":"6","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":40.182648401826498,"l":60.639269406392714},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-60657258597616592,47503593455581608],"tickmode":"array","ticktext":["-5.0e+16","-2.5e+16","0.0e+00","2.5e+16"],"tickvals":[-50000000000000000,-25000000000000000,0,25000000000000000],"categoryorder":"array","categoryarray":["-5.0e+16","-2.5e+16","0.0e+00","2.5e+16"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"LD1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-37919063221963592,21827005937405452],"tickmode":"array","ticktext":["-2e+16","0e+00","2e+16"],"tickvals":[-20000000000000000,0,20000000000000000],"categoryorder":"array","categoryarray":["-2e+16","0e+00","2e+16"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"LD2","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Group","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"d41245d6dcfe":{"x":{},"y":{},"colour":{},"fill":{},"text":{},"type":"scatter"}},"cur_data":"d41245d6dcfe","visdat":{"d41245d6dcfe":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Our resulting DAPC outputs group assignments for each individual, which can be visualized through a composition plot.</p>
+<p><code>DAPCCompoPlot(DAPC, geno, krange, subgroups = NULL)</code>: returns a composition plot of DAPC results</p>
+<ul>
+<li><p><code>DAPC</code>: a <em>dapc</em> object</p></li>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>krange</code>: a range of K values</p></li>
+<li><p><code>subgroups</code>: defaults to NULL, can be replaced with a vector of our factor information</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DAPCCompoPlot</span>(DAPC<span class="sc">$</span>dapc, matrix, <span class="at">krange =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">subgroups =</span> popSet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Pop_Structure_files/figure-html/DAPC-compo-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also produce a frequency plot from our DAPC. This helps us understand the relationship between the produced group assignments and prior group information we may have.</p>
+<p><code>DAPCFreqPlot(DAPC, subgroups)</code>: produced a frequency plot of our DAPC results</p>
+<ul>
+<li><p><code>DAPC</code>: a <em>dapc</em> object</p></li>
+<li><p><code>subgroups</code>: a vector of our factor information</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For k = 3, which is our first object in our DAPC object</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">DAPCFreqPlot</span>(DAPC<span class="sc">$</span>dapc[[<span class="dv">1</span>]], <span class="at">subgroups =</span> popSet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Pop_Structure_files/figure-html/freq-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="snmf" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="snmf"><span class="header-section-number">16.6</span> sNMF</h2>
+<p>sNMF is used to estimate admixture proportions: how much of an individual’s genome comes from different ancestral populations. This means that individuals are not just assigned to a population, instead membership probabilities (admixture coefficients) are calculated. We will be using functions from our package to carry out these analyses. The framework they use comes from the <code>LEA</code> package. Prior to estimating ancestry coefficients, this package requires us to create a <em>geno</em> type object, which we will create using the <code>write.geno.mod()</code> function. We can then run our main function using <code>sNMFFunction()</code>, which outputs a list with our <em>snmf</em> object, a matrix with the produced ancestry coefficients, and a data frame with cross-entropy values. The latter can guide our choice of best K value.</p>
+<p><code>write.geno.mod(geno, output.file)</code>: creates <em>geno</em> type object from genotype matrix</p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>output</code>.file: file path where to save our object</p></li>
+</ul>
+<p><code>sNMFFunction(geno, file, maxK, subgroups = NULL, cePlot = TRUE)</code>: outputs ancestry coefficients</p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>file</code>: file path of <em>geno</em> object</p></li>
+<li><p><code>maxK</code>: the maximum number of K subpopulations</p></li>
+<li><p><code>subgroups</code>: defaults to NULL, can be replaced with a vector of our factor information</p></li>
+<li><p><code>cePlot</code>: defaults to TRUE, outputs a plot of cross-entropy values</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating 'geno' object needed to run sNMF</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.geno.mod</span>(matrix, <span class="st">"output/sNMFgenoBarley.geno"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Running sNMF</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>sNMF <span class="ot">&lt;-</span> <span class="fu">sNMFFunction</span>(matrix, <span class="at">subgroups =</span> popSet, <span class="st">"output/sNMFgenoBarley.geno"</span>, <span class="at">maxK =</span> <span class="dv">6</span>, <span class="at">cePlot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can visualize our membership probability results using a composition plot.</p>
+<p><code>sNMFCompoPlot(sNMFmatrix, geno, krange, subgroups = NULL)</code>: returns a composition plot of admixture results</p>
+<ul>
+<li><p><code>sNMFmatrix</code>: ancestry coefficient matrix</p></li>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>krange</code>: a range of K values</p></li>
+<li><p><code>subgroups</code>: defaults to NULL, can be replaced with a vector of our factor information</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting composition plot</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sNMFCompoPlot</span>(sNMF<span class="sc">$</span>qmatrix, matrix, <span class="at">krange =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">subgroups =</span> popSet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Pop_Structure_files/figure-html/sNMF-compo-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, we can also visualize our sNMF results on a map by incorporating spatial information if available.</p>
+<p><code>sNMFMapPlot(geno, sNMFObjectVar, xy, k, Xlim = NULL, Ylim = NULL)</code>: produces a map plot from ancestry coefficient results for a specific number of subgroups</p>
+<ul>
+<li><p><code>geno</code>: our genotype matrix</p></li>
+<li><p><code>sNMFObjectVar</code>: a <em>snmf</em> object</p></li>
+<li><p><code>xy</code>: a two column longitude - latitude vector or data frame</p></li>
+<li><p><code>k</code>: a number K of subpopulations</p></li>
+<li><p><code>Xlim</code>: defaults to NULL, can be replaced by a range of longitudes to zoom in the map</p></li>
+<li><p><code>Ylim</code>: defaults to NULL, can be replaced by a range of latitudes to zoom in the map</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting results in map</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sNMFMapPlot</span>(matrix, sNMF<span class="sc">$</span>snmf, <span class="at">xy =</span> metadata[,<span class="fu">c</span>(<span class="st">"LON"</span>,<span class="st">"LAT"</span>)], <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Pop_Structure_files/figure-html/sNMF-map-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../04_Pop_Structure/01_Kinship_Relatedness.html" class="pagination-link" aria-label="Module 4.1: Kinship and Relatedness">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Module 4.1: Kinship and Relatedness</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../04_Pop_Structure/03_Phylo_Tree.html" class="pagination-link" aria-label="Module 4.3: Phylogenetic Trees">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Module 4.3: Phylogenetic Trees</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, ICARDA</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -67,5 +67,14 @@
   },
   "03_Genomic_Concepts/04_Genetic_Diversity.qmd": {
     "04_Genetic_Diversity.html": "c0f4d0f3"
+  },
+  "05_GWAS/01_Initial_Concepts.qmd": {
+    "01_Initial_Concepts.html": "863bf1ae"
+  },
+  "05_GWAS/02_Single_Trait_GWAS.qmd": {
+    "02_Single_Trait_GWAS.html": "731f3ce2"
+  },
+  "06_GS/01_Genomic_Selection.qmd": {
+    "01_Genomic_Selection.html": "a3a56896"
   }
 }

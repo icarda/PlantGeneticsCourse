@@ -1,0 +1,238 @@
+# Module 6.2: **Single trait GWAS**
+
+We will be carrying out the GWAS analysis using the `runSingleTraitGwas()` function from the `statgenGWAS` package.
+
+`runSingleTraitGwas(gData, traits = NULL, covar = NULL, snpCov = NULL, kin = NULL, kinshipMethod, remlAlgo, GLSMethod, MAF = 0.01, thrType, alpha = 0.05, LODThr = 4, nSnpLOD = 10, pThr = 0.05)`: performs a single-trait Genome Wide Association Study (GWAS) on phenotypic and genotypic data contained in a *gData* object.
+
+-   `gData`: an object of class gData
+
+-   `traits`: vector of traits on which to run GWAS (numeric indices or character names)
+
+-   `covar`: defaults to NULL, an optional vector of covariates taken into account when running GWAS. These can be either numeric indices or character names of columns in covar in gData
+
+-   `snpCov`: an optional character vector of snps to be included as covariates
+
+-   `kin`: an optional kinship matrix or list of kinship matrices
+
+-   `kinshipMethod`: optional character indicating the method used for calculating the kinship matrix(ces). Currently `"astle"` (Astle and Balding, 2009), `"IBS"` and `"vanRaden"` (VanRaden, 2008) are supported
+
+-   `remlAlgo`: character string indicating the algorithm used to estimate the variance components. Either `EMMA`, for the EMMA algorithm, or `NR`, for the Newton-Raphson algorithm
+
+-   `GLSMethod`: character string indicating the method used to estimate the marker effects
+
+-   `MAF`: numerical value between 0 and 1. SNPs with MAF below this value are not taken into account
+
+-   `thrType`: character string indicating the type of threshold used for the selection of candidate loci
+
+-   `alpha`: defaults to 0.05, numerical value used for calculating the LOD-threshold for thrType = "bonf" and the significant p-Values for thrType = "fdr"
+
+-   `LODThr`: numerical value used as a LOD-threshold when `thrType = "fixed"`
+
+-   `nSnpLOD`: numerical value indicating the number of SNPs with the smallest p-values that are selected when `thrType` = "small"
+
+-   `pThr`: numerical value just as the cut off value for p-Values for `thrType = "fdr"`
+
+## Significance Threshold
+
+Prior to running our analysis, we need to compute a threshold by which to identify significant SNPs. The threshold for selecting significant SNPs in a GWAS analysis tends to be computed by using **Bonferroni correction**, with an alpha of 0.05. The alpha can be modified by setting the option `alpha` when calling the `runSingleTraitGwas()` function. Two other threshold types can be used: a **fixed threshold** (we set the `thrType` parameter to `“fixed”`) by specifying the log10(p) (`LODThr`) value of the threshold, or a **small threshold** (we set the `thrType` parameter to `“small”` and `nSnpLOD` to n) which defines the n SNPs with the highest log10(p) scores as significant SNPs.
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r save, include=FALSE}
+# Save gData object for simplicity
+gData <- readRDS(here("data", "gData.rds"))
+
+geno_file  <- here('data', 'Raw_SNPS_80_Present_5_MAF.hmp.txt')
+genotypic_data <- read.table(geno_file, 
+                             header = TRUE, 
+                             comment.char = '')
+
+marker_matrix <- genotypic_data[, -c(1:11)]
+rownames(marker_matrix) <- genotypic_data[, 1]
+marker_matrix <- t(marker_matrix)
+
+pheno_file <- here("data", "Pheno_REML.csv")
+trait_name <- 'ASC_Score'
+phenotypic_data <- read.csv(pheno_file)
+colnames(phenotypic_data) <- c('genotype', trait_name)
+```
+
+```{r thr}
+# Bonferroni correction approximation
+(pvalue.thr <- 0.05 / ncol(gData$markers))
+format(pvalue.thr, scientific = FALSE)
+
+# LOD score (logarithm of the odds)
+(LOD.thr <- -log10(pvalue.thr))
+
+# Reverse the conversion to get p-value threshold
+10^(-LOD.thr)
+
+# Exact Bonferroni correction formula
+(pvalue.thr <- 1 - (1 - 0.05) ^ (1 / ncol(gData$markers)))
+(LOD.thr <- -log10(pvalue.thr))
+```
+
+## Variance Covariance Matrix
+
+There are two ways to compute the phenotypic variance covariance matrix used in the GWAS analysis. Either the EMMA algorithm (Kang et al. 2008) or the Newton-Raphson algorithm (Tunnicliffe 1989). Specify the method by setting the parameter `remlAlgo` to either `“EMMA”` or `“NR”`. By default the EMMA algorithm is used.
+
+## Running GWAS
+
+```{r gwas}
+GWAS <- runSingleTraitGwas(gData, 
+                           traits  = 'ASC_Score', 
+                           thrType = 'fixed', 
+                           LODThr  = 3.5, 
+                           kinshipMethod = 'vanRaden')
+```
+
+Our output is an object of class *GWAS*. *GWAResult* is a *data.table* with the following columns:
+
+-   **trait:** trait name
+
+-   **snp:** SNP name
+
+-   **chr:** chromosome on which the SNP is located
+
+-   **pos:** position of the SNP on the chromosome
+
+-   **allFreq:** allele frequency of the SNP
+
+-   **pValue:** P-value for the SNP
+
+-   **effect:** effect of the SNP on the trait value
+
+-   **effectSe:** standard error of the effect of the SNP on the trait value
+
+-   **RLR2:** likelihood-ratio-based R2 as defined in Sun et al. (2010)
+
+-   **LOD:** LOD score (logarithm of the odds) for the SNP, defined as log10(pValue)
+
+```{r gwas-results}
+# Visualizing results
+create_dt(cbind(GWAS$GWAResult$phenotypic_data[,1:4],
+                signif(GWAS$GWAResult$phenotypic_data[,-c(1:4)], 3)))
+```
+
+Note that the estimated effect is computed for a single allele. Its direction depends on the coding of the markers in the *gData* object. In this example the minor allele was used as reference allele, so the effects are the estimated effects for the minor allele.
+
+## Significant Alleles
+
+*signSnp* is a *data.tables* containing the significant SNPs. Optionally, the SNPs close to the significant SNPs are included in the *data.table*. The *data.table* in *signSnp* consist of the same columns as those in *GWAResult* described above. Two extra columns are added:
+
+-   **snpStatus:** either significant SNP or within … of a significant SNP
+
+-   **propSnpVar:** proportion of the variance explained by the SNP
+
+```{r sign-snp}
+create_dt(cbind(GWAS$signSnp$phenotypic_data[, 1:4],
+                signif(GWAS$signSnp$phenotypic_data[, 5:10], 3),
+                GWAS$signSnp$phenotypic_data[, 11],
+                signif(GWAS$signSnp$phenotypic_data[, 12], 3)))
+```
+
+We can get the name of the best marker (the one with the highest LOD value):
+
+```{r best-snp}
+(snp <- GWAS$signSnp$phenotypic_data[LOD == max(LOD), snp])
+```
+
+We can manually check by using t.test, which is the old school way.
+
+```{r ttest}
+# Creating data frame for t-test
+df <- as.data.frame(marker_matrix[,snp])
+
+df$genotype  <- rownames(marker_matrix)
+colnames(df) <- c('snp', 'genotype')
+
+df <- merge(df, phenotypic_data, id = 'genotype')
+df <- na.omit(df)
+
+table(df$snp)
+
+# Running t-test
+df <- df[df$snp %in% c('C', 'G', 'A', 'T'),]
+df$snp <- as.factor(df$snp)
+
+t.test(formula(paste(trait_name, '~ snp')), data = df)
+
+# Plotting t-test results
+boxplot(formula(paste(trait_name, '~ snp')), data = df)
+```
+
+## Kinship Results
+
+A kinship matrix was produced and used in the GWAS analysis. The method for producing this matrix can be defined by thge `kinshipMethod` parameter in the `runSingleTraitGwas()` function. By default, the same kinship matrix is used for testing all SNPs (`GLSMethod = “single”`). When `GLSMethod = “multi”`, the kinship matrix is chromosome-specific. As shown by Rincent et al.(2014), this often gives a considerable improvement in power.
+
+```{r kinship}
+# Visualizing kinship matrix
+create_dt(round(GWAS$kinship, 3))
+```
+
+```{r kinship-heatmap}
+# Plotting a heatmap of kinship results
+heatmap(GWAS$kinship)
+```
+
+## Population Structure
+
+The population structure can also be explored from the produced kinship results.
+
+```{r pca}
+# Perform principal components analysis
+pca <- prcomp(GWAS$kinship)
+
+# Cumulative Proportion
+summary(pca)$importance[,1:2]
+
+# Plotting correlations between traits (1st and 2nd components)
+plot(pca$x[,1:2], pch = 20,
+     main = paste0('Kinship PCA (', round(100*summary(pca)$importance[3,2],1), '%)'),
+     xlab = paste0('PC1 (', round(100*summary(pca)$importance[2,1],1), '%)'),
+     ylab = paste0('PC2 (', round(100*summary(pca)$importance[2,2],1), '%)'))
+```
+
+## Results Summary
+
+General information of our GWAS results can be obtained by printing the *GWASInfo* part of our *GWAS* object. GWASInfo\$inflationFactor returns the inflation factor (Devlin and Roeder 1999). Ideally this factor should be 1, meaning there is no inflation at all. If the values are further away from 1, the inflation can be corrected for by setting `genomicControl = TRUE` in `runSingleTraitGwas()`.
+
+```{r res}
+GWAS$GWASInfo
+```
+
+For a quick overview of the results, e.g. the number of significant SNPs, use the summary function.
+
+```{r summary}
+summary(GWAS)
+```
+
+## Plots
+
+### QQ-Plot
+
+A QQ-plot of the observed against the expected log10(p) values. Most of the SNPs are expected to have no effect, resulting in P-values uniformly distributed on \[0,1\], and leading to the identity function (y=x) on the log10(p) scale. Deviations from this line should only occur on the right side of the plot, for a small number of SNPs with an effect on the phenotype (and possibly SNPs in LD).
+
+```{r qq}
+plot(GWAS, plotType = 'qq', trait = trait_name)
+```
+
+### Manhattan Plot
+
+A Manhattan plot of GWAS. Significant SNPs are marked in red. Plot only 5% of SNPs with a LOD below 2 (lod = 2)
+
+```{r manh}
+plot(GWAS, plotType = 'manhattan', trait = trait_name)
+```
+
+### QTL Plot
+
+A qtl plot of GWAS. The significant SNPs are marked by circles at their genomic positions, with diameter proportional to the estimated effect size. Colors indicate the direction of the effect: green when the allele increases the trait value, and blue when it decreases the value.
+
+```{r qtl}
+plot(GWAS, plotType = 'qtl')
+```

@@ -73,6 +73,5 @@ format:
     aspectratio: 169
 
 bibliography: references.bib
-csl: apa.csl
 
 editor: visual

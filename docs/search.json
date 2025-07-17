@@ -1,0 +1,90 @@
+[
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "",
+    "text": "19.1 Significance Threshold\nWe will be carrying out the GWAS analysis using the runSingleTraitGwas() function from the statgenGWAS package.\nrunSingleTraitGwas(gData, traits = NULL, covar = NULL, snpCov = NULL, kin = NULL, kinshipMethod, remlAlgo, GLSMethod, MAF = 0.01, thrType, alpha = 0.05, LODThr = 4, nSnpLOD = 10, pThr = 0.05): performs a single-trait Genome Wide Association Study (GWAS) on phenotypic and genotypic data contained in a gData object.\nPrior to running our analysis, we need to compute a threshold by which to identify significant SNPs. The threshold for selecting significant SNPs in a GWAS analysis tends to be computed by using Bonferroni correction, with an alpha of 0.05. The alpha can be modified by setting the option alpha when calling the runSingleTraitGwas() function. Two other threshold types can be used: a fixed threshold (we set the thrType parameter to “fixed”) by specifying the log10(p) (LODThr) value of the threshold, or a small threshold (we set the thrType parameter to “small” and nSnpLOD to n) which defines the n SNPs with the highest log10(p) scores as significant SNPs.\n# Bonferroni correction approximation\n(pvalue.thr &lt;- 0.05 / ncol(gData$markers))\n\n[1] 4.608295e-05\n\nformat(pvalue.thr, scientific = FALSE)\n\n[1] \"0.00004608295\"\n\n# LOD score (logarithm of the odds)\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.33646\n\n# Reverse the conversion to get p-value threshold\n10^(-LOD.thr)\n\n[1] 4.608295e-05\n\n# Exact Bonferroni correction formula\n(pvalue.thr &lt;- 1 - (1 - 0.05) ^ (1 / ncol(gData$markers)))\n\n[1] 4.727381e-05\n\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.325379",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "19.2 Variance Covariance Matrix",
+    "text": "19.2 Variance Covariance Matrix\nThere are two ways to compute the phenotypic variance covariance matrix used in the GWAS analysis. Either the EMMA algorithm (Kang et al. 2008) or the Newton-Raphson algorithm (Tunnicliffe 1989). Specify the method by setting the parameter remlAlgo to either “EMMA” or “NR”. By default the EMMA algorithm is used.",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "19.3 Running GWAS",
+    "text": "19.3 Running GWAS\n\nGWAS &lt;- runSingleTraitGwas(gData, \n                           traits  = 'ASC_Score', \n                           thrType = 'fixed', \n                           LODThr  = 3.5, \n                           kinshipMethod = 'vanRaden')\n\nOur output is an object of class GWAS. GWAResult is a data.table with the following columns:\n\ntrait: trait name\nsnp: SNP name\nchr: chromosome on which the SNP is located\npos: position of the SNP on the chromosome\nallFreq: allele frequency of the SNP\npValue: P-value for the SNP\neffect: effect of the SNP on the trait value\neffectSe: standard error of the effect of the SNP on the trait value\nRLR2: likelihood-ratio-based R2 as defined in Sun et al. (2010)\nLOD: LOD score (logarithm of the odds) for the SNP, defined as log10(pValue)\n\n\n# Visualizing results\ncreate_dt(cbind(GWAS$GWAResult$phenotypic_data[,1:4],\n                signif(GWAS$GWAResult$phenotypic_data[,-c(1:4)], 3)))\n\n\n\n\n\nNote that the estimated effect is computed for a single allele. Its direction depends on the coding of the markers in the gData object. In this example the minor allele was used as reference allele, so the effects are the estimated effects for the minor allele.",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "19.4 Significant Alleles",
+    "text": "19.4 Significant Alleles\nsignSnp is a data.tables containing the significant SNPs. Optionally, the SNPs close to the significant SNPs are included in the data.table. The data.table in signSnp consist of the same columns as those in GWAResult described above. Two extra columns are added:\n\nsnpStatus: either significant SNP or within … of a significant SNP\npropSnpVar: proportion of the variance explained by the SNP\n\n\ncreate_dt(cbind(GWAS$signSnp$phenotypic_data[, 1:4],\n                signif(GWAS$signSnp$phenotypic_data[, 5:10], 3),\n                GWAS$signSnp$phenotypic_data[, 11],\n                signif(GWAS$signSnp$phenotypic_data[, 12], 3)))\n\n\n\n\n\nWe can get the name of the best marker (the one with the highest LOD value):\n\n(snp &lt;- GWAS$signSnp$phenotypic_data[LOD == max(LOD), snp])\n\n[1] \"SCa4_9803244\"\n\n\nWe can manually check by using t.test, which is the old school way.\n\n# Creating data frame for t-test\ndf &lt;- as.data.frame(marker_matrix[,snp])\n\ndf$genotype  &lt;- rownames(marker_matrix)\ncolnames(df) &lt;- c('snp', 'genotype')\n\ndf &lt;- merge(df, phenotypic_data, id = 'genotype')\ndf &lt;- na.omit(df)\n\ntable(df$snp)\n\n\n  C   N   T   Y \n129  11  55   5 \n\n# Running t-test\ndf &lt;- df[df$snp %in% c('C', 'G', 'A', 'T'),]\ndf$snp &lt;- as.factor(df$snp)\n\nt.test(formula(paste(trait_name, '~ snp')), data = df)\n\n\n    Welch Two Sample t-test\n\ndata:  ASC_Score by snp\nt = -5.4233, df = 114.29, p-value = 3.308e-07\nalternative hypothesis: true difference in means between group C and group T is not equal to 0\n95 percent confidence interval:\n -1.6581884 -0.7709251\nsample estimates:\nmean in group C mean in group T \n       4.592171        5.806727 \n\n# Plotting t-test results\nboxplot(formula(paste(trait_name, '~ snp')), data = df)",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "19.5 Kinship Results",
+    "text": "19.5 Kinship Results\nA kinship matrix was produced and used in the GWAS analysis. The method for producing this matrix can be defined by thge kinshipMethod parameter in the runSingleTraitGwas() function. By default, the same kinship matrix is used for testing all SNPs (GLSMethod = “single”). When GLSMethod = “multi”, the kinship matrix is chromosome-specific. As shown by Rincent et al.(2014), this often gives a considerable improvement in power.\n\n# Visualizing kinship matrix\ncreate_dt(round(GWAS$kinship, 3))\n\n\n\n\n\n\n# Plotting a heatmap of kinship results\nheatmap(GWAS$kinship)",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "19.6 Population Structure",
+    "text": "19.6 Population Structure\nThe population structure can also be explored from the produced kinship results.\n\n# Perform principal components analysis\npca &lt;- prcomp(GWAS$kinship)\n\n# Cumulative Proportion\nsummary(pca)$importance[,1:2]\n\n                            PC1      PC2\nStandard deviation     2.358346 1.273754\nProportion of Variance 0.587010 0.171240\nCumulative Proportion  0.587010 0.758250\n\n# Plotting correlations between traits (1st and 2nd components)\nplot(pca$x[,1:2], pch = 20,\n     main = paste0('Kinship PCA (', round(100*summary(pca)$importance[3,2],1), '%)'),\n     xlab = paste0('PC1 (', round(100*summary(pca)$importance[2,1],1), '%)'),\n     ylab = paste0('PC2 (', round(100*summary(pca)$importance[2,2],1), '%)'))",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "19.7 Results Summary",
+    "text": "19.7 Results Summary\nGeneral information of our GWAS results can be obtained by printing the GWASInfo part of our GWAS object. GWASInfo$inflationFactor returns the inflation factor (Devlin and Roeder 1999). Ideally this factor should be 1, meaning there is no inflation at all. If the values are further away from 1, the inflation can be corrected for by setting genomicControl = TRUE in runSingleTraitGwas().\n\nGWAS$GWASInfo\n\n$call\nrunSingleTraitGwas(gData = gData, traits = \"ASC_Score\", kinshipMethod = \"vanRaden\", \n    thrType = \"fixed\", LODThr = 3.5)\n\n$remlAlgo\n[1] \"EMMA\"\n\n$thrType\n[1] \"fixed\"\n\n$MAF\n[1] 0.01\n\n$GLSMethod\n[1] \"single\"\n\n$kinshipMethod\n[1] \"vanRaden\"\n\n$varComp\n$varComp$phenotypic_data\n$varComp$phenotypic_data$ASC_Score\n       Vg        Ve \n0.6456689 1.8944428 \n\n\n\n$genomicControl\n[1] FALSE\n\n$inflationFactor\n$inflationFactor$phenotypic_data\nASC_Score \n0.8802254 \n\n\nFor a quick overview of the results, e.g. the number of significant SNPs, use the summary function.\n\nsummary(GWAS)\n\nphenotypic_data:\n    Traits analysed: ASC_Score \n\n    Data are available for 1085 SNPs.\n     0 of them were not analyzed because their minor allele frequency is below 0.01 \n\n    GLSMethod: single \n    kinshipMethod: vanRaden \n\n    Trait: ASC_Score \n\n        Mixed model with only polygenic effects, and no marker effects:\n        Genetic variance: 0.6456689 \n        Residual variance: 1.894443 \n\n        LOD-threshold: 3.5 \n        Number of significant SNPs: 2 \n        Smallest p-value among the significant SNPs: 7.081765e-05 \n        Largest p-value among the significant SNPs: 0.0002862997 (LOD-score: 3.543179)\n\n        No genomic control correction was applied\n        Genomic control inflation-factor: 0.88",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#plots",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#plots",
+    "title": "19  Module 6.2: Single trait GWAS",
+    "section": "19.8 Plots",
+    "text": "19.8 Plots\n\n19.8.1 QQ-Plot\nA QQ-plot of the observed against the expected log10(p) values. Most of the SNPs are expected to have no effect, resulting in P-values uniformly distributed on [0,1], and leading to the identity function (y=x) on the log10(p) scale. Deviations from this line should only occur on the right side of the plot, for a small number of SNPs with an effect on the phenotype (and possibly SNPs in LD).\n\nplot(GWAS, plotType = 'qq', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n19.8.2 Manhattan Plot\nA Manhattan plot of GWAS. Significant SNPs are marked in red. Plot only 5% of SNPs with a LOD below 2 (lod = 2)\n\nplot(GWAS, plotType = 'manhattan', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n19.8.3 QTL Plot\nA qtl plot of GWAS. The significant SNPs are marked by circles at their genomic positions, with diameter proportional to the estimated effect size. Colors indicate the direction of the effect: green when the allele increases the trait value, and blue when it decreases the value.\n\nplot(GWAS, plotType = 'qtl')",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: **Single trait GWAS**</span>"
+    ]
+  }
+]
