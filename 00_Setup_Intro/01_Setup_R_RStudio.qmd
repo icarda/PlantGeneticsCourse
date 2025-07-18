@@ -34,7 +34,7 @@ cran_packages <- c(
   "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
   "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
   "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 
-  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial", "DT"
+  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial", "DT", "rrBLUP"
 )
 
 # Bioconductor Packages

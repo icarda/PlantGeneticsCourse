@@ -169,7 +169,6 @@ gData <- createGData(gData, pheno = phenotypic_data)
 saveRDS(gData, here("data", "gData.rds"))
 ```
 
-
 ## Summarize gData
 
 ```{r summary}

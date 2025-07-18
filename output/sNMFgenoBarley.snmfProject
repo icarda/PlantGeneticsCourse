@@ -5,5 +5,5 @@ new("snmfProject", snmfProject.file = "sNMFgenoBarley.snmfProject",
     "K2/run1/sNMFgenoBarley_r1.2.snmfClass", "K3/run1/sNMFgenoBarley_r1.3.snmfClass", 
     "K4/run1/sNMFgenoBarley_r1.4.snmfClass", "K5/run1/sNMFgenoBarley_r1.5.snmfClass", 
     "K6/run1/sNMFgenoBarley_r1.6.snmfClass"), n = 488L, L = 12141L, 
-    creationTime = structure(1752720944.77326, class = c("POSIXct", 
+    creationTime = structure(1752803064.02282, class = c("POSIXct", 
     "POSIXt")))

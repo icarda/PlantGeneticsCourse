@@ -1,0 +1,249 @@
+# Module 7.1: Genomic Selection
+
+Genomic selection enables **early and accurate prediction of complex traits** based on genome-wide SNP data. This can allow us to predict performance immediately after genotyping seedlings, which can **speed up selection decisions** and **reduce the cost** of field trials. We will be using the `rrBBLUP` package for this part, which is a is a package for genomic prediction with the ridge regression best linear unbiased prediction or **RR-BLUP** mixed linear model (Endelman, 2011). One application is to estimate marker effects by ridge regression; alternatively, BLUPs can be calculated based on an additive relationship matrix or a Gaussian kernel.
+
+## Read, Filter and Impute Marker Data
+
+The genotypic matrix for rrBLUP has to be coded as {-1, 0, 1}, meaning we will need a conversion step if our data is not yet in that format. Moreover, we will be carrying out a mean value imputation.
+
+```{r setup, include=FALSE}
+library(here)
+source(here("code","setup.R"))
+```
+
+```{r import-run, include=FALSE}
+# Importing genotypic data
+geno_file <- here('data', 'barley_genbank_2388variants_554individuals_biallelic.hmp.txt.gz')
+
+geno_data <- read.csv(geno_file, sep = "\t")
+
+# Show the first 50 rows/columns only
+create_dt(geno_data[1:50,1:50])
+```
+
+```{r import, eval=FALSE}
+# Importing genotypic data
+geno_file <- 'data/barley_genbank_2388variants_554individuals_biallelic.hmp.txt.gz'
+
+geno_data <- read.csv(geno_file, sep = "\t")
+
+# Show the first 50 rows/columns only
+create_dt(geno_data[1:50,1:50])
+```
+
+```{r recode}
+M <- geno_data[, -c(1:11)]
+rownames(M) <- geno_data[, 1]
+M <- t(M)
+
+# Reformatting matrix to numeric
+M <- ASRgenomics::snp.recode(M, na.string = 'NN', rename.markers = FALSE)$Mrecode
+```
+
+```{r filter}
+# Filtering genotypic matrix
+M <- ASRgenomics::qc.filtering(M, 
+                               marker.callrate = 0.1, 
+                               ind.callrate = 0.2, 
+                               maf = 0.05, 
+                               impute = TRUE)$M.clean
+
+# Reformatting to required format
+M <- as.matrix(M) - 1
+
+# Show the first 50 rows/columns only
+create_dt(M[1:50,1:50])
+```
+
+## Read and Align Phenotypic Data
+
+```{r pheno-run, include=FALSE}
+# Importing phenotypic data
+pheno_file <- here('data', 'barley_genbank_phenotypic_mean_data.csv')
+
+pheno_data <- read.csv(pheno_file)
+
+pheno_data <- merge(pheno_data, as.data.frame(rownames(M)), by.x = 'sample_id', by.y = 1, all.y = TRUE)
+
+# Extracting requires trait
+y <- pheno_data$Yield
+
+# Printing phenotypic data
+create_dt(pheno_data)
+```
+
+```{r pheno, eval=FALSE}
+# Importing phenotypic data
+pheno_file <- 'barley_genbank_phenotypic_mean_data.csv'
+
+pheno_data <- read.csv(pheno_file)
+
+pheno_data <- merge(pheno_data, as.data.frame(rownames(M)), by.x = 'sample_id', by.y = 1, all.y = TRUE)
+
+# Extracting requires trait
+y <- pheno_data$Yield
+
+# Printing phenotypic data
+create_dt(pheno_data)
+```
+
+## Model 1
+
+The first model assumes that all marker effects are normally distributed and have identical variance. Parameters are estimated as a solution to the optimization problem. Predictions from this method are equivalent to BLUP values from an animal model (i.e., GBLUP). The observed relationship matrix is calculated from the markers using the formula by VanRaden (2008).
+
+```{r model1}
+# Fitting a Model using rrBLUP (case 1: all SNPs in the random effect)
+GS <- rrBLUP::mixed.solve(y, Z = M, X = NULL, method = 'REML')
+
+# Obtaining predictions
+predGS <- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u 
+
+# Printing predictions
+create_dt(cbind(round(predGS, 3), y))
+```
+
+```{r m1-plot}
+# Plotting predictions
+plot(y, predGS)
+```
+
+### Goodness of Fit Statistics
+
+```{r m1-stats}
+# Heritability
+# Trait variance
+(var_y  <- var(y, na.rm = TRUE))
+
+# Error variance
+(var_e  <- GS$Ve)
+
+# Proportion of explained variance (High = good fit, potential heritability)
+(h2_GS <- 1 - var_e / var_y)
+
+Anas_table <- cbind(rownames(M), y, predGS)
+
+# Predictive ability (High = good prediction accuracy)
+(PA <- cor(y, predGS, method = 'pearson', use = 'complete.obs'))
+```
+
+## Model 2
+
+This model handles some markers as having a fixed effect (e.g. significant SNPs from GWAS output). It splits the genotypic data into X matrix (fixed effects) and Z matrix (random effects). To calculate the REML solution for the model you solve y = X b + Z u + e. We predict BLUE(b) and BLUP(u) solutions for the fixed and random effects, respectively, using standard formulas (Searle et al. 1992).
+
+```{r model2}
+# Defining markers
+markers <- c('S7H_63131260', 'S5H_573915992')
+SNPs    <- colnames(M)
+
+# Filtering matrices
+X <- M[, SNPs %in% markers]
+Z <- M[,!SNPs %in% markers]
+
+# Fitting a Model using rrBLUP by exclude markers from the Z matrix (for the Random effects) and include them in the X matrix (for the fixed effect)
+GS <- rrBLUP::mixed.solve(y, Z = Z, X = X, method = 'REML')
+
+# Obtaining predictions
+predGS <- X %*% GS$beta + Z %*% GS$u 
+
+# Printing predictions
+create_dt(cbind(round(predGS, 3), y))
+```
+
+```{r m2-plot}
+# Plot to verify 
+plot(y, predGS)
+```
+
+### Goodness of Fit Statistics
+
+```{r m2-stats}
+# Heritability (GS)
+# Trait variance
+(var_y  <- var(y, na.rm = TRUE))
+
+# Error variance
+(var_e  <- GS$Ve)
+
+# Proportion of explained variance (High = good fit, potential heritability)
+(h2_GS <- 1 - var_e / var_y)
+
+# Predictive Ability (correlation between actual and predicted response)
+(PA <- cor(y, predGS, method = 'pearson', use = 'complete.obs'))
+```
+
+## K-Fold Cross Validation
+
+```{r folds}
+# Set the total number of folds, and get the total number of individuals
+k <- 5
+n <- length(y)
+
+# Set randomly the fold group for each observation 
+# That tells when it will be used for validation
+group <- sample(rep(1:k, length.out = n), n)
+head(group, 20)
+
+table(group)
+```
+
+```{r her-fold}
+# An empty matrix to save calculated heritability in each fold, and GS prediction that calculated when individual be in validation group
+predGS <- matrix(data = NA, nrow = n, ncol = 1)
+h2_cv  <- matrix(data = NA, nrow = k, ncol = 1)
+
+for (g in 1:k) { 
+  # Reset response variable, and exclude validation set values for the given k fold
+  y_cv <- y
+  y_cv[group == g] <- NA
+  
+  # Fitting a Model using rrBLUP (model 1: all SNPs in the random effect)
+  # GS <- mixed.solve(y_cv, Z = M, X = NULL, method = 'REML')
+  # predGS_cv <- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u 
+  
+  # Model 2: have some markers to be handled as a fixed effect
+  GS <- rrBLUP::mixed.solve(y_cv, Z = Z, X = X, method = 'REML')
+  
+  # Obtaining predictions
+  predGS_cv <- X %*% GS$beta + Z %*% GS$u 
+  
+  # Heritability (GS)
+  var_y    <- var(y_cv, na.rm = TRUE)
+  var_e    <- GS$Ve
+  h2_cv[g] <- 1 - var_e / var_y
+  
+  # Get the GS prediction for all validation set individuals
+  predGS[group == g] <- predGS_cv[group == g]
+}
+
+# Plot to verify 
+plot(y, predGS)
+```
+
+```{r val}
+# Heritability (GS cross-validation)
+h2_cv
+mean(h2_cv)
+
+# Predictive Ability (correlation between actual and predicted response)
+(PA <- cor(y, predGS, method = 'pearson', use = 'complete.obs'))
+```
+
+## Predict Breeding Values
+
+```{r heatmap}
+# Calculate the additive relationship matrix (it is the kinship matrix multiplied by 2) it can also perform imputation for missing marker data by 
+# Define impute.method (mean or EM) (see also: min.MAF, max.missing, and return.imputed parameters)
+A <- rrBLUP::A.mat(M)
+heatmap(A)
+```
+
+```{r est}
+GS <- rrBLUP::mixed.solve(y, K = A.mat(M), SE = TRUE)
+
+# Genomic Estimated Breeding Value (GEBV)
+GEBV <- cbind(round(GS$u, 3), round(GS$u.SE, 3))
+
+colnames(GEBV) <- c('GEBV', 'SE')
+
+create_dt(GEBV)
+```
