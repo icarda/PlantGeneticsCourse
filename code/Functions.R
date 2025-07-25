@@ -5,7 +5,8 @@ cran_packages <- c(
   "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
   "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
   "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 
-  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial", "DT", "rrBLUP"
+  "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial", "DT", "rrBLUP",
+  "geodata", "terra"
 )
 
 # Bioconductor Packages
@@ -1287,3 +1288,88 @@ phyloTree <- function(geno, treeType, distanceType, samples, path){
   ape::write.tree(tree, file = path)
   return(tree)
 }
+
+# xy is 2 column longitude latitude vector or df
+# id is metadata if vector
+# var can be "tmin", "tmax", "tavg", "prec", "wind", "vapr", or "bio"
+getClimateData <- function(xy, id, var = "bio", res = 5, path){
+  climData <- worldclim_global(var = var, res = res, path = path, version="2.1")
+  if(var == "bio"){
+    names(climData) <- c("Annual Mean Temperature", "Mean Diurnal Range", "Isothermality", "Temperature Seasonality",
+                         "Max Temperature of Warmest Month", "Min Temperature of Coldest Month", "Temperature Annual Range",
+                         "Mean Temperature of Wettest Quarter", "Mean Temperature of Driest Quarter", "Mean Temperature of Warmest Quarter",
+                         "Mean Temperature of Coldest Quarter", "Annual Precipitation", "Precipitation of Wettest Month",
+                         "Precipitation of Driest Month", "Precipitation Seasonality", "Precipitation of Wettest Quarter",
+                         "Precipitation of Driest Quarter", "Precipitation of Warmest Quarter", "Precipitation of Coldest Quarter")
+    #bio1             Annual Mean Temperature
+    #bio2             Mean Diurnal Range (Mean of monthly max temp - min temp)
+    #bio3             Isothermality (BIO2 / BIO7 * 100)
+    #bio4             Temperature Seasonality (standard deviation * 100)
+    #bio5             Max Temperature of Warmest Month
+    #bio6             Min Temperature of Coldest Month
+    #bio7             Temperature Annual Range (BIO5-BIO6)
+    #bio8             Mean Temperature of Wettest Quarter
+    #bio9             Mean Temperature of Driest Quarter
+    #bio10           Mean Temperature of Warmest Quarter
+    #bio11           Mean Temperature of Coldest Quarter
+    #bio12           Annual Precipitation
+    #bio13           Precipitation of Wettest Month
+    #bio14           Precipitation of Driest Month
+    #bio15           Precipitation Seasonality (Coefficient of Variation)
+    #bio16           Precipitation of Wettest Quarter
+    #bio17           Precipitation of Driest Quarter
+    #bio18           Precipitation of Warmest Quarter
+    #bio19           Precipitation of Coldest Quarter
+  }
+  
+  points <- vect(data.frame(lon = xy[,1], lat = xy[,2]), geom = c("lon","lat"), crs = "EPSG:4326")
+  climDF <- extract(climData, points)
+  climDF$ID <- id
+
+  return(climDF)
+}
+
+#markers is the markers matrix obtained from gigwa_get_markers() in QBMS package
+#with statgenGWAS https://cran.r-project.org/web/packages/statgenGWAS/vignettes/GWAS.html
+runGWAS <- function(map, matrix, pheno){
+  
+  #create gData object
+  map <- markers[,colnames(markers) %in% c("chrom", "pos")]
+  colnames(map) <- c("chr", "pos")
+  rownames(map) <- markers$`rs#`
+  map <- map[rownames(map) %in% colnames(matrix),]
+  colnames(dropsMap)[match(c("Chromosome", "Position"), colnames(dropsMap))]
+  
+  # mean value imputation
+  SNPmeans <- apply(matrix, 2, mean, na.rm=TRUE)
+  
+  # imputing median value with NA 
+  matrixMean <- matrix
+  for(i in 1:ncol(matrixMean)){
+    matrixMean[,i][is.na(matrixMean[,i])] <- SNPmeans[i]
+  }
+  colnames(pheno)[1] <- "genotype"
+  gData <- createGData(geno = matrixMean, map = map, pheno = pheno)
+
+  # run GWAS
+  GWAS <- runSingleTraitGwas(gData = gData)
+  
+  # signSNP
+  signSNP <- as.data.frame(GWAS$signSnp)
+  signSNPTable <- htmltools::browsable(
+    tagList(
+      csvDownloadButton("signSNP", "Download as CSV", filename = "signSNP.csv"),
+      reactable(signSNP, filterable = TRUE, searchable = TRUE, elementId = "signSNP")
+    )
+  )
+  
+  return(list(GWAS = GWAS, signSNP = signSNPTable))
+}
+
+plotsGWAS <- function(gwas, var, ythr = NULL, chr = NULL){
+  qqPlot <- plot(gwas, plotType = "qq", trait = var)
+  manPlot <- plot(gwas, plotType = "manhattan", trait = var, yThr = ythr, chr = chr)
+  
+  return(list(qqPlot = qqPlot, manPlot = manPlot))
+}
+

@@ -50,7 +50,7 @@ vcfMatrix <- extract.gt(vcf)
     -   `.ped`: Pedigree/genotype data (tab delimited)
     -   `.map`: SNP mapping information
     -   `.bed`: Binary genotype matrix
-    -   `.bin`: SNP information
+    -   `.bim`: SNP information
     -   `.fam`: Sample information
 -   **HapMap (-`.hmp.txt`):** Used in TASSEL, header includes metadata, positions and genotypes encoded as allele pairs (A/A, A/G, etc.).
 -   **Numeric Matrix (-.csv, .txt):** SNPs in columns and genotypes in rows (or vice versa), data encoded as 0, 1 and 2 for homozygous for reference allele, heterozygous, and homozygous for alternate allele.
