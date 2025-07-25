@@ -1,4 +1,4 @@
-# Module 6.2: Single trait GWAS
+# Module 6.2: Single Trait GWAS
 
 We will be carrying out the GWAS analysis using the `runSingleTraitGwas()` function from the `statgenGWAS` package.
 
