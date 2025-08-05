@@ -1,4 +1,4 @@
-# Module 3.4: Genetic Diversity
+# Module 4.2: Genetic Diversity
 
 SNP data provides us with a genome-wide view of **variation within individuals and populations**. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.
 

@@ -3,14 +3,17 @@
 cran_packages <- c(
   "tidyverse", "readxl", "writexl", "readr", "qqman", "vcfR", "QBMS", "adegenet",
   "ade4", "ggiraph", "ggpubr", "plotly", "poppr", "reactable",
-  "rnaturalearth", "scatterpie", "snpReady", "viridis", "tibble",
+  "rnaturalearth", "scatterpie", "viridis", "tibble",
   "ggplot2", "reshape2", "forcats", "dplyr", "sp", "scales", "htmltools", 
   "ASRgenomics", "statgenGWAS", "gplots", "spdep", "adespatial", "DT", "rrBLUP",
   "geodata", "terra"
 )
 
 # Bioconductor Packages
-bioc_packages <- c("rrBLUP", "LEA")
+bioc_packages <- c("rrBLUP", "LEA", "impute")
+
+# Github Packages
+git_packages <- c("snpReady")
 
 # Installing Cran Packages
 installed <- rownames(installed.packages())
@@ -31,7 +34,18 @@ if (length(missing)) {
   BiocManager::install(missing)
 }
 
-lapply(c(cran_packages, bioc_packages), library, character.only = TRUE)
+# Installing Github Packages
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+installed <- rownames(installed.packages())
+missing <- setdiff(git_packages, installed)
+if (length(missing)) {
+  message("Installing missing Github packages: ", paste(missing, collapse = ", "))
+  devtools::install_github("italo-granato/snpReady")
+}
+
+lapply(c(cran_packages, bioc_packages, git_packages), library, character.only = TRUE)
 
 # aesthetics ----
 clist <- list(

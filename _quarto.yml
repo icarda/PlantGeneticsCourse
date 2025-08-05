@@ -31,19 +31,19 @@ book:
         - 01_R_Basics/05_Simple_Plotting.qmd
     - part: "Handling Breeding Data"
       chapters:
-        - 02_Data_Handling/01_Loading_Breeding_Data.qmd
+        - 02_Data_Handling/01_Loading_Data.qmd
         - 02_Data_Handling/02_Data_QC_Filtering.qmd
     - part: "Core Genomic Concepts"
       chapters:
         - 03_Genomic_Concepts/01_SNPs_Genotypes.qmd
         - 03_Genomic_Concepts/02_QBMS.qmd
         - 03_Genomic_Concepts/03_Filtering_SNP_Data.qmd
-        - 03_Genomic_Concepts/04_Genetic_Diversity.qmd
     - part: "Population Structure and Relatedness"
       chapters:
         - 04_Pop_Structure/01_Kinship_Relatedness.qmd
-        - 04_Pop_Structure/02_Pop_Structure.qmd
-        - 04_Pop_Structure/03_Phylo_Tree.qmd
+        - 04_Pop_Structure/02_Genetic_Diversity.qmd
+        - 04_Pop_Structure/03_Pop_Structure.qmd
+        - 04_Pop_Structure/04_Phylo_Tree.qmd
     - part: "Genome Wide Association Studies (GWAS)"
       chapters:
         - 05_GWAS/01_Initial_Concepts.qmd

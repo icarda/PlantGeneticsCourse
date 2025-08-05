@@ -31,7 +31,7 @@ gigwa_set_db("BarleySubData")
 
 Once we have defined a data base, we have to define a project and a run. We can do this the following way.
 
-```{r proj}
+```{r proj, eval=FALSE}
 # To view available projects
 gigwa_list_projects()
 
@@ -71,7 +71,7 @@ Once we have defined a data base, a project and a run, there are many tools we c
     -   `simplify`: defaults as TRUE, returns data in numeric coding (0, 1, 2 for diploids)
 5.  `gigwa_get_metadata()`: Retrieves associated metadata (if available)
 
-```{r misc}
+```{r misc, eval=FALSE}
 # Get a list of all samples in the selected run
 samples <- gigwa_get_samples()
 

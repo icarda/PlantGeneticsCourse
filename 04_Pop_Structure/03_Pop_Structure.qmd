@@ -1,4 +1,4 @@
-# Module 4.2: Population Structure
+# Module 4.3: Population Structure
 
 Population structure in crop breeding refers to the **presence of clusters or subpopulations that are genetically distinct** from each other. The subpopulations may reflect geography, breeding history, natural selection, gene pools, or other differentiating factors. The subgroups are identified by differences in allele frequencies.
 

@@ -1,4 +1,4 @@
-# Module 4.3: Phylogenetic Trees
+# Module 4.4: Phylogenetic Trees
 
 Besides exploring population structure, we may want to **explore evolutionary relationships between individuals**. We can use phylogenetic trees to **infer common ancestry**, **track lineage divergence**, and **reconstruct evolutionary and adaptation history**. We will focus on distance-based methods. These require us to construct a genetic distance matrix, from which a tree is constructed by clustering similar individuals.
 
