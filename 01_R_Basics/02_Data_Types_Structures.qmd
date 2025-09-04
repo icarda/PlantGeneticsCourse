@@ -116,6 +116,7 @@ summary(trial_data)   # Summary statistics for each column
 
 # Access columns using $
 trial_data$Yield_kg_plot
+
 mean(trial_data$Yield_kg_plot) # Calculate mean of a column
 ```
 
@@ -130,6 +131,12 @@ analysis_results <- list(
    significant_snps = c("SNP101", "SNP504"), # A character vector
    model_parameters = list(threshold = 0.05, method = "MLM") # A nested list
 )
+
+analysis_results
+
 print(analysis_results$description)
+
 print(analysis_results$raw_data) # Access the data frame inside the list
+
+print(analysis_results$model_parameters)
 ```

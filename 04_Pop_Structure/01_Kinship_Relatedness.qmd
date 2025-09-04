@@ -13,7 +13,8 @@ source(here("code","setup.R"))
 
 ```{r matrix-run, include=FALSE}
 # Importing our genotypic data
-raw_matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+raw_matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, 
+                         row.names = 1, check.names = FALSE)
 ```
 
 ```{r matrix, eval=FALSE}
@@ -25,7 +26,8 @@ raw_matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row
 # Filtering
 matrix <- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)
 
-# We transpose our matrix (to have individuals as rows and makers as columns for posterior analyses)
+# We transpose our matrix (to have individuals as rows and makers
+# as columns for posterior analyses)
 matrix <- t(matrix)
 
 # Calculating kinship matrix using ICARDA package
@@ -43,6 +45,8 @@ kinshipHeatmap(kinshipMat, file = here("output", "figures", "heatmap.png"))
 # Generating a heatmap from our kinship matrix as an image in our working directory
 kinshipHeatmap(kinshipMat, file = "output/figures/heatmap.png")
 ```
+
+![](/output/figures/heatmap.png)
 
 ## Duplicates
 
@@ -70,6 +74,8 @@ head(duplicates$potentialDuplicates)
 # Printing histograms with the distribution of diagonal and off-diagonal values
 duplicates$plots
 ```
+
+The diagonal of a kinship matrix is the self-relatedness of each individual. Most kinship estimators normalize values such that they are close to 1 or 0.5 according to scaling. Deviations may represent uneven SNP quality, duplicates or inbreeding. Off-diagonal entries are pairwise kinship estimates between two different individuals. These values are often closer to 0 , meaning the individuals are unrelated. Positive values mean the individuals share more alleles than expected by chance, and negative values mean the individuals are less related than expected. Clusters in a heatmap or in off-diagonal values often represent subpopulations.
 
 If we decide we want to filter our data according to the potential duplicates we identified, we can use the `kinshipFilter()` function from the ICARDA package. This function requires our genotype matrix, our data frame with potential duplicates, and our kinship matrix. This will give us a filtered version of our SNP matrix and kinship matrix. We can also choose to save the matrix locally as a text file by setting the `save` parameter as TRUE, which is set to FALSE by default.
 

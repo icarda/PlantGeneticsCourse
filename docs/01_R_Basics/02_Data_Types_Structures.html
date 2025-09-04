@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01_R_Basics/05_Simple_Plotting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Data Visualization</span></span></a>
   </div>
 </li>
       </ul>
@@ -596,17 +596,48 @@ Line2    1    1    0</code></pre>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">significant_snps =</span> <span class="fu">c</span>(<span class="st">"SNP101"</span>, <span class="st">"SNP504"</span>), <span class="co"># A character vector</span></span>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">model_parameters =</span> <span class="fu">list</span>(<span class="at">threshold =</span> <span class="fl">0.05</span>, <span class="at">method =</span> <span class="st">"MLM"</span>) <span class="co"># A nested list</span></span>
 <span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(analysis_results<span class="sc">$</span>description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>analysis_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$description
+[1] "Yield Trial - Baku 2023"
+
+$raw_data
+  PlotID           Variety Yield_kg_plot Is_Resistant
+1   A101       ICARDA_Gold           5.2         TRUE
+2   A102       Local_Check           4.5        FALSE
+3   B101 ICARDA_RustResist           6.1         TRUE
+4   B102       ICARDA_Gold           5.5         TRUE
+
+$significant_snps
+[1] "SNP101" "SNP504"
+
+$model_parameters
+$model_parameters$threshold
+[1] 0.05
+
+$model_parameters$method
+[1] "MLM"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(analysis_results<span class="sc">$</span>description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Yield Trial - Baku 2023"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(analysis_results<span class="sc">$</span>raw_data) <span class="co"># Access the data frame inside the list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(analysis_results<span class="sc">$</span>raw_data) <span class="co"># Access the data frame inside the list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  PlotID           Variety Yield_kg_plot Is_Resistant
 1   A101       ICARDA_Gold           5.2         TRUE
 2   A102       Local_Check           4.5        FALSE
 3   B101 ICARDA_RustResist           6.1         TRUE
 4   B102       ICARDA_Gold           5.5         TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(analysis_results<span class="sc">$</span>model_parameters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$threshold
+[1] 0.05
+
+$method
+[1] "MLM"</code></pre>
 </div>
 </div>
 

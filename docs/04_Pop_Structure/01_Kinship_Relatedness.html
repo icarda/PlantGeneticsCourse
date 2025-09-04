@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01_R_Basics/05_Simple_Plotting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Data Visualization</span></span></a>
   </div>
 </li>
       </ul>
@@ -387,17 +387,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">filterData</span>(raw_matrix, <span class="at">call_rate =</span> <span class="fl">0.9</span>, <span class="at">maf =</span> <span class="fl">0.01</span>, <span class="at">na_ind =</span> <span class="fl">0.8</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We transpose our matrix (to have individuals as rows and makers as columns for posterior analyses)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(matrix)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating kinship matrix using ICARDA package</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>kinshipMat <span class="ot">&lt;-</span> <span class="fu">kinshipMatrix</span>(matrix, <span class="at">method =</span> <span class="st">"vanRaden"</span>, <span class="at">save =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We transpose our matrix (to have individuals as rows and makers</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># as columns for posterior analyses)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(matrix)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating kinship matrix using ICARDA package</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>kinshipMat <span class="ot">&lt;-</span> <span class="fu">kinshipMatrix</span>(matrix, <span class="at">method =</span> <span class="st">"vanRaden"</span>, <span class="at">save =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also create a heatmap from our kinship matrix using the <code>kinshipHeatmap()</code> function from our package. It requires our kinship matrix obtained using our previous function. It also has a <code>file</code> parameter to define the file path were we want to save our heatmap in.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generating a heatmap from our kinship matrix as an image in our working directory</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kinshipHeatmap</span>(kinshipMat, <span class="at">file =</span> <span class="st">"output/figures/heatmap.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><img src="../output/figures/heatmap.png" class="img-fluid"></p>
 </section>
 <section id="duplicates" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="duplicates"><span class="header-section-number">14.2</span> Duplicates</h2>
@@ -449,6 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The diagonal of a kinship matrix is the self-relatedness of each individual. Most kinship estimators normalize values such that they are close to 1 or 0.5 according to scaling. Deviations may represent uneven SNP quality, duplicates or inbreeding. Off-diagonal entries are pairwise kinship estimates between two different individuals. These values are often closer to 0 , meaning the individuals are unrelated. Positive values mean the individuals share more alleles than expected by chance, and negative values mean the individuals are less related than expected. Clusters in a heatmap or in off-diagonal values often represent subpopulations.</p>
 <p>If we decide we want to filter our data according to the potential duplicates we identified, we can use the <code>kinshipFilter()</code> function from the ICARDA package. This function requires our genotype matrix, our data frame with potential duplicates, and our kinship matrix. This will give us a filtered version of our SNP matrix and kinship matrix. We can also choose to save the matrix locally as a text file by setting the <code>save</code> parameter as TRUE, which is set to FALSE by default.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>filteredMatrix <span class="ot">&lt;-</span> <span class="fu">kinshipFilter</span>(matrix, duplicates<span class="sc">$</span>potentialDuplicates, kinshipMat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

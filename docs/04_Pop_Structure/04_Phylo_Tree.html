@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01_R_Basics/05_Simple_Plotting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Data Visualization</span></span></a>
   </div>
 </li>
       </ul>
@@ -404,25 +404,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>treeType</code>: a text or function that can calculate a tree from a distance matrix, defaults to “upgma”</p></li>
 <li><p><code>distanceType</code>: a character or function defining the distance to be applied, defaults to <code>nei.dist()</code></p></li>
 <li><p><strong><code>samples</code></strong>: a number of bootstrap replicates, defaults to 100</p></li>
-<li><p>path: file path to save tree in Newick format</p></li>
+<li><p><code>path</code>: file path to save tree in Newick format</p></li>
 </ul>
 <p>The output tree can be plotted using the <code>plot()</code> function. We can define the type of visualization in the type parameter, which defaults to <code>"phylogram"</code> and accepts <code>"cladogram"</code>, <code>"fan"</code>, <code>"unrooted"</code>, <code>"radial"</code> or <code>"tidy"</code>. The produced Newick file can be visualized better with tools such as <a href="https://itol.embl.de/">iTOL</a>, which allows for more visualization and annotation options.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing filtered genotypic data</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/FilteredBarley.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># SNP matrix has to have individuals in rows and markers as columns for the posterior functions</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(matrix)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing metadata</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/BarleyMetadata.xlsx"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> metadata[metadata<span class="sc">$</span>Individual <span class="sc">%in%</span> <span class="fu">rownames</span>(matrix),] <span class="co">#Ensuring IDs match</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining our subgroups</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>popSet <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(metadata<span class="sc">$</span>countryOfOriginCode[metadata<span class="sc">$</span>Individual <span class="sc">%in%</span> <span class="fu">rownames</span>(matrix)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/FilteredBarley.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># SNP matrix has to have individuals in rows and markers as columns </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># for the posterior functions</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">&lt;-</span> <span class="fu">t</span>(matrix)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing metadata</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/BarleyMetadata.xlsx"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining our subgroups</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>popSet <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(metadata<span class="sc">$</span>countryOfOriginCode[metadata<span class="sc">$</span>Individual </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                                                 <span class="sc">%in%</span> <span class="fu">rownames</span>(matrix)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating NJ tree from Nei's distance (1 sample for time purposes) </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">phyloTree</span>(matrix, <span class="at">treeType =</span> <span class="st">"nj"</span>, <span class="at">distanceType =</span> nei.dist, <span class="at">samples =</span> <span class="dv">1</span>, <span class="at">path =</span> <span class="fu">here</span>(<span class="st">"output"</span>, <span class="st">"tree.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">phyloTree</span>(matrix, <span class="at">treeType =</span> <span class="st">"nj"</span>, <span class="at">distanceType =</span> nei.dist, <span class="at">samples =</span> <span class="dv">1</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">path =</span> <span class="fu">here</span>(<span class="st">"output"</span>, <span class="st">"tree.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in aboot(alleleFreq, tree = treeType, distance = distanceType, sample =
 samples, : Some branch lengths of the tree are negative. Normalizing branches
@@ -447,13 +450,15 @@ Calculating bootstrap values... done.</code></pre>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating NJ tree from Nei's distance (1 sample for time purposes) </span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">phyloTree</span>(matrix, <span class="at">treeType =</span> <span class="st">"upgma"</span>, <span class="at">distanceType =</span> nei.dist, <span class="at">samples =</span> <span class="dv">1</span>, <span class="at">path =</span> <span class="st">"output/tree.txt"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector of colors for better visualization</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>popColors <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="fu">nlevels</span>(popSet))[<span class="fu">as.numeric</span>(popSet)]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting tree</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">main =</span> <span class="st">"NJ Tree with Bootstrap"</span>, <span class="at">type =</span> <span class="st">"phylogram"</span>, <span class="at">tip.color =</span> popColors, <span class="at">cex =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">phyloTree</span>(matrix, <span class="at">treeType =</span> <span class="st">"upgma"</span>, <span class="at">distanceType =</span> nei.dist, <span class="at">samples =</span> <span class="dv">1</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">path =</span> <span class="st">"output/tree.txt"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector of colors for better visualization</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>popColors <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="fu">nlevels</span>(popSet))[<span class="fu">as.numeric</span>(popSet)]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting tree</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">main =</span> <span class="st">"NJ Tree with Bootstrap"</span>, <span class="at">type =</span> <span class="st">"phylogram"</span>, </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">tip.color =</span> popColors, <span class="at">cex =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

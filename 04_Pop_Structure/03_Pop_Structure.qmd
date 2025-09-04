@@ -16,7 +16,7 @@ Population structure in crop breeding refers to the **presence of clusters or su
 
 -   **Principal Component Analysis (PCA):** Used to reduce dimentionality of large data sets, and to visualize overall diversity and major genetic groupings.
 
--   **Spatial Principal Component Analysis (sPCA):** Incorporates spatial information (geographic location) intro traditional PCA, meaning it seeks to maximize spatial autocorrelation along with variation. It allows us to identify global and local trends.
+-   **Spatial Principal Component Analysis (sPCA):** Incorporates spatial information (geographic location) into traditional PCA, meaning it seeks to maximize spatial autocorrelation along with variation. It allows us to identify global and local trends.
 
 -   **Discriminant Analysis of Principal Components (DAPC)**: Used to assign individuals to groups, provide a visual assessment of between-population differentiation and the contribution of individual alleles to the population structure.
 
@@ -51,18 +51,21 @@ source(here("code","setup.R"))
 ```{r data-import-run, include=FALSE}
 # Importing filtered genotypic data
 matrix <- read.table(here("data", "FilteredBarley.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+
 # SNP matrix has to have individuals in rows and markers as columns for the posterior functions
 matrix <- t(matrix)
 
 # Importing metadata
 metadata <- read_excel(here("data", "BarleyMetadata.xlsx"))
-metadata <- metadata[metadata$Individual %in% rownames(matrix),] #Ensuring IDs match
 ```
 
 ```{r data-import, eval=FALSE}
 # Importing filtered genotypic data
-matrix <- read.table("data/FilteredBarley.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
-# SNP matrix has to have individuals in rows and markers as columns for the posterior functions
+matrix <- read.table("data/FilteredBarley.txt", sep = "\t", header = TRUE, 
+                     row.names = 1, check.names = FALSE)
+
+# SNP matrix has to have individuals in rows and markers as columns 
+# for the posterior functions
 matrix <- t(matrix)
 
 # Importing metadata
@@ -70,9 +73,10 @@ metadata <- read_excel("data/BarleyMetadata.xlsx")
 ```
 
 ```{r pca}
-# We will be guiding our analysis by the 'countryOfOriginCode' column from our metadata
+# We will be guiding our analysis by the 'countryOfOriginCode' metadata column
 # Defining our subgroups
-popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])
+popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual 
+                                                 %in% rownames(matrix)])
 # Running our pca using our genotype data and groups
 pca <- PCAFromMatrix(matrix, popSet)
 
@@ -116,7 +120,8 @@ We will be using the `sPCA()` function from our package. This function uses the 
 
 ```{r spca, eval=FALSE}
 # Running sPCA
-spca <- sPCA(matrix, subgroups = popSet, xy = metadata[,c("LON","LAT")], eigenPlot = TRUE, tests = TRUE)
+spca <- sPCA(matrix, subgroups = popSet, xy = metadata[,c("LON","LAT")], 
+             eigenPlot = TRUE, tests = TRUE)
 
 # Plotting our obtained eigenvalues
 spca$eigenPlot
@@ -128,8 +133,11 @@ spca$globalTest
 spca$localTest
 
 # Plotting our results in a map
-sPCAMapPlot(spca$spca, matrix, xy = metadata[,c("LON","LAT")], axis = 1, pos = TRUE)
+sPCAMapPlot(spca$spca, matrix, xy = metadata[,c("LON","LAT")], 
+            axis = 1, pos = TRUE)
 ```
+
+The **global test** tests whether the genetic structure detected is globally significant, while the **local test** tests identifies which individuals or sites contribute significantly (hotspots).
 
 ## DAPC
 
@@ -165,7 +173,8 @@ BICDAPC <- kMeansStats(matrix, pca$pca, 10, "BIC")
 BICDAPC$statPlot
 
 # Running DAPC
-DAPC <- DAPC(matrix, krange = 3:6, pca = pca$pca, subgroups = popSet, dapcPlot = TRUE)
+DAPC <- DAPC(matrix, krange = 3:7, pca = pca$pca, subgroups = popSet, 
+             dapcPlot = TRUE)
 
 # Plotting DAPC results
 DAPC$dapcPlot
@@ -184,14 +193,14 @@ Our resulting DAPC outputs group assignments for each individual, which can be v
 -   `subgroups`: defaults to NULL, can be replaced with a vector of our factor information
 
 ```{r DAPC-compo, warning=FALSE, message = FALSE, fig.width=8, fig.height=4}
-DAPCCompoPlot(DAPC$dapc, matrix, krange = 3:6, subgroups = popSet)
+DAPCCompoPlot(DAPC$dapc, matrix, krange = 3:7, subgroups = popSet)
 ```
 
 We can also produce a frequency plot from our DAPC. This helps us understand the relationship between the produced group assignments and prior group information we may have.
 
-`DAPCFreqPlot(DAPC, subgroups)`: produced a frequency plot of our DAPC results
+`DAPCFreqPlot(DAPC, subgroups)`: produces a frequency plot of our DAPC results
 
--   `DAPC`: a *dapc* object
+-   `DAPC`: a single *dapc* object
 
 -   `subgroups`: a vector of our factor information
 
@@ -227,7 +236,8 @@ sNMF is used to estimate admixture proportions: how much of an individual’s ge
 write.geno.mod(matrix, here("output","sNMFgenoBarley.geno"))
 
 # Running sNMF
-sNMF <- sNMFFunction(matrix, subgroups = popSet, here("output","sNMFgenoBarley.geno"), maxK = 6, cePlot = TRUE)
+sNMF <- sNMFFunction(matrix, subgroups = popSet, here("output","sNMFgenoBarley.geno"), 
+                     maxK = 7, cePlot = TRUE)
 ```
 
 ```{r sNMF, eval=FALSE}

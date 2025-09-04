@@ -12,12 +12,14 @@ source(here("code","setup.R"))
 ```
 
 ```{r load-matrix, include=FALSE}
-matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, 
+                     row.names = 1, check.names = FALSE)
 ```
 
 ```{r matrix, eval=FALSE}
 # Load SNP data matrix
-matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, 
+                     row.names = 1, check.names = FALSE)
 ```
 
 ```{r call-rate}
@@ -38,7 +40,8 @@ Just as we can filter markers with too much missing data, we can filter individu
 na_ind <- 0.8
 
 # Filtering our matrix
-filtered_matrix <- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) > na_ind)]
+filtered_matrix <- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) 
+                                          > na_ind)]
 ```
 
 ## MAF
@@ -87,7 +90,8 @@ markers <- read.table("data/markers.tsv", sep = "\t", header = TRUE,
 We can then generate our plots using the `markerPlots()` function from our ICARDA package. This function requires the markers and genotype matrix data. It allows for a third parameter called `chrom`, where you can define the specific chromosome you wish to plot your data for.
 
 ```{r marker-plots}
-# Generating our plots (our SNP marker matrix needs to be transposed for this function)
+# Generating our plots
+# (our SNP marker matrix needs to be transposed for this function)
 # Individuals as rows and markers as columns
 markerplots <- markerPlots(markers, t(filter))
 

@@ -36,7 +36,7 @@ We will be using the `phyloTree()` function from our package to create our phylo
 
 -   **`samples`**: a number of bootstrap replicates, defaults to 100
 
--   path: file path to save tree in Newick format
+-   `path`: file path to save tree in Newick format
 
 The output tree can be plotted using the `plot()` function. We can define the type of visualization in the type parameter, which defaults to `"phylogram"` and accepts `"cladogram"`, `"fan"`, `"unrooted"`, `"radial"` or `"tidy"`. The produced Newick file can be visualized better with tools such as [iTOL](https://itol.embl.de/), which allows for more visualization and annotation options.
 
@@ -53,7 +53,6 @@ matrix <- t(matrix)
 
 # Importing metadata
 metadata <- read_excel(here("data", "BarleyMetadata.xlsx"))
-metadata <- metadata[metadata$Individual %in% rownames(matrix),] #Ensuring IDs match
 
 # Defining our subgroups
 popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])
@@ -61,21 +60,24 @@ popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownam
 
 ```{r data-import, eval=FALSE}
 # Importing filtered genotypic data
-matrix <- read.table("data/FilteredBarley.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
-# SNP matrix has to have individuals in rows and markers as columns for the posterior functions
+matrix <- read.table("data/FilteredBarley.txt", sep = "\t", header = TRUE, 
+                     row.names = 1, check.names = FALSE)
+# SNP matrix has to have individuals in rows and markers as columns 
+# for the posterior functions
 matrix <- t(matrix)
 
 # Importing metadata
 metadata <- read_excel("data/BarleyMetadata.xlsx")
-metadata <- metadata[metadata$Individual %in% rownames(matrix),] #Ensuring IDs match
 
 # Defining our subgroups
-popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual %in% rownames(matrix)])
+popSet <- as.factor(metadata$countryOfOriginCode[metadata$Individual 
+                                                 %in% rownames(matrix)])
 ```
 
 ```{r tree-run}
 # Creating NJ tree from Nei's distance (1 sample for time purposes) 
-tree <- phyloTree(matrix, treeType = "nj", distanceType = nei.dist, samples = 1, path = here("output", "tree.txt"))
+tree <- phyloTree(matrix, treeType = "nj", distanceType = nei.dist, samples = 1, 
+                  path = here("output", "tree.txt"))
 
 # Creating vector of colors for better visualization
 popColors <- rainbow(nlevels(popSet))[as.numeric(popSet)]
@@ -86,11 +88,13 @@ plot(tree, main = "NJ Tree with Bootstrap", type = "phylogram", tip.color = popC
 
 ```{r tree, eval=FALSE}
 # Creating NJ tree from Nei's distance (1 sample for time purposes) 
-tree <- phyloTree(matrix, treeType = "upgma", distanceType = nei.dist, samples = 1, path = "output/tree.txt")
+tree <- phyloTree(matrix, treeType = "upgma", distanceType = nei.dist, samples = 1, 
+                  path = "output/tree.txt")
 
 # Creating vector of colors for better visualization
 popColors <- rainbow(nlevels(popSet))[as.numeric(popSet)]
 
 # Plotting tree
-plot(tree, main = "NJ Tree with Bootstrap", type = "phylogram", tip.color = popColors, cex = 0.1)
+plot(tree, main = "NJ Tree with Bootstrap", type = "phylogram", 
+     tip.color = popColors, cex = 0.1)
 ```

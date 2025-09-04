@@ -15,7 +15,7 @@ Please use the navigation menu (Table of Contents) to move through the course mo
 
 Let's begin!
 
-![](assets/logo.png){width="387"}
+![](assets/logo.png){width="293"}
 
 <!-- Begin merged cover content with team table -->
 
@@ -25,7 +25,7 @@ The [ICARDA Bioinformatics Unit](https://www.icarda.org) is at the forefront of 
 
 | Photo | Name | Details |
 |:--:|:---|:---|
-| ![](assets/tamara.png) | **Tamara Ortiz** | Bioinformatician, started February 2024 <br> MS in Bioinformatics, NYU Tandon School of Engineering (Currently enrolled) <br> BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología |
+| ![](assets/tamara.png) | **Tamara Ortiz** | Bioinformatician - Genebank Consultant <br> MS in Bioinformatics, NYU Tandon School of Engineering (Currently enrolled) <br> BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología |
 | ![](assets/khaled.png) | **Khaled Al-Sham'aa** | Research Database Manager and Senior Biometrics Analyst <br> B.S.c in Computer Engineering, Aleppo University <br> Certificates from Johns Hopkins University & Oxford |
 | ![](./assets/zakaria.png){width="200px"} | **Zakaria Kehel** | Research Team Leader – Genetic Resources (GRS) & Morocco Interim Country Manager Genetic Innovation <br> Ph.D. from the School of Agricultural and Forestry Engineering at the University of Córdoba in Spain |
 

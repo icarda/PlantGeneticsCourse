@@ -56,12 +56,14 @@ vcfMatrix <- extract.gt(vcf)
 -   **Numeric Matrix (-.csv, .txt):** SNPs in columns and genotypes in rows (or vice versa), data encoded as 0, 1 and 2 for homozygous for reference allele, heterozygous, and homozygous for alternate allele.
 
 ```{r load-matrix, include=FALSE}
-matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+matrix <- read.table(here("data", "BarleyMatrix.txt"), sep = "\t", header = TRUE, 
+                     row.names = 1, check.names = FALSE)
 ```
 
 ```{r matrix, eval=FALSE}
 # Load SNP data matrix
-matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, row.names = 1, check.names = FALSE)
+matrix <- read.table("data/BarleyMatrix.txt", sep = "\t", header = TRUE, 
+                     row.names = 1, check.names = FALSE)
 ```
 
 ```{r vcf-numeric}

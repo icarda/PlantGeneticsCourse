@@ -139,6 +139,7 @@ To decide how we wish to impute our data we can evaluate the total number of rem
 In this case we will carry out our missing value imputation using the beagle method.
 
 ```{r NA-imputation}
+set.seed(42)
 gData <- codeMarkers(gData, 
                      impute = TRUE, 
                      imputeType = 'beagle', 

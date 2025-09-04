@@ -4,12 +4,19 @@ Now that we know about data types and structures, let's see how to manipulate th
 
 ## Arithmetic Operations (Review)
 
-Works on numbers and numeric vectors/matrices element-wise.
-
 ```{r classes}
-mixed_vector <- c(10, "VarietyA", TRUE)
-print(mixed_vector) # All become character strings!
-class(mixed_vector)
+# Basic arithmetic
+2 + 5
+10 - 3
+4 * 8
+100 / 4
+# Order of operations (like standard math)
+5 + 2 * 3   # Multiplication first
+(5 + 2) * 3 # Parentheses first
+# Built-in mathematical functions
+sqrt(16)    # Square root
+log(10)     # Natural logarithm
+log10(100)  # Base-10 logarithm
 ```
 
 ## Logical Comparisons and Operators
@@ -144,4 +151,8 @@ plot_trials <- matrix(c(5.2, 4.5, 6.1, 5.5, 4, 6.6, 7, 5.1, 5.3),
 apply(plot_trials, 1, mean)
 ```
 
-**Exercise:** Select the data for the 'Local_Check' variety from the `trial_data` data frame. Calculate its yield.
+**Exercise:** Select the data for the 'Local_Check' variety from the `trial_data` data frame.
+
+```{r}
+trial_data[trial_data$Variety == "Local_Check",]
+```

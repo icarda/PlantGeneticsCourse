@@ -8,6 +8,7 @@ So far, we've created data inside R. But usually, your breeding data exists in e
 -   **TSV (Tab Separated Values - `.tsv`):** Similar to CSV, but uses tabs to separate columns.
 -   **Excel Files (`.xls`, `.xlsx`):** Native Microsoft Excel format. Can contain multiple sheets, formatting, formulas. Requires specific R packages to read/write.
 -   **Text Files(`.txt`):** Additionally, data can be saved as a simple text file. This file type can support comma or tab separated values. You would simply need to specify your separator when reading the file.
+-   **RDS Files (**`.rds`**):** A specific binary file format used in R for saving and loading single R objects
 
 ## Paths, Working Directory, and RStudio Projects (Best Practice!)
 
@@ -32,47 +33,28 @@ library(readxl)
 library(dplyr) # for glimpse
 
 # --- Reading a CSV file ---
-# Assumes you have a file 'sample_phenotypes.csv' in the 'data/example' folder
+# Assume you have a file called 'sample_phenotypes.csv' in your 'data' folder
 # relative to your project root.
 pheno_file_path <- "data/sample_phenotypes.csv"
 
 # Check if file exists before trying to read (good habit)
-if (file.exists(pheno_file_path)) {
-  # Use read_csv from the readr package (generally preferred)
-  phenotype_data <- read_csv(pheno_file_path)
-
-  print("CSV data loaded successfully:")
-  head(phenotype_data)   # Look at the first 6 rows
-  glimpse(phenotype_data) # See column names and data types
-
-} else {
-  print(paste("Error: Phenotype file not found at", pheno_file_path))
-  phenotype_data <- NULL # Set to NULL if file not found
-}
+phenotype_data <- read_csv(pheno_file_path)
 
 # Note: Base R has read.csv() - it works but readr::read_csv() is often faster
 # and handles data types more consistently (e.g., doesn't default strings to factors).
 
 # --- Reading an Excel file ---
-# Assumes you have 'sample_trial.xlsx' in 'data/example'
-excel_file_path <- "data/sample_trial.xlsx" # You'll need to create this file
+# Assume you have 'sample_trial.xlsx' in your 'data' folder
+excel_file_path <- "data/sample_trial.xlsx"
 
-if (file.exists(excel_file_path)) {
-  # See what sheets are in the workbook
-  excel_sheets(excel_file_path)
+# See what sheets are in the workbook
+excel_sheets(excel_file_path)
 
-  # Read data from a specific sheet (e.g., "YieldData")
-  # yield_data_excel <- read_excel(excel_file_path, sheet = "YieldData")
+# Read data from a specific sheet (e.g., "YieldData")
+yield_data_excel <- read_excel(excel_file_path, sheet = "YieldData")
 
-  # Or read by sheet number (first sheet is 1)
-  # yield_data_excel <- read_excel(excel_file_path, sheet = 1)
-
-  # print("Excel data loaded:")
-  # glimpse(yield_data_excel)
-
-} else {
-  print(paste("Warning: Example Excel file not found at", excel_file_path))
-}
+# Or read by sheet number (first sheet is 1)
+yield_data_excel <- read_excel(excel_file_path, sheet = 1)
 ```
 
 -   **Always inspect your data after loading!** Use `head()`, `str()`, `glimpse()`, `summary()`. Did R read the column names correctly? Are the data types what you expected (numeric, character, etc.)?
@@ -87,48 +69,17 @@ library(readr)
 library(readxl)
 library(dplyr) # for glimpse
 
-# --- Reading a CSV file ---
-# Assumes you have a file 'sample_phenotypes.csv' in the 'data/example' folder
-# relative to your project root.
-pheno_file_path <- "data/sample_phenotypes.csv"
+# --- Writing a CSV file ---
+# Assume you have a data frame called "df" in your environment
+write.csv(df, "data/sample_phenotypes.csv")
 
-# Check if file exists before trying to read (good habit)
-if (file.exists(pheno_file_path)) {
-  # Use read_csv from the readr package (generally preferred)
-  phenotype_data <- read_csv(pheno_file_path)
+# --- Writing a TSV file ---
+# Assume you have a data frame called "df" in your environment
+write.table(df, "data/sample_phenotypes.tsv")
 
-  print("CSV data loaded successfully:")
-  head(phenotype_data)   # Look at the first 6 rows
-  glimpse(phenotype_data) # See column names and data types
-
-} else {
-  print(paste("Error: Phenotype file not found at", pheno_file_path))
-  phenotype_data <- NULL # Set to NULL if file not found
-}
-
-# Note: Base R has read.csv() - it works but readr::read_csv() is often faster
-# and handles data types more consistently (e.g., doesn't default strings to factors).
-
-# --- Reading an Excel file ---
-# Assumes you have 'sample_trial.xlsx' in 'data/example'
-excel_file_path <- "data/sample_trial.xlsx" # You'll need to create this file
-
-if (file.exists(excel_file_path)) {
-  # See what sheets are in the workbook
-  excel_sheets(excel_file_path)
-
-  # Read data from a specific sheet (e.g., "YieldData")
-  # yield_data_excel <- read_excel(excel_file_path, sheet = "YieldData")
-
-  # Or read by sheet number (first sheet is 1)
-  # yield_data_excel <- read_excel(excel_file_path, sheet = 1)
-
-  # print("Excel data loaded:")
-  # glimpse(yield_data_excel)
-
-} else {
-  print(paste("Warning: Example Excel file not found at", excel_file_path))
-}
+# --- Writing an RDS file ---
+# Assume you have a data frame called "df" in your environment
+saveRDS(df, "data/sample_phenotypes.rds")
 ```
 
 **Exercise:** If you have a simple Excel file with some breeding data (e.g., Plot ID, Variety, Yield), try reading it into R using `read_excel()`. Inspect the loaded data frame using `glimpse()`.

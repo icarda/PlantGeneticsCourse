@@ -8,7 +8,7 @@
 
 <meta name="description" content="This book provides a comprehensive introduction to R programming and its application in plant genetic data analysis.">
 
-<title>8&nbsp; Module 1.5: Why Visualize Your Data? – Plant Genetics Data Analysis with R - Baku</title>
+<title>8&nbsp; Module 1.5: Data Visualization – Plant Genetics Data Analysis with R - Baku</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_R_Basics/01_Intro_To_R.html">R Programming Fundamentals</a></li><li class="breadcrumb-item"><a href="../01_R_Basics/05_Simple_Plotting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_R_Basics/01_Intro_To_R.html">R Programming Fundamentals</a></li><li class="breadcrumb-item"><a href="../01_R_Basics/05_Simple_Plotting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Data Visualization</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01_R_Basics/05_Simple_Plotting.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Data Visualization</span></span></a>
   </div>
 </li>
       </ul>
@@ -351,9 +351,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introducing-ggplot2-the-grammar-of-graphics" id="toc-introducing-ggplot2-the-grammar-of-graphics" class="nav-link active" data-scroll-target="#introducing-ggplot2-the-grammar-of-graphics"><span class="header-section-number">8.1</span> Introducing <code>ggplot2</code>: The Grammar of Graphics</a></li>
   <li><a href="#lets-make-some-plots" id="toc-lets-make-some-plots" class="nav-link" data-scroll-target="#lets-make-some-plots"><span class="header-section-number">8.2</span> Let’s Make Some Plots!</a>
   <ul class="collapse">
-  <li><a href="#scatter-plot-relationship-between-yield-and-height" id="toc-scatter-plot-relationship-between-yield-and-height" class="nav-link" data-scroll-target="#scatter-plot-relationship-between-yield-and-height"><span class="header-section-number">8.2.1</span> 1. Scatter Plot: Relationship between Yield and Height</a></li>
-  <li><a href="#histogram-distribution-of-yield" id="toc-histogram-distribution-of-yield" class="nav-link" data-scroll-target="#histogram-distribution-of-yield"><span class="header-section-number">8.2.2</span> 2. Histogram: Distribution of Yield</a></li>
-  <li><a href="#box-plot-compare-yield-across-locations" id="toc-box-plot-compare-yield-across-locations" class="nav-link" data-scroll-target="#box-plot-compare-yield-across-locations"><span class="header-section-number">8.2.3</span> 3. Box Plot: Compare Yield across Locations</a></li>
+  <li><a href="#scatter-plot-relationship-between-yield-and-height" id="toc-scatter-plot-relationship-between-yield-and-height" class="nav-link" data-scroll-target="#scatter-plot-relationship-between-yield-and-height"><span class="header-section-number">8.2.1</span> Scatter Plot: Relationship between Yield and Height</a></li>
+  <li><a href="#histogram-distribution-of-yield" id="toc-histogram-distribution-of-yield" class="nav-link" data-scroll-target="#histogram-distribution-of-yield"><span class="header-section-number">8.2.2</span> Histogram: Distribution of Yield</a></li>
+  <li><a href="#box-plot-compare-yield-across-locations" id="toc-box-plot-compare-yield-across-locations" class="nav-link" data-scroll-target="#box-plot-compare-yield-across-locations"><span class="header-section-number">8.2.3</span> Box Plot: Compare Yield across Locations</a></li>
   </ul></li>
   <li><a href="#saving-your-plots" id="toc-saving-your-plots" class="nav-link" data-scroll-target="#saving-your-plots"><span class="header-section-number">8.3</span> Saving Your Plots</a></li>
   <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="header-section-number">8.4</span> Exercise</a></li>
@@ -363,9 +363,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_R_Basics/01_Intro_To_R.html">R Programming Fundamentals</a></li><li class="breadcrumb-item"><a href="../01_R_Basics/05_Simple_Plotting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01_R_Basics/01_Intro_To_R.html">R Programming Fundamentals</a></li><li class="breadcrumb-item"><a href="../01_R_Basics/05_Simple_Plotting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Data Visualization</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Why Visualize Your Data?</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Module 1.5: Data Visualization</span></h1>
 </div>
 
 
@@ -406,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>geom_line()</code>: Creates lines.</li>
 <li><code>geom_bar()</code>: Creates bar charts.</li>
 </ul></li>
-<li><strong>Other functions:</strong> Add labels (<code>labs()</code>), change themes (<code>theme_bw()</code>, <code>theme_minimal()</code>), split plots into facets (<code>facet_wrap()</code>), customize scales, etc. Each function also allows you to edit aesthetic characteristics such as size, color, etc.</li>
+<li><strong>Other functions:</strong> Add labels (<code>labs()</code>), change themes (<code>theme_bw()</code>, <code>theme_minimal()</code>), split plots into facets (<code>facet_wrap()</code>), customize scales, etc. Each function also allows you to edit aesthetic characteristics such as size, color, etc. You can explore all the customization options in <code>ggplot2</code> ’s <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html">documentation</a>.</li>
 </ol>
 </section>
 <section id="lets-make-some-plots" class="level2" data-number="8.2">
@@ -442,7 +442,7 @@ $ Height   &lt;dbl&gt; 84.66088, 88.91013, 84.86998, 86.35554, 86.87480, 101.566
 </div>
 </div>
 <section id="scatter-plot-relationship-between-yield-and-height" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="scatter-plot-relationship-between-yield-and-height"><span class="header-section-number">8.2.1</span> 1. Scatter Plot: Relationship between Yield and Height</h3>
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="scatter-plot-relationship-between-yield-and-height"><span class="header-section-number">8.2.1</span> Scatter Plot: Relationship between Yield and Height</h3>
 <p>See if taller plants tend to have higher yield in this dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. ggplot(): data is breeding_plot_data, map Height to x, Yield to y</span></span>
@@ -475,17 +475,19 @@ $ Height   &lt;dbl&gt; 84.66088, 88.91013, 84.86998, 86.35554, 86.87480, 101.566
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Map 'color' aesthetic to the Variety column</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust point size and transparency for better visibility</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> breeding_plot_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Height, <span class="at">y =</span> Yield, <span class="at">color =</span> Variety)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> <span class="co"># Make points slightly bigger, semi-transparent</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Height vs. Yield by Variety"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Plant Height (cm)"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Yield (kg/plot)"</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="co"># Use a different theme</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> breeding_plot_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Height, <span class="at">y =</span> Yield, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">color =</span> Variety)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make points slightly bigger, semi-transparent</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Height vs. Yield by Variety"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Plant Height (cm)"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Yield (kg/plot)"</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="co"># Use a different theme</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -497,7 +499,7 @@ $ Height   &lt;dbl&gt; 84.66088, 88.91013, 84.86998, 86.35554, 86.87480, 101.566
 </div>
 </section>
 <section id="histogram-distribution-of-yield" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="histogram-distribution-of-yield"><span class="header-section-number">8.2.2</span> 2. Histogram: Distribution of Yield</h3>
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="histogram-distribution-of-yield"><span class="header-section-number">8.2.2</span> Histogram: Distribution of Yield</h3>
 <p>See the frequency of different yield values.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. ggplot(): data, map Yield to x-axis</span></span>
@@ -505,16 +507,17 @@ $ Height   &lt;dbl&gt; 84.66088, 88.91013, 84.86998, 86.35554, 86.87480, 101.566
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. labs() and theme_classic(): Add labels and theme</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> breeding_plot_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Yield)) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># Specify binwidth, fill, and outline color</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Plot Yields"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Yield (kg/plot)"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency (Number of Plots)"</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Specify binwidth, fill, and outline color</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Plot Yields"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Yield (kg/plot)"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency (Number of Plots)"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -526,7 +529,7 @@ $ Height   &lt;dbl&gt; 84.66088, 88.91013, 84.86998, 86.35554, 86.87480, 101.566
 </div>
 </section>
 <section id="box-plot-compare-yield-across-locations" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="box-plot-compare-yield-across-locations"><span class="header-section-number">8.2.3</span> 3. Box Plot: Compare Yield across Locations</h3>
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="box-plot-compare-yield-across-locations"><span class="header-section-number">8.2.3</span> Box Plot: Compare Yield across Locations</h3>
 <p>Are yields different in Baku vs.&nbsp;Ganja? Box plots are great for comparing distributions across groups.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. ggplot(): data, map Location (categorical) to x, Yield (numeric) to y</span></span>
@@ -534,18 +537,20 @@ $ Height   &lt;dbl&gt; 84.66088, 88.91013, 84.86998, 86.35554, 86.87480, 101.566
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. labs() and theme_light(): Add labels and theme</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. theme(): Customize theme elements (e.g., remove legend)</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> breeding_plot_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Location, <span class="at">y =</span> Yield, <span class="at">fill =</span> Location)) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Yield Comparison by Location"</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Location"</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Yield (kg/plot)"</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="co"># Hide legend if coloring is obvious from x-axis</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>plot4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> breeding_plot_data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Location, <span class="at">y =</span> Yield, </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">fill =</span> Location)) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Yield Comparison by Location"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Location"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Yield (kg/plot)"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Hide legend if coloring is obvious from x-axis</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plot4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
