@@ -206,5 +206,60 @@
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome – Plant Genetics Data Analysis with R</span>"
     ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "",
+    "text": "3.1 Why R and RStudio?",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#why-r-and-rstudio",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#why-r-and-rstudio",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "",
+    "text": "R: A powerful, free programming language specifically designed for statistical computing and graphics. Widely used in academia and industry for data analysis, including genomics and breeding.\nRStudio: An excellent, free Integrated Development Environment (IDE) for R. It makes using R much easier with features like code highlighting, plot viewing, package management, and project organization.",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#installation-steps",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#installation-steps",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "3.2 Installation Steps",
+    "text": "3.2 Installation Steps\n\nInstall R: Go to CRAN (the Comprehensive R Archive Network) and download the latest version for your operating system (Windows, macOS, Linux). Follow the installation instructions.\nInstall RStudio: Go to the Posit website and download the free RStudio Desktop version for your operating system. Install it after installing R.\nInstall Quarto: Go to Quarto’s website and download and install Quarto for your system. RStudio often bundles Quarto, but installing the latest version is good practice.\n(For PDF Output) Install LaTeX: Open RStudio, go to the Console panel, and type the following commands one by one, pressing Enter after each:\n\n# Run these lines in the R Console \ninstall.packages(\"tinytex\") \n# Run only once if you don't have it \ntinytex::install_tinytex() \n# Run only once to install LaTeX distribution\n# This might take a few minutes. If it fails, consult TinyTeX documentation or ask instructors.\n\n# Installing R Packages for the Course\n# We will use several add-on packages in R. \n# You only need to install packages *once*.\n# --- Run this code chunk in the R Console --- \n# List of packages we will likely need:\n\n# Packages in Cran\ncran_packages &lt;- c(\n  \"tidyverse\", \"readxl\", \"writexl\", \"readr\", \"qqman\", \"vcfR\", \"QBMS\", \"adegenet\",\n  \"ade4\", \"ggiraph\", \"ggpubr\", \"plotly\", \"poppr\", \"reactable\",\n  \"rnaturalearth\", \"scatterpie\", \"viridis\", \"tibble\",\n  \"ggplot2\", \"reshape2\", \"forcats\", \"dplyr\", \"sp\", \"scales\", \"htmltools\", \n  \"ASRgenomics\", \"statgenGWAS\", \"gplots\", \"spdep\", \"adespatial\", \"DT\", \"rrBLUP\",\n  \"geodata\", \"terra\"\n)\n\n# Bioconductor Packages\nbioc_packages &lt;- c(\"rrBLUP\", \"LEA\", \"impute\")\n\n# Github Packages\ngit_packages &lt;- c(\"snpReady\")\n\n# Installing Cran Packages\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(cran_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing CRAN packages: \", paste(missing, collapse = \", \"))\n  install.packages(missing)\n}\n\n# Installing Bioconductor Packages\nif (!requireNamespace(\"BiocManager\", quietly = TRUE)) {\n  install.packages(\"BiocManager\")\n}\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(bioc_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing Bioconductor packages: \", paste(missing, collapse = \", \"))\n  BiocManager::install(missing)\n}\n\n# Installing Github Packages\nif (!requireNamespace(\"devtools\", quietly = TRUE)) {\n  install.packages(\"devtools\")\n}\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(git_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing Github packages: \", paste(missing, collapse = \", \"))\n  devtools::install_github(\"italo-granato/snpReady\")\n}",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#loading-libraries-and-functions",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#loading-libraries-and-functions",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "3.3 Loading Libraries and Functions",
+    "text": "3.3 Loading Libraries and Functions\n\n# You can use library() to load any single package\n# We will load all libraries using lapply()\ninvisible(\n  suppressPackageStartupMessages(\n    lapply(c(cran_packages, bioc_packages, git_packages), library, \n           character.only = TRUE)\n  )\n)",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html#quick-rstudio-tour",
+    "href": "00_Setup_Intro/01_Setup_R_RStudio.html#quick-rstudio-tour",
+    "title": "3  Setting Up Your Environment: R and RStudio",
+    "section": "3.4 Quick RStudio Tour",
+    "text": "3.4 Quick RStudio Tour\n(We will cover this live, but key windows include: Console, Script Editor/Notebook, Environment/History, Files/Plots/Packages/Help/Viewer/Projects). Familiarize yourself with these panes. More in depth information on any of the functions we use can be found by searching for the function in the Help panel.",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
   }
 ]

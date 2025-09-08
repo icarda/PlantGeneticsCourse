@@ -16,8 +16,8 @@
 # Run these lines in the R Console 
 install.packages("tinytex") 
 # Run only once if you don't have it 
-# tinytex::install_tinytex() 
-Run only once to install LaTeX distribution
+tinytex::install_tinytex() 
+# Run only once to install LaTeX distribution
 # This might take a few minutes. If it fails, consult TinyTeX documentation or ask instructors.
 ```
 
