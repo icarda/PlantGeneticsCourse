@@ -1,4 +1,4 @@
-# Module 7.1: Genomic Selection
+# Module 6.1: Genomic Selection
 
 Genomic selection enables **early and accurate prediction of complex traits** based on genome-wide SNP data. This can allow us to predict performance immediately after genotyping seedlings, which can **speed up selection decisions** and **reduce the cost** of field trials. We will be using the `rrBBLUP` package for this part, which is a is a package for genomic prediction with the ridge regression best linear unbiased prediction or **RR-BLUP** mixed linear model (Endelman, 2011). One application is to estimate marker effects by ridge regression; alternatively, BLUPs can be calculated based on an additive relationship matrix or a Gaussian kernel.
 

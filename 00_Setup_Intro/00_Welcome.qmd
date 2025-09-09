@@ -15,7 +15,7 @@ Welcome to this introductory course on data analysis for plant genetics, a colla
 
 ## Course Structure
 
-This course is divided into seven different modules aligned to each of our objectives. Each module includes explanations and practical R exercises.
+This course is divided into six different modules aligned to each of our objectives. Each module includes explanations and practical R exercises.
 
 No prior programming experience is required!
 

@@ -1,4 +1,4 @@
-# Module 6.1: Introduction to GWAS
+# Module 5.1: Introduction to GWAS
 
 The purpose of **Genome-Wide Association Studies (GWAS)** is to **identify genetic variants associated with specific traits**. We will be using the `statgenGWAS` package, which has been designed for performing single trait GWAS.
 

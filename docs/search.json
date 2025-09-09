@@ -2,199 +2,199 @@
   {
     "objectID": "05_GWAS/01_Initial_Concepts.html",
     "href": "05_GWAS/01_Initial_Concepts.html",
-    "title": "18  Module 6.1: Introduction to GWAS",
+    "title": "18  Module 5.1: Introduction to GWAS",
     "section": "",
     "text": "18.1 Reading the Marker Matrix\nThe purpose of Genome-Wide Association Studies (GWAS) is to identify genetic variants associated with specific traits. We will be using the statgenGWAS package, which has been designed for performing single trait GWAS.\nMarkers can either be coded as character strings or as numerical values. Common coding styles include the following options:\ngenotypic_data &lt;- read.table(geno_file, \n                             header = TRUE, \n                             comment.char = '')\n\n# Show the first 50 rows/columns only\ncreate_dt(genotypic_data[1:50,1:50])",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 6.1: Introduction to GWAS</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/01_Initial_Concepts.html#reading-the-marker-matrix",
     "href": "05_GWAS/01_Initial_Concepts.html#reading-the-marker-matrix",
-    "title": "18  Module 6.1: Introduction to GWAS",
+    "title": "18  Module 5.1: Introduction to GWAS",
     "section": "",
-    "text": "AA, AB, BA, BB -&gt; 0, 1, 1, 2 (A is reference allele, and B is alternative allele)\nCC, CT, TC, TT -&gt; 0, 1, 1, 2 (e.g., ref. allele is C)\nC, Y, Y, T -&gt; 0, 1, 1, 2 (Nucleic Acid Notation)\nnumerical code: 0, 1, 1, 2 (0 ref./major allele, 2 alt./minor allele, and 1 is heterozygous) statgenGWAS\nnumerical code: -1, 0, 0, 1 (-1 ref./major allele, 1 alt./minor allele, and 0 is heterozygous) rrBLUP\n\n\n\n18.1.1 Marker Map\nThe data.frame map is used to describe the physical positions of the markers on the chromosomes. The data consists of two columns, chr for the name or number of the chromosome and pos for the position of the marker on the chromosome. The position can be in basepair or in centimorgan. The names of the markers should be the row names of the data.frame.\n\nmarker_map &lt;- genotypic_data[, 3:4]\ncolnames(marker_map) &lt;- c('chr', 'pos')\nrownames(marker_map) &lt;- genotypic_data[, 1]\n\ncreate_dt(marker_map)\n\n\n\n\n\n\n\n18.1.2 Marker Matrix\nThe marker matrix is stored in the matrix marker within the gData object. It has the names of the markers in its column names and the genotypes in its row names. Markers can either be coded as character strings or as numerical values. Important note, before performing any analysis, the marker matrix has to be converted to a numerical matrix. This can be do using the function codeMarkers.\n\nmarker_matrix &lt;- genotypic_data[, -c(1:11)]\nrownames(marker_matrix) &lt;- genotypic_data[, 1]\nmarker_matrix &lt;- t(marker_matrix)\n\n# show the first 50 rows/columns only\ncreate_dt(marker_matrix[1:50,1:50])\n\n\n\n\n\nWe can use the marker map and marker matrix to create a gData object.\n\ngData &lt;- createGData(geno = marker_matrix, map = marker_map)\n\n\n\n18.1.3 Recording and Cleaning of Data\nMarker data has to be numerical and without missing values in order to do GWAS analysis. This can be achieved using the codeMarkers() function. In this example our marker matrix is not numerical; however, the function also allows us to input an already numerical matrix for filtering and the imputation of missing values.\ncodeMarkers(gData, naStrings = NA, impute = TRUE, verbose = TRUE, nMiss = 1, nMissGeno = 1, MAF = NULL, imputeType): returens a copy of the input gData object with markers replaced by coded and imputed markers\n\nnaStings: character vector of strings to be treated as NA\nimpute: defaults to TRUE, performs imputation of missing values\nverbose: defaults to TRUE, prints a summary of performed steps\nnMiss: a numerical value between 0 and 1, SNPs with a fraction of missing values higher than this value will be removed\nnMissgeno: a numerical value between 0 and 1, genotypes with a fraction missing values higher than this value will be removed\nMAF: a numerical value between 0 and 1, SNPs with a MAF below this value will be removed\nimputeType: indicates type of imputation (\"fixed\", \"random\", \"beagle\")\n\n\n# Remove duplicate SNPs from gData\ngData &lt;- codeMarkers(gData, \n                     naStrings = 'N', \n                     removeDuplicates = TRUE, \n                     impute = FALSE, \n                     verbose = TRUE)\n\nInput contains 2772 SNPs for 200 genotypes.\n43190 values replaced by NA.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n467 duplicate SNPs removed.\nOutput contains 2305 SNPs for 200 genotypes.\n\n# SNPs with a fraction of missing values higher than nMiss will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMiss = 0.1)\n\nInput contains 2305 SNPs for 200 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n634 SNPs removed because proportion of missing values larger than or equal to 0.1.\n0 duplicate SNPs removed.\nOutput contains 1671 SNPs for 200 genotypes.\n\n# Genotypes with a fraction of missing values higher than nMissGeno will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMissGeno = 0.2)\n\nInput contains 1671 SNPs for 200 genotypes.\n12 genotypes removed because proportion of missing values larger than or equal to 0.2.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n318 duplicate SNPs removed.\nOutput contains 1353 SNPs for 188 genotypes.\n\n# SNPs with a Minor Allele Frequency (MAF) below this value will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     MAF = 0.05)\n\nInput contains 1353 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n36 SNPs removed because MAF smaller than 0.05.\n0 duplicate SNPs removed.\nOutput contains 1317 SNPs for 188 genotypes.\n\n\nTo decide how we wish to impute our data we can evaluate the total number of remaining missing values and their ratio. We can choose between the following imputation types:\n\nfixed: Impute all missing values by a single fixed value. Use the parameter fixedValue to set this value\nrandom: Impute missing values with a random value based on the non-missing values for a SNP, OK when ratio of missing values is less than 5%.\nbeagle: Impute missing values using the independent beagle software (Browning and Browning 2007)\n\n\n(d &lt;- dim(gData$markers))\n\n[1]  188 1317\n\n(n &lt;- sum(is.na(gData$markers)))\n\n[1] 3036\n\n(r &lt;- n/(d[1]*d[2]))\n\n[1] 0.01226191\n\n\nIn this case we will carry out our missing value imputation using the beagle method.\n\nset.seed(42)\ngData &lt;- codeMarkers(gData, \n                     impute = TRUE, \n                     imputeType = 'beagle', \n                     verbose = TRUE) \n\nInput contains 1317 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n0 duplicate SNPs removed.\n3036 missing values imputed.\n235 duplicate SNPs removed after imputation.\nOutput contains 1082 SNPs for 188 genotypes.\n\n\n\n\n18.1.4 Plot Genetic Map\n\nplot(gData)",
+    "text": "AA, AB, BA, BB -&gt; 0, 1, 1, 2 (A is reference allele, and B is alternative allele)\nCC, CT, TC, TT -&gt; 0, 1, 1, 2 (e.g., ref. allele is C)\nC, Y, Y, T -&gt; 0, 1, 1, 2 (Nucleic Acid Notation)\nnumerical code: 0, 1, 1, 2 (0 ref./major allele, 2 alt./minor allele, and 1 is heterozygous) statgenGWAS\nnumerical code: -1, 0, 0, 1 (-1 ref./major allele, 1 alt./minor allele, and 0 is heterozygous) rrBLUP\n\n\n\n18.1.1 Marker Map\nThe data.frame map is used to describe the physical positions of the markers on the chromosomes. The data consists of two columns, chr for the name or number of the chromosome and pos for the position of the marker on the chromosome. The position can be in basepair or in centimorgan. The names of the markers should be the row names of the data.frame.\n\nmarker_map &lt;- genotypic_data[, 3:4]\ncolnames(marker_map) &lt;- c('chr', 'pos')\nrownames(marker_map) &lt;- genotypic_data[, 1]\n\ncreate_dt(marker_map)\n\n\n\n\n\n\n\n18.1.2 Marker Matrix\nThe marker matrix is stored in the matrix marker within the gData object. It has the names of the markers in its column names and the genotypes in its row names. Markers can either be coded as character strings or as numerical values. Important note, before performing any analysis, the marker matrix has to be converted to a numerical matrix. This can be do using the function codeMarkers.\n\nmarker_matrix &lt;- genotypic_data[, -c(1:11)]\nrownames(marker_matrix) &lt;- genotypic_data[, 1]\nmarker_matrix &lt;- t(marker_matrix)\n\n# show the first 50 rows/columns only\ncreate_dt(marker_matrix[1:50,1:50])\n\n\n\n\n\nWe can use the marker map and marker matrix to create a gData object.\n\ngData &lt;- createGData(geno = marker_matrix, map = marker_map)\n\n\n\n18.1.3 Recording and Cleaning of Data\nMarker data has to be numerical and without missing values in order to do GWAS analysis. This can be achieved using the codeMarkers() function. In this example our marker matrix is not numerical; however, the function also allows us to input an already numerical matrix for filtering and the imputation of missing values.\ncodeMarkers(gData, naStrings = NA, impute = TRUE, verbose = TRUE, nMiss = 1, nMissGeno = 1, MAF = NULL, imputeType): returens a copy of the input gData object with markers replaced by coded and imputed markers\n\nnaStings: character vector of strings to be treated as NA\nimpute: defaults to TRUE, performs imputation of missing values\nverbose: defaults to TRUE, prints a summary of performed steps\nnMiss: a numerical value between 0 and 1, SNPs with a fraction of missing values higher than this value will be removed\nnMissgeno: a numerical value between 0 and 1, genotypes with a fraction missing values higher than this value will be removed\nMAF: a numerical value between 0 and 1, SNPs with a MAF below this value will be removed\nimputeType: indicates type of imputation (\"fixed\", \"random\", \"beagle\")\n\n\n# Remove duplicate SNPs from gData\ngData &lt;- codeMarkers(gData, \n                     naStrings = 'N', \n                     removeDuplicates = TRUE, \n                     impute = FALSE, \n                     verbose = TRUE)\n\nInput contains 2772 SNPs for 200 genotypes.\n43190 values replaced by NA.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n467 duplicate SNPs removed.\nOutput contains 2305 SNPs for 200 genotypes.\n\n# SNPs with a fraction of missing values higher than nMiss will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMiss = 0.1)\n\nInput contains 2305 SNPs for 200 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n634 SNPs removed because proportion of missing values larger than or equal to 0.1.\n0 duplicate SNPs removed.\nOutput contains 1671 SNPs for 200 genotypes.\n\n# Genotypes with a fraction of missing values higher than nMissGeno will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMissGeno = 0.2)\n\nInput contains 1671 SNPs for 200 genotypes.\n12 genotypes removed because proportion of missing values larger than or equal to 0.2.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n318 duplicate SNPs removed.\nOutput contains 1353 SNPs for 188 genotypes.\n\n# SNPs with a Minor Allele Frequency (MAF) below this value will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     MAF = 0.05)\n\nInput contains 1353 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n36 SNPs removed because MAF smaller than 0.05.\n0 duplicate SNPs removed.\nOutput contains 1317 SNPs for 188 genotypes.\n\n\nTo decide how we wish to impute our data we can evaluate the total number of remaining missing values and their ratio. We can choose between the following imputation types:\n\nfixed: Impute all missing values by a single fixed value. Use the parameter fixedValue to set this value\nrandom: Impute missing values with a random value based on the non-missing values for a SNP, OK when ratio of missing values is less than 5%.\nbeagle: Impute missing values using the independent beagle software (Browning and Browning 2007)\n\n\n(d &lt;- dim(gData$markers))\n\n[1]  188 1317\n\n(n &lt;- sum(is.na(gData$markers)))\n\n[1] 3036\n\n(r &lt;- n/(d[1]*d[2]))\n\n[1] 0.01226191\n\n\nIn this case we will carry out our missing value imputation using the beagle method.\n\nset.seed(42)\ngData &lt;- codeMarkers(gData, \n                     impute = TRUE, \n                     imputeType = 'beagle', \n                     verbose = TRUE) \n\nInput contains 1317 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n0 duplicate SNPs removed.\n3036 missing values imputed.\n237 duplicate SNPs removed after imputation.\nOutput contains 1080 SNPs for 188 genotypes.\n\n\n\n\n18.1.4 Plot Genetic Map\n\nplot(gData)",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 6.1: Introduction to GWAS</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/01_Initial_Concepts.html#reading-the-phenotypic-data",
     "href": "05_GWAS/01_Initial_Concepts.html#reading-the-phenotypic-data",
-    "title": "18  Module 6.1: Introduction to GWAS",
+    "title": "18  Module 5.1: Introduction to GWAS",
     "section": "18.2 Reading the Phenotypic Data",
     "text": "18.2 Reading the Phenotypic Data\nPhenotypic data, either directly from field trials or after summarizing can be stored in pheno in the gData object. Pheno can either be a single data.frame or a list of data.frames for storing data for different trials or different summarizations of the original data. The first column of all elements of pheno should be genotype and all the other columns should represent different traits. Storing additional variables should be done in covar.\n\n# Import phenotypic data\nphenotypic_data &lt;- read.csv(pheno_file)\ncolnames(phenotypic_data) &lt;- c('genotype', trait_name)\n\n# Add phenotypic data to gData\ngData &lt;- createGData(gData, pheno = phenotypic_data)",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 6.1: Introduction to GWAS</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/01_Initial_Concepts.html#summarize-gdata",
     "href": "05_GWAS/01_Initial_Concepts.html#summarize-gdata",
-    "title": "18  Module 6.1: Introduction to GWAS",
+    "title": "18  Module 5.1: Introduction to GWAS",
     "section": "18.3 Summarize gData",
-    "text": "18.3 Summarize gData\n\nsummary(gData)\n\nmap\n    Number of markers: 1082 \n    Number of chromosomes: 8 \n\nmarkers\n    Number of markers: 1082 \n    Number of genotypes: 188 \n    Content:\n        0    1 &lt;NA&gt;  \n     0.75 0.25 0.00  \n\npheno\n    Number of trials: 1 \n\n    phenotypic_data:\n        Number of traits: 2 \n        Number of genotypes: 200 \n\n        ASC_Score       NA\nMin.       0.9400 1.156000\n1st Qu.    3.9600 1.189750\nMedian     4.9300 1.209000\nMean       4.9652 1.207365\n3rd Qu.    6.1250 1.223000\nMax.       8.8200 1.288000\nNA's       0.0000 0.000000",
+    "text": "18.3 Summarize gData\n\nsummary(gData)\n\nmap\n    Number of markers: 1080 \n    Number of chromosomes: 8 \n\nmarkers\n    Number of markers: 1080 \n    Number of genotypes: 188 \n    Content:\n        0    1 &lt;NA&gt;  \n     0.75 0.25 0.00  \n\npheno\n    Number of trials: 1 \n\n    phenotypic_data:\n        Number of traits: 2 \n        Number of genotypes: 200 \n\n        ASC_Score       NA\nMin.       0.9400 1.156000\n1st Qu.    3.9600 1.189750\nMedian     4.9300 1.209000\nMean       4.9652 1.207365\n3rd Qu.    6.1250 1.223000\nMax.       8.8200 1.288000\nNA's       0.0000 0.000000",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 6.1: Introduction to GWAS</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html",
     "href": "05_GWAS/02_Single_Trait_GWAS.html",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "",
-    "text": "19.1 Significance Threshold\nWe will be carrying out the GWAS analysis using the runSingleTraitGwas() function from the statgenGWAS package.\nrunSingleTraitGwas(gData, traits = NULL, covar = NULL, snpCov = NULL, kin = NULL, kinshipMethod, remlAlgo, GLSMethod, MAF = 0.01, thrType, alpha = 0.05, LODThr = 4, nSnpLOD = 10, pThr = 0.05): performs a single-trait Genome Wide Association Study (GWAS) on phenotypic and genotypic data contained in a gData object.\nPrior to running our analysis, we need to compute a threshold by which to identify significant SNPs. The threshold for selecting significant SNPs in a GWAS analysis tends to be computed by using Bonferroni correction, with an alpha of 0.05. The alpha can be modified by setting the option alpha when calling the runSingleTraitGwas() function. Two other threshold types can be used: a fixed threshold (we set the thrType parameter to “fixed”) by specifying the log10(p) (LODThr) value of the threshold, or a small threshold (we set the thrType parameter to “small” and nSnpLOD to n) which defines the n SNPs with the highest log10(p) scores as significant SNPs.\n# Bonferroni correction approximation\n(pvalue.thr &lt;- 0.05 / ncol(gData$markers))\n\n[1] 4.621072e-05\n\nformat(pvalue.thr, scientific = FALSE)\n\n[1] \"0.00004621072\"\n\n# LOD score (logarithm of the odds)\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.335257\n\n# Reverse the conversion to get p-value threshold\n10^(-LOD.thr)\n\n[1] 4.621072e-05\n\n# Exact Bonferroni correction formula\n(pvalue.thr &lt;- 1 - (1 - 0.05) ^ (1 / ncol(gData$markers)))\n\n[1] 4.740488e-05\n\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.324177",
+    "text": "19.1 Significance Threshold\nWe will be carrying out the GWAS analysis using the runSingleTraitGwas() function from the statgenGWAS package.\nrunSingleTraitGwas(gData, traits = NULL, covar = NULL, snpCov = NULL, kin = NULL, kinshipMethod, remlAlgo, GLSMethod, MAF = 0.01, thrType, alpha = 0.05, LODThr = 4, nSnpLOD = 10, pThr = 0.05): performs a single-trait Genome Wide Association Study (GWAS) on phenotypic and genotypic data contained in a gData object.\nPrior to running our analysis, we need to compute a threshold by which to identify significant SNPs. The threshold for selecting significant SNPs in a GWAS analysis tends to be computed by using Bonferroni correction, with an alpha of 0.05. The alpha can be modified by setting the option alpha when calling the runSingleTraitGwas() function. Two other threshold types can be used: a fixed threshold (we set the thrType parameter to “fixed”) by specifying the log10(p) (LODThr) value of the threshold, or a small threshold (we set the thrType parameter to “small” and nSnpLOD to n) which defines the n SNPs with the highest log10(p) scores as significant SNPs.\n# Bonferroni correction approximation\n(pvalue.thr &lt;- 0.05 / ncol(gData$markers))\n\n[1] 4.62963e-05\n\nformat(pvalue.thr, scientific = FALSE)\n\n[1] \"0.0000462963\"\n\n# LOD score (logarithm of the odds)\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.334454\n\n# Reverse the conversion to get p-value threshold\n10^(-LOD.thr)\n\n[1] 4.62963e-05\n\n# Exact Bonferroni correction formula\n(pvalue.thr &lt;- 1 - (1 - 0.05) ^ (1 / ncol(gData$markers)))\n\n[1] 4.749266e-05\n\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.323373",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
     "href": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "19.2 Variance Covariance Matrix",
     "text": "19.2 Variance Covariance Matrix\nThere are two ways to compute the phenotypic variance covariance matrix used in the GWAS analysis. Either the EMMA algorithm (Kang et al. 2008) or the Newton-Raphson algorithm (Tunnicliffe 1989). Specify the method by setting the parameter remlAlgo to either “EMMA” or “NR”. By default the EMMA algorithm is used.",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
     "href": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "19.3 Running GWAS",
     "text": "19.3 Running GWAS\n\nGWAS &lt;- runSingleTraitGwas(gData, \n                           traits  = 'ASC_Score', \n                           thrType = 'fixed', \n                           LODThr  = 3.5, \n                           kinshipMethod = 'vanRaden')\n\nOur output is an object of class GWAS. GWAResult is a data.table with the following columns:\n\ntrait: trait name\nsnp: SNP name\nchr: chromosome on which the SNP is located\npos: position of the SNP on the chromosome\nallFreq: allele frequency of the SNP\npValue: P-value for the SNP\neffect: effect of the SNP on the trait value\neffectSe: standard error of the effect of the SNP on the trait value\nRLR2: likelihood-ratio-based R2 as defined in Sun et al. (2010)\nLOD: LOD score (logarithm of the odds) for the SNP, defined as log10(pValue)\n\n\n# Visualizing results\ncreate_dt(cbind(GWAS$GWAResult$phenotypic_data[,1:4],\n                signif(GWAS$GWAResult$phenotypic_data[,-c(1:4)], 3)))\n\n\n\n\n\nNote that the estimated effect is computed for a single allele. Its direction depends on the coding of the markers in the gData object. In this example the minor allele was used as reference allele, so the effects are the estimated effects for the minor allele.",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
     "href": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "19.4 Significant Alleles",
     "text": "19.4 Significant Alleles\nsignSnp is a data.tables containing the significant SNPs. Optionally, the SNPs close to the significant SNPs are included in the data.table. The data.table in signSnp consist of the same columns as those in GWAResult described above. Two extra columns are added:\n\nsnpStatus: either significant SNP or within … of a significant SNP\npropSnpVar: proportion of the variance explained by the SNP\n\n\ncreate_dt(cbind(GWAS$signSnp$phenotypic_data[, 1:4],\n                signif(GWAS$signSnp$phenotypic_data[, 5:10], 3),\n                GWAS$signSnp$phenotypic_data[, 11],\n                signif(GWAS$signSnp$phenotypic_data[, 12], 3)))\n\n\n\n\n\nWe can get the name of the best marker (the one with the highest LOD value):\n\n(snp &lt;- GWAS$signSnp$phenotypic_data[LOD == max(LOD), snp])\n\n[1] \"SCa4_9803244\"\n\n\nWe can manually check by using t.test, which is the old school way.\n\n# Creating data frame for t-test\ndf &lt;- as.data.frame(marker_matrix[,snp])\n\ndf$genotype  &lt;- rownames(marker_matrix)\ncolnames(df) &lt;- c('snp', 'genotype')\n\ndf &lt;- merge(df, phenotypic_data, id = 'genotype')\ndf &lt;- na.omit(df)\n\ntable(df$snp)\n\n\n  C   N   T   Y \n129  11  55   5 \n\n# Running t-test\ndf &lt;- df[df$snp %in% c('C', 'G', 'A', 'T'),]\ndf$snp &lt;- as.factor(df$snp)\n\nt.test(formula(paste(trait_name, '~ snp')), data = df)\n\n\n    Welch Two Sample t-test\n\ndata:  ASC_Score by snp\nt = -5.4233, df = 114.29, p-value = 3.308e-07\nalternative hypothesis: true difference in means between group C and group T is not equal to 0\n95 percent confidence interval:\n -1.6581884 -0.7709251\nsample estimates:\nmean in group C mean in group T \n       4.592171        5.806727 \n\n# Plotting t-test results\nboxplot(formula(paste(trait_name, '~ snp')), data = df)",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
     "href": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "19.5 Kinship Results",
     "text": "19.5 Kinship Results\nA kinship matrix was produced and used in the GWAS analysis. The method for producing this matrix can be defined by thge kinshipMethod parameter in the runSingleTraitGwas() function. By default, the same kinship matrix is used for testing all SNPs (GLSMethod = “single”). When GLSMethod = “multi”, the kinship matrix is chromosome-specific. As shown by Rincent et al.(2014), this often gives a considerable improvement in power.\n\n# Visualizing kinship matrix\ncreate_dt(round(GWAS$kinship, 3))\n\n\n\n\n\n\n# Plotting a heatmap of kinship results\nheatmap(GWAS$kinship)",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
     "href": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "19.6 Population Structure",
-    "text": "19.6 Population Structure\nThe population structure can also be explored from the produced kinship results.\n\n# Perform principal components analysis\npca &lt;- prcomp(GWAS$kinship)\n\n# Cumulative Proportion\nsummary(pca)$importance[,1:2]\n\n                            PC1      PC2\nStandard deviation     2.356227 1.262777\nProportion of Variance 0.587820 0.168830\nCumulative Proportion  0.587820 0.756650\n\n# Plotting correlations between traits (1st and 2nd components)\nplot(pca$x[,1:2], pch = 20,\n     main = paste0('Kinship PCA (', round(100*summary(pca)$importance[3,2],1), '%)'),\n     xlab = paste0('PC1 (', round(100*summary(pca)$importance[2,1],1), '%)'),\n     ylab = paste0('PC2 (', round(100*summary(pca)$importance[2,2],1), '%)'))",
+    "text": "19.6 Population Structure\nThe population structure can also be explored from the produced kinship results.\n\n# Perform principal components analysis\npca &lt;- prcomp(GWAS$kinship)\n\n# Cumulative Proportion\nsummary(pca)$importance[,1:2]\n\n                            PC1      PC2\nStandard deviation     2.365458 1.270465\nProportion of Variance 0.590100 0.170220\nCumulative Proportion  0.590100 0.760320\n\n# Plotting correlations between traits (1st and 2nd components)\nplot(pca$x[,1:2], pch = 20,\n     main = paste0('Kinship PCA (', round(100*summary(pca)$importance[3,2],1), '%)'),\n     xlab = paste0('PC1 (', round(100*summary(pca)$importance[2,1],1), '%)'),\n     ylab = paste0('PC2 (', round(100*summary(pca)$importance[2,2],1), '%)'))",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
     "href": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "19.7 Results Summary",
-    "text": "19.7 Results Summary\nGeneral information of our GWAS results can be obtained by printing the GWASInfo part of our GWAS object. GWASInfo$inflationFactor returns the inflation factor (Devlin and Roeder 1999). Ideally this factor should be 1, meaning there is no inflation at all. If the values are further away from 1, the inflation can be corrected for by setting genomicControl = TRUE in runSingleTraitGwas().\n\nGWAS$GWASInfo\n\n$call\nrunSingleTraitGwas(gData = gData, traits = \"ASC_Score\", kinshipMethod = \"vanRaden\", \n    thrType = \"fixed\", LODThr = 3.5)\n\n$remlAlgo\n[1] \"EMMA\"\n\n$thrType\n[1] \"fixed\"\n\n$MAF\n[1] 0.01\n\n$GLSMethod\n[1] \"single\"\n\n$kinshipMethod\n[1] \"vanRaden\"\n\n$varComp\n$varComp$phenotypic_data\n$varComp$phenotypic_data$ASC_Score\n       Vg        Ve \n0.6457415 1.8946559 \n\n\n\n$genomicControl\n[1] FALSE\n\n$inflationFactor\n$inflationFactor$phenotypic_data\nASC_Score \n0.8789669 \n\n\nFor a quick overview of the results, e.g. the number of significant SNPs, use the summary function.\n\nsummary(GWAS)\n\nphenotypic_data:\n    Traits analysed: ASC_Score \n\n    Data are available for 1082 SNPs.\n     0 of them were not analyzed because their minor allele frequency is below 0.01 \n\n    GLSMethod: single \n    kinshipMethod: vanRaden \n\n    Trait: ASC_Score \n\n        Mixed model with only polygenic effects, and no marker effects:\n        Genetic variance: 0.6457415 \n        Residual variance: 1.894656 \n\n        LOD-threshold: 3.5 \n        Number of significant SNPs: 2 \n        Smallest p-value among the significant SNPs: 7.163359e-05 \n        Largest p-value among the significant SNPs: 8.311162e-05 (LOD-score: 4.080338)\n\n        No genomic control correction was applied\n        Genomic control inflation-factor: 0.879",
+    "text": "19.7 Results Summary\nGeneral information of our GWAS results can be obtained by printing the GWASInfo part of our GWAS object. GWASInfo$inflationFactor returns the inflation factor (Devlin and Roeder 1999). Ideally this factor should be 1, meaning there is no inflation at all. If the values are further away from 1, the inflation can be corrected for by setting genomicControl = TRUE in runSingleTraitGwas().\n\nGWAS$GWASInfo\n\n$call\nrunSingleTraitGwas(gData = gData, traits = \"ASC_Score\", kinshipMethod = \"vanRaden\", \n    thrType = \"fixed\", LODThr = 3.5)\n\n$remlAlgo\n[1] \"EMMA\"\n\n$thrType\n[1] \"fixed\"\n\n$MAF\n[1] 0.01\n\n$GLSMethod\n[1] \"single\"\n\n$kinshipMethod\n[1] \"vanRaden\"\n\n$varComp\n$varComp$phenotypic_data\n$varComp$phenotypic_data$ASC_Score\n      Vg       Ve \n0.645392 1.893630 \n\n\n\n$genomicControl\n[1] FALSE\n\n$inflationFactor\n$inflationFactor$phenotypic_data\nASC_Score \n0.8851307 \n\n\nFor a quick overview of the results, e.g. the number of significant SNPs, use the summary function.\n\nsummary(GWAS)\n\nphenotypic_data:\n    Traits analysed: ASC_Score \n\n    Data are available for 1080 SNPs.\n     0 of them were not analyzed because their minor allele frequency is below 0.01 \n\n    GLSMethod: single \n    kinshipMethod: vanRaden \n\n    Trait: ASC_Score \n\n        Mixed model with only polygenic effects, and no marker effects:\n        Genetic variance: 0.645392 \n        Residual variance: 1.89363 \n\n        LOD-threshold: 3.5 \n        Number of significant SNPs: 2 \n        Smallest p-value among the significant SNPs: 7.154119e-05 \n        Largest p-value among the significant SNPs: 8.387735e-05 (LOD-score: 4.076355)\n\n        No genomic control correction was applied\n        Genomic control inflation-factor: 0.885",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "05_GWAS/02_Single_Trait_GWAS.html#plots",
     "href": "05_GWAS/02_Single_Trait_GWAS.html#plots",
-    "title": "19  Module 6.2: Single Trait GWAS",
+    "title": "19  Module 5.2: Single Trait GWAS",
     "section": "19.8 Plots",
     "text": "19.8 Plots\n\n19.8.1 QQ-Plot\nA QQ-plot of the observed against the expected log10(p) values. Most of the SNPs are expected to have no effect, resulting in P-values uniformly distributed on [0,1], and leading to the identity function (y=x) on the log10(p) scale. Deviations from this line should only occur on the right side of the plot, for a small number of SNPs with an effect on the phenotype (and possibly SNPs in LD).\n\nplot(GWAS, plotType = 'qq', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n19.8.2 Manhattan Plot\nA Manhattan plot of GWAS. Significant SNPs are marked in red. Plot only 5% of SNPs with a LOD below 2 (lod = 2)\n\nplot(GWAS, plotType = 'manhattan', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n19.8.3 QTL Plot\nA qtl plot of GWAS. The significant SNPs are marked by circles at their genomic positions, with diameter proportional to the estimated effect size. Colors indicate the direction of the effect: green when the allele increases the trait value, and blue when it decreases the value.\n\nplot(GWAS, plotType = 'qtl')",
     "crumbs": [
       "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 6.2: Single Trait GWAS</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
     ]
   },
   {
     "objectID": "06_GS/01_Genomic_Selection.html",
     "href": "06_GS/01_Genomic_Selection.html",
-    "title": "20  Module 7.1: Genomic Selection",
+    "title": "20  Module 6.1: Genomic Selection",
     "section": "",
     "text": "20.1 Read, Filter and Impute Marker Data\nGenomic selection enables early and accurate prediction of complex traits based on genome-wide SNP data. This can allow us to predict performance immediately after genotyping seedlings, which can speed up selection decisions and reduce the cost of field trials. We will be using the rrBBLUP package for this part, which is a is a package for genomic prediction with the ridge regression best linear unbiased prediction or RR-BLUP mixed linear model (Endelman, 2011). One application is to estimate marker effects by ridge regression; alternatively, BLUPs can be calculated based on an additive relationship matrix or a Gaussian kernel.\nThe genotypic matrix for rrBLUP has to be coded as {-1, 0, 1}, meaning we will need a conversion step if our data is not yet in that format. Moreover, we will be carrying out a mean value imputation.\n# Importing genotypic data\ngeno_file &lt;- 'data/barley_genbank_2388variants_554individuals_biallelic.hmp.txt.gz'\n\ngeno_data &lt;- read.csv(geno_file, sep = \"\\t\")\n\n# Show the first 50 rows/columns only\ncreate_dt(geno_data[1:50,1:50])\nM &lt;- geno_data[, -c(1:11)]\nrownames(M) &lt;- geno_data[, 1]\nM &lt;- t(M)\n\n# Reformatting matrix to numeric\nM &lt;- ASRgenomics::snp.recode(M, na.string = 'NN', rename.markers = FALSE)$Mrecode\n\nA total of 87800 values were identified as missing with the string NN and were replaced by NA.\n\n\nMatrix M was recoded from bi-allelic nucleotide bases to numeric.\n# Filtering genotypic matrix\nM &lt;- ASRgenomics::qc.filtering(M, \n                               marker.callrate = 0.1, \n                               ind.callrate = 0.2, \n                               maf = 0.05, \n                               impute = TRUE)$M.clean\n\nInitial marker matrix M contains 554 individuals and 2388 markers.\n\n\nA total of 674 markers were removed because their proportion of missing values was equal or larger than 0.1.\n\n\nA total of 5 individuals were removed because their proportion of missing values was equal or larger than 0.2.\n\n\nA total of 34 markers were removed because their MAF was smaller than 0.05.\n\n\nA total of 0 markers were removed because their heterozygosity was larger than 1.\n\n\nA total of 0 markers were removed because their |F| was larger than 1.\n\n\nFinal cleaned marker matrix M contains 2.84% of missing SNPs.\n\n\nFinal cleaned marker matrix M contains 549 individuals and 1680 markers.\n\n\nA total of 26221 missing values were imputed, corresponding to 2.84% of the total number of SNPs.\n\n# Reformatting to required format\nM &lt;- as.matrix(M) - 1\n\n# Show the first 50 rows/columns only\ncreate_dt(M[1:50,1:50])",
     "crumbs": [
       "Genomic Selection",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 7.1: Genomic Selection</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
     ]
   },
   {
     "objectID": "06_GS/01_Genomic_Selection.html#read-and-align-phenotypic-data",
     "href": "06_GS/01_Genomic_Selection.html#read-and-align-phenotypic-data",
-    "title": "20  Module 7.1: Genomic Selection",
+    "title": "20  Module 6.1: Genomic Selection",
     "section": "20.2 Read and Align Phenotypic Data",
     "text": "20.2 Read and Align Phenotypic Data\n\n# Importing phenotypic data\npheno_file &lt;- 'barley_genbank_phenotypic_mean_data.csv'\n\npheno_data &lt;- read.csv(pheno_file)\n\npheno_data &lt;- merge(pheno_data, as.data.frame(rownames(M)), by.x = 'sample_id', by.y = 1, all.y = TRUE)\n\n# Extracting requires trait\ny &lt;- pheno_data$Yield\n\n# Printing phenotypic data\ncreate_dt(pheno_data)",
     "crumbs": [
       "Genomic Selection",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 7.1: Genomic Selection</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
     ]
   },
   {
     "objectID": "06_GS/01_Genomic_Selection.html#model-1",
     "href": "06_GS/01_Genomic_Selection.html#model-1",
-    "title": "20  Module 7.1: Genomic Selection",
+    "title": "20  Module 6.1: Genomic Selection",
     "section": "20.3 Model 1",
     "text": "20.3 Model 1\nThe first model assumes that all marker effects are normally distributed and have identical variance. Parameters are estimated as a solution to the optimization problem. Predictions from this method are equivalent to BLUP values from an animal model (i.e., GBLUP). The observed relationship matrix is calculated from the markers using the formula by VanRaden (2008).\n\n# Fitting a Model using rrBLUP (case 1: all SNPs in the random effect)\nGS &lt;- rrBLUP::mixed.solve(y, Z = M, X = NULL, method = 'REML')\n\n# Obtaining predictions\npredGS &lt;- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u \n\n# Printing predictions\ncreate_dt(cbind(round(predGS, 3), y))\n\n\n\n\n\n\n# Plotting predictions\nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n20.3.1 Goodness of Fit Statistics\n\n# Heritability\n# Trait variance\n(var_y  &lt;- var(y, na.rm = TRUE))\n\n[1] 2.107743\n\n# Error variance\n(var_e  &lt;- GS$Ve)\n\n[1] 1.465679\n\n# Proportion of explained variance (High = good fit, potential heritability)\n(h2_GS &lt;- 1 - var_e / var_y)\n\n[1] 0.3046215\n\nAnas_table &lt;- cbind(rownames(M), y, predGS)\n\n# Predictive ability (High = good prediction accuracy)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.7800125",
     "crumbs": [
       "Genomic Selection",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 7.1: Genomic Selection</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
     ]
   },
   {
     "objectID": "06_GS/01_Genomic_Selection.html#model-2",
     "href": "06_GS/01_Genomic_Selection.html#model-2",
-    "title": "20  Module 7.1: Genomic Selection",
+    "title": "20  Module 6.1: Genomic Selection",
     "section": "20.4 Model 2",
     "text": "20.4 Model 2\nThis model handles some markers as having a fixed effect (e.g. significant SNPs from GWAS output). It splits the genotypic data into X matrix (fixed effects) and Z matrix (random effects). To calculate the REML solution for the model you solve y = X b + Z u + e. We predict BLUE(b) and BLUP(u) solutions for the fixed and random effects, respectively, using standard formulas (Searle et al. 1992).\n\n# Defining markers\nmarkers &lt;- c('S7H_63131260', 'S5H_573915992')\nSNPs    &lt;- colnames(M)\n\n# Filtering matrices\nX &lt;- M[, SNPs %in% markers]\nZ &lt;- M[,!SNPs %in% markers]\n\n# Fitting a Model using rrBLUP by exclude markers from the Z matrix (for the Random effects) and include them in the X matrix (for the fixed effect)\nGS &lt;- rrBLUP::mixed.solve(y, Z = Z, X = X, method = 'REML')\n\n# Obtaining predictions\npredGS &lt;- X %*% GS$beta + Z %*% GS$u \n\n# Printing predictions\ncreate_dt(cbind(round(predGS, 3), y))\n\n\n\n\n\n\n# Plot to verify \nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n20.4.1 Goodness of Fit Statistics\n\n# Heritability (GS)\n# Trait variance\n(var_y  &lt;- var(y, na.rm = TRUE))\n\n[1] 2.107743\n\n# Error variance\n(var_e  &lt;- GS$Ve)\n\n[1] 1.018018\n\n# Proportion of explained variance (High = good fit, potential heritability)\n(h2_GS &lt;- 1 - var_e / var_y)\n\n[1] 0.5170105\n\n# Predictive Ability (correlation between actual and predicted response)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.8952614",
     "crumbs": [
       "Genomic Selection",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 7.1: Genomic Selection</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
     ]
   },
   {
     "objectID": "06_GS/01_Genomic_Selection.html#k-fold-cross-validation",
     "href": "06_GS/01_Genomic_Selection.html#k-fold-cross-validation",
-    "title": "20  Module 7.1: Genomic Selection",
+    "title": "20  Module 6.1: Genomic Selection",
     "section": "20.5 K-Fold Cross Validation",
-    "text": "20.5 K-Fold Cross Validation\n\n# Set the total number of folds, and get the total number of individuals\nk &lt;- 5\nn &lt;- length(y)\n\n# Set randomly the fold group for each observation \n# That tells when it will be used for validation\ngroup &lt;- sample(rep(1:k, length.out = n), n)\nhead(group, 20)\n\n [1] 4 3 2 1 1 3 1 5 2 5 5 4 5 5 2 3 4 1 2 4\n\ntable(group)\n\ngroup\n  1   2   3   4   5 \n110 110 110 110 109 \n\n\n\n# An empty matrix to save calculated heritability in each fold, and GS prediction that calculated when individual be in validation group\npredGS &lt;- matrix(data = NA, nrow = n, ncol = 1)\nh2_cv  &lt;- matrix(data = NA, nrow = k, ncol = 1)\n\nfor (g in 1:k) { \n  # Reset response variable, and exclude validation set values for the given k fold\n  y_cv &lt;- y\n  y_cv[group == g] &lt;- NA\n  \n  # Fitting a Model using rrBLUP (model 1: all SNPs in the random effect)\n  # GS &lt;- mixed.solve(y_cv, Z = M, X = NULL, method = 'REML')\n  # predGS_cv &lt;- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u \n  \n  # Model 2: have some markers to be handled as a fixed effect\n  GS &lt;- rrBLUP::mixed.solve(y_cv, Z = Z, X = X, method = 'REML')\n  \n  # Obtaining predictions\n  predGS_cv &lt;- X %*% GS$beta + Z %*% GS$u \n  \n  # Heritability (GS)\n  var_y    &lt;- var(y_cv, na.rm = TRUE)\n  var_e    &lt;- GS$Ve\n  h2_cv[g] &lt;- 1 - var_e / var_y\n  \n  # Get the GS prediction for all validation set individuals\n  predGS[group == g] &lt;- predGS_cv[group == g]\n}\n\n# Plot to verify \nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n# Heritability (GS cross-validation)\nh2_cv\n\n          [,1]\n[1,] 0.5375536\n[2,] 0.5392966\n[3,] 0.5214742\n[4,] 0.5793726\n[5,] 0.5264667\n\nmean(h2_cv)\n\n[1] 0.5408327\n\n# Predictive Ability (correlation between actual and predicted response)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.4016631",
+    "text": "20.5 K-Fold Cross Validation\n\n# Set the total number of folds, and get the total number of individuals\nk &lt;- 5\nn &lt;- length(y)\n\n# Set randomly the fold group for each observation \n# That tells when it will be used for validation\ngroup &lt;- sample(rep(1:k, length.out = n), n)\nhead(group, 20)\n\n [1] 3 5 4 4 1 1 2 5 2 3 4 1 2 2 2 2 2 3 5 1\n\ntable(group)\n\ngroup\n  1   2   3   4   5 \n110 110 110 110 109 \n\n\n\n# An empty matrix to save calculated heritability in each fold, and GS prediction that calculated when individual be in validation group\npredGS &lt;- matrix(data = NA, nrow = n, ncol = 1)\nh2_cv  &lt;- matrix(data = NA, nrow = k, ncol = 1)\n\nfor (g in 1:k) { \n  # Reset response variable, and exclude validation set values for the given k fold\n  y_cv &lt;- y\n  y_cv[group == g] &lt;- NA\n  \n  # Fitting a Model using rrBLUP (model 1: all SNPs in the random effect)\n  # GS &lt;- mixed.solve(y_cv, Z = M, X = NULL, method = 'REML')\n  # predGS_cv &lt;- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u \n  \n  # Model 2: have some markers to be handled as a fixed effect\n  GS &lt;- rrBLUP::mixed.solve(y_cv, Z = Z, X = X, method = 'REML')\n  \n  # Obtaining predictions\n  predGS_cv &lt;- X %*% GS$beta + Z %*% GS$u \n  \n  # Heritability (GS)\n  var_y    &lt;- var(y_cv, na.rm = TRUE)\n  var_e    &lt;- GS$Ve\n  h2_cv[g] &lt;- 1 - var_e / var_y\n  \n  # Get the GS prediction for all validation set individuals\n  predGS[group == g] &lt;- predGS_cv[group == g]\n}\n\n# Plot to verify \nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n# Heritability (GS cross-validation)\nh2_cv\n\n          [,1]\n[1,] 0.5071735\n[2,] 0.4899859\n[3,] 0.6435327\n[4,] 0.5300970\n[5,] 0.5058979\n\nmean(h2_cv)\n\n[1] 0.5353374\n\n# Predictive Ability (correlation between actual and predicted response)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.4152787",
     "crumbs": [
       "Genomic Selection",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 7.1: Genomic Selection</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
     ]
   },
   {
     "objectID": "06_GS/01_Genomic_Selection.html#predict-breeding-values",
     "href": "06_GS/01_Genomic_Selection.html#predict-breeding-values",
-    "title": "20  Module 7.1: Genomic Selection",
+    "title": "20  Module 6.1: Genomic Selection",
     "section": "20.6 Predict Breeding Values",
     "text": "20.6 Predict Breeding Values\n\n# Calculate the additive relationship matrix (it is the kinship matrix multiplied by 2) it can also perform imputation for missing marker data by \n# Define impute.method (mean or EM) (see also: min.MAF, max.missing, and return.imputed parameters)\nA &lt;- rrBLUP::A.mat(M)\nheatmap(A)\n\n\n\n\n\n\n\n\n\nGS &lt;- rrBLUP::mixed.solve(y, K = A.mat(M), SE = TRUE)\n\n# Genomic Estimated Breeding Value (GEBV)\nGEBV &lt;- cbind(round(GS$u, 3), round(GS$u.SE, 3))\n\ncolnames(GEBV) &lt;- c('GEBV', 'SE')\n\ncreate_dt(GEBV)",
     "crumbs": [
       "Genomic Selection",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 7.1: Genomic Selection</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
     ]
   },
   {
@@ -260,6 +260,39 @@
     "crumbs": [
       "Introduction and Setup",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/00_Welcome.html",
+    "href": "00_Setup_Intro/00_Welcome.html",
+    "title": "2  Welcome and Course Overview",
+    "section": "",
+    "text": "2.1 Hello Baku Breeders!\nWelcome to this introductory course on data analysis for plant genetics, a collaboration with ICARDA. We are excited to guide you through the essential tools and concepts needed to make sense of your valuable breeding data using R.",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/00_Welcome.html#course-objectives",
+    "href": "00_Setup_Intro/00_Welcome.html#course-objectives",
+    "title": "2  Welcome and Course Overview",
+    "section": "2.2 Course Objectives",
+    "text": "2.2 Course Objectives\n\nLearn the fundamentals of the R programming language.\nUnderstand core genomic concepts.\nPerform genomic basic data loading, cleaning, and quality control.\nRun population structure, genetic diversity and relatedness analyses.\nUnderstand and run genome-wide association studies (GWAS).\nIntroduction to genomic selection (GS)",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
+    ]
+  },
+  {
+    "objectID": "00_Setup_Intro/00_Welcome.html#course-structure",
+    "href": "00_Setup_Intro/00_Welcome.html#course-structure",
+    "title": "2  Welcome and Course Overview",
+    "section": "2.3 Course Structure",
+    "text": "2.3 Course Structure\nThis course is divided into six different modules aligned to each of our objectives. Each module includes explanations and practical R exercises.\nNo prior programming experience is required!\nAll course files and scripts are available on our GitHub repository",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
     ]
   }
 ]
