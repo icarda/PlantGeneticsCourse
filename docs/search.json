@@ -294,5 +294,82 @@
       "Introduction and Setup",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
     ]
+  },
+  {
+    "objectID": "01_R_Basics/01_Intro_To_R.html",
+    "href": "01_R_Basics/01_Intro_To_R.html",
+    "title": "4  Module 1.1: Introduction to R - Your Breeding Data Analysis Tool",
+    "section": "",
+    "text": "4.0.1 Introduction to R\nR is a powerful language for data manipulation, visualization, and statistical analysis. Think of R as a versatile calculator for data.\nTry these examples in the RStudio Console:\n# Basic arithmetic\n2 + 5\n\n[1] 7\n\n10 - 3\n\n[1] 7\n\n4 * 8\n\n[1] 32\n\n100 / 4\n\n[1] 25\n\n# Order of operations (like standard math)\n5 + 2 * 3   # Multiplication first\n\n[1] 11\n\n(5 + 2) * 3 # Parentheses first\n\n[1] 21\n\n# Built-in mathematical functions\nsqrt(16)    # Square root\n\n[1] 4\n\nlog(10)     # Natural logarithm\n\n[1] 2.302585\n\nlog10(100)  # Base-10 logarithm\n\n[1] 2",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Module 1.1: Introduction to R - Your Breeding Data Analysis Tool</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/01_Intro_To_R.html#variables-storing-information",
+    "href": "01_R_Basics/01_Intro_To_R.html#variables-storing-information",
+    "title": "4  Module 1.1: Introduction to R - Your Breeding Data Analysis Tool",
+    "section": "4.1 Variables: Storing Information",
+    "text": "4.1 Variables: Storing Information\nVariables are used to store information in R. You can think of them as containers for data. In R, you can create variables using the assignment operator &lt;-. You can also use = for assignment, but &lt;- is more common in R.\nUse the &lt;- operator to assign and manipulate variables:\n\n# Assign the value 5 to variable x\nx &lt;- 5\n\n# Assign the result of 10 + 3 to variable y\ny &lt;- 10 + 3\n\n# Print the value of x\nx\n\n[1] 5\n\n# Use variables in calculations\nz &lt;- x + y\n# Print the value of z\nz\n\n[1] 18\n\n# Assign the name of a variety to a variable\nbest_variety &lt;- \"ICARDA_Gold\" # Text needs quotes \"\"\n\n# Print name\nprint(best_variety)\n\n[1] \"ICARDA_Gold\"\n\n# We can also concatenate text like this\nprint(paste(\"The best variety is\", best_variety))\n\n[1] \"The best variety is ICARDA_Gold\"",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Module 1.1: Introduction to R - Your Breeding Data Analysis Tool</span>"
+    ]
+  },
+  {
+    "objectID": "01_R_Basics/01_Intro_To_R.html#useful-shortcuts",
+    "href": "01_R_Basics/01_Intro_To_R.html#useful-shortcuts",
+    "title": "4  Module 1.1: Introduction to R - Your Breeding Data Analysis Tool",
+    "section": "4.2 Useful shortcuts",
+    "text": "4.2 Useful shortcuts\n\n\n\n\n\n\n\nFunction\nShortcut\n\n\n\n\nRun code\nCtrl + Enter (Windows)\nCmd + Enter (Mac)\n\n\nInsert chunk\nCtrl + Alt + I (Windows)\nCmd + Option + I (Mac)\n\n\nRun current chunk\nCtrl + Alt + C (Windows)\nCmd + Option + C (Mac)\n\n\nRun all chunks above\nCtrl + Alt + P (Windows)\nCmd + Option + P (Mac)\n\n\nRun all chunks\nCtrl + Alt + R (Windows)\nCmd + Option + R (Mac)",
+    "crumbs": [
+      "R Programming Fundamentals",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Module 1.1: Introduction to R - Your Breeding Data Analysis Tool</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "",
+    "text": "15.1 Diversity parameters\nSNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.\nWe can easily calculate the most relevant diversity parameters using the genDivSNPReady() from our package.\ngenDivSNPReady(geno, plots = FALSE, interactive = TRUE): Returns diversity parameters calculated with snpReady package.\nThe function returns a list object with two data frames, one with the diversity parameters for each marker, and one with the diversity parameters for each accession. If plots = TRUE, a third object is generated with the different plots.\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n# SNP matrix has to have individuals in rows and markers as columns for the \n# posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n# Ensuring IDs match\nmetadata &lt;- metadata[metadata$Individual %in% rownames(matrix),]\n# Obtaining genetic diversity parameters\nSNPReadyParams &lt;- genDivSNPReady(matrix, plots = TRUE)\n\n# Printing marker diversity parameters\nSNPReadyParams$markers\n\nDownload as CSV\n\n\n\n# Printing individual's diversity parameters\nSNPReadyParams$accessions\n\nDownload as CSV\n\n\n\n# Diversity plots\nSNPReadyParams$plots",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#diversity-parameters",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html#diversity-parameters",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "",
+    "text": "geno: our genotype matrix\nplots: defaults to FALSE, if TRUE, a graphical output of the results is produced\ninteractive: defaults to TRUE, produces a dynamic table, if FALSE, output remains as data frame",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#by-population",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html#by-population",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "15.2 By population",
+    "text": "15.2 By population\nThese parameters can also be calculated by population in order to compare the diversity between them. We will use the HeBySubgroups() function from our package.\nHeBySubgroups(geno, subgroups, plot = FALSE, interactive = TRUE): returns expected heterozygosity (He) by groups, including an optional plot\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\nplots: defaults to FALSE, if TRUE, a graphical output of the results is produced\ninteractive: defaults to TRUE, produces a dynamic table, if FALSE, output remains as data frame\n\n\n# Defining our populations from country information\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual \n                                                 %in% rownames(matrix)])\n\n# Calculating parameters by population\nHe &lt;- HeBySubgroups(matrix, popSet, plot = TRUE)\n\n# Plotting results\nHe$plot\n\n\n\n\n# Printing results\nHe$df\n\nDownload as CSV",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#amova",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html#amova",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "15.3 AMOVA",
+    "text": "15.3 AMOVA\nAMOVA or Analysis of Molecular Variance can be run from a genetic distance matrix to evaluate genetic variation within populations, between populations and among populations. It helps us understand the structure of variation in our sample. We will be using the genDistPop() and AMOVA() functions from our package for this. They use frameworks from adegenet and poppr to carry out the AMOVA.\ngenDistPop(geno, subgroups, method = 1, PCoA = FALSE): returns a genetic distance matrix and optional Principal Coordinate Analysis from the distance matrix.\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\nmethod: defaults to 1 (Nei’s distance), allows for values 1-5 (Nei, Edwards, Reynolds, Rogers, Provesti)\nPCoA: defaults to FALSE, if TRUE, performs a principal coordinates analysis of a Euclidean distance matrix\n\nAMOVA():\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\n\n\n# Calculating our genetic distance matrix and PCoA\ngenDist &lt;- genDistPop(matrix, popSet, PCoA = TRUE)\n\n\n Converting data from a genind to a genpop object... \n\n...done.\n\n# Printing results\ngenDist\n\n$genDist\n          CHN       ETH       TUR\nCHN 0.0000000                    \nETH 0.1785492 0.0000000          \nTUR 0.1075913 0.1388646 0.0000000\n\n$PCoA\nDuality diagramm\nclass: pco dudi\n$call: dudi.pco(d = genDist, scannf = FALSE, nf = 3)\n\n$nf: 2 axis-components saved\n$rank: 2\neigen values: 0.005458 0.001513\n  vector length mode    content       \n1 $cw    2      numeric column weights\n2 $lw    3      numeric row weights   \n3 $eig   2      numeric eigen values  \n\n  data.frame nrow ncol content             \n1 $tab       3    2    modified array      \n2 $li        3    2    row coordinates     \n3 $l1        3    2    row normed scores   \n4 $co        2    2    column coordinates  \n5 $c1        2    2    column normed scores\nother elements: NULL\n\n$PCoAPlot\n\n# PCoA\ngenDist$PCoAPlot\n\n\n\n\n# Running AMOVA\namovaResult &lt;- AMOVA(matrix, popSet)\n\n\n Replaced 248144 missing values.\n\n\n\n No missing values detected.\n\n# Printing results\namovaResult\n\n$call\nade4::amova(samples = xtab, distances = xdist, structures = xstruct)\n\n$results\n                 Df    Sum Sq    Mean Sq\nBetween samples   2  92405.09 46202.5455\nWithin samples  485 346712.00   714.8701\nTotal           487 439117.09   901.6778\n\n$componentsofcovariance\n                                Sigma         %\nVariations  Between samples  291.6988  28.97952\nVariations  Within samples   714.8701  71.02048\nTotal variations            1006.5689 100.00000\n\n$statphi\n                        Phi\nPhi-samples-total 0.2897952",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
   }
 ]

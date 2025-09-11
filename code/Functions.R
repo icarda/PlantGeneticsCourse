@@ -197,33 +197,36 @@ markerPlots <- function(markers, matrix, chrom = NULL){
 ## SNP ready
 # geno is nxm numeric matrix with n individuals and m markers
 # returns diversity parameters calculated with SNP ready package
-genDivSNPReady <- function(geno, plots = FALSE){
+genDivSNPReady <- function(geno, plots = FALSE, interactive = TRUE){
   SNPDivStats <- popgen(geno, plot=FALSE)
   
   # diversity parameters by markers
   DivMarkers <- SNPDivStats[["whole"]][["Markers"]]
   DivMarkers <- rownames_to_column(DivMarkers,"Marker")
-  
-  DivMarkersTable <- htmltools::browsable(
-    tagList(
-      csvDownloadButton("DivMarkers", "Download as CSV", filename = "DivMarkers.csv"),
-      
-      reactable(DivMarkers, filterable = TRUE, searchable = TRUE, elementId = "DivMarkers")
-    )
-  )
+  DivMarkersTable <- DivMarkers
   
   # diversity parameters by accessions
   AccessionsHo <- as.data.frame(SNPDivStats[["whole"]][["Genotypes"]][,1])
   AccessionsHo <- rownames_to_column(AccessionsHo, "Accession")
   colnames(AccessionsHo)[2] <- "Observed heterozygosity"
+  AccessionsHoTable <- AccessionsHo
   
-  AccessionsHoTable <- htmltools::browsable(
-    tagList(
-      csvDownloadButton("DivAccessions", "Download as CSV", filename = "DivAccessions.csv"),
-      
-      reactable(AccessionsHo, filterable = TRUE, searchable = TRUE, elementId = "DivAccessions")
+  if(interactive == TRUE){
+    DivMarkersTable <- htmltools::browsable(
+      tagList(
+        csvDownloadButton("DivMarkers", "Download as CSV", filename = "DivMarkers.csv"),
+        
+        reactable(DivMarkers, filterable = TRUE, searchable = TRUE, elementId = "DivMarkers")
+      )
     )
-  )
+    AccessionsHoTable <- htmltools::browsable(
+      tagList(
+        csvDownloadButton("DivAccessions", "Download as CSV", filename = "DivAccessions.csv"),
+        
+        reactable(AccessionsHo, filterable = TRUE, searchable = TRUE, elementId = "DivAccessions")
+      )
+    )
+  }
   
   if(plots == FALSE){
     return(list(markers = DivMarkersTable, accessions = AccessionsHoTable))
@@ -269,21 +272,24 @@ genDivSNPReady <- function(geno, plots = FALSE){
 # geno is nxm matrix with n individuals and m markers in "1/1" format
 # subgroups is factor vector of n length
 # returns He by groups, including optional plot
-HeBySubgroups <- function(geno, subgroups, plot = FALSE){
+HeBySubgroups <- function(geno, subgroups, plot = FALSE, interactive = TRUE){
   genInd <- df2genind(geno, sep = "/", ploidy = 2, type = "codom", pop = subgroups)
   
   # expected heterozygosity within populations
   HePop <- Hs(genInd)
   HePop <- data.frame(HePop)
   names(HePop) <- "He"
+  HePopTable <- HePop
   
-  HePopTable <- htmltools::browsable(
+  if(interactive == TRUE){
+    HePopTable <- htmltools::browsable(
       tagList(
         csvDownloadButton("HePop", "Download as CSV", filename = "HePop.csv"),
         
         reactable(HePop, elementId = "HePop")
       )
     )
+  }
   
   if(plot == FALSE){
     return(HePopTable)

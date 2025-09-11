@@ -62,3 +62,29 @@ print(best_variety)
 # We can also concatenate text like this
 print(paste("The best variety is", best_variety))
 ```
+
+## Useful shortcuts
+
++----------------------+--------------------------------+
+| Function             | Shortcut                       |
++======================+================================+
+| Run code             | `Ctrl + Enter` **(Windows)**   |
+|                      |                                |
+|                      | `Cmd + Enter` **(Mac)**        |
++----------------------+--------------------------------+
+| Insert chunk         | `Ctrl + Alt + I` **(Windows)** |
+|                      |                                |
+|                      | `Cmd + Option + I` **(Mac)**   |
++----------------------+--------------------------------+
+| Run current chunk    | `Ctrl + Alt + C` **(Windows)** |
+|                      |                                |
+|                      | `Cmd + Option + C` **(Mac)**   |
++----------------------+--------------------------------+
+| Run all chunks above | `Ctrl + Alt + P` **(Windows)** |
+|                      |                                |
+|                      | `Cmd + Option + P` **(Mac)**   |
++----------------------+--------------------------------+
+| Run all chunks       | `Ctrl + Alt + R` **(Windows)** |
+|                      |                                |
+|                      | `Cmd + Option + R` **(Mac)**   |
++----------------------+--------------------------------+
