@@ -77,13 +77,13 @@ Once we have filtered our matrix, we can visualize marker information. We first 
 
 ```{r markers-run, include=FALSE}
 # Importing our marker information
-markers <- read.table(here("data","markers.tsv"), sep = "\t", header = TRUE, 
+markers <- read.table(here("data","BarleyMarkers.tsv"), sep = "\t", header = TRUE, 
                      check.names = FALSE)
 ```
 
 ```{r markers, eval=FALSE}
 # Importing our marker information
-markers <- read.table("data/markers.tsv", sep = "\t", header = TRUE, 
+markers <- read.table("data/BarleyMarkers.tsv", sep = "\t", header = TRUE, 
                      check.names = FALSE)
 ```
 
