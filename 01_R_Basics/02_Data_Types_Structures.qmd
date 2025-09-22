@@ -82,13 +82,13 @@ class(mixed_vector)# Example: Small genotype matrix (Individuals x SNPs)
 
 ```{r matrix}
 # Example: Small genotype matrix (Individuals x SNPs)
- genotype_data <- matrix(c(0, 1, 2, 1, 1, 0), nrow = 2, ncol = 3, byrow = TRUE)
- rownames(genotype_data) <- c("Line1", "Line2")
- colnames(genotype_data) <- c("SNP1", "SNP2", "SNP3")
- print(genotype_data)
- class(genotype_data)
- dim(genotype_data) # Get dimensions (rows, columns)
- genotype_data[1, 2] # Access element row 1, column 2
+genotype_data <- matrix(c(0, 1, 2, 1, 1, 0), nrow = 2, ncol = 3, byrow = TRUE)
+rownames(genotype_data) <- c("Line1", "Line2")
+colnames(genotype_data) <- c("SNP1", "SNP2", "SNP3")
+print(genotype_data)
+class(genotype_data)
+dim(genotype_data) # Get dimensions (rows, columns)
+genotype_data[1, 2] # Access element row 1, column 2
 ```
 
 3.  **Data Frame:** **The most important data structure for breeders!** Like a spreadsheet or table in R.

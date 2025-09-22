@@ -1,0 +1,127 @@
+# Module 2.3: General Biostatistics
+
+We will be using a data of wheat plant height values to practice some general biostatistical analyses. We first need to start by importing our data.
+
+```{r setup, include=FALSE}
+library(here)
+```
+
+```{r import-run, include=FALSE}
+# Loading required library
+library(readxl)
+
+# Import excel data frame
+df <- read_excel(here("data","plantHeights.xlsx"))
+```
+
+```{r import, eval=FALSE}
+# Loading required library
+library(readxl)
+
+# Import excel data frame
+df <- read_excel("data/plantHeights.xlsx")
+```
+
+Let's look at our data frame.
+
+```{r}
+head(df)
+str(df)
+```
+
+We can see that we have a lot of empty values, we want to remove these before any further analyses.
+
+```{r}
+df <- df[complete.cases(df),]
+head(df)
+```
+
+Our plant height variable is the column `PHT`. We want to visualize the distribution of this variable.
+
+```{r}
+# Summary statistics
+summary(df$PHT)
+
+# Histogram
+hist(df$PHT)
+
+# Box plot
+boxplot(df$PHT)
+```
+
+We can see that there are two outlier values above 800, which are most likely wrongly annotated. We will remove this for the sake of the analysis.
+
+```{r}
+# We want to keep only those values less than 800
+df <- df[df$PHT < 800,]
+
+# We plot our histogram aghain
+hist(df$PHT, breaks = 50)
+
+# We plot our boxplot again
+boxplot(df$PHT)
+```
+
+If we look at our data frame, we can see we have year and country information, we will use this to make certain assertions about our data.
+
+```{r}
+# Box plot by year
+boxplot(df$PHT ~ df$YEAR)
+
+# box plot by country
+boxplot(df$PHT ~ df$Country, las = 2, cex.axis = 0.4)
+```
+
+As we saw in our histogram, our data is approximately normally distributed, which means we can run a t-test to see if there is a significant difference between the plant heights of two different countries. I will choose AZE and CHN for this case.
+
+```{r}
+AZE_PHT <- df[df$Country == "AZE",]
+CHN_PHT <- df[df$Country == "CHN",]
+
+# Creating data frame with data only from these two countries
+AZE_CHN_PHT <- rbind(AZE_PHT, CHN_PHT)
+
+# Running t-test
+t.test(AZE_CHN_PHT$PHT ~ AZE_CHN_PHT$Country)
+```
+
+We get a p-value of 0.04, less than our threshold of 0.05. This means we we can reject the null hypothesis of no differentiation between the means of both groups.
+
+**What if we wanted to evaluate more than one variable, not only two countries but all of the countries with more than 100 observations?**
+
+```{r}
+# Filter for countries with more than 20 observations
+df_filtered <- df[df$Country %in% names(which(table(df$Country) > 100)),]
+
+# Make sure variables are factored
+df_filtered$Country <- factor(df_filtered$Country)
+
+# Fit one-way ANOVA
+anova_model <- aov(PHT ~ Country, data = df_filtered)
+
+# ANOVA table
+summary(anova_model)
+```
+
+In this results, the **Sum Sq** shows us the variation in plant height explained by differences between countries, and the variation within countries (which is the one shown in the **Residuals** row). The **F value** is the ratio of between-group variance (countries) to within-group variance (residuals). A large F means country differences are much larger than random variation. Our obtained p-value is extremely small, meaning plant height does significantly differ between countries.
+
+**What if we wanted to know which pairs of countries differed (the individual interactions)?**
+
+```{r}
+# We would run the Tukey HSD test
+tuk <- TukeyHSD(anova_model)
+tuk
+
+# To see the pairs with lower p-values (most significant differences)
+# We exctract results and turn into data frame
+tuk_df <- as.data.frame(tuk$Country)
+
+# Add pair names
+tuk_df$Pair <- rownames(tuk$Country)
+
+# Sort by adjusted p-value
+tuk_df_sorted <- tuk_df[order(tuk_df$`p adj`), ]
+
+# Show the pairs with significant differences
+tuk_df_sorted[tuk_df_sorted$`p adj` < 0.05,]
+```

@@ -118,10 +118,10 @@ We will be using the `sPCA()` function from our package. This function uses the 
 
 -   `pos`: defaults to TRUE to plot the positive values, can be set to FALSE to plot the negative values
 
-```{r spca, eval=FALSE}
+```{r spca, eval = FALSE}
 # Running sPCA
 spca <- sPCA(matrix, subgroups = popSet, xy = metadata[,c("LON","LAT")], 
-             eigenPlot = TRUE, tests = TRUE)
+             eigenPlot = TRUE, tests = FALSE)
 
 # Plotting our obtained eigenvalues
 spca$eigenPlot

@@ -90,19 +90,42 @@ num_yield_obs <- sum(!is.na(yield_values))
 print(paste("Number of accessions with GY data:", num_yield_obs))
 ```
 
-**Exercise:** 1. Load the `icarda_barley_2019_pheno.csv` file into R. 2. Use `glimpse()` to check the column names and data types. 3. Calculate and print the average Plant Height (`PH`) from the dataset. Remember to handle potential missing values (`na.rm = TRUE`).
+## Visualizing data
 
-This module has shown you the first critical step: getting your valuable field data into R. In the next modules, we'll learn how to clean, manipulate, and visualize this data.
+We can visualize the distribution of a specific variable using histograms and box plots.
 
-```{r exercise, warning=FALSE}
-# Exercise
-# Inspect data and data types
-glimpse(barley_pheno_data)
+```{r}
+# Plotting histogram
+hist(barley_pheno_data$Protein, breaks = 50)
+# Adding mean
+abline(v = mean(barley_pheno_data$Protein), col = "red")
+# Adding median
+abline(v = median(barley_pheno_data$Protein), col = "blue")
+```
 
-# Calculating average Plant Height
-plant_heights <- barley_pheno_data$PH # extracting plant height column
-mean_height <- mean(plant_heights, na.rm = TRUE)
+```{r}
+# Plotting box plot
+boxplot(barley_pheno_data$Protein)
+```
 
-# Printing average Plant Height
-print(paste("Average Plant Height (PH):", round(mean_height, 2)))
+We can evaluate if there is any general structure that can be identified through PCA.
+
+```{r}
+# Scale and run PCA (without our 1st ID column)
+pca_res <- prcomp(barley_pheno_data[,-1], scale. = TRUE)
+
+# Summary: variance explained
+summary(pca_res)
+
+# PCA scores (samples)
+scores <- as.data.frame(pca_res$x)
+
+# PCA loadings (traits contribution)
+loadings <- as.data.frame(pca_res$rotation)
+
+# Plot first two PCs
+plot(scores$PC1, scores$PC2,
+     xlab = paste0("PC1 (", round(summary(pca_res)$importance[2,1]*100, 1), "%)"),
+     ylab = paste0("PC2 (", round(summary(pca_res)$importance[2,2]*100, 1), "%)"),
+     main = "PCA Scatterplot")
 ```

@@ -33,6 +33,7 @@ book:
       chapters:
         - 02_Data_Handling/01_Loading_Data.qmd
         - 02_Data_Handling/02_Data_QC_Filtering.qmd
+        - 02_Data_Handling/03_General_Biostatistics.qmd
     - part: "Core Genomic Concepts"
       chapters:
         - 03_Genomic_Concepts/01_SNPs_Genotypes.qmd
