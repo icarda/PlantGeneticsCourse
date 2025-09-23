@@ -351,8 +351,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#libraries" id="toc-libraries" class="nav-link active" data-scroll-target="#libraries"><span class="header-section-number">11.1</span> Libraries</a></li>
+  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import"><span class="header-section-number">11.2</span> Data import</a></li>
+  <li><a href="#exploring-data" id="toc-exploring-data" class="nav-link" data-scroll-target="#exploring-data"><span class="header-section-number">11.3</span> Exploring data</a></li>
+  <li><a href="#basic-summaries" id="toc-basic-summaries" class="nav-link" data-scroll-target="#basic-summaries"><span class="header-section-number">11.4</span> Basic Summaries</a></li>
+  <li><a href="#data-distribution" id="toc-data-distribution" class="nav-link" data-scroll-target="#data-distribution"><span class="header-section-number">11.5</span> Data Distribution</a></li>
+  <li><a href="#significant-differences-between-two-groups" id="toc-significant-differences-between-two-groups" class="nav-link" data-scroll-target="#significant-differences-between-two-groups"><span class="header-section-number">11.6</span> Significant differences between two groups</a>
+  <ul class="collapse">
+  <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test"><span class="header-section-number">11.6.1</span> T-test</a></li>
+  <li><a href="#wilcoxon-signed-rank-test" id="toc-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#wilcoxon-signed-rank-test"><span class="header-section-number">11.6.2</span> Wilcoxon signed-rank test</a></li>
+  </ul></li>
+  <li><a href="#significant-differences-between-multiple-groups" id="toc-significant-differences-between-multiple-groups" class="nav-link" data-scroll-target="#significant-differences-between-multiple-groups"><span class="header-section-number">11.7</span> Significant differences between multiple groups</a>
+  <ul class="collapse">
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova"><span class="header-section-number">11.7.1</span> ANOVA</a></li>
+  </ul></li>
+  <li><a href="#significant-differences-between-multiple-groups-and-conditions" id="toc-significant-differences-between-multiple-groups-and-conditions" class="nav-link" data-scroll-target="#significant-differences-between-multiple-groups-and-conditions"><span class="header-section-number">11.8</span> Significant differences between multiple groups and conditions</a>
+  <ul class="collapse">
+  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova"><span class="header-section-number">11.8.1</span> Two-way ANOVA</a></li>
+  </ul></li>
+  <li><a href="#pearson-correlation" id="toc-pearson-correlation" class="nav-link" data-scroll-target="#pearson-correlation"><span class="header-section-number">11.9</span> Pearson Correlation</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">11.10</span> PCA</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots"><span class="header-section-number">11.11</span> Plots</a>
+  <ul class="collapse">
+  <li><a href="#box-plots" id="toc-box-plots" class="nav-link" data-scroll-target="#box-plots"><span class="header-section-number">11.11.1</span> Box plots</a></li>
+  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link" data-scroll-target="#scatter-plot"><span class="header-section-number">11.11.2</span> Scatter plot</a></li>
+  <li><a href="#bar-plots" id="toc-bar-plots" class="nav-link" data-scroll-target="#bar-plots"><span class="header-section-number">11.11.3</span> Bar plots</a></li>
+  <li><a href="#saving-a-plot" id="toc-saving-a-plot" class="nav-link" data-scroll-target="#saving-a-plot"><span class="header-section-number">11.11.4</span> Saving a plot</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -376,518 +408,633 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>We will be using a data of wheat plant height values to practice some general biostatistical analyses. We first need to start by importing our data.</p>
+<p>We will be using an artificial data set of plant traits to practice some general biostatistical analyses. We first need to start by loading the required libraries.</p>
+<section id="libraries" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">11.1</span> Libraries</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading required library</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Import excel data frame</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/plantHeights.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install required packages if not already installed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"reshape2"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"FactoMineR"</span>, <span class="st">"factoextra"</span>, <span class="st">"corrplot"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>installed <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> packages) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>(p <span class="sc">%in%</span> installed)) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(p)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s look at our data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading required libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.2
+✔ ggplot2   4.0.0     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'reshape2'
+
+The following object is masked from 'package:tidyr':
+
+    smiths</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>corrplot 0.95 loaded</code></pre>
+</div>
+</div>
+</section>
+<section id="data-import" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="data-import"><span class="header-section-number">11.2</span> Data import</h2>
+<p>Lets import our excel data sheet into R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import excel data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/PlantData.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exploring-data" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="exploring-data"><span class="header-section-number">11.3</span> Exploring data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets see how it looks</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 14
-     IG     PLOT   REP EXPT     YEAR   BLK   PLT TREAT CHECK PDATE TAXVER   PHT
-  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1 40803   953574    NA CE9601   1996    NA    NA    NA    NA     0      0   138
-2 40803 16020009     1 CEM1602  2016     0     0     0     0     0      0   105
-3 40803 21030006     1 CEM2103  2021     0     0     0     0     0      0   130
-4 40804   953756    NA CE9601   1996    NA    NA    NA    NA     0      0   125
-5 40804 18022250     1 CEM1802  2018     0     0     0     0     0      0    98
-6 40807   953905    NA CE9601   1996    NA    NA    NA    NA     0      0   100
-# ℹ 2 more variables: SeedID &lt;chr&gt;, Country &lt;chr&gt;</code></pre>
+<pre><code>tibble [90 × 11] (S3: tbl_df/tbl/data.frame)
+ $ PlantID      : num [1:90] 1 2 3 4 5 6 7 8 9 10 ...
+ $ Species      : chr [1:90] "SpeciesA" "SpeciesA" "SpeciesA" "SpeciesA" ...
+ $ Treatment    : chr [1:90] "Control" "Control" "Control" "Control" ...
+ $ Location     : chr [1:90] "Field" "Field" "Field" "Field" ...
+ $ Height_cm    : num [1:90] 145 133 154 150 167 ...
+ $ LeafLength_cm: num [1:90] 24.5 26.9 27.7 32.1 32.2 ...
+ $ LeafWidth_cm : num [1:90] 8.02 10.73 9.21 11.4 10.03 ...
+ $ Biomass_g    : num [1:90] 278 228 224 239 254 ...
+ $ Yield_g      : num [1:90] 342 238 290 282 341 ...
+ $ Chlorophyll  : num [1:90] 42.5 48.1 33.7 37.3 56.3 ...
+ $ Color        : chr [1:90] "Green" "Green" "Green" "Green" ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see that we have a few numeric variables and a few character variables. We want to turn these character variables into factors (categories) for posterior analyses.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turning into factor</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>Species)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Treatment <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>Treatment)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Location <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>Location)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Color <span class="ot">&lt;-</span> <span class="fu">factor</span>(data<span class="sc">$</span>Color)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploring again</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>tibble [38,840 × 14] (S3: tbl_df/tbl/data.frame)
- $ IG     : num [1:38840] 40803 40803 40803 40804 40804 ...
- $ PLOT   : num [1:38840] 953574 16020009 21030006 953756 18022250 ...
- $ REP    : num [1:38840] NA 1 1 NA 1 NA 1 NA 1 1 ...
- $ EXPT   : chr [1:38840] "CE9601" "CEM1602" "CEM2103" "CE9601" ...
- $ YEAR   : num [1:38840] 1996 2016 2021 1996 2018 ...
- $ BLK    : num [1:38840] NA 0 0 NA 0 NA 0 NA 0 0 ...
- $ PLT    : num [1:38840] NA 0 0 NA 0 NA 0 NA 0 0 ...
- $ TREAT  : num [1:38840] NA 0 0 NA 0 NA 0 NA 0 0 ...
- $ CHECK  : num [1:38840] NA 0 0 NA 0 NA 0 NA 0 0 ...
- $ PDATE  : num [1:38840] 0 0 0 0 0 0 0 0 0 0 ...
- $ TAXVER : num [1:38840] 0 0 0 0 0 0 0 0 0 0 ...
- $ PHT    : num [1:38840] 138 105 130 125 98 100 102 135 102 135 ...
- $ SeedID : chr [1:38840] "SEEDICAR14919" "SEEDICAR14919" "SEEDICAR14919" "SEEDICAR14920" ...
- $ Country: chr [1:38840] "SYR" "SYR" "SYR" "SYR" ...</code></pre>
+<pre><code>tibble [90 × 11] (S3: tbl_df/tbl/data.frame)
+ $ PlantID      : num [1:90] 1 2 3 4 5 6 7 8 9 10 ...
+ $ Species      : Factor w/ 3 levels "SpeciesA","SpeciesB",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ Treatment    : Factor w/ 2 levels "Control","Treated": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Location     : Factor w/ 2 levels "Field","Greenhouse": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Height_cm    : num [1:90] 145 133 154 150 167 ...
+ $ LeafLength_cm: num [1:90] 24.5 26.9 27.7 32.1 32.2 ...
+ $ LeafWidth_cm : num [1:90] 8.02 10.73 9.21 11.4 10.03 ...
+ $ Biomass_g    : num [1:90] 278 228 224 239 254 ...
+ $ Yield_g      : num [1:90] 342 238 290 282 341 ...
+ $ Chlorophyll  : num [1:90] 42.5 48.1 33.7 37.3 56.3 ...
+ $ Color        : Factor w/ 3 levels "Green","LightGreen",..: 1 1 1 1 1 2 1 1 1 2 ...</code></pre>
 </div>
-</div>
-<p>We can see that we have a lot of empty values, we want to remove these before any further analyses.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="fu">complete.cases</span>(df),]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploring frequencies</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 14
-     IG     PLOT   REP EXPT     YEAR   BLK   PLT TREAT CHECK PDATE TAXVER   PHT
-  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1 40803 16020009     1 CEM1602  2016     0     0     0     0     0      0   105
-2 40803 21030006     1 CEM2103  2021     0     0     0     0     0      0   130
-3 40804 18022250     1 CEM1802  2018     0     0     0     0     0      0    98
-4 40807 18022253     1 CEM1802  2018     0     0     0     0     0      0   102
-5 40823 16020013     1 CEM1602  2016     0     0     0     0     0      0   102
-6 40823 21030008     1 CEM2103  2021     0     0     0     0     0      0   135
-# ℹ 2 more variables: SeedID &lt;chr&gt;, Country &lt;chr&gt;</code></pre>
+<pre><code>
+SpeciesA SpeciesB SpeciesC 
+      30       30       30 </code></pre>
 </div>
-</div>
-<p>Our plant height variable is the column <code>PHT</code>. We want to visualize the distribution of this variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>PHT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>Treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   0.00   86.00   98.00   96.97  110.00 1103.00 </code></pre>
+<pre><code>
+Control Treated 
+     45      45 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>PHT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>Location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Field Greenhouse 
+        45         45 </code></pre>
 </div>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>PHT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>Color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Green LightGreen     Yellow 
+        31         31         28 </code></pre>
 </div>
 </div>
-</div>
-<p>We can see that there are two outlier values above 800, which are most likely wrongly annotated. We will remove this for the sake of the analysis.</p>
+</section>
+<section id="basic-summaries" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="basic-summaries"><span class="header-section-number">11.4</span> Basic Summaries</h2>
+<p>Lets perform some basic statistic summaries of our data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We want to keep only those values less than 800</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>PHT <span class="sc">&lt;</span> <span class="dv">800</span>,]</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We plot our histogram aghain</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>PHT, <span class="at">breaks =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlantID          Species     Treatment        Location    Height_cm    
+ Min.   : 1.00   SpeciesA:30   Control:45   Field     :45   Min.   :124.8  
+ 1st Qu.:23.25   SpeciesB:30   Treated:45   Greenhouse:45   1st Qu.:155.9  
+ Median :45.50   SpeciesC:30                                Median :168.6  
+ Mean   :45.50                                              Mean   :168.1  
+ 3rd Qu.:67.75                                              3rd Qu.:180.6  
+ Max.   :90.00                                              Max.   :216.4  
+ LeafLength_cm    LeafWidth_cm      Biomass_g        Yield_g     
+ Min.   :24.14   Min.   : 6.409   Min.   :219.7   Min.   :238.2  
+ 1st Qu.:30.22   1st Qu.: 8.732   1st Qu.:269.7   1st Qu.:299.1  
+ Median :33.11   Median : 9.829   Median :292.0   Median :325.7  
+ Mean   :33.17   Mean   : 9.975   Mean   :289.8   Mean   :324.8  
+ 3rd Qu.:36.42   3rd Qu.:11.184   3rd Qu.:307.3   3rd Qu.:351.5  
+ Max.   :43.84   Max.   :13.424   Max.   :384.9   Max.   :408.3  
+  Chlorophyll           Color   
+ Min.   :24.15   Green     :31  
+ 1st Qu.:34.83   LightGreen:31  
+ Median :39.52   Yellow    :28  
+ Mean   :38.93                  
+ 3rd Qu.:43.18                  
+ Max.   :56.25                  </code></pre>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We plot our boxplot again</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>PHT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>If we look at our data frame, we can see we have year and country information, we will use this to make certain assertions about our data.</p>
+</section>
+<section id="data-distribution" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="data-distribution"><span class="header-section-number">11.5</span> Data Distribution</h2>
+<p>We can use histograms on our numeric variables to explore their distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot by year</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>PHT <span class="sc">~</span> df<span class="sc">$</span>YEAR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograms</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data<span class="sc">$</span>Height_cm, <span class="at">main =</span> <span class="st">"Height"</span>, <span class="at">xlab =</span> <span class="st">"cm"</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data<span class="sc">$</span>LeafLength_cm, <span class="at">main =</span> <span class="st">"Leaf Length"</span>, <span class="at">xlab =</span> <span class="st">"cm"</span>, <span class="at">col =</span> <span class="st">"lightgreen"</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data<span class="sc">$</span>LeafWidth_cm, <span class="at">main =</span> <span class="st">"Leaf Width"</span>, <span class="at">xlab =</span> <span class="st">"cm"</span>, <span class="at">col =</span> <span class="st">"lightgreen"</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data<span class="sc">$</span>Biomass_g, <span class="at">main =</span> <span class="st">"Biomass"</span>, <span class="at">xlab =</span> <span class="st">"g"</span>, <span class="at">col =</span> <span class="st">"orange"</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data<span class="sc">$</span>Yield_g, <span class="at">main =</span> <span class="st">"Yield"</span>, <span class="at">xlab =</span> <span class="st">"g"</span>, <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data<span class="sc">$</span>Chlorophyll, <span class="at">main =</span> <span class="st">"Chlorophyll"</span>, <span class="at">xlab =</span> <span class="st">"Index"</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># box plot by country</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>PHT <span class="sc">~</span> df<span class="sc">$</span>Country, <span class="at">las =</span> <span class="dv">2</span>, <span class="at">cex.axis =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<p>As we saw in our histogram, our data is approximately normally distributed, which means we can run a t-test to see if there is a significant difference between the plant heights of two different countries. I will choose AZE and CHN for this case.</p>
+</section>
+<section id="significant-differences-between-two-groups" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="significant-differences-between-two-groups"><span class="header-section-number">11.6</span> Significant differences between two groups</h2>
+<p>We want to explore the effect of treatment (Control vs Treated) on Height. On our histogram we have seen that height is approximately <strong>symmetric</strong> and close to a <strong>normal distribution,</strong> so we can use a t-test. Even if the distribution is not perfectly normal, we can usually still use a t-test.</p>
+<section id="t-test" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="t-test"><span class="header-section-number">11.6.1</span> T-test</h3>
+<p>A <strong>t-test</strong> is a statistical test used to compare <strong>means</strong> between groups (or a group vs.&nbsp;a reference) to see if they are <strong>significantly different</strong>. It assumes data is approximately normally distributed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>AZE_PHT <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Country <span class="sc">==</span> <span class="st">"AZE"</span>,]</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>CHN_PHT <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Country <span class="sc">==</span> <span class="st">"CHN"</span>,]</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating data frame with data only from these two countries</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>AZE_CHN_PHT <span class="ot">&lt;-</span> <span class="fu">rbind</span>(AZE_PHT, CHN_PHT)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Running t-test</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(AZE_CHN_PHT<span class="sc">$</span>PHT <span class="sc">~</span> AZE_CHN_PHT<span class="sc">$</span>Country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height_cm <span class="sc">~</span> Location, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
 
-data:  AZE_CHN_PHT$PHT by AZE_CHN_PHT$Country
-t = 2.0687, df = 46.353, p-value = 0.04418
-alternative hypothesis: true difference in means between group AZE and group CHN is not equal to 0
+data:  Height_cm by Location
+t = -3.4363, df = 79.844, p-value = 0.0009387
+alternative hypothesis: true difference in means between group Field and group Greenhouse is not equal to 0
 95 percent confidence interval:
-  0.2794298 20.2947416
+ -19.727554  -5.257546
 sample estimates:
-mean in group AZE mean in group CHN 
-        101.23303          90.94595 </code></pre>
+     mean in group Field mean in group Greenhouse 
+                161.8530                 174.3455 </code></pre>
 </div>
 </div>
-<p>We get a p-value of 0.04, less than our threshold of 0.05. This means we we can reject the null hypothesis of no differentiation between the means of both groups.</p>
-<p><strong>What if we wanted to evaluate more than one variable, not only two countries but all of the countries with more than 100 observations?</strong></p>
+<p>We obtain a <strong>p-value</strong> of <strong>0.009387</strong>, which is <strong>less than</strong> our threshold of <strong>0.05</strong>. This means there is a significant difference in heights between our two groups.</p>
+<p><strong>If p-value &lt; 0.05 → Significant difference between groups</strong></p>
+</section>
+<section id="wilcoxon-signed-rank-test" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="wilcoxon-signed-rank-test"><span class="header-section-number">11.6.2</span> Wilcoxon signed-rank test</h3>
+<p>If our data is not normally distributed (not symmetric or skewed) and we want an alternative to the t-test, we can use a <strong>Wilcoxon signed-rank test</strong>. Instead of comparing means, it compares <strong>medians/distributions</strong> between groups. We now want to explore the effect of treatment (Control vs Treated) on Leaf Length.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for countries with more than 20 observations</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Country <span class="sc">%in%</span> <span class="fu">names</span>(<span class="fu">which</span>(<span class="fu">table</span>(df<span class="sc">$</span>Country) <span class="sc">&gt;</span> <span class="dv">100</span>)),]</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure variables are factored</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>df_filtered<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_filtered<span class="sc">$</span>Country)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit one-way ANOVA</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>anova_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(PHT <span class="sc">~</span> Country, <span class="at">data =</span> df_filtered)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA table</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(LeafLength_cm <span class="sc">~</span> Treatment, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>               Df  Sum Sq Mean Sq F value Pr(&gt;F)    
-Country        19  550412   28969    77.7 &lt;2e-16 ***
-Residuals   17079 6367623     373                   
+<pre><code>
+    Wilcoxon rank sum exact test
+
+data:  LeafLength_cm by Treatment
+W = 1110, p-value = 0.4356
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<p>In this case our <strong>p-value is greater than 0.05</strong>, meaning that there is <strong>no significant difference</strong> between both groups.</p>
+</section>
+</section>
+<section id="significant-differences-between-multiple-groups" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="significant-differences-between-multiple-groups"><span class="header-section-number">11.7</span> Significant differences between multiple groups</h2>
+<p>If we wanted to explore the effect of our different Species on Biomass we would use an <strong>Analysis of Variance (ANOVA)</strong>, given we have more than two groups.</p>
+<p><strong>ANOVA is used to test if three or more groups are significantly different!</strong></p>
+<section id="anova" class="level3" data-number="11.7.1">
+<h3 data-number="11.7.1" class="anchored" data-anchor-id="anova"><span class="header-section-number">11.7.1</span> ANOVA</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carrying out ANOVA</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Biomass_g <span class="sc">~</span> Species, <span class="at">data =</span> data)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing results</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Species      2  51360   25680   42.11 1.62e-13 ***
+Residuals   87  53058     610                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>In this results, the <strong>Sum Sq</strong> shows us the variation in plant height explained by differences between countries, and the variation within countries (which is the one shown in the <strong>Residuals</strong> row). The <strong>F value</strong> is the ratio of between-group variance (countries) to within-group variance (residuals). A large F means country differences are much larger than random variation. Our obtained p-value is extremely small, meaning plant height does significantly differ between countries.</p>
-<p><strong>What if we wanted to know which pairs of countries differed (the individual interactions)?</strong></p>
+<p>We can see that our obtained <strong>p-value is very small and less than 0.05</strong>, meaning species has a <strong>significant effect</strong> on biomass. We can also make pairwise comparisons between our groups to have a more detailed view of their effect on our experimental measure.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We would run the Tukey HSD test</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tuk <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(anova_model)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>tuk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons between groups</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = PHT ~ Country, data = df_filtered)
+Fit: aov(formula = Biomass_g ~ Species, data = data)
 
-$Country
-                diff           lwr         upr     p adj
-AZE-AFG   3.89993370 -1.132686e+00   8.9325530 0.3935667
-DZA-AFG  -2.17989689 -5.070796e+00   0.7110021 0.4487556
-EGY-AFG  -8.75843734 -1.379106e+01  -3.7258181 0.0000002
-ERI-AFG -16.20631226 -2.298517e+01  -9.4274541 0.0000000
-ESP-AFG   0.11294520 -6.037648e+00   6.2635389 1.0000000
-ETH-AFG  -9.35491793 -1.230734e+01  -6.4024916 0.0000000
-GRC-AFG  -3.54551627 -9.440134e+00   2.3491015 0.8404892
-IND-AFG -11.89270062 -1.569708e+01  -8.0883252 0.0000000
-IRN-AFG   5.18615231  2.850768e+00   7.5215368 0.0000000
-IRQ-AFG  -7.68906730 -1.073274e+01  -4.6453921 0.0000000
-JOR-AFG -11.84264853 -1.736053e+01  -6.3247689 0.0000000
-MAR-AFG  -7.61635450 -1.098215e+01  -4.2505583 0.0000000
-OMN-AFG -10.64746579 -1.484186e+01  -6.4530760 0.0000000
-PAK-AFG   2.90567561  3.871001e-01   5.4242512 0.0068206
-SYR-AFG  -9.48309797 -1.381560e+01  -5.1505967 0.0000000
-TJK-AFG  -6.90302804 -1.297652e+01  -0.8295397 0.0086884
-TUN-AFG  -0.46618799 -4.406981e+00   3.4746050 1.0000000
-TUR-AFG   3.09841921  7.654840e-01   5.4313544 0.0004461
-UZB-AFG  -3.73279028 -8.039226e+00   0.5736454 0.1945494
-DZA-AZE  -6.07983059 -1.112133e+01  -1.0383309 0.0031635
-EGY-AZE -12.65837104 -1.916888e+01  -6.1478657 0.0000000
-ERI-AZE -20.10624596 -2.804428e+01 -12.1682147 0.0000000
-ESP-AZE  -3.78698851 -1.119571e+01   3.6217378 0.9604687
-ETH-AZE -13.25485164 -1.833188e+01  -8.1778206 0.0000000
-GRC-AZE  -7.44544997 -1.464308e+01  -0.2478155 0.0332031
-IND-AZE -15.79263432 -2.140803e+01 -10.1772363 0.0000000
-IRN-AZE   1.28621861 -3.458615e+00   6.0310519 0.9999917
-IRQ-AZE -11.58900101 -1.671963e+01  -6.4583693 0.0000000
-JOR-AZE -15.74258224 -2.263507e+01  -8.8500922 0.0000000
-MAR-AZE -11.51628820 -1.684433e+01  -6.1882486 0.0000000
-OMN-AZE -14.54739949 -2.043402e+01  -8.6607767 0.0000000
-PAK-AZE  -0.99425809 -5.831886e+00   3.8433700 0.9999999
-SYR-AZE -13.38303167 -1.936885e+01  -7.3972160 0.0000000
-TJK-AZE -10.80296174 -1.814780e+01  -3.4581212 0.0000346
-TUN-AZE  -4.36612170 -1.007482e+01   1.3425797 0.4199724
-TUR-AZE  -0.80151449 -5.545143e+00   3.9421138 1.0000000
-UZB-AZE  -7.63272398 -1.359970e+01  -1.6657473 0.0010044
-EGY-DZA  -6.57854045 -1.162004e+01  -1.5370407 0.0006586
-ERI-DZA -14.02641537 -2.081187e+01  -7.2409618 0.0000000
-ESP-DZA   2.29284208 -3.865020e+00   8.4507041 0.9990630
-ETH-DZA  -7.17502104 -1.014256e+01  -4.2074827 0.0000000
-GRC-DZA  -1.36561938 -7.267821e+00   4.5365820 0.9999994
-IND-DZA  -9.71280373 -1.352892e+01  -5.8966885 0.0000000
-IRN-DZA   7.36604920  5.011589e+00   9.7205095 0.0000000
-IRQ-DZA  -5.50917041 -8.567507e+00  -2.4508340 0.0000001
-JOR-DZA  -9.66275164 -1.518873e+01  -4.1367713 0.0000001
-MAR-DZA  -5.43645761 -8.815518e+00  -2.0573976 0.0000023
-OMN-DZA  -8.46756890 -1.267261e+01  -4.2625281 0.0000000
-PAK-DZA   5.08557250  2.549299e+00   7.6218464 0.0000000
-SYR-DZA  -7.30320108 -1.164601e+01  -2.9603875 0.0000005
-TJK-DZA  -4.72313115 -1.080398e+01   1.3577177 0.3889618
-TUN-DZA   1.71370889 -2.238419e+00   5.6658364 0.9934223
-TUR-DZA   5.27831610  2.926285e+00   7.6303470 0.0000000
-UZB-DZA  -1.55289339 -5.869704e+00   2.7639169 0.9994164
-ERI-EGY  -7.44787492 -1.538591e+01   0.4901563 0.0983136
-ESP-EGY   8.87138253  1.462656e+00  16.2801088 0.0035969
-ETH-EGY  -0.59648059 -5.673512e+00   4.4805504 1.0000000
-GRC-EGY   5.21292107 -1.984713e+00  12.4105555 0.5309509
-IND-EGY  -3.13426328 -8.749661e+00   2.4811348 0.9116311
-IRN-EGY  13.94458965  9.199756e+00  18.6894230 0.0000000
-IRQ-EGY   1.06937003 -4.061262e+00   6.2000017 0.9999999
-JOR-EGY  -3.08421120 -9.976701e+00   3.8082788 0.9904786
-MAR-EGY   1.14208284 -4.185957e+00   6.4701225 0.9999998
-OMN-EGY  -1.88902845 -7.775651e+00   3.9975944 0.9998872
-PAK-EGY  11.66411295  6.826485e+00  16.5017410 0.0000000
-SYR-EGY  -0.72466063 -6.710476e+00   5.2611551 1.0000000
-TJK-EGY   1.85540930 -5.489431e+00   9.2002499 0.9999973
-TUN-EGY   8.29224934  2.583548e+00  14.0009507 0.0000488
-TUR-EGY  11.85685655  7.113228e+00  16.6004848 0.0000000
-UZB-EGY   5.02564706 -9.413296e-01  10.9926237 0.2395399
-ESP-ERI  16.31925745  7.629327e+00  25.0091876 0.0000000
-ETH-ERI   6.85139432  3.949997e-02  13.6632887 0.0467425
-GRC-ERI  12.66079599  4.150120e+00  21.1714718 0.0000252
-IND-ERI   4.31361164 -2.908463e+00  11.5356859 0.8485156
-IRN-ERI  21.39246457  1.482443e+01  27.9605011 0.0000000
-IRQ-ERI   8.51724495  1.665308e+00  15.3691821 0.0017870
-JOR-ERI   4.36366372 -3.890552e+00  12.6178796 0.9454791
-MAR-ERI   8.58995776  1.588982e+00  15.5909339 0.0022950
-OMN-ERI   5.55884647 -1.876070e+00  12.9937634 0.4661138
-PAK-ERI  19.11198787  1.247660e+01  25.7473708 0.0000000
-SYR-ERI   6.72321429 -7.904833e-01  14.2369118 0.1508974
-TJK-ERI   9.30328422  6.677562e-01  17.9388122 0.0193360
-TUN-ERI  15.74012426  8.445268e+00  23.0349808 0.0000000
-TUR-ERI  19.30473147  1.273757e+01  25.8718975 0.0000000
-UZB-ERI  12.47352198  4.974824e+00  19.9722200 0.0000007
-ETH-ESP  -9.46786313 -1.565485e+01  -3.2808776 0.0000110
-GRC-ESP  -3.65846147 -1.167772e+01   4.3607958 0.9881205
-IND-ESP -12.00564581 -1.864155e+01  -5.3697404 0.0000001
-IRN-ESP   5.07320712 -8.442238e-01  10.9906381 0.2111378
-IRQ-ESP  -7.80201250 -1.403306e+01  -1.5709671 0.0015490
-JOR-ESP -11.95559373 -1.970214e+01  -4.2090484 0.0000085
-MAR-ESP  -7.72929969 -1.412387e+01  -1.3347276 0.0030335
-OMN-ESP -10.76041098 -1.762735e+01  -3.8934703 0.0000053
-PAK-ESP   2.79273042 -3.199364e+00   8.7848245 0.9849101
-SYR-ESP  -9.59604317 -1.654820e+01  -2.6438827 0.0001810
-TJK-ESP  -7.01597324 -1.516761e+01   1.1356664 0.2051569
-TUN-ESP  -0.57913319 -7.294177e+00   6.1359109 1.0000000
-TUR-ESP   2.98547402 -2.930991e+00   8.9019387 0.9651977
-UZB-ESP  -3.84573547 -1.078168e+01   3.0902112 0.9164953
-GRC-ETH   5.80940166 -1.231784e-01  11.7419817 0.0633003
-IND-ETH  -2.53778269 -6.400717e+00   1.3251514 0.7145669
-IRN-ETH  14.54107024  1.211146e+01  16.9706809 0.0000000
-IRQ-ETH   1.66585063 -1.450709e+00   4.7824106 0.9396497
-JOR-ETH  -2.48773060 -8.046146e+00   3.0706849 0.9904572
-MAR-ETH   1.73856343 -1.693283e+00   5.1704100 0.9638064
-OMN-ETH  -1.29254786 -5.540123e+00   2.9550271 0.9999493
-PAK-ETH  12.26059355  9.654407e+00  14.8667804 0.0000000
-SYR-ETH  -0.12818004 -4.512191e+00   4.2558312 1.0000000
-TJK-ETH   2.45188989 -3.658449e+00   8.5622293 0.9974832
-TUN-ETH   8.88872994  4.891376e+00  12.8860836 0.0000000
-TUR-ETH  12.45333714  1.002608e+01  14.8805935 0.0000000
-UZB-ETH   5.62212765  1.263874e+00   9.9803813 0.0008418
-IND-GRC  -8.34718435 -1.474656e+01  -1.9478127 0.0006641
-IRN-GRC   8.73166858  3.080766e+00  14.3825717 0.0000082
-IRQ-GRC  -4.14355103 -1.012207e+01   1.8349641 0.6179789
-JOR-GRC  -8.29713226 -1.584204e+01  -0.7522213 0.0143967
-MAR-GRC  -4.07083823 -1.021960e+01   2.0779233 0.7014309
-OMN-GRC  -7.10194952 -1.374059e+01  -0.4633058 0.0213140
-PAK-GRC   6.45119189  7.221512e-01  12.1802326 0.0100597
-SYR-GRC  -5.93758170 -1.266434e+01   0.7891747 0.1687942
-TJK-GRC  -3.35751177 -1.131778e+01   4.6027611 0.9952949
-TUN-GRC   3.07932828 -3.402071e+00   9.5607273 0.9813893
-TUR-GRC   6.64393548  9.940442e-01  12.2938267 0.0049445
-UZB-GRC  -0.18727401 -6.897272e+00   6.5227240 1.0000000
-IRN-IND  17.07885293  1.366426e+01  20.4934480 0.0000000
-IRQ-IND   4.20363332  2.705179e-01   8.1367488 0.0215923
-JOR-IND   0.05005209 -6.004073e+00   6.1041775 1.0000000
-MAR-IND   4.27634612  8.898152e-02   8.4637107 0.0389392
-OMN-IND   1.24523483 -3.633120e+00   6.1235895 0.9999968
-PAK-IND  14.79837623  1.125597e+01  18.3407852 0.0000000
-SYR-IND   2.40960265 -2.587997e+00   7.4072026 0.9782125
-TJK-IND   4.98967258 -1.574830e+00  11.5541755 0.4325145
-TUN-IND  11.42651262  6.764401e+00  16.0886245 0.0000000
-TUR-IND  14.99111983  1.157820e+01  18.4040401 0.0000000
-UZB-IND   8.15991034  3.184890e+00  13.1349306 0.0000012
-IRQ-IRN -12.87521961 -1.541493e+01 -10.3355060 0.0000000
-JOR-IRN -17.02880084 -2.228553e+01 -11.7720735 0.0000000
-MAR-IRN -12.80250681 -1.572051e+01  -9.8844988 0.0000000
-OMN-IRN -15.83361810 -1.967798e+01 -11.9892596 0.0000000
-PAK-IRN  -2.28047670 -4.159149e+00  -0.4018044 0.0028052
-SYR-IRN -14.66925028 -1.866384e+01 -10.6746597 0.0000000
-TJK-IRN -12.08918035 -1.792643e+01  -6.2519338 0.0000000
-TUN-IRN  -5.65234031 -9.218295e+00  -2.0863852 0.0000037
-TUR-IRN  -2.08773310 -3.709082e+00  -0.4663839 0.0008747
-UZB-IRN  -8.91894259 -1.288525e+01  -4.9526377 0.0000000
-JOR-IRQ  -4.15358123 -9.760998e+00   1.4538354 0.4851591
-MAR-IRQ   0.07271280 -3.437944e+00   3.5833692 1.0000000
-OMN-IRQ  -2.95839848 -7.269898e+00   1.3531013 0.6369889
-PAK-IRQ  10.59474292  7.885620e+00  13.3038659 0.0000000
-SYR-IRQ  -1.79403067 -6.240005e+00   2.6519441 0.9972967
-TJK-IRQ   0.78603926 -5.368909e+00   6.9409873 1.0000000
-TUN-IRQ   7.22287931  3.157664e+00  11.2880944 0.0000001
-TUR-IRQ  10.78748652  8.250025e+00  13.3249481 0.0000000
-UZB-IRQ   3.95627702 -4.643013e-01   8.3768553 0.1506514
-MAR-JOR   4.22629403 -1.562294e+00  10.0148816 0.5146146
-OMN-JOR   1.19518275 -5.111327e+00   7.5016927 1.0000000
-PAK-JOR  14.74832415  9.407689e+00  20.0889594 0.0000000
-SYR-JOR   2.35955056 -4.039647e+00   8.7587481 0.9991797
-TJK-JOR   4.93962049 -2.745848e+00  12.6250887 0.7500422
-TUN-JOR  11.37646054  5.235694e+00  17.5172269 0.0000000
-TUR-JOR  14.94106775  9.685428e+00  20.1967074 0.0000000
-UZB-JOR   8.10985825  1.728279e+00  14.4914372 0.0011492
-OMN-MAR  -3.03111129 -7.575741e+00   1.5135180 0.6886074
-PAK-MAR  10.52203011  7.455440e+00  13.5886198 0.0000000
-SYR-MAR  -1.86674347 -6.539143e+00   2.8056560 0.9976201
-TJK-MAR   0.71332646 -5.607117e+00   7.0337703 1.0000000
-TUN-MAR   7.15016650  2.838485e+00  11.4618482 0.0000008
-TUR-MAR  10.71477371  7.798726e+00  13.6308218 0.0000000
-UZB-MAR   3.88356422 -7.646761e-01   8.5318045 0.2530194
-PAK-OMN  13.55314140  9.594822e+00  17.5114610 0.0000000
-SYR-OMN   1.16436782 -4.136164e+00   6.4648998 0.9999997
-TJK-OMN   3.74443775 -3.053528e+00  10.5424030 0.9211208
-TUN-OMN  10.18127779  5.195807e+00  15.1667488 0.0000000
-TUR-OMN  13.74588500  9.903014e+00  17.5887561 0.0000000
-UZB-OMN   6.91467551  1.635427e+00  12.1939235 0.0006070
-SYR-PAK -12.38877358 -1.649316e+01  -8.2843911 0.0000000
-TJK-PAK  -9.80870365 -1.572163e+01  -3.8957815 0.0000008
-TUN-PAK  -3.37186361 -7.060391e+00   0.3166642 0.1253123
-TUR-PAK   0.19274360 -1.682883e+00   2.0683702 1.0000000
-UZB-PAK  -6.63846589 -1.071532e+01  -2.5616072 0.0000015
-TJK-SYR   2.58006993 -4.303969e+00   9.4641090 0.9989761
-TUN-SYR   9.01690998  3.914697e+00  14.1191234 0.0000001
-TUR-SYR  12.58151718  8.588358e+00  16.5746763 0.0000000
-UZB-SYR   5.75030769  3.606768e-01  11.1399386 0.0221131
-TUN-TJK   6.43684005 -2.076520e-01  13.0813321 0.0710799
-TUR-TJK  10.00144725  4.165180e+00  15.8377143 0.0000003
-UZB-TJK   3.17023776 -3.697427e+00  10.0379021 0.9864364
-TUR-TUN   3.56460721  2.557222e-04   7.1289587 0.0499585
-UZB-TUN  -3.26660228 -8.346701e+00   1.8134964 0.7493206
-UZB-TUR  -6.83120949 -1.079607e+01  -2.8663463 0.0000002</code></pre>
+$Species
+                      diff       lwr      upr     p adj
+SpeciesB-SpeciesA 33.27007 18.065895 48.47425 0.0000036
+SpeciesC-SpeciesA 58.32229 43.118109 73.52646 0.0000000
+SpeciesC-SpeciesB 25.05221  9.848038 40.25639 0.0004966</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the pairs with lower p-values (most significant differences)</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We exctract results and turn into data frame</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>tuk_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(tuk<span class="sc">$</span>Country)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add pair names</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>tuk_df<span class="sc">$</span>Pair <span class="ot">&lt;-</span> <span class="fu">rownames</span>(tuk<span class="sc">$</span>Country)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by adjusted p-value</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>tuk_df_sorted <span class="ot">&lt;-</span> tuk_df[<span class="fu">order</span>(tuk_df<span class="sc">$</span><span class="st">`</span><span class="at">p adj</span><span class="st">`</span>), ]</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the pairs with significant differences</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>tuk_df_sorted[tuk_df_sorted<span class="sc">$</span><span class="st">`</span><span class="at">p adj</span><span class="st">`</span> <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="significant-differences-between-multiple-groups-and-conditions" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="significant-differences-between-multiple-groups-and-conditions"><span class="header-section-number">11.8</span> Significant differences between multiple groups and conditions</h2>
+<p>If we wanted to evaluate the effect of species AND location on Yield we could use a <strong>Two-way ANOVA</strong>, which allows us to evaluate the effect of each of these conditions and of the interaction between them.</p>
+<section id="two-way-anova" class="level3" data-number="11.8.1">
+<h3 data-number="11.8.1" class="anchored" data-anchor-id="two-way-anova"><span class="header-section-number">11.8.1</span> Two-way ANOVA</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carrying out ANOVA</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Yield_g <span class="sc">~</span> Species <span class="sc">*</span> Location, <span class="at">data =</span> data)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing results</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(a2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              diff           lwr         upr        p adj    Pair
-IRN-ERI  21.392465  1.482443e+01  27.9605011 3.171767e-08 IRN-ERI
-IRN-ETH  14.541070  1.211146e+01  16.9706809 3.171767e-08 IRN-ETH
-PAK-ETH  12.260594  9.654407e+00  14.8667804 3.171767e-08 PAK-ETH
-TUR-ETH  12.453337  1.002608e+01  14.8805935 3.171767e-08 TUR-ETH
-IRN-IND  17.078853  1.366426e+01  20.4934480 3.171767e-08 IRN-IND
-PAK-IND  14.798376  1.125597e+01  18.3407852 3.171767e-08 PAK-IND
-TUR-IND  14.991120  1.157820e+01  18.4040401 3.171767e-08 TUR-IND
-IRQ-IRN -12.875220 -1.541493e+01 -10.3355060 3.171767e-08 IRQ-IRN
-MAR-IRN -12.802507 -1.572051e+01  -9.8844988 3.171767e-08 MAR-IRN
-OMN-IRN -15.833618 -1.967798e+01 -11.9892596 3.171767e-08 OMN-IRN
-SYR-IRN -14.669250 -1.866384e+01 -10.6746597 3.171767e-08 SYR-IRN
-PAK-IRQ  10.594743  7.885620e+00  13.3038659 3.171767e-08 PAK-IRQ
-TUR-IRQ  10.787487  8.250025e+00  13.3249481 3.171767e-08 TUR-IRQ
-PAK-MAR  10.522030  7.455440e+00  13.5886198 3.171767e-08 PAK-MAR
-TUR-MAR  10.714774  7.798726e+00  13.6308218 3.171767e-08 TUR-MAR
-PAK-OMN  13.553141  9.594822e+00  17.5114610 3.171767e-08 PAK-OMN
-TUR-OMN  13.745885  9.903014e+00  17.5887561 3.171767e-08 TUR-OMN
-JOR-IRN -17.028801 -2.228553e+01 -11.7720735 3.171767e-08 JOR-IRN
-ETH-AFG  -9.354918 -1.230734e+01  -6.4024916 3.171771e-08 ETH-AFG
-TUR-SYR  12.581517  8.588358e+00  16.5746763 3.171773e-08 TUR-SYR
-IRN-DZA   7.366049  5.011589e+00   9.7205095 3.171776e-08 IRN-DZA
-IND-AFG -11.892701 -1.569708e+01  -8.0883252 3.171777e-08 IND-AFG
-IRQ-AFG  -7.689067 -1.073274e+01  -4.6453921 3.171781e-08 IRQ-AFG
-TUR-EGY  11.856857  7.113228e+00  16.6004848 3.171782e-08 TUR-EGY
-OMN-AFG -10.647466 -1.484186e+01  -6.4530760 3.171782e-08 OMN-AFG
-ERI-AZE -20.106246 -2.804428e+01 -12.1682147 3.171782e-08 ERI-AZE
-OMN-AZE -14.547399 -2.043402e+01  -8.6607767 3.171783e-08 OMN-AZE
-TUN-IND  11.426513  6.764401e+00  16.0886245 3.171784e-08 TUN-IND
-IND-DZA  -9.712804 -1.352892e+01  -5.8966885 3.171784e-08 IND-DZA
-IND-AZE -15.792634 -2.140803e+01 -10.1772363 3.171784e-08 IND-AZE
-ETH-DZA  -7.175021 -1.014256e+01  -4.2074827 3.171785e-08 ETH-DZA
-PAK-ERI  19.111988  1.247660e+01  25.7473708 3.171785e-08 PAK-ERI
-PAK-EGY  11.664113  6.826485e+00  16.5017410 3.171785e-08 PAK-EGY
-TUR-ERI  19.304731  1.273757e+01  25.8718975 3.171786e-08 TUR-ERI
-SYR-PAK -12.388774 -1.649316e+01  -8.2843911 3.171786e-08 SYR-PAK
-IRN-EGY  13.944590  9.199756e+00  18.6894230 3.171786e-08 IRN-EGY
-TUR-JOR  14.941068  9.685428e+00  20.1967074 3.171786e-08 TUR-JOR
-ERI-AFG -16.206312 -2.298517e+01  -9.4274541 3.171787e-08 ERI-AFG
-PAK-JOR  14.748324  9.407689e+00  20.0889594 3.171788e-08 PAK-JOR
-ETH-AZE -13.254852 -1.833188e+01  -8.1778206 3.171789e-08 ETH-AZE
-JOR-AZE -15.742582 -2.263507e+01  -8.8500922 3.171803e-08 JOR-AZE
-MAR-AFG  -7.616354 -1.098215e+01  -4.2505583 3.171814e-08 MAR-AFG
-IRQ-AZE -11.589001 -1.671963e+01  -6.4583693 3.171817e-08 IRQ-AZE
-UZB-IRN  -8.918943 -1.288525e+01  -4.9526377 3.171826e-08 UZB-IRN
-TUR-DZA   5.278316  2.926285e+00   7.6303470 3.171831e-08 TUR-DZA
-SYR-AZE -13.383032 -1.936885e+01  -7.3972160 3.171840e-08 SYR-AZE
-TUN-ETH   8.888730  4.891376e+00  12.8860836 3.171858e-08 TUN-ETH
-IRN-AFG   5.186152  2.850768e+00   7.5215368 3.171864e-08 IRN-AFG
-SYR-AFG  -9.483098 -1.381560e+01  -5.1505967 3.171952e-08 SYR-AFG
-MAR-AZE -11.516288 -1.684433e+01  -6.1882486 3.172148e-08 MAR-AZE
-TUN-ERI  15.740124  8.445268e+00  23.0349808 3.172188e-08 TUN-ERI
-JOR-AFG -11.842649 -1.736053e+01  -6.3247689 3.172339e-08 JOR-AFG
-TJK-IRN -12.089180 -1.792643e+01  -6.2519338 3.176002e-08 TJK-IRN
-ERI-DZA -14.026415 -2.081187e+01  -7.2409618 3.176461e-08 ERI-DZA
-TUN-OMN  10.181278  5.195807e+00  15.1667488 3.180777e-08 TUN-OMN
-OMN-DZA  -8.467569 -1.267261e+01  -4.2625281 3.190596e-08 OMN-DZA
-PAK-DZA   5.085573  2.549299e+00   7.6218464 3.195199e-08 PAK-DZA
-EGY-AZE -12.658371 -1.916888e+01  -6.1478657 3.280380e-08 EGY-AZE
-ESP-ERI  16.319257  7.629327e+00  25.0091876 3.721241e-08 ESP-ERI
-TUN-JOR  11.376461  5.235694e+00  17.5172269 4.177822e-08 TUN-JOR
-IND-ESP -12.005646 -1.864155e+01  -5.3697404 5.956188e-08 IND-ESP
-IRQ-DZA  -5.509170 -8.567507e+00  -2.4508340 6.509256e-08 IRQ-DZA
-TUN-IRQ   7.222879  3.157664e+00  11.2880944 9.039723e-08 TUN-IRQ
-TUN-SYR   9.016910  3.914697e+00  14.1191234 1.045279e-07 TUN-SYR
-JOR-DZA  -9.662752 -1.518873e+01  -4.1367713 1.425814e-07 JOR-DZA
-EGY-AFG  -8.758437 -1.379106e+01  -3.7258181 1.651185e-07 EGY-AFG
-UZB-TUR  -6.831209 -1.079607e+01  -2.8663463 2.280585e-07 UZB-TUR
-TUR-TJK  10.001447  4.165180e+00  15.8377143 2.725610e-07 TUR-TJK
-SYR-DZA  -7.303201 -1.164601e+01  -2.9603875 5.154036e-07 SYR-DZA
-UZB-ERI  12.473522  4.974824e+00  19.9722200 7.475163e-07 UZB-ERI
-TJK-PAK  -9.808704 -1.572163e+01  -3.8957815 8.207545e-07 TJK-PAK
-TUN-MAR   7.150167  2.838485e+00  11.4618482 8.297915e-07 TUN-MAR
-UZB-IND   8.159910  3.184890e+00  13.1349306 1.203935e-06 UZB-IND
-UZB-PAK  -6.638466 -1.071532e+01  -2.5616072 1.534979e-06 UZB-PAK
-MAR-DZA  -5.436458 -8.815518e+00  -2.0573976 2.284973e-06 MAR-DZA
-TUN-IRN  -5.652340 -9.218295e+00  -2.0863852 3.702577e-06 TUN-IRN
-OMN-ESP -10.760411 -1.762735e+01  -3.8934703 5.327762e-06 OMN-ESP
-IRN-GRC   8.731669  3.080766e+00  14.3825717 8.222733e-06 IRN-GRC
-JOR-ESP -11.955594 -1.970214e+01  -4.2090484 8.526660e-06 JOR-ESP
-ETH-ESP  -9.467863 -1.565485e+01  -3.2808776 1.102578e-05 ETH-ESP
-GRC-ERI  12.660796  4.150120e+00  21.1714718 2.516427e-05 GRC-ERI
-TJK-AZE -10.802962 -1.814780e+01  -3.4581212 3.462122e-05 TJK-AZE
-TUN-EGY   8.292249  2.583548e+00  14.0009507 4.875525e-05 TUN-EGY
-SYR-ESP  -9.596043 -1.654820e+01  -2.6438827 1.809529e-04 SYR-ESP
-TUR-AFG   3.098419  7.654840e-01   5.4313544 4.461192e-04 TUR-AFG
-UZB-OMN   6.914676  1.635427e+00  12.1939235 6.070296e-04 UZB-OMN
-EGY-DZA  -6.578540 -1.162004e+01  -1.5370407 6.586371e-04 EGY-DZA
-IND-GRC  -8.347184 -1.474656e+01  -1.9478127 6.641463e-04 IND-GRC
-UZB-ETH   5.622128  1.263874e+00   9.9803813 8.417925e-04 UZB-ETH
-TUR-IRN  -2.087733 -3.709082e+00  -0.4663839 8.747006e-04 TUR-IRN
-UZB-AZE  -7.632724 -1.359970e+01  -1.6657473 1.004385e-03 UZB-AZE
-UZB-JOR   8.109858  1.728279e+00  14.4914372 1.149246e-03 UZB-JOR
-IRQ-ESP  -7.802012 -1.403306e+01  -1.5709671 1.548968e-03 IRQ-ESP
-IRQ-ERI   8.517245  1.665308e+00  15.3691821 1.787048e-03 IRQ-ERI
-MAR-ERI   8.589958  1.588982e+00  15.5909339 2.294968e-03 MAR-ERI
-PAK-IRN  -2.280477 -4.159149e+00  -0.4018044 2.805197e-03 PAK-IRN
-MAR-ESP  -7.729300 -1.412387e+01  -1.3347276 3.033503e-03 MAR-ESP
-DZA-AZE  -6.079831 -1.112133e+01  -1.0383309 3.163460e-03 DZA-AZE
-ESP-EGY   8.871383  1.462656e+00  16.2801088 3.596903e-03 ESP-EGY
-TUR-GRC   6.643935  9.940442e-01  12.2938267 4.944487e-03 TUR-GRC
-PAK-AFG   2.905676  3.871001e-01   5.4242512 6.820641e-03 PAK-AFG
-TJK-AFG  -6.903028 -1.297652e+01  -0.8295397 8.688384e-03 TJK-AFG
-PAK-GRC   6.451192  7.221512e-01  12.1802326 1.005968e-02 PAK-GRC
-JOR-GRC  -8.297132 -1.584204e+01  -0.7522213 1.439672e-02 JOR-GRC
-TJK-ERI   9.303284  6.677562e-01  17.9388122 1.933595e-02 TJK-ERI
-OMN-GRC  -7.101950 -1.374059e+01  -0.4633058 2.131401e-02 OMN-GRC
-IRQ-IND   4.203633  2.705179e-01   8.1367488 2.159226e-02 IRQ-IND
-UZB-SYR   5.750308  3.606768e-01  11.1399386 2.211308e-02 UZB-SYR
-GRC-AZE  -7.445450 -1.464308e+01  -0.2478155 3.320313e-02 GRC-AZE
-MAR-IND   4.276346  8.898152e-02   8.4637107 3.893922e-02 MAR-IND
-ETH-ERI   6.851394  3.949997e-02  13.6632887 4.674248e-02 ETH-ERI
-TUR-TUN   3.564607  2.557222e-04   7.1289587 4.995854e-02 TUR-TUN</code></pre>
+<pre><code>                 Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Species           2  47772   23886  31.149 7.58e-11 ***
+Location          1   7590    7590   9.898  0.00229 ** 
+Species:Location  2   1564     782   1.020  0.36512    
+Residuals        84  64415     767                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise comparisons between groups</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(a2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = Yield_g ~ Species * Location, data = data)
+
+$Species
+                      diff       lwr      upr     p adj
+SpeciesB-SpeciesA 26.67084  9.611157 43.73053 0.0010017
+SpeciesC-SpeciesA 56.40651 39.346826 73.46619 0.0000000
+SpeciesC-SpeciesB 29.73567 12.675984 46.79535 0.0002249
+
+$Location
+                     diff      lwr      upr     p adj
+Greenhouse-Field 18.36719 6.757727 29.97665 0.0022888
+
+$`Species:Location`
+                                              diff         lwr       upr
+SpeciesB:Field-SpeciesA:Field            16.528851 -12.9623077  46.02001
+SpeciesC:Field-SpeciesA:Field            52.360377  22.8692190  81.85154
+SpeciesA:Greenhouse-SpeciesA:Field        8.908442 -20.5827165  38.39960
+SpeciesB:Greenhouse-SpeciesA:Field       45.721274  16.2301156  75.21243
+SpeciesC:Greenhouse-SpeciesA:Field       69.361084  39.8699252  98.85224
+SpeciesC:Field-SpeciesB:Field            35.831527   6.3403684  65.32269
+SpeciesA:Greenhouse-SpeciesB:Field       -7.620409 -37.1115672  21.87075
+SpeciesB:Greenhouse-SpeciesB:Field       29.192423  -0.2987351  58.68358
+SpeciesC:Greenhouse-SpeciesB:Field       52.832233  23.3410746  82.32339
+SpeciesA:Greenhouse-SpeciesC:Field      -43.451936 -72.9430939 -13.96078
+SpeciesB:Greenhouse-SpeciesC:Field       -6.639103 -36.1302618  22.85205
+SpeciesC:Greenhouse-SpeciesC:Field       17.000706 -12.4904521  46.49186
+SpeciesB:Greenhouse-SpeciesA:Greenhouse  36.812832   7.3216737  66.30399
+SpeciesC:Greenhouse-SpeciesA:Greenhouse  60.452642  30.9614834  89.94380
+SpeciesC:Greenhouse-SpeciesB:Greenhouse  23.639810  -5.8513487  53.13097
+                                            p adj
+SpeciesB:Field-SpeciesA:Field           0.5782968
+SpeciesC:Field-SpeciesA:Field           0.0000219
+SpeciesA:Greenhouse-SpeciesA:Field      0.9500602
+SpeciesB:Greenhouse-SpeciesA:Field      0.0002816
+SpeciesC:Greenhouse-SpeciesA:Field      0.0000000
+SpeciesC:Field-SpeciesB:Field           0.0082318
+SpeciesA:Greenhouse-SpeciesB:Field      0.9743273
+SpeciesB:Greenhouse-SpeciesB:Field      0.0539774
+SpeciesC:Greenhouse-SpeciesB:Field      0.0000182
+SpeciesA:Greenhouse-SpeciesC:Field      0.0006427
+SpeciesB:Greenhouse-SpeciesC:Field      0.9860814
+SpeciesC:Greenhouse-SpeciesC:Field      0.5478532
+SpeciesB:Greenhouse-SpeciesA:Greenhouse 0.0060550
+SpeciesC:Greenhouse-SpeciesA:Greenhouse 0.0000008
+SpeciesC:Greenhouse-SpeciesB:Greenhouse 0.1908068</code></pre>
+</div>
+</div>
+<p>Our results show that on their own, <strong>species and location do have a significant effect</strong> on yield as we have obtained a <strong>p-value smaller than 0.05</strong>: however, the <strong>interaction effect does not seem to have a significant effect</strong> as the obtained p-value is greater than 0.05.</p>
+</section>
+</section>
+<section id="pearson-correlation" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="pearson-correlation"><span class="header-section-number">11.9</span> Pearson Correlation</h2>
+<p><strong>Pearson correlation</strong> is a statistic (often written as <strong>r</strong>) that measures the <strong>linear relationship</strong> between two continuous variables.</p>
+<ul>
+<li><p>Ranges from <strong>-1 to +1</strong></p>
+<ul>
+<li><p><strong>+1</strong> → perfect positive linear relationship (when one increases, the other always increases proportionally)</p></li>
+<li><p><strong>0</strong> → no linear relationship.</p></li>
+<li><p><strong>-1</strong> → perfect negative linear relationship (when one increases, the other always decreases proportionally).</p></li>
+</ul></li>
+</ul>
+<p>Now we want to see if there is a relationship between our different numerical values. We can calculate their correlation and plot them as a correlation map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets separate the numeric and factor variables</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>num_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Height_cm"</span>,<span class="st">"Biomass_g"</span>,<span class="st">"Yield_g"</span>,<span class="st">"Chlorophyll"</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"LeafLength_cm"</span>,<span class="st">"LeafWidth_cm"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filtered data frame of only our numeric variables</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>num_df <span class="ot">&lt;-</span> data[ , num_vars]</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate our pearson correlation</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>cor_mat <span class="ot">&lt;-</span> <span class="fu">cor</span>(num_df, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>cor_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Height_cm  Biomass_g     Yield_g Chlorophyll LeafLength_cm
+Height_cm      1.0000000  0.6450521  0.47549955 -0.43031897     0.1543019
+Biomass_g      0.6450521  1.0000000  0.50074384 -0.46928736     0.1750263
+Yield_g        0.4754996  0.5007438  1.00000000 -0.26681865     0.1910125
+Chlorophyll   -0.4303190 -0.4692874 -0.26681865  1.00000000     0.0794551
+LeafLength_cm  0.1543019  0.1750263  0.19101246  0.07945510     1.0000000
+LeafWidth_cm   0.2479400  0.1469155  0.08928293 -0.06247535     0.2024340
+              LeafWidth_cm
+Height_cm       0.24794000
+Biomass_g       0.14691551
+Yield_g         0.08928293
+Chlorophyll    -0.06247535
+LeafLength_cm   0.20243403
+LeafWidth_cm    1.00000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot results</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(cor_mat, <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">type =</span> <span class="st">"upper"</span>, <span class="at">addCoef.col =</span> <span class="st">"black"</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>, <span class="at">number.cex =</span> <span class="fl">0.7</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pca" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="pca"><span class="header-section-number">11.10</span> PCA</h2>
+<p>A <strong>PCA</strong> transforms many correlated variables (Height, Biomass, Yield, Chlorophyll, etc.) into a smaller set of <strong>uncorrelated components</strong> (PC1, PC2, …). Each component aims to capture <strong>as much variance as possible</strong>. It is a common technique used to visualize multi-variate data and identify correlated traits.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using FactoMineR so we can color by groups easily</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(num_df, <span class="at">scale.unit =</span> <span class="cn">TRUE</span>, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Individuals plot colored by Species with 95% ellipses</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  pca,</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">habillage =</span> data<span class="sc">$</span>Species, <span class="at">addEllipses =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"PCA of Plant Traits (colored by Species)"</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable loadings</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca, <span class="at">title =</span> <span class="st">"PCA Variable Loadings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.
+ℹ The deprecated feature was likely used in the ggpubr package.
+  Please report the issue at &lt;https://github.com/kassambara/ggpubr/issues&gt;.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`.
+ℹ See also `vignette("ggplot2-in-packages")` for more information.
+ℹ The deprecated feature was likely used in the factoextra package.
+  Please report the issue at &lt;https://github.com/kassambara/factoextra/issues&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Direction of arrow = how that variable contributes to the PCA axes (Dim1, Dim2).</p></li>
+<li><p>Length of arrow = strength of contribution (longer = explains more of that axis).</p></li>
+<li><p>Angle between arrows = correlation between variables.</p></li>
+<li><p>Small angle (pointing in the same direction) → strong positive correlation.</p></li>
+<li><p>Opposite direction (180° apart) → strong negative correlation.</p></li>
+<li><p>90° apart → little/no correlation.</p></li>
+</ul>
+</section>
+<section id="plots" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="plots"><span class="header-section-number">11.11</span> Plots</h2>
+<p>Lets move on to making some publication-ready plots with <code>ggplot2</code>.</p>
+<section id="box-plots" class="level3" data-number="11.11.1">
+<h3 data-number="11.11.1" class="anchored" data-anchor-id="box-plots"><span class="header-section-number">11.11.1</span> Box plots</h3>
+<p>Each box shows the <strong>median, quartiles,</strong> and <strong>outliers.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Treatment, Height_cm, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Height by Treatment"</span>, <span class="at">y =</span> <span class="st">"Height (cm)"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Treatment, Biomass_g, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Biomass by Treatment"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Species, Biomass_g, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Biomass by Species"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Species, Chlorophyll, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Chlorophyll by Species"</span>, <span class="at">y =</span> <span class="st">"Chlorophyll"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Location, Yield_g, <span class="at">fill =</span> Location)) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Yield by Location (↑ in Greenhouse)"</span>, <span class="at">y =</span> <span class="st">"Yield (g)"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Location, Chlorophyll, <span class="at">fill =</span> Location)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Chlorophyll by Location (↓ in Greenhouse)"</span>, <span class="at">y =</span> <span class="st">"Chlorophyll"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="scatter-plot" class="level3" data-number="11.11.2">
+<h3 data-number="11.11.2" class="anchored" data-anchor-id="scatter-plot"><span class="header-section-number">11.11.2</span> Scatter plot</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Height_cm, Biomass_g, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">size =</span> <span class="fl">2.3</span>) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Height vs Biomass (by Species)"</span>,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Height (cm)"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Chlorophyll, Yield_g, <span class="at">color =</span> Location)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Yield vs Chlorophyll by Location"</span>) <span class="sc">+</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(Height_cm, Yield_g, <span class="at">color =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Species <span class="sc">~</span> Location) <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Height vs Yield faceted by Species &amp; Location"</span>) <span class="sc">+</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-plots" class="level3" data-number="11.11.3">
+<h3 data-number="11.11.3" class="anchored" data-anchor-id="bar-plots"><span class="header-section-number">11.11.3</span> Bar plots</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise: mean + standard error</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> <span class="fu">group_by</span>(data, Species, Treatment)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> <span class="fu">summarise</span>(df_summary, </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mean_height =</span> <span class="fu">mean</span>(Height_cm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">se_height   =</span> <span class="fu">sd</span>(Height_cm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot with error bars</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_summary, <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> mean_height, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_height <span class="sc">-</span> se_height,</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> mean_height <span class="sc">+</span> se_height),</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Mean Height by Species and Treatment"</span>,</span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Height (cm)"</span>, <span class="at">x =</span> <span class="st">"Species"</span>) <span class="sc">+</span></span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_General_Biostatistics_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="saving-a-plot" class="level3" data-number="11.11.4">
+<h3 data-number="11.11.4" class="anchored" data-anchor-id="saving-a-plot"><span class="header-section-number">11.11.4</span> Saving a plot</h3>
+<p>Many times we will want to save a plot as a <code>png</code>, <code>jpg</code> or <code>pdf</code>. We can easily do this the following way:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot into an object (in this case p)</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Biomass_g, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>p</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Save as PNG</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/boxplot_biomass_species.png"</span>, p, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Or as PDF</span></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/boxplot_biomass_species.pdf"</span>, p, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,127 +1,355 @@
 # Module 2.3: General Biostatistics
 
-We will be using a data of wheat plant height values to practice some general biostatistical analyses. We first need to start by importing our data.
+We will be using an artificial data set of plant traits to practice some general biostatistical analyses. We first need to start by loading the required libraries.
+
+## Libraries
 
 ```{r setup, include=FALSE}
 library(here)
 ```
 
-```{r import-run, include=FALSE}
-# Loading required library
-library(readxl)
+```{r}
+# Install required packages if not already installed
+packages <- c("tidyverse", "dplyr", "ggplot2", "reshape2",
+              "FactoMineR", "factoextra", "corrplot")
 
-# Import excel data frame
-df <- read_excel(here("data","plantHeights.xlsx"))
+installed <- rownames(installed.packages())
+for (p in packages) {
+  if (!(p %in% installed)) {
+    install.packages(p)
+  }
+}
+```
+
+```{r}
+# Loading required libraries
+library(tidyverse)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(reshape2)
+library(FactoMineR)
+library(factoextra)
+library(corrplot)
+```
+
+## Data import
+
+Lets import our excel data sheet into R.
+
+```{r import-run, include=FALSE}
+# Import excel data
+data <- read_excel(here("data","PlantData.xlsx"))
 ```
 
 ```{r import, eval=FALSE}
-# Loading required library
-library(readxl)
-
-# Import excel data frame
-df <- read_excel("data/plantHeights.xlsx")
+# Import excel data
+data <- read_excel("data/PlantData.xlsx")
 ```
 
-Let's look at our data frame.
+## Exploring data
 
 ```{r}
-head(df)
-str(df)
+# Lets see how it looks
+str(data)
 ```
 
-We can see that we have a lot of empty values, we want to remove these before any further analyses.
+We can see that we have a few numeric variables and a few character variables. We want to turn these character variables into factors (categories) for posterior analyses.
 
 ```{r}
-df <- df[complete.cases(df),]
-head(df)
+# Turning into factor
+data$Species <- factor(data$Species)
+data$Treatment <- factor(data$Treatment)
+data$Location <- factor(data$Location)
+data$Color <- factor(data$Color)
+
+# Exploring again
+str(data)
+
+# Exploring frequencies
+table(data$Species)
+table(data$Treatment)
+table(data$Location)
+table(data$Color)
 ```
 
-Our plant height variable is the column `PHT`. We want to visualize the distribution of this variable.
+## Basic Summaries
+
+Lets perform some basic statistic summaries of our data.
 
 ```{r}
-# Summary statistics
-summary(df$PHT)
-
-# Histogram
-hist(df$PHT)
-
-# Box plot
-boxplot(df$PHT)
+summary(data)
 ```
 
-We can see that there are two outlier values above 800, which are most likely wrongly annotated. We will remove this for the sake of the analysis.
+## Data Distribution
+
+We can use histograms on our numeric variables to explore their distribution.
 
 ```{r}
-# We want to keep only those values less than 800
-df <- df[df$PHT < 800,]
+# Histograms
+par(mfrow = c(2, 3))
 
-# We plot our histogram aghain
-hist(df$PHT, breaks = 50)
+hist(data$Height_cm, main = "Height", xlab = "cm", col = "lightblue", breaks = 10)
+hist(data$LeafLength_cm, main = "Leaf Length", xlab = "cm", col = "lightgreen", breaks = 10)
+hist(data$LeafWidth_cm, main = "Leaf Width", xlab = "cm", col = "lightgreen", breaks = 10)
+hist(data$Biomass_g, main = "Biomass", xlab = "g", col = "orange", breaks = 10)
+hist(data$Yield_g, main = "Yield", xlab = "g", col = "purple", breaks = 10)
+hist(data$Chlorophyll, main = "Chlorophyll", xlab = "Index", col = "darkgreen", breaks = 10)
 
-# We plot our boxplot again
-boxplot(df$PHT)
+par(mfrow = c(1, 1))
 ```
 
-If we look at our data frame, we can see we have year and country information, we will use this to make certain assertions about our data.
+## Significant differences between two groups
+
+We want to explore the effect of treatment (Control vs Treated) on Height. On our histogram we have seen that height is approximately **symmetric** and close to a **normal distribution,** so we can use a t-test. Even if the distribution is not perfectly normal, we can usually still use a t-test.
+
+### T-test
+
+A **t-test** is a statistical test used to compare **means** between groups (or a group vs. a reference) to see if they are **significantly different**. It assumes data is approximately normally distributed.
 
 ```{r}
-# Box plot by year
-boxplot(df$PHT ~ df$YEAR)
-
-# box plot by country
-boxplot(df$PHT ~ df$Country, las = 2, cex.axis = 0.4)
+t.test(Height_cm ~ Location, data = data)
 ```
 
-As we saw in our histogram, our data is approximately normally distributed, which means we can run a t-test to see if there is a significant difference between the plant heights of two different countries. I will choose AZE and CHN for this case.
+We obtain a **p-value** of **0.009387**, which is **less than** our threshold of **0.05**. This means there is a significant difference in heights between our two groups.
+
+**If p-value \< 0.05 → Significant difference between groups**
+
+### Wilcoxon signed-rank test
+
+If our data is not normally distributed (not symmetric or skewed) and we want an alternative to the t-test, we can use a **Wilcoxon signed-rank test**. Instead of comparing means, it compares **medians/distributions** between groups. We now want to explore the effect of treatment (Control vs Treated) on Leaf Length.
 
 ```{r}
-AZE_PHT <- df[df$Country == "AZE",]
-CHN_PHT <- df[df$Country == "CHN",]
-
-# Creating data frame with data only from these two countries
-AZE_CHN_PHT <- rbind(AZE_PHT, CHN_PHT)
-
-# Running t-test
-t.test(AZE_CHN_PHT$PHT ~ AZE_CHN_PHT$Country)
+wilcox.test(LeafLength_cm ~ Treatment, data = data)
 ```
 
-We get a p-value of 0.04, less than our threshold of 0.05. This means we we can reject the null hypothesis of no differentiation between the means of both groups.
+In this case our **p-value is greater than 0.05**, meaning that there is **no significant difference** between both groups.
 
-**What if we wanted to evaluate more than one variable, not only two countries but all of the countries with more than 100 observations?**
+## Significant differences between multiple groups
+
+If we wanted to explore the effect of our different Species on Biomass we would use an **Analysis of Variance (ANOVA)**, given we have more than two groups.
+
+**ANOVA is used to test if three or more groups are significantly different!**
+
+### ANOVA
 
 ```{r}
-# Filter for countries with more than 20 observations
-df_filtered <- df[df$Country %in% names(which(table(df$Country) > 100)),]
+# Carrying out ANOVA
+a1 <- aov(Biomass_g ~ Species, data = data)
 
-# Make sure variables are factored
-df_filtered$Country <- factor(df_filtered$Country)
-
-# Fit one-way ANOVA
-anova_model <- aov(PHT ~ Country, data = df_filtered)
-
-# ANOVA table
-summary(anova_model)
+# Printing results
+summary(a1)
 ```
 
-In this results, the **Sum Sq** shows us the variation in plant height explained by differences between countries, and the variation within countries (which is the one shown in the **Residuals** row). The **F value** is the ratio of between-group variance (countries) to within-group variance (residuals). A large F means country differences are much larger than random variation. Our obtained p-value is extremely small, meaning plant height does significantly differ between countries.
-
-**What if we wanted to know which pairs of countries differed (the individual interactions)?**
+We can see that our obtained **p-value is very small and less than 0.05**, meaning species has a **significant effect** on biomass. We can also make pairwise comparisons between our groups to have a more detailed view of their effect on our experimental measure.
 
 ```{r}
-# We would run the Tukey HSD test
-tuk <- TukeyHSD(anova_model)
-tuk
+# Pairwise comparisons between groups
+TukeyHSD(a1)
+```
 
-# To see the pairs with lower p-values (most significant differences)
-# We exctract results and turn into data frame
-tuk_df <- as.data.frame(tuk$Country)
+## Significant differences between multiple groups and conditions
 
-# Add pair names
-tuk_df$Pair <- rownames(tuk$Country)
+If we wanted to evaluate the effect of species AND location on Yield we could use a **Two-way ANOVA**, which allows us to evaluate the effect of each of these conditions and of the interaction between them.
 
-# Sort by adjusted p-value
-tuk_df_sorted <- tuk_df[order(tuk_df$`p adj`), ]
+### Two-way ANOVA
 
-# Show the pairs with significant differences
-tuk_df_sorted[tuk_df_sorted$`p adj` < 0.05,]
+```{r}
+# Carrying out ANOVA
+a2 <- aov(Yield_g ~ Species * Location, data = data)
+
+# Printing results
+summary(a2)
+
+# Pairwise comparisons between groups
+TukeyHSD(a2)
+```
+
+Our results show that on their own, **species and location do have a significant effect** on yield as we have obtained a **p-value smaller than 0.05**: however, the **interaction effect does not seem to have a significant effect** as the obtained p-value is greater than 0.05.
+
+## Pearson Correlation
+
+**Pearson correlation** is a statistic (often written as **r**) that measures the **linear relationship** between two continuous variables.
+
+-   Ranges from **-1 to +1**
+
+    -   **+1** → perfect positive linear relationship (when one increases, the other always increases proportionally)
+
+    -   **0** → no linear relationship.
+
+    -   **-1** → perfect negative linear relationship (when one increases, the other always decreases proportionally).
+
+Now we want to see if there is a relationship between our different numerical values. We can calculate their correlation and plot them as a correlation map.
+
+```{r}
+# Lets separate the numeric and factor variables
+num_vars <- c("Height_cm","Biomass_g","Yield_g","Chlorophyll",
+              "LeafLength_cm","LeafWidth_cm")
+
+# Create a filtered data frame of only our numeric variables
+num_df <- data[ , num_vars]
+# Calculate our pearson correlation
+cor_mat <- cor(num_df, use = "pairwise.complete.obs", method = "pearson")
+cor_mat
+
+# Plot results
+corrplot(cor_mat, method = "color", type = "upper", addCoef.col = "black",
+         tl.col = "black", tl.srt = 45, number.cex = 0.7,
+         mar = c(0,0,2,0))
+```
+
+## PCA
+
+A **PCA** transforms many correlated variables (Height, Biomass, Yield, Chlorophyll, etc.) into a smaller set of **uncorrelated components** (PC1, PC2, …). Each component aims to capture **as much variance as possible**. It is a common technique used to visualize multi-variate data and identify correlated traits.
+
+```{r}
+# Using FactoMineR so we can color by groups easily
+pca <- PCA(num_df, scale.unit = TRUE, graph = FALSE)
+
+# Individuals plot colored by Species with 95% ellipses
+fviz_pca_ind(
+  pca,
+  habillage = data$Species, addEllipses = FALSE,
+  title = "PCA of Plant Traits (colored by Species)"
+)
+
+# Variable loadings
+fviz_pca_var(pca, title = "PCA Variable Loadings")
+```
+
+-   Direction of arrow = how that variable contributes to the PCA axes (Dim1, Dim2).
+
+-   Length of arrow = strength of contribution (longer = explains more of that axis).
+
+-   Angle between arrows = correlation between variables.
+
+-   Small angle (pointing in the same direction) → strong positive correlation.
+
+-   Opposite direction (180° apart) → strong negative correlation.
+
+-   90° apart → little/no correlation.
+
+## Plots
+
+Lets move on to making some publication-ready plots with `ggplot2`.
+
+### Box plots
+
+Each box shows the **median, quartiles,** and **outliers.**
+
+```{r}
+ggplot(data, aes(Treatment, Height_cm, fill = Treatment)) +
+  geom_boxplot() +
+  labs(title = "Height by Treatment", y = "Height (cm)", x = NULL) +
+  theme_minimal() + theme(legend.position = "none")
+
+
+ggplot(data, aes(Treatment, Biomass_g, fill = Treatment)) +
+  geom_boxplot() +
+  labs(title = "Biomass by Treatment", y = "Biomass (g)", x = NULL) +
+  theme_minimal() + theme(legend.position = "none")
+```
+
+```{r}
+ggplot(data, aes(Species, Biomass_g, fill = Species)) +
+  geom_boxplot() +
+  labs(title = "Biomass by Species", y = "Biomass (g)", x = NULL) +
+  theme_minimal() + theme(legend.position = "none")
+
+ggplot(data, aes(Species, Chlorophyll, fill = Species)) +
+  geom_boxplot() +
+  labs(title = "Chlorophyll by Species", y = "Chlorophyll", x = NULL) +
+  theme_minimal() + theme(legend.position = "none")
+```
+
+```{r}
+ggplot(data, aes(Location, Yield_g, fill = Location)) +
+  geom_boxplot() +
+  labs(title = "Yield by Location (↑ in Greenhouse)", y = "Yield (g)", x = NULL) +
+  theme_minimal() + theme(legend.position = "none")
+
+ggplot(data, aes(Location, Chlorophyll, fill = Location)) +
+  geom_boxplot() +
+  labs(title = "Chlorophyll by Location (↓ in Greenhouse)", y = "Chlorophyll", x = NULL) +
+  theme_minimal() + theme(legend.position = "none")
+```
+
+### Scatter plot
+
+```{r}
+ggplot(data, aes(Height_cm, Biomass_g, color = Species)) +
+  geom_point(alpha = 0.8, size = 2.3) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Height vs Biomass (by Species)",
+       x = "Height (cm)", y = "Biomass (g)") +
+  theme_minimal()
+
+ggplot(data, aes(Chlorophyll, Yield_g, color = Location)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Yield vs Chlorophyll by Location") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(data, aes(Height_cm, Yield_g, color = Treatment)) +
+  geom_point(size = 2.5, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_grid(Species ~ Location) +
+  labs(title = "Height vs Yield faceted by Species & Location") +
+  theme_minimal()
+```
+
+### Bar plots
+
+```{r}
+# Summarise: mean + standard error
+df_summary <- group_by(data, Species, Treatment)
+df_summary <- summarise(df_summary, 
+                        mean_height = mean(Height_cm, na.rm = TRUE),
+                        se_height   = sd(Height_cm, na.rm = TRUE) / sqrt(n()),
+                        .groups = "drop")
+
+# Bar plot with error bars
+ggplot(df_summary, aes(x = Species, y = mean_height, fill = Treatment)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  geom_errorbar(aes(ymin = mean_height - se_height,
+                    ymax = mean_height + se_height),
+                position = position_dodge(width = 0.8),
+                width = 0.25) +
+  labs(title = "Mean Height by Species and Treatment",
+       y = "Height (cm)", x = "Species") +
+  theme_minimal()
+```
+
+### Saving a plot
+
+Many times we will want to save a plot as a `png`, `jpg` or `pdf`. We can easily do this the following way:
+
+```{r, include = FALSE}
+# Create plot into an object (in this case p)
+p <- ggplot(data, aes(x = Species, y = Biomass_g, fill = Species)) +
+  geom_boxplot() +
+  theme_minimal()
+p
+
+# Save as PNG
+ggsave(here("output","boxplot_biomass_species.png"), p, width = 6, height = 4, dpi = 300)
+
+# Or as PDF
+ggsave(here("output","boxplot_biomass_species.pdf"), p, width = 6, height = 4)
+```
+
+```{r, eval = FALSE}
+# Create plot into an object (in this case p)
+p <- ggplot(data, aes(x = Species, y = Biomass_g, fill = Species)) +
+  geom_boxplot() +
+  theme_minimal()
+p
+
+# Save as PNG
+ggsave("output/boxplot_biomass_species.png", p, width = 6, height = 4, dpi = 300)
+
+# Or as PDF
+ggsave("output/boxplot_biomass_species.pdf", p, width = 6, height = 4)
 ```
