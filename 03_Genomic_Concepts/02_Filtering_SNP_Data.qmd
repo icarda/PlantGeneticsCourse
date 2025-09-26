@@ -1,4 +1,4 @@
-# Module 3.3: Data Quality Control and Filtering for SNP Data
+# Module 3.2: Data Quality Control and Filtering for SNP Data
 
 Filtering SNP data is important for genetic and genomic studies in order to improve data quality, optimize resources and avoid noise by removing non-informative markers, and account for missing data. The most common filtering criteria we will focus on is **call rate**, **missing data** and **MAF (Minor Allele Frequency)**.
 

@@ -91,5 +91,8 @@
   },
   "02_Data_Handling/03_General_Biostatistics.qmd": {
     "03_General_Biostatistics.html": "30beca83"
+  },
+  "03_Genomic_Concepts/02_Filtering_SNP_Data.qmd": {
+    "02_Filtering_SNP_Data.html": "b770f7ad"
   }
 }

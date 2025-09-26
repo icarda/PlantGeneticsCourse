@@ -20,3 +20,28 @@ This course is divided into six different modules aligned to each of our objecti
 No prior programming experience is required!
 
 All course files and scripts are available on our [GitHub repository](https://github.com/icarda/PlantGeneticsCourse)
+
+## Additional Resources
+
+Learning R requires practice; luckily, there are many different online resources that can help us learn and master R such that we can use it for our own research.
+
+-   **swirl R Package:** swirl is an interactive R package that helps you learn R through a variety of different exercises and lessons. Get started [here](https://swirlstats.com/students.html)
+
+```{r, eval = FALSE}
+# Install package
+install.packages("swirl")
+
+# Load library
+library(swirl)
+
+# Start learning
+swirl()
+```
+
+-   **Base R Cheat Sheet:** Basic commands and functions available [here](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf?utm_source=chatgpt.com)
+
+-   **General RStudio Cheat Sheets:** General commands and functions for different R packages available [here](https://rstudio.github.io/cheatsheets/?utm_source=chatgpt.com)
+
+-   **R Markdown (.Rmd) Cheat Sheets:** Information on how .Rmd files work and why they are useful is available [here](https://rmarkdown.rstudio.com/lesson-15.HTML?utm_source=chatgpt.com)
+
+-   **gplot2 Plot Templates and Information:** You can find more information on all of ggplot's plotting options [here](https://ggplot2.tidyverse.org/). You can also find many ready to run plot templates [here](https://r-graph-gallery.com/ggplot2-package.html)

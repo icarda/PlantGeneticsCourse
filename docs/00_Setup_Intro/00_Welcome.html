@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -224,14 +259,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../03_Genomic_Concepts/02_QBMS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Module 3.2: Using the QBMS Package to Query Genotypic Data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../03_Genomic_Concepts/03_Filtering_SNP_Data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Module 3.3: Data Quality Control and Filtering for SNP Data</span></span></a>
+  <a href="../03_Genomic_Concepts/02_Filtering_SNP_Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Module 3.2: Data Quality Control and Filtering for SNP Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,25 +277,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/01_Kinship_Relatedness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Module 4.1: Kinship and Relatedness</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Module 4.1: Kinship and Relatedness</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/02_Genetic_Diversity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Module 4.2: Genetic Diversity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Module 4.2: Genetic Diversity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/03_Pop_Structure.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Module 4.3: Population Structure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Module 4.3: Population Structure</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04_Pop_Structure/04_Phylo_Tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Module 4.4: Phylogenetic Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Module 4.4: Phylogenetic Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -283,13 +312,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../05_GWAS/01_Initial_Concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Module 5.1: Introduction to GWAS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Module 5.1: Introduction to GWAS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../05_GWAS/02_Single_Trait_GWAS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Module 5.2: Single Trait GWAS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Module 5.2: Single Trait GWAS</span></span></a>
   </div>
 </li>
       </ul>
@@ -306,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../06_GS/01_Genomic_Selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Module 6.1: Genomic Selection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Module 6.1: Genomic Selection</span></span></a>
   </div>
 </li>
       </ul>
@@ -324,6 +353,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#hello-baku-breeders" id="toc-hello-baku-breeders" class="nav-link active" data-scroll-target="#hello-baku-breeders"><span class="header-section-number">2.1</span> Hello Baku Breeders!</a></li>
   <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives"><span class="header-section-number">2.2</span> Course Objectives</a></li>
   <li><a href="#course-structure" id="toc-course-structure" class="nav-link" data-scroll-target="#course-structure"><span class="header-section-number">2.3</span> Course Structure</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">2.4</span> Additional Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -369,6 +399,29 @@ ul.task-list li input[type="checkbox"] {
 <p>This course is divided into six different modules aligned to each of our objectives. Each module includes explanations and practical R exercises.</p>
 <p>No prior programming experience is required!</p>
 <p>All course files and scripts are available on our <a href="https://github.com/icarda/PlantGeneticsCourse">GitHub repository</a></p>
+</section>
+<section id="additional-resources" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">2.4</span> Additional Resources</h2>
+<p>Learning R requires practice; luckily, there are many different online resources that can help us learn and master R such that we can use it for our own research.</p>
+<ul>
+<li><strong>swirl R Package:</strong> swirl is an interactive R package that helps you learn R through a variety of different exercises and lessons. Get started <a href="https://swirlstats.com/students.html">here</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"swirl"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load library</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(swirl)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Start learning</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">swirl</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p><strong>Base R Cheat Sheet:</strong> Basic commands and functions available <a href="https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf?utm_source=chatgpt.com">here</a></p></li>
+<li><p><strong>General RStudio Cheat Sheets:</strong> General commands and functions for different R packages available <a href="https://rstudio.github.io/cheatsheets/?utm_source=chatgpt.com">here</a></p></li>
+<li><p><strong>R Markdown (.Rmd) Cheat Sheets:</strong> Information on how .Rmd files work and why they are useful is available <a href="https://rmarkdown.rstudio.com/lesson-15.HTML?utm_source=chatgpt.com">here</a></p></li>
+<li><p><strong>gplot2 Plot Templates and Information:</strong> You can find more information on all of ggplot’s plotting options <a href="https://ggplot2.tidyverse.org/">here</a>. You can also find many ready to run plot templates <a href="https://r-graph-gallery.com/ggplot2-package.html">here</a></p></li>
+</ul>
 
 
 </section>

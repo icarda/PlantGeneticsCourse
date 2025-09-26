@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Plant Genetics Data Analysis with R - Baku",
     "section": "",
-    "text": "1 Welcome to the Plant Genetics Data Analysis Course\nTarget Audience: Breeders in Baku, Azerbaijan with minimal prior data analysis or programming experience. Collaboration with ICARDA.\nGoal: To provide a practical and understandable introduction to analyzing common breeding and genomic data types using the R programming language.\nThis course covers fundamental concepts in genetics and statistics relevant to breeding programs, alongside hands-on R coding sessions. We aim to build your confidence in handling your own data and interpreting results.\nPlease use the navigation menu (Table of Contents) to move through the course modules.\nLet’s begin!\n\n\n\n\n2 Meet Your Instructors & the ICARDA Bioinformatics Unit\nThe ICARDA Bioinformatics Unit is at the forefront of applying cutting-edge computational biology to address agricultural challenges in dry areas. Our multidisciplinary team specializes in genomics, data science, AI, and high-performance computing to empower your data analysis journey.\n\n\n\n\n\n\n\n\nPhoto\nName\nDetails\n\n\n\n\n\nTamara Ortiz\nBioinformatician - Genebank Consultant  MS in Bioinformatics, NYU Tandon School of Engineering (Currently enrolled)  BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología\n\n\n\nKhaled Al-Sham’aa\nResearch Database Manager and Senior Biometrics Analyst  B.S.c in Computer Engineering, Aleppo University  Certificates from Johns Hopkins University & Oxford\n\n\n\nZakaria Kehel\nResearch Team Leader – Genetic Resources (GRS) & Morocco Interim Country Manager Genetic Innovation  Ph.D. from the School of Agricultural and Forestry Engineering at the University of Córdoba in Spain",
+    "text": "1 Welcome to the Plant Genetics Data Analysis Course\nTarget Audience: Breeders in Baku, Azerbaijan with minimal prior data analysis or programming experience. Collaboration with ICARDA.\nGoal: To provide a practical and understandable introduction to analyzing common breeding and genomic data types using the R programming language.\nThis course covers fundamental concepts in genetics and statistics relevant to breeding programs, alongside hands-on R coding sessions. We aim to build your confidence in handling your own data and interpreting results.\nPlease use the navigation menu (Table of Contents) to move through the course modules.\nLet’s begin!\n\n\n\n\n2 Meet Your Instructors & the ICARDA Bioinformatics Unit\nThe ICARDA Bioinformatics Unit is at the forefront of applying cutting-edge computational biology to address agricultural challenges in dry areas. Our multidisciplinary team specializes in genomics, data science, AI, and high-performance computing to empower your data analysis journey.\n\n\n\n\n\n\n\n\nPhoto\nName\nDetails\n\n\n\n\n\nTamara Ortiz\nt.ortiz@cgiar.org\nBioinformatician - Genebank Consultant  MS in Bioinformatics, NYU Tandon School of Engineering (Currently enrolled)  BE in Bioengineering, UTEC – Universidad de Ingeniería y Tecnología\n\n\n\nKhaled Al-Sham’aa\nResearch Database Manager and Senior Biometrics Analyst  B.S.c in Computer Engineering, Aleppo University  Certificates from Johns Hopkins University & Oxford\n\n\n\nZakaria Kehel\nResearch Team Leader – Genetic Resources (GRS) & Morocco Interim Country Manager Genetic Innovation  Ph.D. from the School of Agricultural and Forestry Engineering at the University of Córdoba in Spain",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Welcome – Plant Genetics Data Analysis with R</span>"
     ]
@@ -43,6 +43,17 @@
     ]
   },
   {
+    "objectID": "00_Setup_Intro/00_Welcome.html#additional-resources",
+    "href": "00_Setup_Intro/00_Welcome.html#additional-resources",
+    "title": "2  Welcome and Course Overview",
+    "section": "2.4 Additional Resources",
+    "text": "2.4 Additional Resources\nLearning R requires practice; luckily, there are many different online resources that can help us learn and master R such that we can use it for our own research.\n\nswirl R Package: swirl is an interactive R package that helps you learn R through a variety of different exercises and lessons. Get started here\n\n\n# Install package\ninstall.packages(\"swirl\")\n\n# Load library\nlibrary(swirl)\n\n# Start learning\nswirl()\n\n\nBase R Cheat Sheet: Basic commands and functions available here\nGeneral RStudio Cheat Sheets: General commands and functions for different R packages available here\nR Markdown (.Rmd) Cheat Sheets: Information on how .Rmd files work and why they are useful is available here\ngplot2 Plot Templates and Information: You can find more information on all of ggplot’s plotting options here. You can also find many ready to run plot templates here",
+    "crumbs": [
+      "Introduction and Setup",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Welcome and Course Overview</span>"
+    ]
+  },
+  {
     "objectID": "00_Setup_Intro/01_Setup_R_RStudio.html",
     "href": "00_Setup_Intro/01_Setup_R_RStudio.html",
     "title": "3  Setting Up Your Environment: R and RStudio",
@@ -69,7 +80,7 @@
     "href": "00_Setup_Intro/01_Setup_R_RStudio.html#installation-steps",
     "title": "3  Setting Up Your Environment: R and RStudio",
     "section": "3.2 Installation Steps",
-    "text": "3.2 Installation Steps\n\nInstall R: Go to CRAN (the Comprehensive R Archive Network) and download the latest version for your operating system (Windows, macOS, Linux). Follow the installation instructions.\nInstall RStudio: Go to the Posit website and download the free RStudio Desktop version for your operating system. Install it after installing R.\nInstall Quarto: Go to Quarto’s website and download and install Quarto for your system. RStudio often bundles Quarto, but installing the latest version is good practice.\n(For PDF Output) Install LaTeX: Open RStudio, go to the Console panel, and type the following commands one by one, pressing Enter after each:\n\n# Run these lines in the R Console \ninstall.packages(\"tinytex\") \n# Run only once if you don't have it \ntinytex::install_tinytex() \n# Run only once to install LaTeX distribution\n# This might take a few minutes. If it fails, consult TinyTeX documentation or ask instructors.\n\n# Installing R Packages for the Course\n# We will use several add-on packages in R. \n# You only need to install packages *once*.\n# --- Run this code chunk in the R Console --- \n# List of packages we will likely need:\n\n# Packages in Cran\ncran_packages &lt;- c(\n  \"tidyverse\", \"readxl\", \"writexl\", \"readr\", \"qqman\", \"vcfR\", \"QBMS\", \"adegenet\",\n  \"ade4\", \"ggiraph\", \"ggpubr\", \"plotly\", \"poppr\", \"reactable\",\n  \"rnaturalearth\", \"scatterpie\", \"viridis\", \"tibble\",\n  \"ggplot2\", \"reshape2\", \"forcats\", \"dplyr\", \"sp\", \"scales\", \"htmltools\", \n  \"ASRgenomics\", \"statgenGWAS\", \"gplots\", \"spdep\", \"adespatial\", \"DT\", \"rrBLUP\",\n  \"geodata\", \"terra\"\n)\n\n# Bioconductor Packages\nbioc_packages &lt;- c(\"rrBLUP\", \"LEA\", \"impute\")\n\n# Github Packages\ngit_packages &lt;- c(\"snpReady\")\n\n# Installing Cran Packages\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(cran_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing CRAN packages: \", paste(missing, collapse = \", \"))\n  install.packages(missing)\n}\n\n# Installing Bioconductor Packages\nif (!requireNamespace(\"BiocManager\", quietly = TRUE)) {\n  install.packages(\"BiocManager\")\n}\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(bioc_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing Bioconductor packages: \", paste(missing, collapse = \", \"))\n  BiocManager::install(missing)\n}\n\n# Installing Github Packages\nif (!requireNamespace(\"devtools\", quietly = TRUE)) {\n  install.packages(\"devtools\")\n}\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(git_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing Github packages: \", paste(missing, collapse = \", \"))\n  devtools::install_github(\"italo-granato/snpReady\")\n}",
+    "text": "3.2 Installation Steps\n\nInstall R: Go to CRAN (the Comprehensive R Archive Network) and download the latest version for your operating system (Windows, macOS, Linux). Follow the installation instructions.\nInstall RStudio: Go to the Posit website and download the free RStudio Desktop version for your operating system. Install it after installing R.\nInstall RTools: RTools can be installed from the CRAN website. You need to install the version corresponding to the R version you have installed through its installer.\nInstall Quarto: Go to Quarto’s website and download and install Quarto for your system. RStudio often bundles Quarto, but installing the latest version is good practice.\n(For PDF Output) Install LaTeX: Open RStudio, go to the Console panel, and type the following commands one by one, pressing Enter after each:\n\n\n# Run these lines in the R Console \ninstall.packages(\"tinytex\") \n# Run only once if you don't have it \ntinytex::install_tinytex() \n# Run only once to install LaTeX distribution\n# This might take a few minutes. If it fails, consult TinyTeX documentation or ask instructors.\n\n\n# Installing R Packages for the Course\n# We will use several add-on packages in R. \n# You only need to install packages *once*.\n# --- Run this code chunk in the R Console --- \n# List of packages we will likely need:\n\n# Packages in Cran\ncran_packages &lt;- c(\n  \"tidyverse\", \"readxl\", \"writexl\", \"readr\", \"qqman\", \"vcfR\", \"QBMS\", \"adegenet\",\n  \"ade4\", \"ggiraph\", \"ggpubr\", \"plotly\", \"poppr\", \"reactable\",\n  \"rnaturalearth\", \"scatterpie\", \"viridis\", \"tibble\",\n  \"ggplot2\", \"reshape2\", \"forcats\", \"dplyr\", \"sp\", \"scales\", \"htmltools\", \n  \"ASRgenomics\", \"statgenGWAS\", \"gplots\", \"spdep\", \"adespatial\", \"DT\", \"rrBLUP\",\n  \"geodata\", \"terra\"\n)\n\n# Bioconductor Packages\nbioc_packages &lt;- c(\"rrBLUP\", \"LEA\", \"impute\")\n\n# Github Packages\ngit_packages &lt;- c(\"snpReady\")\n\n# Installing Cran Packages\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(cran_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing CRAN packages: \", paste(missing, collapse = \", \"))\n  install.packages(missing)\n}\n\n# Installing Bioconductor Packages\nif (!requireNamespace(\"BiocManager\", quietly = TRUE)) {\n  install.packages(\"BiocManager\")\n}\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(bioc_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing Bioconductor packages: \", paste(missing, collapse = \", \"))\n  BiocManager::install(missing)\n}\n\n# Installing Github Packages\nif (!requireNamespace(\"devtools\", quietly = TRUE)) {\n  install.packages(\"devtools\")\n}\ninstalled &lt;- rownames(installed.packages())\nmissing &lt;- setdiff(git_packages, installed)\nif (length(missing)) {\n  message(\"Installing missing Github packages: \", paste(missing, collapse = \", \"))\n  devtools::install_github(\"italo-granato/snpReady\")\n}",
     "crumbs": [
       "Introduction and Setup",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Setting Up Your Environment: R and RStudio</span>"
@@ -472,490 +483,6 @@
     ]
   },
   {
-    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html",
-    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html",
-    "title": "12  Module 3.1: Genotype Data",
-    "section": "",
-    "text": "12.1 Introduction\nGenotype data refers to the genetic makeup, in this case of crops, at specific loci across the genome. This data allows us to associate genetic differences with traits of agronomic interest and regional information.",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html#introduction",
-    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html#introduction",
-    "title": "12  Module 3.1: Genotype Data",
-    "section": "",
-    "text": "The genotype refers to the specific combination of alleles at a given location. Depending on the ploidy of the crop, we will have two (diploids) or more alleles per locus.\nSNPs (Single Nucleotide Polymorphisms) are positions across the genome where variations exist between individuals.\n\nExample: Three different crop variants may have homozygous A/A, heterozygous A/G and homozygous G/G at a specific locus. This can also be coded as 0, 1 and 2. 0 represents homozygous for the reference allele, 1 represents heterozygous, and 2 represents homozygous for the alternate allele.",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html#formats",
-    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html#formats",
-    "title": "12  Module 3.1: Genotype Data",
-    "section": "12.2 Formats",
-    "text": "12.2 Formats\nSNP data can be stored in different formats and file types, depending on the platform or program used. We will briefly discuss the most common file types.\n\nVCF (Variant Call Format - .vcf): Standard format for SNPs and variants from sequencing. Contains metadata, IDs, calls, positions and other information.\n\nGT = Genotype\n0 = REF; 1 = ALT\n0/0 or 1/1= homozygous; 0/1 or 1/0 = heterozygous\n\n\n\n#CHROM  POS     ID            REF   ALT QUAL    FILTER  INFO    FORMAT  G1  G2  G3\n1H      7253074 SCRI_RS_1929    A     C   .     PASS        .     GT        1/1 1/1 0/0\n\n\n\n# Read vcf file\nvcf &lt;- read.vcfR(\"data/Barley.vcf\", verbose = FALSE)\n\n\n# Glimpse vcf\nhead(vcf)\n\n[1] \"***** Object of class 'vcfR' *****\"\n[1] \"***** Meta section *****\"\n[1] \"##fileformat=VCFv4.1\"\n[1] \"##FILTER=&lt;ID=PASS,Description=\\\"All filters passed\\\"&gt;\"\n[1] \"##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=\\\"Approximate read  [Truncated]\"\n[1] \"##FORMAT=&lt;ID=DV,Number=.,Type=Integer,Description=\\\"Read depth of the [Truncated]\"\n[1] \"##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=\\\"Genotype\\\"&gt;\"\n[1] \"##INFO=&lt;ID=MQ,Number=1,Type=Float,Description=\\\"RMS Mapping Quality\\\"&gt;\"\n[1] \"First 6 rows.\"\n[1] \n[1] \"***** Fixed section *****\"\n     CHROM POS      ID REF ALT QUAL  FILTER\n[1,] \"1H\"  \"144018\" NA \"A\" \"G\" \"999\" \"NA\"  \n[2,] \"1H\"  \"147155\" NA \"T\" \"C\" \"999\" \"NA\"  \n[3,] \"1H\"  \"166336\" NA \"C\" \"T\" \"999\" \"NA\"  \n[4,] \"1H\"  \"173286\" NA \"T\" \"C\" \"999\" \"NA\"  \n[5,] \"1H\"  \"253434\" NA \"C\" \"T\" \"999\" \"NA\"  \n[6,] \"1H\"  \"253481\" NA \"C\" \"T\" \"999\" \"NA\"  \n[1] \n[1] \"***** Genotype section *****\"\n     FORMAT     ICARDA_G0011 ICARDA_G0012 ICARDA_G0013 ICARDA_G0014\n[1,] \"GT:DP:DV\" \"0/0:33:0\"   \"0/0:23:0\"   \"0/0:18:0\"   \"0/0:23:0\"  \n[2,] \"GT:DP:DV\" \"0/0:8:0\"    \"0/0:8:0\"    \"0/0:10:0\"   \"0/0:6:0\"   \n[3,] \"GT:DP:DV\" \"0/0:16:0\"   \"0/0:9:0\"    \"0/0:9:0\"    \"0/0:5:0\"   \n[4,] \"GT:DP:DV\" \"0/0:18:0\"   \"0/0:18:0\"   \"0/0:14:0\"   \"0/0:10:0\"  \n[5,] \"GT:DP:DV\" \"1/1:12:12\"  \"1/1:19:19\"  \"1/1:12:11\"  \"1/1:10:10\" \n[6,] \"GT:DP:DV\" \"0/0:12:0\"   \"0/0:17:0\"   \"0/0:12:0\"   \"0/0:10:0\"  \n     ICARDA_G0015\n[1,] \"0/0:15:0\"  \n[2,] \"0/0:8:0\"   \n[3,] \"0/0:9:0\"   \n[4,] \"0/0:10:0\"  \n[5,] \"1/1:12:12\" \n[6,] \"0/0:11:0\"  \n[1] \"First 6 columns only.\"\n[1] \n[1] \"Unique GT formats:\"\n[1] \"GT:DP:DV\"\n[1] \n\n# Turn into matrix\nvcfMatrix &lt;- extract.gt(vcf)\n\n\nPLINK (-.ped, .map) or Binary PLINK (-.bed, .bim, .fam)\n\n.ped: Pedigree/genotype data (tab delimited)\n.map: SNP mapping information\n.bed: Binary genotype matrix\n.bim: SNP information\n.fam: Sample information\n\nHapMap (-.hmp.txt): Used in TASSEL, header includes metadata, positions and genotypes encoded as allele pairs (A/A, A/G, etc.).\nNumeric Matrix (-.csv, .txt): SNPs in columns and genotypes in rows (or vice versa), data encoded as 0, 1 and 2 for homozygous for reference allele, heterozygous, and homozygous for alternate allele.\n\n\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n\n\n# The vcf matrix we obtained can also be turned into this type of format\nmatrixNum &lt;- vcfToNumericMatrix(vcfMatrix)",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/02_QBMS.html",
-    "href": "03_Genomic_Concepts/02_QBMS.html",
-    "title": "13  Module 3.2: Using the QBMS Package to Query Genotypic Data",
-    "section": "",
-    "text": "We have explored how to import genotypic data from files into R, but we can also retrieve it directly from online databases, such as Gigwa, using ICARDA’s QBMS package.\n\n# Loading QBMS library\nlibrary(QBMS)\n\n# Configuring the connection\nset_qbms_config(url = \"https://gigwa.icarda.org:8443/gigwa/\", engine = \"gigwa\")\n\nlogin_gigwa(\"Tamara\", \"-Zy2gn5ijQcW!EE\")\n\nOnce logged in, we can use the gigwa_list_dbs() function to view all available data bases.\n\ngigwa_list_dbs()\n\n [1] \"BarleySubData\"              \"Barley_Hvulgare2\"          \n [3] \"Barley_Hvulgare3\"           \"Barley_Hvulgare4\"          \n [5] \"Barley_Hvulgare5\"           \"Barley_MegaProject1\"       \n [7] \"Barley_MegaProject1_public\" \"Cactus_Copuntia1\"          \n [9] \"Chickpea_Carietinum1\"       \"Chickpea_Carietinum2\"      \n[11] \"Chickpea_Carietinum3\"       \"Chickpea_Carietinum4\"      \n[13] \"Faba_Vfaba1\"                \"GrassPea_Lsativus1\"        \n[15] \"GrassPea_Lsativus2\"         \"Musa_Macuminata1\"          \n[17] \"WheatDurum_Tdurum1\"         \"WheatDurum_Tdurum2\"        \n[19] \"WheatDurum_Tdurum3\"         \"WheatDurum_Tdurum4\"        \n[21] \"WheatDurum_Tdurum5\"         \"WheatDurum_Tdurum6\"        \n[23] \"WheatDurum_Tdurum7\"         \"WheatDurum_Tdurum8\"        \n[25] \"WheatWild_Tspp1\"            \"Wheat_Taestivum1\"          \n[27] \"Wheat_Taestivum2\"           \"Wheat_Taestivum3\"          \n[29] \"Wheat_Taestivum4\"           \"Wheat_Taestivum5\"          \n\n\nFor this example we will be choosing the “BarleySubData” database.\n\n# To set a data base\ngigwa_set_db(\"BarleySubData\")\n\nOnce we have defined a data base, we have to define a project and a run. We can do this the following way.\n\n# To view available projects\ngigwa_list_projects()\n\n# To set a project\ngigwa_set_project(\"BarleySubData\")\n\n# To view available runs\ngigwa_list_runs()\n\n# To set a run\ngigwa_set_run(\"Run1\")\n\nOnce we have defined a data base, a project and a run, there are many tools we can use to extract relevant information.\n\ngigwa_get_samples(): Retrieves a list of samples associated with defined GIGWA project\ngigwa_get_sequences(): Retrieves a list of chromosomes associated with defined GIGWA project\ngigwa_get_markers(start = NULL, end = NULL, chrom = NULL, simplify = TRUE): Retrieves a list of SNP variants from selected GIGWA run. We can define the following parameters:\n\nstart: starting position of query\nend: ending position of query\nchrom: chromosome\nsimplify: defaults as TRUE, returns data in HapMap format with columns for rs#, alleles, chromosome and position\n\ngigwa_get_allelematrix(samples = NULL, start = 0, end = \"\", chrom = NULL, snps = NULL, simplify = TRUE): Retrieves a two-dimensional matrix of genotype data from the defined GIGWA run.\n\nsamples: optional list of sample IDs, if NULL, all samples are included\nstart: starting position of query\nend: ending position of query\nchrom: chromosome\nsnps: list of SNP variants to filter\nsimplify: defaults as TRUE, returns data in numeric coding (0, 1, 2 for diploids)\n\ngigwa_get_metadata(): Retrieves associated metadata (if available)\n\n\n# Get a list of all samples in the selected run\nsamples &lt;- gigwa_get_samples()\n\n# Get sequence list\nchroms &lt;- gigwa_get_sequences()\n\n# Get markers\nmarkers &lt;- gigwa_get_markers()\n\n# Get genotypic matrix\n#marker_matrix &lt;- gigwa_get_allelematrix()",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.2: Using the QBMS Package to Query Genotypic Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html",
-    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html",
-    "title": "14  Module 3.3: Data Quality Control and Filtering for SNP Data",
-    "section": "",
-    "text": "14.1 Call Rate\nFiltering SNP data is important for genetic and genomic studies in order to improve data quality, optimize resources and avoid noise by removing non-informative markers, and account for missing data. The most common filtering criteria we will focus on is call rate, missing data and MAF (Minor Allele Frequency).\nCall rate refers to the percentage of non-missing data for a specific SNP marker. It is calculated by dividing the number of non-missing individuals / total number of individuals for each marker. The filtering threshold will depend on the specific data set or investigation; however, common thresholds tend to be 0.9 or 0.95.]\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n# Considering our n x m matrix with n markers and m individuals\n# Defining our threshold\ncall_rate &lt;- 0.9\n\n# Filtering our matrix\nfiltered_matrix &lt;- matrix[which(rowMeans(!is.na(matrix)) &gt; call_rate),]",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#missing-data",
-    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#missing-data",
-    "title": "14  Module 3.3: Data Quality Control and Filtering for SNP Data",
-    "section": "14.2 Missing data",
-    "text": "14.2 Missing data\nJust as we can filter markers with too much missing data, we can filter individuals with too many missing values. Our missing data threshold will refer to the percentage of non-missing data for each individual.\n\n# Defining our threshold\nna_ind &lt;- 0.8\n\n# Filtering our matrix\nfiltered_matrix &lt;- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) \n                                          &gt; na_ind)]",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#maf",
-    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#maf",
-    "title": "14  Module 3.3: Data Quality Control and Filtering for SNP Data",
-    "section": "14.3 MAF",
-    "text": "14.3 MAF\nMinor allele frequency refers to the frequency of the least common allele for a particular SNP marker in a given population. It is commonly used as a filtering criteria as it allows you to exclude markers that contribute little to population-level analyses and helps reduce noise.\nFor example, if I have a marker which is homozygous 0 (AA), heterozygous 1 (AG), and homozygous 2 (GG), each individual contributes 2 alleles. We then count the minor alleles across all individuals to obtain MAF.\n\n# Calculating MAF for all markers\nmafFreq &lt;- apply(filtered_matrix, 1, function(row) {\n  row &lt;- row[!is.na(row)]\n  maf &lt;- sum(row) / (2 * length(row))\n  maf &lt;- min(maf, 1 - maf)\n  maf\n})\n\n# Filtering matrix according to maf\nfiltered_matrix &lt;- filtered_matrix[mafFreq &gt; 0.01,]",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#general-filtering",
-    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#general-filtering",
-    "title": "14  Module 3.3: Data Quality Control and Filtering for SNP Data",
-    "section": "14.4 General Filtering",
-    "text": "14.4 General Filtering\nTo simplify all previous steps, we can use the filterData() function from our package. The function allows you to define thresholds for call rate, MAF and missing individuals. There is an additional parameter called stats, it is set to FALSE by default but by setting it to TRUE you can get a data frame with statistics for the number of filtered markers and individuals by criteria.\n\nfilter &lt;- filterData(matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
-    ]
-  },
-  {
-    "objectID": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#visualization-of-marker-information",
-    "href": "03_Genomic_Concepts/03_Filtering_SNP_Data.html#visualization-of-marker-information",
-    "title": "14  Module 3.3: Data Quality Control and Filtering for SNP Data",
-    "section": "14.5 Visualization of marker information",
-    "text": "14.5 Visualization of marker information\nOnce we have filtered our matrix, we can visualize marker information. We first need to import our marker information.\n\n# Importing our marker information\nmarkers &lt;- read.table(\"data/BarleyMarkers.tsv\", sep = \"\\t\", header = TRUE, \n                     check.names = FALSE)\n\nWe can then generate our plots using the markerPlots() function from our ICARDA package. This function requires the markers and genotype matrix data. It allows for a third parameter called chrom, where you can define the specific chromosome you wish to plot your data for.\n\n# Generating our plots\n# (our SNP marker matrix needs to be transposed for this function)\n# Individuals as rows and markers as columns\nmarkerplots &lt;- markerPlots(markers, t(filter))\n\nWarning in guide_legend(ncol = 8, bycol = TRUE): Arguments in `...` must be used.\n✖ Problematic argument:\n• bycol = TRUE\nℹ Did you misspell an argument name?\n\n# Marker plot\nmarkerplots$markerPlot\n\n\n\n\n# MAF plot\nmarkerplots$mafPlot\n\n\n\n\n# Missing Data\nmarkerplots$missingData",
-    "crumbs": [
-      "Core Genomic Concepts",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 3.3: Data Quality Control and Filtering for SNP Data</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/01_Kinship_Relatedness.html",
-    "href": "04_Pop_Structure/01_Kinship_Relatedness.html",
-    "title": "15  Module 4.1: Kinship and Relatedness",
-    "section": "",
-    "text": "15.1 Kinship\nIdentifying relatedness between individuals is important to ensure samples are independent, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can help control confounding affects in association studies and can help infer subpopulations when studying structure. Moreover, not only may individuals be related, we can sometimes find duplicates of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.\nKinship refers to the genetic relatedness between individuals, and it is a measure of how much of their genomes two individuals share due to common ancestry. Kinship is often evaluated by calculating a kinship matrix. We can use the kinshipMatrix() function from our package to do this. This function requires our genotype matrix. It has the option to choose the method we want to use to calculate the matrix by defining the method parameter. By default it it set to \"vanRaden\", but we can choose between \"astle\", \"IBS\", and \"identity\". We can also choose to save the matrix locally as a text file by setting the save parameter as TRUE, which is set to FALSE by default.\n# Importing our genotypic data\nraw_matrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# Filtering\nmatrix &lt;- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)\n\n# We transpose our matrix (to have individuals as rows and makers\n# as columns for posterior analyses)\nmatrix &lt;- t(matrix)\n\n# Calculating kinship matrix using ICARDA package\nkinshipMat &lt;- kinshipMatrix(matrix, method = \"vanRaden\", save = FALSE)\nWe can also create a heatmap from our kinship matrix using the kinshipHeatmap() function from our package. It requires our kinship matrix obtained using our previous function. It also has a file parameter to define the file path were we want to save our heatmap in.\n# Generating a heatmap from our kinship matrix as an image in our working directory\nkinshipHeatmap(kinshipMat, file = \"output/figures/heatmap.png\")",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.1: Kinship and Relatedness</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/01_Kinship_Relatedness.html#duplicates",
-    "href": "04_Pop_Structure/01_Kinship_Relatedness.html#duplicates",
-    "title": "15  Module 4.1: Kinship and Relatedness",
-    "section": "15.2 Duplicates",
-    "text": "15.2 Duplicates\nWe can use the results from our kinship matrix to identify potential duplicates within our data. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses. We will use the kinshipDuplicates() function from our package, which returns a list object with our kinship matrix, a data frame with our potential duplicates, and plots of the distribution of diagonal and off-diagonal values from our kinship matrix.\nkinshipDuplicates(geno, threshold, method = \"vanRaden\", save = FALSE, kinship = NULL)\n\ngeno: our genotype matrix\nthreshold: a similarity threshold to differentiate our duplicates\nmethod: set to \"vanRaden\" by default, accepts \"astle\", \"IBS\", and \"identity\"\nsave: defaults to FALSE, if TRUE, saves as a text file\nkinship: defaults to NULL, if we have already produced a kinship matrix we can define this parameter with it\n\n\n# Identifying duplicates by setting a similarity threshold and using the ICARDA package\nduplicates &lt;- kinshipDuplicates(matrix, threshold = 0.99, kinship = kinshipMat)\n\n# Printing potential duplicates along with their kinship and correlation\nhead(duplicates$potentialDuplicates)\n\n       Indiv.A      Indiv.B    Value      Corr\n1 ICARDA_G1416 ICARDA_G0226 1.623916 0.9988232\n2 ICARDA_G0052 ICARDA_G0043 1.784647 0.9984566\n3 ICARDA_G0140 ICARDA_G0059 1.840917 0.9983279\n4 ICARDA_G0110 ICARDA_G0098 1.808388 0.9982951\n5 ICARDA_G0119 ICARDA_G0098 1.807323 0.9980452\n6 ICARDA_G0291 ICARDA_G0217 1.622423 0.9979949\n\n# Printing histograms with the distribution of diagonal and off-diagonal values\nduplicates$plots\n\n[[1]]\n\n\n\n\n\n\n\n\n\n\n[[2]]\n\n\n\n\n\n\n\n\n\nThe diagonal of a kinship matrix is the self-relatedness of each individual. Most kinship estimators normalize values such that they are close to 1 or 0.5 according to scaling. Deviations may represent uneven SNP quality, duplicates or inbreeding. Off-diagonal entries are pairwise kinship estimates between two different individuals. These values are often closer to 0 , meaning the individuals are unrelated. Positive values mean the individuals share more alleles than expected by chance, and negative values mean the individuals are less related than expected. Clusters in a heatmap or in off-diagonal values often represent subpopulations.\nIf we decide we want to filter our data according to the potential duplicates we identified, we can use the kinshipFilter() function from the ICARDA package. This function requires our genotype matrix, our data frame with potential duplicates, and our kinship matrix. This will give us a filtered version of our SNP matrix and kinship matrix. We can also choose to save the matrix locally as a text file by setting the save parameter as TRUE, which is set to FALSE by default.\n\nfilteredMatrix &lt;- kinshipFilter(matrix, duplicates$potentialDuplicates, kinshipMat)",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.1: Kinship and Relatedness</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html",
-    "href": "04_Pop_Structure/02_Genetic_Diversity.html",
-    "title": "16  Module 4.2: Genetic Diversity",
-    "section": "",
-    "text": "16.1 Diversity parameters\nSNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.\nWe can easily calculate the most relevant diversity parameters using the genDivSNPReady() from our package.\ngenDivSNPReady(geno, plots = FALSE, interactive = TRUE): Returns diversity parameters calculated with snpReady package.\nThe function returns a list object with two data frames, one with the diversity parameters for each marker, and one with the diversity parameters for each accession. If plots = TRUE, a third object is generated with the different plots.\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n# SNP matrix has to have individuals in rows and markers as columns for the \n# posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n# Ensuring IDs match\nmetadata &lt;- metadata[metadata$Individual %in% rownames(matrix),]\n# Obtaining genetic diversity parameters\nSNPReadyParams &lt;- genDivSNPReady(matrix, plots = TRUE)\n\n# Printing marker diversity parameters\nSNPReadyParams$markers\n\nDownload as CSV\n\n\n\n# Printing individual's diversity parameters\nSNPReadyParams$accessions\n\nDownload as CSV\n\n\n\n# Diversity plots\nSNPReadyParams$plots",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#diversity-parameters",
-    "href": "04_Pop_Structure/02_Genetic_Diversity.html#diversity-parameters",
-    "title": "16  Module 4.2: Genetic Diversity",
-    "section": "",
-    "text": "geno: our genotype matrix\nplots: defaults to FALSE, if TRUE, a graphical output of the results is produced\ninteractive: defaults to TRUE, produces a dynamic table, if FALSE, output remains as data frame",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#by-population",
-    "href": "04_Pop_Structure/02_Genetic_Diversity.html#by-population",
-    "title": "16  Module 4.2: Genetic Diversity",
-    "section": "16.2 By population",
-    "text": "16.2 By population\nThese parameters can also be calculated by population in order to compare the diversity between them. We will use the HeBySubgroups() function from our package.\nHeBySubgroups(geno, subgroups, plot = FALSE, interactive = TRUE): returns expected heterozygosity (He) by groups, including an optional plot\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\nplots: defaults to FALSE, if TRUE, a graphical output of the results is produced\ninteractive: defaults to TRUE, produces a dynamic table, if FALSE, output remains as data frame\n\n\n# Defining our populations from country information\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual \n                                                 %in% rownames(matrix)])\n\n# Calculating parameters by population\nHe &lt;- HeBySubgroups(matrix, popSet, plot = TRUE)\n\n# Plotting results\nHe$plot\n\n\n\n\n# Printing results\nHe$df\n\nDownload as CSV",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#amova",
-    "href": "04_Pop_Structure/02_Genetic_Diversity.html#amova",
-    "title": "16  Module 4.2: Genetic Diversity",
-    "section": "16.3 AMOVA",
-    "text": "16.3 AMOVA\nAMOVA or Analysis of Molecular Variance can be run from a genetic distance matrix to evaluate genetic variation within populations, between populations and among populations. It helps us understand the structure of variation in our sample. We will be using the genDistPop() and AMOVA() functions from our package for this. They use frameworks from adegenet and poppr to carry out the AMOVA.\ngenDistPop(geno, subgroups, method = 1, PCoA = FALSE): returns a genetic distance matrix and optional Principal Coordinate Analysis from the distance matrix.\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\nmethod: defaults to 1 (Nei’s distance), allows for values 1-5 (Nei, Edwards, Reynolds, Rogers, Provesti)\nPCoA: defaults to FALSE, if TRUE, performs a principal coordinates analysis of a Euclidean distance matrix\n\nAMOVA():\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\n\n\n# Calculating our genetic distance matrix and PCoA\ngenDist &lt;- genDistPop(matrix, popSet, PCoA = TRUE)\n\n\n Converting data from a genind to a genpop object... \n\n...done.\n\n# Printing results\ngenDist\n\n$genDist\n          CHN       ETH       TUR\nCHN 0.0000000                    \nETH 0.1785492 0.0000000          \nTUR 0.1075913 0.1388646 0.0000000\n\n$PCoA\nDuality diagramm\nclass: pco dudi\n$call: dudi.pco(d = genDist, scannf = FALSE, nf = 3)\n\n$nf: 2 axis-components saved\n$rank: 2\neigen values: 0.005458 0.001513\n  vector length mode    content       \n1 $cw    2      numeric column weights\n2 $lw    3      numeric row weights   \n3 $eig   2      numeric eigen values  \n\n  data.frame nrow ncol content             \n1 $tab       3    2    modified array      \n2 $li        3    2    row coordinates     \n3 $l1        3    2    row normed scores   \n4 $co        2    2    column coordinates  \n5 $c1        2    2    column normed scores\nother elements: NULL\n\n$PCoAPlot\n\n# PCoA\ngenDist$PCoAPlot\n\n\n\n\n# Running AMOVA\namovaResult &lt;- AMOVA(matrix, popSet)\n\n\n Replaced 248144 missing values.\n\n\n\n No missing values detected.\n\n# Printing results\namovaResult\n\n$call\nade4::amova(samples = xtab, distances = xdist, structures = xstruct)\n\n$results\n                 Df    Sum Sq    Mean Sq\nBetween samples   2  92405.09 46202.5455\nWithin samples  485 346712.00   714.8701\nTotal           487 439117.09   901.6778\n\n$componentsofcovariance\n                                Sigma         %\nVariations  Between samples  291.6988  28.97952\nVariations  Within samples   714.8701  71.02048\nTotal variations            1006.5689 100.00000\n\n$statphi\n                        Phi\nPhi-samples-total 0.2897952",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/03_Pop_Structure.html",
-    "href": "04_Pop_Structure/03_Pop_Structure.html",
-    "title": "17  Module 4.3: Population Structure",
-    "section": "",
-    "text": "17.1 Why is it important?\nPopulation structure in crop breeding refers to the presence of clusters or subpopulations that are genetically distinct from each other. The subpopulations may reflect geography, breeding history, natural selection, gene pools, or other differentiating factors. The subgroups are identified by differences in allele frequencies.",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/03_Pop_Structure.html#why-is-it-important",
-    "href": "04_Pop_Structure/03_Pop_Structure.html#why-is-it-important",
-    "title": "17  Module 4.3: Population Structure",
-    "section": "",
-    "text": "Allows us to detect subpopulations and understand genetic diversity\nCan be used to control bias in GWAS or other genomic prediction models (by including structure information as covariates), as not accounting for structure may lead to spurious associations (false-positives)\nAcknowledging structure can help guide breeding programs",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/03_Pop_Structure.html#common-methods",
-    "href": "04_Pop_Structure/03_Pop_Structure.html#common-methods",
-    "title": "17  Module 4.3: Population Structure",
-    "section": "17.2 Common methods",
-    "text": "17.2 Common methods\n\nSTRUCTURE / ADMIXTURE: Uses Bayesian clustering or Maximum Likelihood (ML) estimation to assign individuals into subpopulations, including admixture proportions for each individual.\nPrincipal Component Analysis (PCA): Used to reduce dimentionality of large data sets, and to visualize overall diversity and major genetic groupings.\nSpatial Principal Component Analysis (sPCA): Incorporates spatial information (geographic location) into traditional PCA, meaning it seeks to maximize spatial autocorrelation along with variation. It allows us to identify global and local trends.\nDiscriminant Analysis of Principal Components (DAPC): Used to assign individuals to groups, provide a visual assessment of between-population differentiation and the contribution of individual alleles to the population structure.\nSparse Non-negative Matrix Factorization (sNMF): Fast algorithm used to infer structure by estimating ancestry coefficients. Allows us to evaluate levels of admixture. More efficient than STRUCTURE for large data sets.\n\nAll methods are complementary to each other and using them in combination can help us fully understand structure in our data.\n\n\n\nWant to explore structure quickly?\nPCA\n\n\nWant to analyze spatial genetic variation?\nsPCA\n\n\nNeed to classify individuals into groups?\nDAPC\n\n\nNeed to estimate admixture proportions?\nsNMF\n\n\n\nWe will be using functions from our package to carry out and visualize most of these analyses.",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/03_Pop_Structure.html#pca",
-    "href": "04_Pop_Structure/03_Pop_Structure.html#pca",
-    "title": "17  Module 4.3: Population Structure",
-    "section": "17.3 PCA",
-    "text": "17.3 PCA\nPCA reduces our large genotype matrix into principal components which capture the variation in our data. We will use the PCAFromMatrix() function from our package. This function uses the PCA framework from the ade4 package. This function returns a list with three objects, the first one being a PCA, the second one being a data frame with the variance explained by each component, and the third one being a plot of the PCA results (1st and 2nd PCs).\nPCAFromMatrix(geno, subgroups = NULL): returns a pca object from genotype matrix\n\ngeno: our genotype matrix\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\n\n\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n\n# SNP matrix has to have individuals in rows and markers as columns \n# for the posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n\n\n# We will be guiding our analysis by the 'countryOfOriginCode' metadata column\n# Defining our subgroups\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual \n                                                 %in% rownames(matrix)])\n# Running our pca using our genotype data and groups\npca &lt;- PCAFromMatrix(matrix, popSet)\n\n# Printing pca object\npca$pca\n\nDuality diagramm\nclass: pca dudi\n$call: dudi.pca(df = x.genInd, center = FALSE, scale = FALSE, scannf = FALSE, \n    nf = round(ncol(geno)/3, 0))\n\n$nf: 487 axis-components saved\n$rank: 487\neigen values: 288 231.5 102.3 71 37.18 ...\n  vector length mode    content       \n1 $cw    12141  numeric column weights\n2 $lw    488    numeric row weights   \n3 $eig   487    numeric eigen values  \n\n  data.frame nrow  ncol  content             \n1 $tab       488   12141 modified array      \n2 $li        488   487   row coordinates     \n3 $l1        488   487   row normed scores   \n4 $co        12141 487   column coordinates  \n5 $c1        12141 487   column normed scores\nother elements: cent norm \n\n# Printing PC variation\nhead(pca$var)\n\n  PC  Variance CumulativeVar\n1  1 17.004415      17.00442\n2  2 13.666554      30.67097\n3  3  6.040506      36.71148\n4  4  4.191208      40.90268\n5  5  2.195083      43.09777\n6  6  1.665563      44.76333\n\n# Plotting pca results\npca$plot",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/03_Pop_Structure.html#spca",
-    "href": "04_Pop_Structure/03_Pop_Structure.html#spca",
-    "title": "17  Module 4.3: Population Structure",
-    "section": "17.4 sPCA",
-    "text": "17.4 sPCA\nWe will be using the sPCA() function from our package. This function uses the sPCA framework from the adegenet package. It returns a list with our sPCA object, a plot of the obtained eigenvalues, results and plots for the global test and results and plots for the local test. The obtained sPCA result can be plotted using the sPCAMapPlot() function.\nsPCA(geno, subgroups = NULL, xy, eigenPlot = TRUE, tests = TRUE): returns sPCA from genotype data\n\ngeno: our genotype matrix\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\nxy: a two column longitude - latitude vector or data frame\neigenPlot: defaults to TRUE, plots the resulting eigenvalues\ntests: defaults to TRUE, carries out global and local tests\n\nsPCAMapPlot(spca, geno, xy, axis = 1, pos = TRUE): plots our sPCA results on a map\n\nspca: our spca object\ngeno: our genotype matrix\nxy: a two column longitude - latitude vector or data frame\naxis: defaults to 1 (our first axis), we can choose any other axis to plot\npos: defaults to TRUE to plot the positive values, can be set to FALSE to plot the negative values\n\n\n# Running sPCA\nspca &lt;- sPCA(matrix, subgroups = popSet, xy = metadata[,c(\"LON\",\"LAT\")], \n             eigenPlot = TRUE, tests = FALSE)\n\n# Plotting our obtained eigenvalues\nspca$eigenPlot\n\n# Plotting global test results\nspca$globalTest\n\n# Plotting local test results\nspca$localTest\n\n# Plotting our results in a map\nsPCAMapPlot(spca$spca, matrix, xy = metadata[,c(\"LON\",\"LAT\")], \n            axis = 1, pos = TRUE)\n\nThe global test tests whether the genetic structure detected is globally significant, while the local test tests identifies which individuals or sites contribute significantly (hotspots).",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/03_Pop_Structure.html#dapc",
-    "href": "04_Pop_Structure/03_Pop_Structure.html#dapc",
-    "title": "17  Module 4.3: Population Structure",
-    "section": "17.5 DAPC",
-    "text": "17.5 DAPC\nDAPC requires the user to define a range of subpopulation numbers for which to perform the analyses. To do this, we can calculate different k-statistics to guide our choice of this range. We will be using our kMeansStats() function, which allows us to choose between \"BIC\", \"AIC\" or \"WCC\" for our desired k-statistic. This function outputs a data frame with our k-statistic values, and a plot. We will then use our DAPC() function on our genotype data, which uses the DAPC framework from the adegenet package. This function outputs a list with the dapc object and a data frame with the explained variances. An additional plot can also be produced.\nkMeansStats(geno, pca = NULL, maxK, stat): returns test statistic results for different K values\n\ngeno: our genotype matrix\npca: defaults to NULL, can be replaced by a pca object to skip over creating a new PCA\nmaxK: the maximum number of K subpopulations for which to calculate k-statistics\nstat: type of k-statistic to calculate\n\nDAPC(geno, krange, subgroups = NULL, pca = NULL, dapcPlot = FALSE): performs DAPC\n\ngeno: our genotype matrix\nkrange: a range of K values\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\npca: defaults to NULL, can be replaced by a pca object to skip over creating a new PCA\ndapcPlot: defaults to FALSE, if TRUE, an output plot is produced\n\n\n# Calculating our K statistics\nBICDAPC &lt;- kMeansStats(matrix, pca$pca, 10, \"BIC\")\n\n# Plotting K statistic\nBICDAPC$statPlot\n\n\n\n\n\n\n\n# Running DAPC\nDAPC &lt;- DAPC(matrix, krange = 3:7, pca = pca$pca, subgroups = popSet, \n             dapcPlot = TRUE)\n\n# Plotting DAPC results\nDAPC$dapcPlot\n\n\n\n\n\nOur resulting DAPC outputs group assignments for each individual, which can be visualized through a composition plot.\nDAPCCompoPlot(DAPC, geno, krange, subgroups = NULL): returns a composition plot of DAPC results\n\nDAPC: a dapc object\ngeno: our genotype matrix\nkrange: a range of K values\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\n\n\nDAPCCompoPlot(DAPC$dapc, matrix, krange = 3:7, subgroups = popSet)\n\n\n\n\n\n\n\n\nWe can also produce a frequency plot from our DAPC. This helps us understand the relationship between the produced group assignments and prior group information we may have.\nDAPCFreqPlot(DAPC, subgroups): produces a frequency plot of our DAPC results\n\nDAPC: a single dapc object\nsubgroups: a vector of our factor information\n\n\n# For k = 3, which is our first object in our DAPC object\nDAPCFreqPlot(DAPC$dapc[[1]], subgroups = popSet)",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/03_Pop_Structure.html#snmf",
-    "href": "04_Pop_Structure/03_Pop_Structure.html#snmf",
-    "title": "17  Module 4.3: Population Structure",
-    "section": "17.6 sNMF",
-    "text": "17.6 sNMF\nsNMF is used to estimate admixture proportions: how much of an individual’s genome comes from different ancestral populations. This means that individuals are not just assigned to a population, instead membership probabilities (admixture coefficients) are calculated. We will be using functions from our package to carry out these analyses. The framework they use comes from the LEA package. Prior to estimating ancestry coefficients, this package requires us to create a geno type object, which we will create using the write.geno.mod() function. We can then run our main function using sNMFFunction(), which outputs a list with our snmf object, a matrix with the produced ancestry coefficients, and a data frame with cross-entropy values. The latter can guide our choice of best K value.\nwrite.geno.mod(geno, output.file): creates geno type object from genotype matrix\n\ngeno: our genotype matrix\noutput.file: file path where to save our object\n\nsNMFFunction(geno, file, maxK, subgroups = NULL, cePlot = TRUE): outputs ancestry coefficients\n\ngeno: our genotype matrix\nfile: file path of geno object\nmaxK: the maximum number of K subpopulations\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\ncePlot: defaults to TRUE, outputs a plot of cross-entropy values\n\n\n# Creating 'geno' object needed to run sNMF\nwrite.geno.mod(matrix, \"output/sNMFgenoBarley.geno\")\n\n# Running sNMF\nsNMF &lt;- sNMFFunction(matrix, subgroups = popSet, \"output/sNMFgenoBarley.geno\", maxK = 6, cePlot = TRUE)\n\nWe can visualize our membership probability results using a composition plot.\nsNMFCompoPlot(sNMFmatrix, geno, krange, subgroups = NULL): returns a composition plot of admixture results\n\nsNMFmatrix: ancestry coefficient matrix\ngeno: our genotype matrix\nkrange: a range of K values\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\n\n\n# Plotting composition plot\nsNMFCompoPlot(sNMF$qmatrix, matrix, krange = 2:6, subgroups = popSet)\n\n\n\n\n\n\n\n\nFinally, we can also visualize our sNMF results on a map by incorporating spatial information if available.\nsNMFMapPlot(geno, sNMFObjectVar, xy, k, Xlim = NULL, Ylim = NULL): produces a map plot from ancestry coefficient results for a specific number of subgroups\n\ngeno: our genotype matrix\nsNMFObjectVar: a snmf object\nxy: a two column longitude - latitude vector or data frame\nk: a number K of subpopulations\nXlim: defaults to NULL, can be replaced by a range of longitudes to zoom in the map\nYlim: defaults to NULL, can be replaced by a range of latitudes to zoom in the map\n\n\n# Plotting results in map\nsNMFMapPlot(matrix, sNMF$snmf, xy = metadata[,c(\"LON\",\"LAT\")], 3)\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\nℹ The deprecated feature was likely used in the scatterpie package.\n  Please report the issue to the authors.",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/04_Phylo_Tree.html",
-    "href": "04_Pop_Structure/04_Phylo_Tree.html",
-    "title": "18  Module 4.4: Phylogenetic Trees",
-    "section": "",
-    "text": "18.1 Tree Methods\nBesides exploring population structure, we may want to explore evolutionary relationships between individuals. We can use phylogenetic trees to infer common ancestry, track lineage divergence, and reconstruct evolutionary and adaptation history. We will focus on distance-based methods. These require us to construct a genetic distance matrix, from which a tree is constructed by clustering similar individuals.",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/04_Phylo_Tree.html#tree-methods",
-    "href": "04_Pop_Structure/04_Phylo_Tree.html#tree-methods",
-    "title": "18  Module 4.4: Phylogenetic Trees",
-    "section": "",
-    "text": "Neighbor Joining (NJ): builds an unrooted tree by minimizing the total branch length. It is fast and scaleable, often used for SNP data.\nUnweighted Pair Group Method with Arithmetic Mean (UPGMA): builds a rooted, ultrametric tree, meaning all leaves are at an equal distance from the root. It clusters taxa based on average pairwise distances and assumes a constant rate of evolution.",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/04_Phylo_Tree.html#distance-types",
-    "href": "04_Pop_Structure/04_Phylo_Tree.html#distance-types",
-    "title": "18  Module 4.4: Phylogenetic Trees",
-    "section": "18.2 Distance types",
-    "text": "18.2 Distance types\n\nNei’s distance [nei.dist()]: Measures genetic divergence based on allele frequencies. Very common in population genetics.\nEuclidean distance [bitwise.dist()]: Based on geometric distance in multidimensional space.\nReynolds’ distance [reynolds.dist()]: Reynolds’ distance measures genetic differentiation due to drift and it as the main evolutionary force. Good for closely related populations.\nRogers’ distance [rogers.dist()]: Scaled version of the standard Euclidean distance applied to allele frequency data.\nEdwards’ distance [edwards.dist()]: Measures the cosine of the angle between allele frequency vectors.\nPrevosti’s distance [provesti.dist()]: Based on the absolute difference in allele frequencies between two populations.",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
-    ]
-  },
-  {
-    "objectID": "04_Pop_Structure/04_Phylo_Tree.html#creating-our-tree",
-    "href": "04_Pop_Structure/04_Phylo_Tree.html#creating-our-tree",
-    "title": "18  Module 4.4: Phylogenetic Trees",
-    "section": "18.3 Creating our tree",
-    "text": "18.3 Creating our tree\nWe will be using the phyloTree() function from our package to create our phylogenetic tree. This function uses framework from the poppr package to construct the phylogenetic tree.\nphyloTree(geno, treeType, distanceType, samples, path): returns a phylo type object\n\ngeno: our genotype matrix\ntreeType: a text or function that can calculate a tree from a distance matrix, defaults to “upgma”\ndistanceType: a character or function defining the distance to be applied, defaults to nei.dist()\nsamples: a number of bootstrap replicates, defaults to 100\npath: file path to save tree in Newick format\n\nThe output tree can be plotted using the plot() function. We can define the type of visualization in the type parameter, which defaults to \"phylogram\" and accepts \"cladogram\", \"fan\", \"unrooted\", \"radial\" or \"tidy\". The produced Newick file can be visualized better with tools such as iTOL, which allows for more visualization and annotation options.\n\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n# SNP matrix has to have individuals in rows and markers as columns \n# for the posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n\n# Defining our subgroups\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual \n                                                 %in% rownames(matrix)])\n\n\n# Creating NJ tree from Nei's distance (1 sample for time purposes) \ntree &lt;- phyloTree(matrix, treeType = \"nj\", distanceType = nei.dist, samples = 1, \n                  path = here(\"output\", \"tree.txt\"))\n\nWarning in aboot(alleleFreq, tree = treeType, distance = distanceType, sample =\nsamples, : Some branch lengths of the tree are negative. Normalizing branches\naccording to Kuhner and Felsenstein (1994)\n\n\n\nCalculating bootstrap values... done.\n\n# Creating vector of colors for better visualization\npopColors &lt;- rainbow(nlevels(popSet))[as.numeric(popSet)]\n\n# Plotting tree\nplot(tree, main = \"NJ Tree with Bootstrap\", type = \"phylogram\", tip.color = popColors, cex = 0.1)\n\n\n\n\n\n\n\n\n\n# Creating NJ tree from Nei's distance (1 sample for time purposes) \ntree &lt;- phyloTree(matrix, treeType = \"upgma\", distanceType = nei.dist, samples = 1, \n                  path = \"output/tree.txt\")\n\n# Creating vector of colors for better visualization\npopColors &lt;- rainbow(nlevels(popSet))[as.numeric(popSet)]\n\n# Plotting tree\nplot(tree, main = \"NJ Tree with Bootstrap\", type = \"phylogram\", \n     tip.color = popColors, cex = 0.1)",
-    "crumbs": [
-      "Population Structure and Relatedness",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/01_Initial_Concepts.html",
-    "href": "05_GWAS/01_Initial_Concepts.html",
-    "title": "19  Module 5.1: Introduction to GWAS",
-    "section": "",
-    "text": "19.1 Reading the Marker Matrix\nThe purpose of Genome-Wide Association Studies (GWAS) is to identify genetic variants associated with specific traits. We will be using the statgenGWAS package, which has been designed for performing single trait GWAS.\nMarkers can either be coded as character strings or as numerical values. Common coding styles include the following options:\ngenotypic_data &lt;- read.table(geno_file, \n                             header = TRUE, \n                             comment.char = '')\n\n# Show the first 50 rows/columns only\ncreate_dt(genotypic_data[1:50,1:50])",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/01_Initial_Concepts.html#reading-the-marker-matrix",
-    "href": "05_GWAS/01_Initial_Concepts.html#reading-the-marker-matrix",
-    "title": "19  Module 5.1: Introduction to GWAS",
-    "section": "",
-    "text": "AA, AB, BA, BB -&gt; 0, 1, 1, 2 (A is reference allele, and B is alternative allele)\nCC, CT, TC, TT -&gt; 0, 1, 1, 2 (e.g., ref. allele is C)\nC, Y, Y, T -&gt; 0, 1, 1, 2 (Nucleic Acid Notation)\nnumerical code: 0, 1, 1, 2 (0 ref./major allele, 2 alt./minor allele, and 1 is heterozygous) statgenGWAS\nnumerical code: -1, 0, 0, 1 (-1 ref./major allele, 1 alt./minor allele, and 0 is heterozygous) rrBLUP\n\n\n\n19.1.1 Marker Map\nThe data.frame map is used to describe the physical positions of the markers on the chromosomes. The data consists of two columns, chr for the name or number of the chromosome and pos for the position of the marker on the chromosome. The position can be in basepair or in centimorgan. The names of the markers should be the row names of the data.frame.\n\nmarker_map &lt;- genotypic_data[, 3:4]\ncolnames(marker_map) &lt;- c('chr', 'pos')\nrownames(marker_map) &lt;- genotypic_data[, 1]\n\ncreate_dt(marker_map)\n\n\n\n\n\n\n\n19.1.2 Marker Matrix\nThe marker matrix is stored in the matrix marker within the gData object. It has the names of the markers in its column names and the genotypes in its row names. Markers can either be coded as character strings or as numerical values. Important note, before performing any analysis, the marker matrix has to be converted to a numerical matrix. This can be do using the function codeMarkers.\n\nmarker_matrix &lt;- genotypic_data[, -c(1:11)]\nrownames(marker_matrix) &lt;- genotypic_data[, 1]\nmarker_matrix &lt;- t(marker_matrix)\n\n# show the first 50 rows/columns only\ncreate_dt(marker_matrix[1:50,1:50])\n\n\n\n\n\nWe can use the marker map and marker matrix to create a gData object.\n\ngData &lt;- createGData(geno = marker_matrix, map = marker_map)\n\n\n\n19.1.3 Recording and Cleaning of Data\nMarker data has to be numerical and without missing values in order to do GWAS analysis. This can be achieved using the codeMarkers() function. In this example our marker matrix is not numerical; however, the function also allows us to input an already numerical matrix for filtering and the imputation of missing values.\ncodeMarkers(gData, naStrings = NA, impute = TRUE, verbose = TRUE, nMiss = 1, nMissGeno = 1, MAF = NULL, imputeType): returens a copy of the input gData object with markers replaced by coded and imputed markers\n\nnaStings: character vector of strings to be treated as NA\nimpute: defaults to TRUE, performs imputation of missing values\nverbose: defaults to TRUE, prints a summary of performed steps\nnMiss: a numerical value between 0 and 1, SNPs with a fraction of missing values higher than this value will be removed\nnMissgeno: a numerical value between 0 and 1, genotypes with a fraction missing values higher than this value will be removed\nMAF: a numerical value between 0 and 1, SNPs with a MAF below this value will be removed\nimputeType: indicates type of imputation (\"fixed\", \"random\", \"beagle\")\n\n\n# Remove duplicate SNPs from gData\ngData &lt;- codeMarkers(gData, \n                     naStrings = 'N', \n                     removeDuplicates = TRUE, \n                     impute = FALSE, \n                     verbose = TRUE)\n\nInput contains 2772 SNPs for 200 genotypes.\n43190 values replaced by NA.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n467 duplicate SNPs removed.\nOutput contains 2305 SNPs for 200 genotypes.\n\n# SNPs with a fraction of missing values higher than nMiss will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMiss = 0.1)\n\nInput contains 2305 SNPs for 200 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n634 SNPs removed because proportion of missing values larger than or equal to 0.1.\n0 duplicate SNPs removed.\nOutput contains 1671 SNPs for 200 genotypes.\n\n# Genotypes with a fraction of missing values higher than nMissGeno will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMissGeno = 0.2)\n\nInput contains 1671 SNPs for 200 genotypes.\n12 genotypes removed because proportion of missing values larger than or equal to 0.2.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n318 duplicate SNPs removed.\nOutput contains 1353 SNPs for 188 genotypes.\n\n# SNPs with a Minor Allele Frequency (MAF) below this value will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     MAF = 0.05)\n\nInput contains 1353 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n36 SNPs removed because MAF smaller than 0.05.\n0 duplicate SNPs removed.\nOutput contains 1317 SNPs for 188 genotypes.\n\n\nTo decide how we wish to impute our data we can evaluate the total number of remaining missing values and their ratio. We can choose between the following imputation types:\n\nfixed: Impute all missing values by a single fixed value. Use the parameter fixedValue to set this value\nrandom: Impute missing values with a random value based on the non-missing values for a SNP, OK when ratio of missing values is less than 5%.\nbeagle: Impute missing values using the independent beagle software (Browning and Browning 2007)\n\n\n(d &lt;- dim(gData$markers))\n\n[1]  188 1317\n\n(n &lt;- sum(is.na(gData$markers)))\n\n[1] 3036\n\n(r &lt;- n/(d[1]*d[2]))\n\n[1] 0.01226191\n\n\nIn this case we will carry out our missing value imputation using the beagle method.\n\nset.seed(42)\ngData &lt;- codeMarkers(gData, \n                     impute = TRUE, \n                     imputeType = 'beagle', \n                     verbose = TRUE) \n\nInput contains 1317 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n0 duplicate SNPs removed.\n3036 missing values imputed.\n239 duplicate SNPs removed after imputation.\nOutput contains 1078 SNPs for 188 genotypes.\n\n\n\n\n19.1.4 Plot Genetic Map\n\nplot(gData)",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/01_Initial_Concepts.html#reading-the-phenotypic-data",
-    "href": "05_GWAS/01_Initial_Concepts.html#reading-the-phenotypic-data",
-    "title": "19  Module 5.1: Introduction to GWAS",
-    "section": "19.2 Reading the Phenotypic Data",
-    "text": "19.2 Reading the Phenotypic Data\nPhenotypic data, either directly from field trials or after summarizing can be stored in pheno in the gData object. Pheno can either be a single data.frame or a list of data.frames for storing data for different trials or different summarizations of the original data. The first column of all elements of pheno should be genotype and all the other columns should represent different traits. Storing additional variables should be done in covar.\n\n# Import phenotypic data\nphenotypic_data &lt;- read.csv(pheno_file)\ncolnames(phenotypic_data) &lt;- c('genotype', trait_name)\n\n# Add phenotypic data to gData\ngData &lt;- createGData(gData, pheno = phenotypic_data)",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/01_Initial_Concepts.html#summarize-gdata",
-    "href": "05_GWAS/01_Initial_Concepts.html#summarize-gdata",
-    "title": "19  Module 5.1: Introduction to GWAS",
-    "section": "19.3 Summarize gData",
-    "text": "19.3 Summarize gData\n\nsummary(gData)\n\nmap\n    Number of markers: 1078 \n    Number of chromosomes: 8 \n\nmarkers\n    Number of markers: 1078 \n    Number of genotypes: 188 \n    Content:\n        0    1 &lt;NA&gt;  \n     0.75 0.25 0.00  \n\npheno\n    Number of trials: 1 \n\n    phenotypic_data:\n        Number of traits: 2 \n        Number of genotypes: 200 \n\n        ASC_Score       NA\nMin.       0.9400 1.156000\n1st Qu.    3.9600 1.189750\nMedian     4.9300 1.209000\nMean       4.9652 1.207365\n3rd Qu.    6.1250 1.223000\nMax.       8.8200 1.288000\nNA's       0.0000 0.000000",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "",
-    "text": "20.1 Significance Threshold\nWe will be carrying out the GWAS analysis using the runSingleTraitGwas() function from the statgenGWAS package.\nrunSingleTraitGwas(gData, traits = NULL, covar = NULL, snpCov = NULL, kin = NULL, kinshipMethod, remlAlgo, GLSMethod, MAF = 0.01, thrType, alpha = 0.05, LODThr = 4, nSnpLOD = 10, pThr = 0.05): performs a single-trait Genome Wide Association Study (GWAS) on phenotypic and genotypic data contained in a gData object.\nPrior to running our analysis, we need to compute a threshold by which to identify significant SNPs. The threshold for selecting significant SNPs in a GWAS analysis tends to be computed by using Bonferroni correction, with an alpha of 0.05. The alpha can be modified by setting the option alpha when calling the runSingleTraitGwas() function. Two other threshold types can be used: a fixed threshold (we set the thrType parameter to “fixed”) by specifying the log10(p) (LODThr) value of the threshold, or a small threshold (we set the thrType parameter to “small” and nSnpLOD to n) which defines the n SNPs with the highest log10(p) scores as significant SNPs.\n# Bonferroni correction approximation\n(pvalue.thr &lt;- 0.05 / ncol(gData$markers))\n\n[1] 4.638219e-05\n\nformat(pvalue.thr, scientific = FALSE)\n\n[1] \"0.00004638219\"\n\n# LOD score (logarithm of the odds)\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.333649\n\n# Reverse the conversion to get p-value threshold\n10^(-LOD.thr)\n\n[1] 4.638219e-05\n\n# Exact Bonferroni correction formula\n(pvalue.thr &lt;- 1 - (1 - 0.05) ^ (1 / ncol(gData$markers)))\n\n[1] 4.758077e-05\n\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.322568",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "20.2 Variance Covariance Matrix",
-    "text": "20.2 Variance Covariance Matrix\nThere are two ways to compute the phenotypic variance covariance matrix used in the GWAS analysis. Either the EMMA algorithm (Kang et al. 2008) or the Newton-Raphson algorithm (Tunnicliffe 1989). Specify the method by setting the parameter remlAlgo to either “EMMA” or “NR”. By default the EMMA algorithm is used.",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "20.3 Running GWAS",
-    "text": "20.3 Running GWAS\n\nGWAS &lt;- runSingleTraitGwas(gData, \n                           traits  = 'ASC_Score', \n                           thrType = 'fixed', \n                           LODThr  = 3.5, \n                           kinshipMethod = 'vanRaden')\n\nOur output is an object of class GWAS. GWAResult is a data.table with the following columns:\n\ntrait: trait name\nsnp: SNP name\nchr: chromosome on which the SNP is located\npos: position of the SNP on the chromosome\nallFreq: allele frequency of the SNP\npValue: P-value for the SNP\neffect: effect of the SNP on the trait value\neffectSe: standard error of the effect of the SNP on the trait value\nRLR2: likelihood-ratio-based R2 as defined in Sun et al. (2010)\nLOD: LOD score (logarithm of the odds) for the SNP, defined as log10(pValue)\n\n\n# Visualizing results\ncreate_dt(cbind(GWAS$GWAResult$phenotypic_data[,1:4],\n                signif(GWAS$GWAResult$phenotypic_data[,-c(1:4)], 3)))\n\n\n\n\n\nNote that the estimated effect is computed for a single allele. Its direction depends on the coding of the markers in the gData object. In this example the minor allele was used as reference allele, so the effects are the estimated effects for the minor allele.",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "20.4 Significant Alleles",
-    "text": "20.4 Significant Alleles\nsignSnp is a data.tables containing the significant SNPs. Optionally, the SNPs close to the significant SNPs are included in the data.table. The data.table in signSnp consist of the same columns as those in GWAResult described above. Two extra columns are added:\n\nsnpStatus: either significant SNP or within … of a significant SNP\npropSnpVar: proportion of the variance explained by the SNP\n\n\ncreate_dt(cbind(GWAS$signSnp$phenotypic_data[, 1:4],\n                signif(GWAS$signSnp$phenotypic_data[, 5:10], 3),\n                GWAS$signSnp$phenotypic_data[, 11],\n                signif(GWAS$signSnp$phenotypic_data[, 12], 3)))\n\n\n\n\n\nWe can get the name of the best marker (the one with the highest LOD value):\n\n(snp &lt;- GWAS$signSnp$phenotypic_data[LOD == max(LOD), snp])\n\n[1] \"SCa4_9803244\"\n\n\nWe can manually check by using t.test, which is the old school way.\n\n# Creating data frame for t-test\ndf &lt;- as.data.frame(marker_matrix[,snp])\n\ndf$genotype  &lt;- rownames(marker_matrix)\ncolnames(df) &lt;- c('snp', 'genotype')\n\ndf &lt;- merge(df, phenotypic_data, id = 'genotype')\ndf &lt;- na.omit(df)\n\ntable(df$snp)\n\n\n  C   N   T   Y \n129  11  55   5 \n\n# Running t-test\ndf &lt;- df[df$snp %in% c('C', 'G', 'A', 'T'),]\ndf$snp &lt;- as.factor(df$snp)\n\nt.test(formula(paste(trait_name, '~ snp')), data = df)\n\n\n    Welch Two Sample t-test\n\ndata:  ASC_Score by snp\nt = -5.4233, df = 114.29, p-value = 3.308e-07\nalternative hypothesis: true difference in means between group C and group T is not equal to 0\n95 percent confidence interval:\n -1.6581884 -0.7709251\nsample estimates:\nmean in group C mean in group T \n       4.592171        5.806727 \n\n# Plotting t-test results\nboxplot(formula(paste(trait_name, '~ snp')), data = df)",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "20.5 Kinship Results",
-    "text": "20.5 Kinship Results\nA kinship matrix was produced and used in the GWAS analysis. The method for producing this matrix can be defined by thge kinshipMethod parameter in the runSingleTraitGwas() function. By default, the same kinship matrix is used for testing all SNPs (GLSMethod = “single”). When GLSMethod = “multi”, the kinship matrix is chromosome-specific. As shown by Rincent et al.(2014), this often gives a considerable improvement in power.\n\n# Visualizing kinship matrix\ncreate_dt(round(GWAS$kinship, 3))\n\n\n\n\n\n\n# Plotting a heatmap of kinship results\nheatmap(GWAS$kinship)",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "20.6 Population Structure",
-    "text": "20.6 Population Structure\nThe population structure can also be explored from the produced kinship results.\n\n# Perform principal components analysis\npca &lt;- prcomp(GWAS$kinship)\n\n# Cumulative Proportion\nsummary(pca)$importance[,1:2]\n\n                            PC1      PC2\nStandard deviation     2.359818 1.279708\nProportion of Variance 0.586830 0.172580\nCumulative Proportion  0.586830 0.759410\n\n# Plotting correlations between traits (1st and 2nd components)\nplot(pca$x[,1:2], pch = 20,\n     main = paste0('Kinship PCA (', round(100*summary(pca)$importance[3,2],1), '%)'),\n     xlab = paste0('PC1 (', round(100*summary(pca)$importance[2,1],1), '%)'),\n     ylab = paste0('PC2 (', round(100*summary(pca)$importance[2,2],1), '%)'))",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "20.7 Results Summary",
-    "text": "20.7 Results Summary\nGeneral information of our GWAS results can be obtained by printing the GWASInfo part of our GWAS object. GWASInfo$inflationFactor returns the inflation factor (Devlin and Roeder 1999). Ideally this factor should be 1, meaning there is no inflation at all. If the values are further away from 1, the inflation can be corrected for by setting genomicControl = TRUE in runSingleTraitGwas().\n\nGWAS$GWASInfo\n\n$call\nrunSingleTraitGwas(gData = gData, traits = \"ASC_Score\", kinshipMethod = \"vanRaden\", \n    thrType = \"fixed\", LODThr = 3.5)\n\n$remlAlgo\n[1] \"EMMA\"\n\n$thrType\n[1] \"fixed\"\n\n$MAF\n[1] 0.01\n\n$GLSMethod\n[1] \"single\"\n\n$kinshipMethod\n[1] \"vanRaden\"\n\n$varComp\n$varComp$phenotypic_data\n$varComp$phenotypic_data$ASC_Score\n       Vg        Ve \n0.6463373 1.8964040 \n\n\n\n$genomicControl\n[1] FALSE\n\n$inflationFactor\n$inflationFactor$phenotypic_data\nASC_Score \n0.8866475 \n\n\nFor a quick overview of the results, e.g. the number of significant SNPs, use the summary function.\n\nsummary(GWAS)\n\nphenotypic_data:\n    Traits analysed: ASC_Score \n\n    Data are available for 1078 SNPs.\n     0 of them were not analyzed because their minor allele frequency is below 0.01 \n\n    GLSMethod: single \n    kinshipMethod: vanRaden \n\n    Trait: ASC_Score \n\n        Mixed model with only polygenic effects, and no marker effects:\n        Genetic variance: 0.6463373 \n        Residual variance: 1.896404 \n\n        LOD-threshold: 3.5 \n        Number of significant SNPs: 2 \n        Smallest p-value among the significant SNPs: 6.793934e-05 \n        Largest p-value among the significant SNPs: 8.094673e-05 (LOD-score: 4.091801)\n\n        No genomic control correction was applied\n        Genomic control inflation-factor: 0.887",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#plots",
-    "href": "05_GWAS/02_Single_Trait_GWAS.html#plots",
-    "title": "20  Module 5.2: Single Trait GWAS",
-    "section": "20.8 Plots",
-    "text": "20.8 Plots\n\n20.8.1 QQ-Plot\nA QQ-plot of the observed against the expected log10(p) values. Most of the SNPs are expected to have no effect, resulting in P-values uniformly distributed on [0,1], and leading to the identity function (y=x) on the log10(p) scale. Deviations from this line should only occur on the right side of the plot, for a small number of SNPs with an effect on the phenotype (and possibly SNPs in LD).\n\nplot(GWAS, plotType = 'qq', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n20.8.2 Manhattan Plot\nA Manhattan plot of GWAS. Significant SNPs are marked in red. Plot only 5% of SNPs with a LOD below 2 (lod = 2)\n\nplot(GWAS, plotType = 'manhattan', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n20.8.3 QTL Plot\nA qtl plot of GWAS. The significant SNPs are marked by circles at their genomic positions, with diameter proportional to the estimated effect size. Colors indicate the direction of the effect: green when the allele increases the trait value, and blue when it decreases the value.\n\nplot(GWAS, plotType = 'qtl')",
-    "crumbs": [
-      "Genome Wide Association Studies (GWAS)",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
-    ]
-  },
-  {
-    "objectID": "06_GS/01_Genomic_Selection.html",
-    "href": "06_GS/01_Genomic_Selection.html",
-    "title": "21  Module 6.1: Genomic Selection",
-    "section": "",
-    "text": "21.1 Read, Filter and Impute Marker Data\nGenomic selection enables early and accurate prediction of complex traits based on genome-wide SNP data. This can allow us to predict performance immediately after genotyping seedlings, which can speed up selection decisions and reduce the cost of field trials. We will be using the rrBBLUP package for this part, which is a is a package for genomic prediction with the ridge regression best linear unbiased prediction or RR-BLUP mixed linear model (Endelman, 2011). One application is to estimate marker effects by ridge regression; alternatively, BLUPs can be calculated based on an additive relationship matrix or a Gaussian kernel.\nThe genotypic matrix for rrBLUP has to be coded as {-1, 0, 1}, meaning we will need a conversion step if our data is not yet in that format. Moreover, we will be carrying out a mean value imputation.\n# Importing genotypic data\ngeno_file &lt;- 'data/barley_genbank_2388variants_554individuals_biallelic.hmp.txt.gz'\n\ngeno_data &lt;- read.csv(geno_file, sep = \"\\t\")\n\n# Show the first 50 rows/columns only\ncreate_dt(geno_data[1:50,1:50])\nM &lt;- geno_data[, -c(1:11)]\nrownames(M) &lt;- geno_data[, 1]\nM &lt;- t(M)\n\n# Reformatting matrix to numeric\nM &lt;- ASRgenomics::snp.recode(M, na.string = 'NN', rename.markers = FALSE)$Mrecode\n\nA total of 87800 values were identified as missing with the string NN and were replaced by NA.\n\n\nMatrix M was recoded from bi-allelic nucleotide bases to numeric.\n# Filtering genotypic matrix\nM &lt;- ASRgenomics::qc.filtering(M, \n                               marker.callrate = 0.1, \n                               ind.callrate = 0.2, \n                               maf = 0.05, \n                               impute = TRUE)$M.clean\n\nInitial marker matrix M contains 554 individuals and 2388 markers.\n\n\nA total of 674 markers were removed because their proportion of missing values was equal or larger than 0.1.\n\n\nA total of 5 individuals were removed because their proportion of missing values was equal or larger than 0.2.\n\n\nA total of 34 markers were removed because their MAF was smaller than 0.05.\n\n\nA total of 0 markers were removed because their heterozygosity was larger than 1.\n\n\nA total of 0 markers were removed because their |F| was larger than 1.\n\n\nFinal cleaned marker matrix M contains 2.84% of missing SNPs.\n\n\nFinal cleaned marker matrix M contains 549 individuals and 1680 markers.\n\n\nA total of 26221 missing values were imputed, corresponding to 2.84% of the total number of SNPs.\n\n# Reformatting to required format\nM &lt;- as.matrix(M) - 1\n\n# Show the first 50 rows/columns only\ncreate_dt(M[1:50,1:50])",
-    "crumbs": [
-      "Genomic Selection",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
-    ]
-  },
-  {
-    "objectID": "06_GS/01_Genomic_Selection.html#read-and-align-phenotypic-data",
-    "href": "06_GS/01_Genomic_Selection.html#read-and-align-phenotypic-data",
-    "title": "21  Module 6.1: Genomic Selection",
-    "section": "21.2 Read and Align Phenotypic Data",
-    "text": "21.2 Read and Align Phenotypic Data\n\n# Importing phenotypic data\npheno_file &lt;- 'barley_genbank_phenotypic_mean_data.csv'\n\npheno_data &lt;- read.csv(pheno_file)\n\npheno_data &lt;- merge(pheno_data, as.data.frame(rownames(M)), by.x = 'sample_id', by.y = 1, all.y = TRUE)\n\n# Extracting requires trait\ny &lt;- pheno_data$Yield\n\n# Printing phenotypic data\ncreate_dt(pheno_data)",
-    "crumbs": [
-      "Genomic Selection",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
-    ]
-  },
-  {
-    "objectID": "06_GS/01_Genomic_Selection.html#model-1",
-    "href": "06_GS/01_Genomic_Selection.html#model-1",
-    "title": "21  Module 6.1: Genomic Selection",
-    "section": "21.3 Model 1",
-    "text": "21.3 Model 1\nThe first model assumes that all marker effects are normally distributed and have identical variance. Parameters are estimated as a solution to the optimization problem. Predictions from this method are equivalent to BLUP values from an animal model (i.e., GBLUP). The observed relationship matrix is calculated from the markers using the formula by VanRaden (2008).\n\n# Fitting a Model using rrBLUP (case 1: all SNPs in the random effect)\nGS &lt;- rrBLUP::mixed.solve(y, Z = M, X = NULL, method = 'REML')\n\n# Obtaining predictions\npredGS &lt;- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u \n\n# Printing predictions\ncreate_dt(cbind(round(predGS, 3), y))\n\n\n\n\n\n\n# Plotting predictions\nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n21.3.1 Goodness of Fit Statistics\n\n# Heritability\n# Trait variance\n(var_y  &lt;- var(y, na.rm = TRUE))\n\n[1] 2.107743\n\n# Error variance\n(var_e  &lt;- GS$Ve)\n\n[1] 1.465679\n\n# Proportion of explained variance (High = good fit, potential heritability)\n(h2_GS &lt;- 1 - var_e / var_y)\n\n[1] 0.3046215\n\nAnas_table &lt;- cbind(rownames(M), y, predGS)\n\n# Predictive ability (High = good prediction accuracy)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.7800125",
-    "crumbs": [
-      "Genomic Selection",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
-    ]
-  },
-  {
-    "objectID": "06_GS/01_Genomic_Selection.html#model-2",
-    "href": "06_GS/01_Genomic_Selection.html#model-2",
-    "title": "21  Module 6.1: Genomic Selection",
-    "section": "21.4 Model 2",
-    "text": "21.4 Model 2\nThis model handles some markers as having a fixed effect (e.g. significant SNPs from GWAS output). It splits the genotypic data into X matrix (fixed effects) and Z matrix (random effects). To calculate the REML solution for the model you solve y = X b + Z u + e. We predict BLUE(b) and BLUP(u) solutions for the fixed and random effects, respectively, using standard formulas (Searle et al. 1992).\n\n# Defining markers\nmarkers &lt;- c('S7H_63131260', 'S5H_573915992')\nSNPs    &lt;- colnames(M)\n\n# Filtering matrices\nX &lt;- M[, SNPs %in% markers]\nZ &lt;- M[,!SNPs %in% markers]\n\n# Fitting a Model using rrBLUP by exclude markers from the Z matrix (for the Random effects) and include them in the X matrix (for the fixed effect)\nGS &lt;- rrBLUP::mixed.solve(y, Z = Z, X = X, method = 'REML')\n\n# Obtaining predictions\npredGS &lt;- X %*% GS$beta + Z %*% GS$u \n\n# Printing predictions\ncreate_dt(cbind(round(predGS, 3), y))\n\n\n\n\n\n\n# Plot to verify \nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n21.4.1 Goodness of Fit Statistics\n\n# Heritability (GS)\n# Trait variance\n(var_y  &lt;- var(y, na.rm = TRUE))\n\n[1] 2.107743\n\n# Error variance\n(var_e  &lt;- GS$Ve)\n\n[1] 1.018018\n\n# Proportion of explained variance (High = good fit, potential heritability)\n(h2_GS &lt;- 1 - var_e / var_y)\n\n[1] 0.5170105\n\n# Predictive Ability (correlation between actual and predicted response)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.8952614",
-    "crumbs": [
-      "Genomic Selection",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
-    ]
-  },
-  {
-    "objectID": "06_GS/01_Genomic_Selection.html#k-fold-cross-validation",
-    "href": "06_GS/01_Genomic_Selection.html#k-fold-cross-validation",
-    "title": "21  Module 6.1: Genomic Selection",
-    "section": "21.5 K-Fold Cross Validation",
-    "text": "21.5 K-Fold Cross Validation\n\n# Set the total number of folds, and get the total number of individuals\nk &lt;- 5\nn &lt;- length(y)\n\n# Set randomly the fold group for each observation \n# That tells when it will be used for validation\ngroup &lt;- sample(rep(1:k, length.out = n), n)\nhead(group, 20)\n\n [1] 4 2 3 2 2 3 5 1 1 3 2 1 5 5 5 3 2 5 2 2\n\ntable(group)\n\ngroup\n  1   2   3   4   5 \n110 110 110 110 109 \n\n\n\n# An empty matrix to save calculated heritability in each fold, and GS prediction that calculated when individual be in validation group\npredGS &lt;- matrix(data = NA, nrow = n, ncol = 1)\nh2_cv  &lt;- matrix(data = NA, nrow = k, ncol = 1)\n\nfor (g in 1:k) { \n  # Reset response variable, and exclude validation set values for the given k fold\n  y_cv &lt;- y\n  y_cv[group == g] &lt;- NA\n  \n  # Fitting a Model using rrBLUP (model 1: all SNPs in the random effect)\n  # GS &lt;- mixed.solve(y_cv, Z = M, X = NULL, method = 'REML')\n  # predGS_cv &lt;- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u \n  \n  # Model 2: have some markers to be handled as a fixed effect\n  GS &lt;- rrBLUP::mixed.solve(y_cv, Z = Z, X = X, method = 'REML')\n  \n  # Obtaining predictions\n  predGS_cv &lt;- X %*% GS$beta + Z %*% GS$u \n  \n  # Heritability (GS)\n  var_y    &lt;- var(y_cv, na.rm = TRUE)\n  var_e    &lt;- GS$Ve\n  h2_cv[g] &lt;- 1 - var_e / var_y\n  \n  # Get the GS prediction for all validation set individuals\n  predGS[group == g] &lt;- predGS_cv[group == g]\n}\n\n# Plot to verify \nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n# Heritability (GS cross-validation)\nh2_cv\n\n          [,1]\n[1,] 0.5732976\n[2,] 0.5171978\n[3,] 0.5296389\n[4,] 0.5687678\n[5,] 0.5160174\n\nmean(h2_cv)\n\n[1] 0.5409839\n\n# Predictive Ability (correlation between actual and predicted response)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.3917907",
-    "crumbs": [
-      "Genomic Selection",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
-    ]
-  },
-  {
-    "objectID": "06_GS/01_Genomic_Selection.html#predict-breeding-values",
-    "href": "06_GS/01_Genomic_Selection.html#predict-breeding-values",
-    "title": "21  Module 6.1: Genomic Selection",
-    "section": "21.6 Predict Breeding Values",
-    "text": "21.6 Predict Breeding Values\n\n# Calculate the additive relationship matrix (it is the kinship matrix multiplied by 2) it can also perform imputation for missing marker data by \n# Define impute.method (mean or EM) (see also: min.MAF, max.missing, and return.imputed parameters)\nA &lt;- rrBLUP::A.mat(M)\nheatmap(A)\n\n\n\n\n\n\n\n\n\nGS &lt;- rrBLUP::mixed.solve(y, K = A.mat(M), SE = TRUE)\n\n# Genomic Estimated Breeding Value (GEBV)\nGEBV &lt;- cbind(round(GS$u, 3), round(GS$u.SE, 3))\n\ncolnames(GEBV) &lt;- c('GEBV', 'SE')\n\ncreate_dt(GEBV)",
-    "crumbs": [
-      "Genomic Selection",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
-    ]
-  },
-  {
     "objectID": "02_Data_Handling/03_General_Biostatistics.html#data-import",
     "href": "02_Data_Handling/03_General_Biostatistics.html#data-import",
     "title": "11  Module 2.3: General Biostatistics",
@@ -1063,6 +590,479 @@
     "crumbs": [
       "Handling Breeding Data",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Module 2.3: General Biostatistics</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html",
+    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html",
+    "title": "12  Module 3.1: Genotype Data",
+    "section": "",
+    "text": "12.1 Introduction\nGenotype data refers to the genetic makeup, in this case of crops, at specific loci across the genome. This data allows us to associate genetic differences with traits of agronomic interest and regional information.",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html#introduction",
+    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html#introduction",
+    "title": "12  Module 3.1: Genotype Data",
+    "section": "",
+    "text": "The genotype refers to the specific combination of alleles at a given location. Depending on the ploidy of the crop, we will have two (diploids) or more alleles per locus.\nSNPs (Single Nucleotide Polymorphisms) are positions across the genome where variations exist between individuals.\n\nExample: Three different crop variants may have homozygous A/A, heterozygous A/G and homozygous G/G at a specific locus. This can also be coded as 0, 1 and 2. 0 represents homozygous for the reference allele, 1 represents heterozygous, and 2 represents homozygous for the alternate allele.",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/01_SNPs_Genotypes.html#formats",
+    "href": "03_Genomic_Concepts/01_SNPs_Genotypes.html#formats",
+    "title": "12  Module 3.1: Genotype Data",
+    "section": "12.2 Formats",
+    "text": "12.2 Formats\nSNP data can be stored in different formats and file types, depending on the platform or program used. We will briefly discuss the most common file types.\n\nVCF (Variant Call Format - .vcf): Standard format for SNPs and variants from sequencing. Contains metadata, IDs, calls, positions and other information.\n\nGT = Genotype\n0 = REF; 1 = ALT\n0/0 or 1/1= homozygous; 0/1 or 1/0 = heterozygous\n\n\n\n#CHROM  POS     ID            REF   ALT QUAL    FILTER  INFO    FORMAT  G1  G2  G3\n1H      7253074 SCRI_RS_1929    A     C   .     PASS        .     GT        1/1 1/1 0/0\n\n\n\n# Read vcf file\nvcf &lt;- read.vcfR(\"data/Barley.vcf\", verbose = FALSE)\n\n\n# Glimpse vcf\nhead(vcf)\n\n[1] \"***** Object of class 'vcfR' *****\"\n[1] \"***** Meta section *****\"\n[1] \"##fileformat=VCFv4.1\"\n[1] \"##FILTER=&lt;ID=PASS,Description=\\\"All filters passed\\\"&gt;\"\n[1] \"##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=\\\"Approximate read  [Truncated]\"\n[1] \"##FORMAT=&lt;ID=DV,Number=.,Type=Integer,Description=\\\"Read depth of the [Truncated]\"\n[1] \"##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=\\\"Genotype\\\"&gt;\"\n[1] \"##INFO=&lt;ID=MQ,Number=1,Type=Float,Description=\\\"RMS Mapping Quality\\\"&gt;\"\n[1] \"First 6 rows.\"\n[1] \n[1] \"***** Fixed section *****\"\n     CHROM POS      ID REF ALT QUAL  FILTER\n[1,] \"1H\"  \"144018\" NA \"A\" \"G\" \"999\" \"NA\"  \n[2,] \"1H\"  \"147155\" NA \"T\" \"C\" \"999\" \"NA\"  \n[3,] \"1H\"  \"166336\" NA \"C\" \"T\" \"999\" \"NA\"  \n[4,] \"1H\"  \"173286\" NA \"T\" \"C\" \"999\" \"NA\"  \n[5,] \"1H\"  \"253434\" NA \"C\" \"T\" \"999\" \"NA\"  \n[6,] \"1H\"  \"253481\" NA \"C\" \"T\" \"999\" \"NA\"  \n[1] \n[1] \"***** Genotype section *****\"\n     FORMAT     ICARDA_G0011 ICARDA_G0012 ICARDA_G0013 ICARDA_G0014\n[1,] \"GT:DP:DV\" \"0/0:33:0\"   \"0/0:23:0\"   \"0/0:18:0\"   \"0/0:23:0\"  \n[2,] \"GT:DP:DV\" \"0/0:8:0\"    \"0/0:8:0\"    \"0/0:10:0\"   \"0/0:6:0\"   \n[3,] \"GT:DP:DV\" \"0/0:16:0\"   \"0/0:9:0\"    \"0/0:9:0\"    \"0/0:5:0\"   \n[4,] \"GT:DP:DV\" \"0/0:18:0\"   \"0/0:18:0\"   \"0/0:14:0\"   \"0/0:10:0\"  \n[5,] \"GT:DP:DV\" \"1/1:12:12\"  \"1/1:19:19\"  \"1/1:12:11\"  \"1/1:10:10\" \n[6,] \"GT:DP:DV\" \"0/0:12:0\"   \"0/0:17:0\"   \"0/0:12:0\"   \"0/0:10:0\"  \n     ICARDA_G0015\n[1,] \"0/0:15:0\"  \n[2,] \"0/0:8:0\"   \n[3,] \"0/0:9:0\"   \n[4,] \"0/0:10:0\"  \n[5,] \"1/1:12:12\" \n[6,] \"0/0:11:0\"  \n[1] \"First 6 columns only.\"\n[1] \n[1] \"Unique GT formats:\"\n[1] \"GT:DP:DV\"\n[1] \n\n# Turn into matrix\nvcfMatrix &lt;- extract.gt(vcf)\n\n\nPLINK (-.ped, .map) or Binary PLINK (-.bed, .bim, .fam)\n\n.ped: Pedigree/genotype data (tab delimited)\n.map: SNP mapping information\n.bed: Binary genotype matrix\n.bim: SNP information\n.fam: Sample information\n\nHapMap (-.hmp.txt): Used in TASSEL, header includes metadata, positions and genotypes encoded as allele pairs (A/A, A/G, etc.).\nNumeric Matrix (-.csv, .txt): SNPs in columns and genotypes in rows (or vice versa), data encoded as 0, 1 and 2 for homozygous for reference allele, heterozygous, and homozygous for alternate allele.\n\n\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n\n\n# The vcf matrix we obtained can also be turned into this type of format\nmatrixNum &lt;- vcfToNumericMatrix(vcfMatrix)",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Module 3.1: Genotype Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/02_Filtering_SNP_Data.html",
+    "href": "03_Genomic_Concepts/02_Filtering_SNP_Data.html",
+    "title": "13  Module 3.2: Data Quality Control and Filtering for SNP Data",
+    "section": "",
+    "text": "13.1 Call Rate\nFiltering SNP data is important for genetic and genomic studies in order to improve data quality, optimize resources and avoid noise by removing non-informative markers, and account for missing data. The most common filtering criteria we will focus on is call rate, missing data and MAF (Minor Allele Frequency).\nCall rate refers to the percentage of non-missing data for a specific SNP marker. It is calculated by dividing the number of non-missing individuals / total number of individuals for each marker. The filtering threshold will depend on the specific data set or investigation; however, common thresholds tend to be 0.9 or 0.95.]\n# Load SNP data matrix\nmatrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n# Considering our n x m matrix with n markers and m individuals\n# Defining our threshold\ncall_rate &lt;- 0.9\n\n# Filtering our matrix\nfiltered_matrix &lt;- matrix[which(rowMeans(!is.na(matrix)) &gt; call_rate),]",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.2: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#missing-data",
+    "href": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#missing-data",
+    "title": "13  Module 3.2: Data Quality Control and Filtering for SNP Data",
+    "section": "13.2 Missing data",
+    "text": "13.2 Missing data\nJust as we can filter markers with too much missing data, we can filter individuals with too many missing values. Our missing data threshold will refer to the percentage of non-missing data for each individual.\n\n# Defining our threshold\nna_ind &lt;- 0.8\n\n# Filtering our matrix\nfiltered_matrix &lt;- filtered_matrix[,which(colMeans(!is.na(filtered_matrix)) \n                                          &gt; na_ind)]",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.2: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#maf",
+    "href": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#maf",
+    "title": "13  Module 3.2: Data Quality Control and Filtering for SNP Data",
+    "section": "13.3 MAF",
+    "text": "13.3 MAF\nMinor allele frequency refers to the frequency of the least common allele for a particular SNP marker in a given population. It is commonly used as a filtering criteria as it allows you to exclude markers that contribute little to population-level analyses and helps reduce noise.\nFor example, if I have a marker which is homozygous 0 (AA), heterozygous 1 (AG), and homozygous 2 (GG), each individual contributes 2 alleles. We then count the minor alleles across all individuals to obtain MAF.\n\n# Calculating MAF for all markers\nmafFreq &lt;- apply(filtered_matrix, 1, function(row) {\n  row &lt;- row[!is.na(row)]\n  maf &lt;- sum(row) / (2 * length(row))\n  maf &lt;- min(maf, 1 - maf)\n  maf\n})\n\n# Filtering matrix according to maf\nfiltered_matrix &lt;- filtered_matrix[mafFreq &gt; 0.01,]",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.2: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#general-filtering",
+    "href": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#general-filtering",
+    "title": "13  Module 3.2: Data Quality Control and Filtering for SNP Data",
+    "section": "13.4 General Filtering",
+    "text": "13.4 General Filtering\nTo simplify all previous steps, we can use the filterData() function from our package. The function allows you to define thresholds for call rate, MAF and missing individuals. There is an additional parameter called stats, it is set to FALSE by default but by setting it to TRUE you can get a data frame with statistics for the number of filtered markers and individuals by criteria.\n\nfilter &lt;- filterData(matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.2: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#visualization-of-marker-information",
+    "href": "03_Genomic_Concepts/02_Filtering_SNP_Data.html#visualization-of-marker-information",
+    "title": "13  Module 3.2: Data Quality Control and Filtering for SNP Data",
+    "section": "13.5 Visualization of marker information",
+    "text": "13.5 Visualization of marker information\nOnce we have filtered our matrix, we can visualize marker information. We first need to import our marker information.\n\n# Importing our marker information\nmarkers &lt;- read.table(\"data/BarleyMarkers.tsv\", sep = \"\\t\", header = TRUE, \n                     check.names = FALSE)\n\nWe can then generate our plots using the markerPlots() function from our ICARDA package. This function requires the markers and genotype matrix data. It allows for a third parameter called chrom, where you can define the specific chromosome you wish to plot your data for.\n\n# Generating our plots\n# (our SNP marker matrix needs to be transposed for this function)\n# Individuals as rows and markers as columns\nmarkerplots &lt;- markerPlots(markers, t(filter))\n\nWarning in guide_legend(ncol = 8, bycol = TRUE): Arguments in `...` must be used.\n✖ Problematic argument:\n• bycol = TRUE\nℹ Did you misspell an argument name?\n\n# Marker plot\nmarkerplots$markerPlot\n\n\n\n\n# MAF plot\nmarkerplots$mafPlot\n\n\n\n\n# Missing Data\nmarkerplots$missingData",
+    "crumbs": [
+      "Core Genomic Concepts",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Module 3.2: Data Quality Control and Filtering for SNP Data</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/01_Kinship_Relatedness.html",
+    "href": "04_Pop_Structure/01_Kinship_Relatedness.html",
+    "title": "14  Module 4.1: Kinship and Relatedness",
+    "section": "",
+    "text": "14.1 Kinship\nIdentifying relatedness between individuals is important to ensure samples are independent, as not accounting for kinship may distort posterior analyses such as GWAS or population structure. Kinship coefficients can help control confounding affects in association studies and can help infer subpopulations when studying structure. Moreover, not only may individuals be related, we can sometimes find duplicates of the same individual, which can skew posterior diversity estimates. Overall, studying kinship allows us to maintain the quality standard of our data.\nKinship refers to the genetic relatedness between individuals, and it is a measure of how much of their genomes two individuals share due to common ancestry. Kinship is often evaluated by calculating a kinship matrix. We can use the kinshipMatrix() function from our package to do this. This function requires our genotype matrix. It has the option to choose the method we want to use to calculate the matrix by defining the method parameter. By default it it set to \"vanRaden\", but we can choose between \"astle\", \"IBS\", and \"identity\". We can also choose to save the matrix locally as a text file by setting the save parameter as TRUE, which is set to FALSE by default.\n# Importing our genotypic data\nraw_matrix &lt;- read.table(\"data/BarleyMatrix.txt\", sep = \"\\t\", header = TRUE, row.names = 1, check.names = FALSE)\n# Filtering\nmatrix &lt;- filterData(raw_matrix, call_rate = 0.9, maf = 0.01, na_ind = 0.8)\n\n# We transpose our matrix (to have individuals as rows and makers\n# as columns for posterior analyses)\nmatrix &lt;- t(matrix)\n\n# Calculating kinship matrix using ICARDA package\nkinshipMat &lt;- kinshipMatrix(matrix, method = \"vanRaden\", save = FALSE)\nWe can also create a heatmap from our kinship matrix using the kinshipHeatmap() function from our package. It requires our kinship matrix obtained using our previous function. It also has a file parameter to define the file path were we want to save our heatmap in.\n# Generating a heatmap from our kinship matrix as an image in our working directory\nkinshipHeatmap(kinshipMat, file = \"output/figures/heatmap.png\")",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 4.1: Kinship and Relatedness</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/01_Kinship_Relatedness.html#duplicates",
+    "href": "04_Pop_Structure/01_Kinship_Relatedness.html#duplicates",
+    "title": "14  Module 4.1: Kinship and Relatedness",
+    "section": "14.2 Duplicates",
+    "text": "14.2 Duplicates\nWe can use the results from our kinship matrix to identify potential duplicates within our data. The existence of duplicates in a data set can mean different things. A sample may be genotyped multiple times or accidentally re-entried as a new individual sample and it is important to identify these errors. However, we can also find cases where the samples belong to different individuals but present no genetic variation, which can hint towards inbred lines or clonal lines. Moreover, duplicates inflate sample sizes, which can give us false confidence on GWAS or other statistical analyses. We will use the kinshipDuplicates() function from our package, which returns a list object with our kinship matrix, a data frame with our potential duplicates, and plots of the distribution of diagonal and off-diagonal values from our kinship matrix.\nkinshipDuplicates(geno, threshold, method = \"vanRaden\", save = FALSE, kinship = NULL)\n\ngeno: our genotype matrix\nthreshold: a similarity threshold to differentiate our duplicates\nmethod: set to \"vanRaden\" by default, accepts \"astle\", \"IBS\", and \"identity\"\nsave: defaults to FALSE, if TRUE, saves as a text file\nkinship: defaults to NULL, if we have already produced a kinship matrix we can define this parameter with it\n\n\n# Identifying duplicates by setting a similarity threshold and using the ICARDA package\nduplicates &lt;- kinshipDuplicates(matrix, threshold = 0.99, kinship = kinshipMat)\n\n# Printing potential duplicates along with their kinship and correlation\nhead(duplicates$potentialDuplicates)\n\n       Indiv.A      Indiv.B    Value      Corr\n1 ICARDA_G1416 ICARDA_G0226 1.623916 0.9988232\n2 ICARDA_G0052 ICARDA_G0043 1.784647 0.9984566\n3 ICARDA_G0140 ICARDA_G0059 1.840917 0.9983279\n4 ICARDA_G0110 ICARDA_G0098 1.808388 0.9982951\n5 ICARDA_G0119 ICARDA_G0098 1.807323 0.9980452\n6 ICARDA_G0291 ICARDA_G0217 1.622423 0.9979949\n\n# Printing histograms with the distribution of diagonal and off-diagonal values\nduplicates$plots\n\n[[1]]\n\n\n\n\n\n\n\n\n\n\n[[2]]\n\n\n\n\n\n\n\n\n\nThe diagonal of a kinship matrix is the self-relatedness of each individual. Most kinship estimators normalize values such that they are close to 1 or 0.5 according to scaling. Deviations may represent uneven SNP quality, duplicates or inbreeding. Off-diagonal entries are pairwise kinship estimates between two different individuals. These values are often closer to 0 , meaning the individuals are unrelated. Positive values mean the individuals share more alleles than expected by chance, and negative values mean the individuals are less related than expected. Clusters in a heatmap or in off-diagonal values often represent subpopulations.\nIf we decide we want to filter our data according to the potential duplicates we identified, we can use the kinshipFilter() function from the ICARDA package. This function requires our genotype matrix, our data frame with potential duplicates, and our kinship matrix. This will give us a filtered version of our SNP matrix and kinship matrix. We can also choose to save the matrix locally as a text file by setting the save parameter as TRUE, which is set to FALSE by default.\n\nfilteredMatrix &lt;- kinshipFilter(matrix, duplicates$potentialDuplicates, kinshipMat)",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Module 4.1: Kinship and Relatedness</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "",
+    "text": "15.1 Diversity parameters\nSNP data provides us with a genome-wide view of variation within individuals and populations. Calculating certain diversity parameters from this data helps us better understand the genetic diversity held within a population and between its subpopulations. These can later be used for diversity-based plant breeding.\nWe can easily calculate the most relevant diversity parameters using the genDivSNPReady() from our package.\ngenDivSNPReady(geno, plots = FALSE, interactive = TRUE): Returns diversity parameters calculated with snpReady package.\nThe function returns a list object with two data frames, one with the diversity parameters for each marker, and one with the diversity parameters for each accession. If plots = TRUE, a third object is generated with the different plots.\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n# SNP matrix has to have individuals in rows and markers as columns for the \n# posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n# Ensuring IDs match\nmetadata &lt;- metadata[metadata$Individual %in% rownames(matrix),]\n# Obtaining genetic diversity parameters\nSNPReadyParams &lt;- genDivSNPReady(matrix, plots = TRUE)\n\n# Printing marker diversity parameters\nSNPReadyParams$markers\n\nDownload as CSV\n\n\n\n# Printing individual's diversity parameters\nSNPReadyParams$accessions\n\nDownload as CSV\n\n\n\n# Diversity plots\nSNPReadyParams$plots",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#diversity-parameters",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html#diversity-parameters",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "",
+    "text": "geno: our genotype matrix\nplots: defaults to FALSE, if TRUE, a graphical output of the results is produced\ninteractive: defaults to TRUE, produces a dynamic table, if FALSE, output remains as data frame",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#by-population",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html#by-population",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "15.2 By population",
+    "text": "15.2 By population\nThese parameters can also be calculated by population in order to compare the diversity between them. We will use the HeBySubgroups() function from our package.\nHeBySubgroups(geno, subgroups, plot = FALSE, interactive = TRUE): returns expected heterozygosity (He) by groups, including an optional plot\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\nplots: defaults to FALSE, if TRUE, a graphical output of the results is produced\ninteractive: defaults to TRUE, produces a dynamic table, if FALSE, output remains as data frame\n\n\n# Defining our populations from country information\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual \n                                                 %in% rownames(matrix)])\n\n# Calculating parameters by population\nHe &lt;- HeBySubgroups(matrix, popSet, plot = TRUE)\n\n# Plotting results\nHe$plot\n\n\n\n\n# Printing results\nHe$df\n\nDownload as CSV",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/02_Genetic_Diversity.html#amova",
+    "href": "04_Pop_Structure/02_Genetic_Diversity.html#amova",
+    "title": "15  Module 4.2: Genetic Diversity",
+    "section": "15.3 AMOVA",
+    "text": "15.3 AMOVA\nAMOVA or Analysis of Molecular Variance can be run from a genetic distance matrix to evaluate genetic variation within populations, between populations and among populations. It helps us understand the structure of variation in our sample. We will be using the genDistPop() and AMOVA() functions from our package for this. They use frameworks from adegenet and poppr to carry out the AMOVA.\ngenDistPop(geno, subgroups, method = 1, PCoA = FALSE): returns a genetic distance matrix and optional Principal Coordinate Analysis from the distance matrix.\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\nmethod: defaults to 1 (Nei’s distance), allows for values 1-5 (Nei, Edwards, Reynolds, Rogers, Provesti)\nPCoA: defaults to FALSE, if TRUE, performs a principal coordinates analysis of a Euclidean distance matrix\n\nAMOVA():\n\ngeno: our genotype matrix\nsubgroups: a vector with our factor information\n\n\n# Calculating our genetic distance matrix and PCoA\ngenDist &lt;- genDistPop(matrix, popSet, PCoA = TRUE)\n\n\n Converting data from a genind to a genpop object... \n\n...done.\n\n# Printing results\ngenDist\n\n$genDist\n          CHN       ETH       TUR\nCHN 0.0000000                    \nETH 0.1785492 0.0000000          \nTUR 0.1075913 0.1388646 0.0000000\n\n$PCoA\nDuality diagramm\nclass: pco dudi\n$call: dudi.pco(d = genDist, scannf = FALSE, nf = 3)\n\n$nf: 2 axis-components saved\n$rank: 2\neigen values: 0.005458 0.001513\n  vector length mode    content       \n1 $cw    2      numeric column weights\n2 $lw    3      numeric row weights   \n3 $eig   2      numeric eigen values  \n\n  data.frame nrow ncol content             \n1 $tab       3    2    modified array      \n2 $li        3    2    row coordinates     \n3 $l1        3    2    row normed scores   \n4 $co        2    2    column coordinates  \n5 $c1        2    2    column normed scores\nother elements: NULL\n\n$PCoAPlot\n\n# PCoA\ngenDist$PCoAPlot\n\n\n\n\n# Running AMOVA\namovaResult &lt;- AMOVA(matrix, popSet)\n\n\n Replaced 248144 missing values.\n\n\n\n No missing values detected.\n\n# Printing results\namovaResult\n\n$call\nade4::amova(samples = xtab, distances = xdist, structures = xstruct)\n\n$results\n                 Df    Sum Sq    Mean Sq\nBetween samples   2  92405.09 46202.5455\nWithin samples  485 346712.00   714.8701\nTotal           487 439117.09   901.6778\n\n$componentsofcovariance\n                                Sigma         %\nVariations  Between samples  291.6988  28.97952\nVariations  Within samples   714.8701  71.02048\nTotal variations            1006.5689 100.00000\n\n$statphi\n                        Phi\nPhi-samples-total 0.2897952",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Module 4.2: Genetic Diversity</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/03_Pop_Structure.html",
+    "href": "04_Pop_Structure/03_Pop_Structure.html",
+    "title": "16  Module 4.3: Population Structure",
+    "section": "",
+    "text": "16.1 Why is it important?\nPopulation structure in crop breeding refers to the presence of clusters or subpopulations that are genetically distinct from each other. The subpopulations may reflect geography, breeding history, natural selection, gene pools, or other differentiating factors. The subgroups are identified by differences in allele frequencies.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/03_Pop_Structure.html#why-is-it-important",
+    "href": "04_Pop_Structure/03_Pop_Structure.html#why-is-it-important",
+    "title": "16  Module 4.3: Population Structure",
+    "section": "",
+    "text": "Allows us to detect subpopulations and understand genetic diversity\nCan be used to control bias in GWAS or other genomic prediction models (by including structure information as covariates), as not accounting for structure may lead to spurious associations (false-positives)\nAcknowledging structure can help guide breeding programs",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/03_Pop_Structure.html#common-methods",
+    "href": "04_Pop_Structure/03_Pop_Structure.html#common-methods",
+    "title": "16  Module 4.3: Population Structure",
+    "section": "16.2 Common methods",
+    "text": "16.2 Common methods\n\nSTRUCTURE / ADMIXTURE: Uses Bayesian clustering or Maximum Likelihood (ML) estimation to assign individuals into subpopulations, including admixture proportions for each individual.\nPrincipal Component Analysis (PCA): Used to reduce dimentionality of large data sets, and to visualize overall diversity and major genetic groupings.\nSpatial Principal Component Analysis (sPCA): Incorporates spatial information (geographic location) into traditional PCA, meaning it seeks to maximize spatial autocorrelation along with variation. It allows us to identify global and local trends.\nDiscriminant Analysis of Principal Components (DAPC): Used to assign individuals to groups, provide a visual assessment of between-population differentiation and the contribution of individual alleles to the population structure.\nSparse Non-negative Matrix Factorization (sNMF): Fast algorithm used to infer structure by estimating ancestry coefficients. Allows us to evaluate levels of admixture. More efficient than STRUCTURE for large data sets.\n\nAll methods are complementary to each other and using them in combination can help us fully understand structure in our data.\n\n\n\nWant to explore structure quickly?\nPCA\n\n\nWant to analyze spatial genetic variation?\nsPCA\n\n\nNeed to classify individuals into groups?\nDAPC\n\n\nNeed to estimate admixture proportions?\nsNMF\n\n\n\nWe will be using functions from our package to carry out and visualize most of these analyses.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/03_Pop_Structure.html#pca",
+    "href": "04_Pop_Structure/03_Pop_Structure.html#pca",
+    "title": "16  Module 4.3: Population Structure",
+    "section": "16.3 PCA",
+    "text": "16.3 PCA\nPCA reduces our large genotype matrix into principal components which capture the variation in our data. We will use the PCAFromMatrix() function from our package. This function uses the PCA framework from the ade4 package. This function returns a list with three objects, the first one being a PCA, the second one being a data frame with the variance explained by each component, and the third one being a plot of the PCA results (1st and 2nd PCs).\nPCAFromMatrix(geno, subgroups = NULL): returns a pca object from genotype matrix\n\ngeno: our genotype matrix\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\n\n\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n\n# SNP matrix has to have individuals in rows and markers as columns \n# for the posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n\n\n# We will be guiding our analysis by the 'countryOfOriginCode' metadata column\n# Defining our subgroups\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual \n                                                 %in% rownames(matrix)])\n# Running our pca using our genotype data and groups\npca &lt;- PCAFromMatrix(matrix, popSet)\n\n# Printing pca object\npca$pca\n\nDuality diagramm\nclass: pca dudi\n$call: dudi.pca(df = x.genInd, center = FALSE, scale = FALSE, scannf = FALSE, \n    nf = round(ncol(geno)/3, 0))\n\n$nf: 487 axis-components saved\n$rank: 487\neigen values: 288 231.5 102.3 71 37.18 ...\n  vector length mode    content       \n1 $cw    12141  numeric column weights\n2 $lw    488    numeric row weights   \n3 $eig   487    numeric eigen values  \n\n  data.frame nrow  ncol  content             \n1 $tab       488   12141 modified array      \n2 $li        488   487   row coordinates     \n3 $l1        488   487   row normed scores   \n4 $co        12141 487   column coordinates  \n5 $c1        12141 487   column normed scores\nother elements: cent norm \n\n# Printing PC variation\nhead(pca$var)\n\n  PC  Variance CumulativeVar\n1  1 17.004415      17.00442\n2  2 13.666554      30.67097\n3  3  6.040506      36.71148\n4  4  4.191208      40.90268\n5  5  2.195083      43.09777\n6  6  1.665563      44.76333\n\n# Plotting pca results\npca$plot",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/03_Pop_Structure.html#spca",
+    "href": "04_Pop_Structure/03_Pop_Structure.html#spca",
+    "title": "16  Module 4.3: Population Structure",
+    "section": "16.4 sPCA",
+    "text": "16.4 sPCA\nWe will be using the sPCA() function from our package. This function uses the sPCA framework from the adegenet package. It returns a list with our sPCA object, a plot of the obtained eigenvalues, results and plots for the global test and results and plots for the local test. The obtained sPCA result can be plotted using the sPCAMapPlot() function.\nsPCA(geno, subgroups = NULL, xy, eigenPlot = TRUE, tests = TRUE): returns sPCA from genotype data\n\ngeno: our genotype matrix\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\nxy: a two column longitude - latitude vector or data frame\neigenPlot: defaults to TRUE, plots the resulting eigenvalues\ntests: defaults to TRUE, carries out global and local tests\n\nsPCAMapPlot(spca, geno, xy, axis = 1, pos = TRUE): plots our sPCA results on a map\n\nspca: our spca object\ngeno: our genotype matrix\nxy: a two column longitude - latitude vector or data frame\naxis: defaults to 1 (our first axis), we can choose any other axis to plot\npos: defaults to TRUE to plot the positive values, can be set to FALSE to plot the negative values\n\n\n# Running sPCA\nspca &lt;- sPCA(matrix, subgroups = popSet, xy = metadata[,c(\"LON\",\"LAT\")], \n             eigenPlot = TRUE, tests = FALSE)\n\n# Plotting our obtained eigenvalues\nspca$eigenPlot\n\n# Plotting global test results\nspca$globalTest\n\n# Plotting local test results\nspca$localTest\n\n# Plotting our results in a map\nsPCAMapPlot(spca$spca, matrix, xy = metadata[,c(\"LON\",\"LAT\")], \n            axis = 1, pos = TRUE)\n\nThe global test tests whether the genetic structure detected is globally significant, while the local test tests identifies which individuals or sites contribute significantly (hotspots).",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/03_Pop_Structure.html#dapc",
+    "href": "04_Pop_Structure/03_Pop_Structure.html#dapc",
+    "title": "16  Module 4.3: Population Structure",
+    "section": "16.5 DAPC",
+    "text": "16.5 DAPC\nDAPC requires the user to define a range of subpopulation numbers for which to perform the analyses. To do this, we can calculate different k-statistics to guide our choice of this range. We will be using our kMeansStats() function, which allows us to choose between \"BIC\", \"AIC\" or \"WCC\" for our desired k-statistic. This function outputs a data frame with our k-statistic values, and a plot. We will then use our DAPC() function on our genotype data, which uses the DAPC framework from the adegenet package. This function outputs a list with the dapc object and a data frame with the explained variances. An additional plot can also be produced.\nkMeansStats(geno, pca = NULL, maxK, stat): returns test statistic results for different K values\n\ngeno: our genotype matrix\npca: defaults to NULL, can be replaced by a pca object to skip over creating a new PCA\nmaxK: the maximum number of K subpopulations for which to calculate k-statistics\nstat: type of k-statistic to calculate\n\nDAPC(geno, krange, subgroups = NULL, pca = NULL, dapcPlot = FALSE): performs DAPC\n\ngeno: our genotype matrix\nkrange: a range of K values\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\npca: defaults to NULL, can be replaced by a pca object to skip over creating a new PCA\ndapcPlot: defaults to FALSE, if TRUE, an output plot is produced\n\n\n# Calculating our K statistics\nBICDAPC &lt;- kMeansStats(matrix, pca$pca, 10, \"BIC\")\n\n# Plotting K statistic\nBICDAPC$statPlot\n\n\n\n\n\n\n\n# Running DAPC\nDAPC &lt;- DAPC(matrix, krange = 3:7, pca = pca$pca, subgroups = popSet, \n             dapcPlot = TRUE)\n\n# Plotting DAPC results\nDAPC$dapcPlot\n\n\n\n\n\nOur resulting DAPC outputs group assignments for each individual, which can be visualized through a composition plot.\nDAPCCompoPlot(DAPC, geno, krange, subgroups = NULL): returns a composition plot of DAPC results\n\nDAPC: a dapc object\ngeno: our genotype matrix\nkrange: a range of K values\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\n\n\nDAPCCompoPlot(DAPC$dapc, matrix, krange = 3:7, subgroups = popSet)\n\n\n\n\n\n\n\n\nWe can also produce a frequency plot from our DAPC. This helps us understand the relationship between the produced group assignments and prior group information we may have.\nDAPCFreqPlot(DAPC, subgroups): produces a frequency plot of our DAPC results\n\nDAPC: a single dapc object\nsubgroups: a vector of our factor information\n\n\n# For k = 3, which is our first object in our DAPC object\nDAPCFreqPlot(DAPC$dapc[[1]], subgroups = popSet)",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/03_Pop_Structure.html#snmf",
+    "href": "04_Pop_Structure/03_Pop_Structure.html#snmf",
+    "title": "16  Module 4.3: Population Structure",
+    "section": "16.6 sNMF",
+    "text": "16.6 sNMF\nsNMF is used to estimate admixture proportions: how much of an individual’s genome comes from different ancestral populations. This means that individuals are not just assigned to a population, instead membership probabilities (admixture coefficients) are calculated. We will be using functions from our package to carry out these analyses. The framework they use comes from the LEA package. Prior to estimating ancestry coefficients, this package requires us to create a geno type object, which we will create using the write.geno.mod() function. We can then run our main function using sNMFFunction(), which outputs a list with our snmf object, a matrix with the produced ancestry coefficients, and a data frame with cross-entropy values. The latter can guide our choice of best K value.\nwrite.geno.mod(geno, output.file): creates geno type object from genotype matrix\n\ngeno: our genotype matrix\noutput.file: file path where to save our object\n\nsNMFFunction(geno, file, maxK, subgroups = NULL, cePlot = TRUE): outputs ancestry coefficients\n\ngeno: our genotype matrix\nfile: file path of geno object\nmaxK: the maximum number of K subpopulations\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\ncePlot: defaults to TRUE, outputs a plot of cross-entropy values\n\n\n# Creating 'geno' object needed to run sNMF\nwrite.geno.mod(matrix, \"output/sNMFgenoBarley.geno\")\n\n# Running sNMF\nsNMF &lt;- sNMFFunction(matrix, subgroups = popSet, \"output/sNMFgenoBarley.geno\", maxK = 6, cePlot = TRUE)\n\nWe can visualize our membership probability results using a composition plot.\nsNMFCompoPlot(sNMFmatrix, geno, krange, subgroups = NULL): returns a composition plot of admixture results\n\nsNMFmatrix: ancestry coefficient matrix\ngeno: our genotype matrix\nkrange: a range of K values\nsubgroups: defaults to NULL, can be replaced with a vector of our factor information\n\n\n# Plotting composition plot\nsNMFCompoPlot(sNMF$qmatrix, matrix, krange = 2:6, subgroups = popSet)\n\n\n\n\n\n\n\n\nFinally, we can also visualize our sNMF results on a map by incorporating spatial information if available.\nsNMFMapPlot(geno, sNMFObjectVar, xy, k, Xlim = NULL, Ylim = NULL): produces a map plot from ancestry coefficient results for a specific number of subgroups\n\ngeno: our genotype matrix\nsNMFObjectVar: a snmf object\nxy: a two column longitude - latitude vector or data frame\nk: a number K of subpopulations\nXlim: defaults to NULL, can be replaced by a range of longitudes to zoom in the map\nYlim: defaults to NULL, can be replaced by a range of latitudes to zoom in the map\n\n\n# Plotting results in map\nsNMFMapPlot(matrix, sNMF$snmf, xy = metadata[,c(\"LON\",\"LAT\")], 3)\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\nℹ The deprecated feature was likely used in the scatterpie package.\n  Please report the issue to the authors.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Module 4.3: Population Structure</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/04_Phylo_Tree.html",
+    "href": "04_Pop_Structure/04_Phylo_Tree.html",
+    "title": "17  Module 4.4: Phylogenetic Trees",
+    "section": "",
+    "text": "17.1 Tree Methods\nBesides exploring population structure, we may want to explore evolutionary relationships between individuals. We can use phylogenetic trees to infer common ancestry, track lineage divergence, and reconstruct evolutionary and adaptation history. We will focus on distance-based methods. These require us to construct a genetic distance matrix, from which a tree is constructed by clustering similar individuals.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/04_Phylo_Tree.html#tree-methods",
+    "href": "04_Pop_Structure/04_Phylo_Tree.html#tree-methods",
+    "title": "17  Module 4.4: Phylogenetic Trees",
+    "section": "",
+    "text": "Neighbor Joining (NJ): builds an unrooted tree by minimizing the total branch length. It is fast and scaleable, often used for SNP data.\nUnweighted Pair Group Method with Arithmetic Mean (UPGMA): builds a rooted, ultrametric tree, meaning all leaves are at an equal distance from the root. It clusters taxa based on average pairwise distances and assumes a constant rate of evolution.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/04_Phylo_Tree.html#distance-types",
+    "href": "04_Pop_Structure/04_Phylo_Tree.html#distance-types",
+    "title": "17  Module 4.4: Phylogenetic Trees",
+    "section": "17.2 Distance types",
+    "text": "17.2 Distance types\n\nNei’s distance [nei.dist()]: Measures genetic divergence based on allele frequencies. Very common in population genetics.\nEuclidean distance [bitwise.dist()]: Based on geometric distance in multidimensional space.\nReynolds’ distance [reynolds.dist()]: Reynolds’ distance measures genetic differentiation due to drift and it as the main evolutionary force. Good for closely related populations.\nRogers’ distance [rogers.dist()]: Scaled version of the standard Euclidean distance applied to allele frequency data.\nEdwards’ distance [edwards.dist()]: Measures the cosine of the angle between allele frequency vectors.\nPrevosti’s distance [provesti.dist()]: Based on the absolute difference in allele frequencies between two populations.",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
+    ]
+  },
+  {
+    "objectID": "04_Pop_Structure/04_Phylo_Tree.html#creating-our-tree",
+    "href": "04_Pop_Structure/04_Phylo_Tree.html#creating-our-tree",
+    "title": "17  Module 4.4: Phylogenetic Trees",
+    "section": "17.3 Creating our tree",
+    "text": "17.3 Creating our tree\nWe will be using the phyloTree() function from our package to create our phylogenetic tree. This function uses framework from the poppr package to construct the phylogenetic tree.\nphyloTree(geno, treeType, distanceType, samples, path): returns a phylo type object\n\ngeno: our genotype matrix\ntreeType: a text or function that can calculate a tree from a distance matrix, defaults to “upgma”\ndistanceType: a character or function defining the distance to be applied, defaults to nei.dist()\nsamples: a number of bootstrap replicates, defaults to 100\npath: file path to save tree in Newick format\n\nThe output tree can be plotted using the plot() function. We can define the type of visualization in the type parameter, which defaults to \"phylogram\" and accepts \"cladogram\", \"fan\", \"unrooted\", \"radial\" or \"tidy\". The produced Newick file can be visualized better with tools such as iTOL, which allows for more visualization and annotation options.\n\n# Importing filtered genotypic data\nmatrix &lt;- read.table(\"data/FilteredBarley.txt\", sep = \"\\t\", header = TRUE, \n                     row.names = 1, check.names = FALSE)\n# SNP matrix has to have individuals in rows and markers as columns \n# for the posterior functions\nmatrix &lt;- t(matrix)\n\n# Importing metadata\nmetadata &lt;- read_excel(\"data/BarleyMetadata.xlsx\")\n\n# Defining our subgroups\npopSet &lt;- as.factor(metadata$countryOfOriginCode[metadata$Individual \n                                                 %in% rownames(matrix)])\n\n\n# Creating NJ tree from Nei's distance (1 sample for time purposes) \ntree &lt;- phyloTree(matrix, treeType = \"nj\", distanceType = nei.dist, samples = 1, \n                  path = here(\"output\", \"tree.txt\"))\n\nWarning in aboot(alleleFreq, tree = treeType, distance = distanceType, sample =\nsamples, : Some branch lengths of the tree are negative. Normalizing branches\naccording to Kuhner and Felsenstein (1994)\n\n\n\nCalculating bootstrap values... done.\n\n# Creating vector of colors for better visualization\npopColors &lt;- rainbow(nlevels(popSet))[as.numeric(popSet)]\n\n# Plotting tree\nplot(tree, main = \"NJ Tree with Bootstrap\", type = \"phylogram\", tip.color = popColors, cex = 0.1)\n\n\n\n\n\n\n\n\n\n# Creating NJ tree from Nei's distance (1 sample for time purposes) \ntree &lt;- phyloTree(matrix, treeType = \"upgma\", distanceType = nei.dist, samples = 1, \n                  path = \"output/tree.txt\")\n\n# Creating vector of colors for better visualization\npopColors &lt;- rainbow(nlevels(popSet))[as.numeric(popSet)]\n\n# Plotting tree\nplot(tree, main = \"NJ Tree with Bootstrap\", type = \"phylogram\", \n     tip.color = popColors, cex = 0.1)",
+    "crumbs": [
+      "Population Structure and Relatedness",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Module 4.4: Phylogenetic Trees</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/01_Initial_Concepts.html",
+    "href": "05_GWAS/01_Initial_Concepts.html",
+    "title": "18  Module 5.1: Introduction to GWAS",
+    "section": "",
+    "text": "18.1 Reading the Marker Matrix\nThe purpose of Genome-Wide Association Studies (GWAS) is to identify genetic variants associated with specific traits. We will be using the statgenGWAS package, which has been designed for performing single trait GWAS.\nMarkers can either be coded as character strings or as numerical values. Common coding styles include the following options:\ngenotypic_data &lt;- read.table(geno_file, \n                             header = TRUE, \n                             comment.char = '')\n\n# Show the first 50 rows/columns only\ncreate_dt(genotypic_data[1:50,1:50])",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/01_Initial_Concepts.html#reading-the-marker-matrix",
+    "href": "05_GWAS/01_Initial_Concepts.html#reading-the-marker-matrix",
+    "title": "18  Module 5.1: Introduction to GWAS",
+    "section": "",
+    "text": "AA, AB, BA, BB -&gt; 0, 1, 1, 2 (A is reference allele, and B is alternative allele)\nCC, CT, TC, TT -&gt; 0, 1, 1, 2 (e.g., ref. allele is C)\nC, Y, Y, T -&gt; 0, 1, 1, 2 (Nucleic Acid Notation)\nnumerical code: 0, 1, 1, 2 (0 ref./major allele, 2 alt./minor allele, and 1 is heterozygous) statgenGWAS\nnumerical code: -1, 0, 0, 1 (-1 ref./major allele, 1 alt./minor allele, and 0 is heterozygous) rrBLUP\n\n\n\n18.1.1 Marker Map\nThe data.frame map is used to describe the physical positions of the markers on the chromosomes. The data consists of two columns, chr for the name or number of the chromosome and pos for the position of the marker on the chromosome. The position can be in basepair or in centimorgan. The names of the markers should be the row names of the data.frame.\n\nmarker_map &lt;- genotypic_data[, 3:4]\ncolnames(marker_map) &lt;- c('chr', 'pos')\nrownames(marker_map) &lt;- genotypic_data[, 1]\n\ncreate_dt(marker_map)\n\n\n\n\n\n\n\n18.1.2 Marker Matrix\nThe marker matrix is stored in the matrix marker within the gData object. It has the names of the markers in its column names and the genotypes in its row names. Markers can either be coded as character strings or as numerical values. Important note, before performing any analysis, the marker matrix has to be converted to a numerical matrix. This can be do using the function codeMarkers.\n\nmarker_matrix &lt;- genotypic_data[, -c(1:11)]\nrownames(marker_matrix) &lt;- genotypic_data[, 1]\nmarker_matrix &lt;- t(marker_matrix)\n\n# show the first 50 rows/columns only\ncreate_dt(marker_matrix[1:50,1:50])\n\n\n\n\n\nWe can use the marker map and marker matrix to create a gData object.\n\ngData &lt;- createGData(geno = marker_matrix, map = marker_map)\n\n\n\n18.1.3 Recording and Cleaning of Data\nMarker data has to be numerical and without missing values in order to do GWAS analysis. This can be achieved using the codeMarkers() function. In this example our marker matrix is not numerical; however, the function also allows us to input an already numerical matrix for filtering and the imputation of missing values.\ncodeMarkers(gData, naStrings = NA, impute = TRUE, verbose = TRUE, nMiss = 1, nMissGeno = 1, MAF = NULL, imputeType): returens a copy of the input gData object with markers replaced by coded and imputed markers\n\nnaStings: character vector of strings to be treated as NA\nimpute: defaults to TRUE, performs imputation of missing values\nverbose: defaults to TRUE, prints a summary of performed steps\nnMiss: a numerical value between 0 and 1, SNPs with a fraction of missing values higher than this value will be removed\nnMissgeno: a numerical value between 0 and 1, genotypes with a fraction missing values higher than this value will be removed\nMAF: a numerical value between 0 and 1, SNPs with a MAF below this value will be removed\nimputeType: indicates type of imputation (\"fixed\", \"random\", \"beagle\")\n\n\n# Remove duplicate SNPs from gData\ngData &lt;- codeMarkers(gData, \n                     naStrings = 'N', \n                     removeDuplicates = TRUE, \n                     impute = FALSE, \n                     verbose = TRUE)\n\nInput contains 2772 SNPs for 200 genotypes.\n43190 values replaced by NA.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n467 duplicate SNPs removed.\nOutput contains 2305 SNPs for 200 genotypes.\n\n# SNPs with a fraction of missing values higher than nMiss will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMiss = 0.1)\n\nInput contains 2305 SNPs for 200 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n634 SNPs removed because proportion of missing values larger than or equal to 0.1.\n0 duplicate SNPs removed.\nOutput contains 1671 SNPs for 200 genotypes.\n\n# Genotypes with a fraction of missing values higher than nMissGeno will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     nMissGeno = 0.2)\n\nInput contains 1671 SNPs for 200 genotypes.\n12 genotypes removed because proportion of missing values larger than or equal to 0.2.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n318 duplicate SNPs removed.\nOutput contains 1353 SNPs for 188 genotypes.\n\n# SNPs with a Minor Allele Frequency (MAF) below this value will be removed.\ngData &lt;- codeMarkers(gData, \n                     impute = FALSE, \n                     verbose = TRUE, \n                     MAF = 0.05)\n\nInput contains 1353 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n36 SNPs removed because MAF smaller than 0.05.\n0 duplicate SNPs removed.\nOutput contains 1317 SNPs for 188 genotypes.\n\n\nTo decide how we wish to impute our data we can evaluate the total number of remaining missing values and their ratio. We can choose between the following imputation types:\n\nfixed: Impute all missing values by a single fixed value. Use the parameter fixedValue to set this value\nrandom: Impute missing values with a random value based on the non-missing values for a SNP, OK when ratio of missing values is less than 5%.\nbeagle: Impute missing values using the independent beagle software (Browning and Browning 2007)\n\n\n(d &lt;- dim(gData$markers))\n\n[1]  188 1317\n\n(n &lt;- sum(is.na(gData$markers)))\n\n[1] 3036\n\n(r &lt;- n/(d[1]*d[2]))\n\n[1] 0.01226191\n\n\nIn this case we will carry out our missing value imputation using the beagle method.\n\nset.seed(42)\ngData &lt;- codeMarkers(gData, \n                     impute = TRUE, \n                     imputeType = 'beagle', \n                     verbose = TRUE) \n\nInput contains 1317 SNPs for 188 genotypes.\n0 genotypes removed because proportion of missing values larger than or equal to 1.\n0 SNPs removed because proportion of missing values larger than or equal to 1.\n0 duplicate SNPs removed.\n3036 missing values imputed.\n230 duplicate SNPs removed after imputation.\nOutput contains 1087 SNPs for 188 genotypes.\n\n\n\n\n18.1.4 Plot Genetic Map\n\nplot(gData)",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/01_Initial_Concepts.html#reading-the-phenotypic-data",
+    "href": "05_GWAS/01_Initial_Concepts.html#reading-the-phenotypic-data",
+    "title": "18  Module 5.1: Introduction to GWAS",
+    "section": "18.2 Reading the Phenotypic Data",
+    "text": "18.2 Reading the Phenotypic Data\nPhenotypic data, either directly from field trials or after summarizing can be stored in pheno in the gData object. Pheno can either be a single data.frame or a list of data.frames for storing data for different trials or different summarizations of the original data. The first column of all elements of pheno should be genotype and all the other columns should represent different traits. Storing additional variables should be done in covar.\n\n# Import phenotypic data\nphenotypic_data &lt;- read.csv(pheno_file)\ncolnames(phenotypic_data) &lt;- c('genotype', trait_name)\n\n# Add phenotypic data to gData\ngData &lt;- createGData(gData, pheno = phenotypic_data)",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/01_Initial_Concepts.html#summarize-gdata",
+    "href": "05_GWAS/01_Initial_Concepts.html#summarize-gdata",
+    "title": "18  Module 5.1: Introduction to GWAS",
+    "section": "18.3 Summarize gData",
+    "text": "18.3 Summarize gData\n\nsummary(gData)\n\nmap\n    Number of markers: 1087 \n    Number of chromosomes: 8 \n\nmarkers\n    Number of markers: 1087 \n    Number of genotypes: 188 \n    Content:\n        0    1    2 &lt;NA&gt;  \n     0.75 0.25 0.00 0.00  \n\npheno\n    Number of trials: 1 \n\n    phenotypic_data:\n        Number of traits: 2 \n        Number of genotypes: 200 \n\n        ASC_Score       NA\nMin.       0.9400 1.156000\n1st Qu.    3.9600 1.189750\nMedian     4.9300 1.209000\nMean       4.9652 1.207365\n3rd Qu.    6.1250 1.223000\nMax.       8.8200 1.288000\nNA's       0.0000 0.000000",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Module 5.1: Introduction to GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "",
+    "text": "19.1 Significance Threshold\nWe will be carrying out the GWAS analysis using the runSingleTraitGwas() function from the statgenGWAS package.\nrunSingleTraitGwas(gData, traits = NULL, covar = NULL, snpCov = NULL, kin = NULL, kinshipMethod, remlAlgo, GLSMethod, MAF = 0.01, thrType, alpha = 0.05, LODThr = 4, nSnpLOD = 10, pThr = 0.05): performs a single-trait Genome Wide Association Study (GWAS) on phenotypic and genotypic data contained in a gData object.\nPrior to running our analysis, we need to compute a threshold by which to identify significant SNPs. The threshold for selecting significant SNPs in a GWAS analysis tends to be computed by using Bonferroni correction, with an alpha of 0.05. The alpha can be modified by setting the option alpha when calling the runSingleTraitGwas() function. Two other threshold types can be used: a fixed threshold (we set the thrType parameter to “fixed”) by specifying the log10(p) (LODThr) value of the threshold, or a small threshold (we set the thrType parameter to “small” and nSnpLOD to n) which defines the n SNPs with the highest log10(p) scores as significant SNPs.\n# Bonferroni correction approximation\n(pvalue.thr &lt;- 0.05 / ncol(gData$markers))\n\n[1] 4.599816e-05\n\nformat(pvalue.thr, scientific = FALSE)\n\n[1] \"0.00004599816\"\n\n# LOD score (logarithm of the odds)\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.33726\n\n# Reverse the conversion to get p-value threshold\n10^(-LOD.thr)\n\n[1] 4.599816e-05\n\n# Exact Bonferroni correction formula\n(pvalue.thr &lt;- 1 - (1 - 0.05) ^ (1 / ncol(gData$markers)))\n\n[1] 4.718683e-05\n\n(LOD.thr &lt;- -log10(pvalue.thr))\n\n[1] 4.326179",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#variance-covariance-matrix",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "19.2 Variance Covariance Matrix",
+    "text": "19.2 Variance Covariance Matrix\nThere are two ways to compute the phenotypic variance covariance matrix used in the GWAS analysis. Either the EMMA algorithm (Kang et al. 2008) or the Newton-Raphson algorithm (Tunnicliffe 1989). Specify the method by setting the parameter remlAlgo to either “EMMA” or “NR”. By default the EMMA algorithm is used.",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#running-gwas",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "19.3 Running GWAS",
+    "text": "19.3 Running GWAS\n\nGWAS &lt;- runSingleTraitGwas(gData, \n                           traits  = 'ASC_Score', \n                           thrType = 'fixed', \n                           LODThr  = 3.5, \n                           kinshipMethod = 'vanRaden')\n\nOur output is an object of class GWAS. GWAResult is a data.table with the following columns:\n\ntrait: trait name\nsnp: SNP name\nchr: chromosome on which the SNP is located\npos: position of the SNP on the chromosome\nallFreq: allele frequency of the SNP\npValue: P-value for the SNP\neffect: effect of the SNP on the trait value\neffectSe: standard error of the effect of the SNP on the trait value\nRLR2: likelihood-ratio-based R2 as defined in Sun et al. (2010)\nLOD: LOD score (logarithm of the odds) for the SNP, defined as log10(pValue)\n\n\n# Visualizing results\ncreate_dt(cbind(GWAS$GWAResult$phenotypic_data[,1:4],\n                signif(GWAS$GWAResult$phenotypic_data[,-c(1:4)], 3)))\n\n\n\n\n\nNote that the estimated effect is computed for a single allele. Its direction depends on the coding of the markers in the gData object. In this example the minor allele was used as reference allele, so the effects are the estimated effects for the minor allele.",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#significant-alleles",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "19.4 Significant Alleles",
+    "text": "19.4 Significant Alleles\nsignSnp is a data.tables containing the significant SNPs. Optionally, the SNPs close to the significant SNPs are included in the data.table. The data.table in signSnp consist of the same columns as those in GWAResult described above. Two extra columns are added:\n\nsnpStatus: either significant SNP or within … of a significant SNP\npropSnpVar: proportion of the variance explained by the SNP\n\n\ncreate_dt(cbind(GWAS$signSnp$phenotypic_data[, 1:4],\n                signif(GWAS$signSnp$phenotypic_data[, 5:10], 3),\n                GWAS$signSnp$phenotypic_data[, 11],\n                signif(GWAS$signSnp$phenotypic_data[, 12], 3)))\n\n\n\n\n\nWe can get the name of the best marker (the one with the highest LOD value):\n\n(snp &lt;- GWAS$signSnp$phenotypic_data[LOD == max(LOD), snp])\n\n[1] \"SCa4_9803244\"\n\n\nWe can manually check by using t.test, which is the old school way.\n\n# Creating data frame for t-test\ndf &lt;- as.data.frame(marker_matrix[,snp])\n\ndf$genotype  &lt;- rownames(marker_matrix)\ncolnames(df) &lt;- c('snp', 'genotype')\n\ndf &lt;- merge(df, phenotypic_data, id = 'genotype')\ndf &lt;- na.omit(df)\n\ntable(df$snp)\n\n\n  C   N   T   Y \n129  11  55   5 \n\n# Running t-test\ndf &lt;- df[df$snp %in% c('C', 'G', 'A', 'T'),]\ndf$snp &lt;- as.factor(df$snp)\n\nt.test(formula(paste(trait_name, '~ snp')), data = df)\n\n\n    Welch Two Sample t-test\n\ndata:  ASC_Score by snp\nt = -5.4233, df = 114.29, p-value = 3.308e-07\nalternative hypothesis: true difference in means between group C and group T is not equal to 0\n95 percent confidence interval:\n -1.6581884 -0.7709251\nsample estimates:\nmean in group C mean in group T \n       4.592171        5.806727 \n\n# Plotting t-test results\nboxplot(formula(paste(trait_name, '~ snp')), data = df)",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#kinship-results",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "19.5 Kinship Results",
+    "text": "19.5 Kinship Results\nA kinship matrix was produced and used in the GWAS analysis. The method for producing this matrix can be defined by thge kinshipMethod parameter in the runSingleTraitGwas() function. By default, the same kinship matrix is used for testing all SNPs (GLSMethod = “single”). When GLSMethod = “multi”, the kinship matrix is chromosome-specific. As shown by Rincent et al.(2014), this often gives a considerable improvement in power.\n\n# Visualizing kinship matrix\ncreate_dt(round(GWAS$kinship, 3))\n\n\n\n\n\n\n# Plotting a heatmap of kinship results\nheatmap(GWAS$kinship)",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#population-structure",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "19.6 Population Structure",
+    "text": "19.6 Population Structure\nThe population structure can also be explored from the produced kinship results.\n\n# Perform principal components analysis\npca &lt;- prcomp(GWAS$kinship)\n\n# Cumulative Proportion\nsummary(pca)$importance[,1:2]\n\n                            PC1      PC2\nStandard deviation     2.373792 1.268689\nProportion of Variance 0.591670 0.169010\nCumulative Proportion  0.591670 0.760670\n\n# Plotting correlations between traits (1st and 2nd components)\nplot(pca$x[,1:2], pch = 20,\n     main = paste0('Kinship PCA (', round(100*summary(pca)$importance[3,2],1), '%)'),\n     xlab = paste0('PC1 (', round(100*summary(pca)$importance[2,1],1), '%)'),\n     ylab = paste0('PC2 (', round(100*summary(pca)$importance[2,2],1), '%)'))",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#results-summary",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "19.7 Results Summary",
+    "text": "19.7 Results Summary\nGeneral information of our GWAS results can be obtained by printing the GWASInfo part of our GWAS object. GWASInfo$inflationFactor returns the inflation factor (Devlin and Roeder 1999). Ideally this factor should be 1, meaning there is no inflation at all. If the values are further away from 1, the inflation can be corrected for by setting genomicControl = TRUE in runSingleTraitGwas().\n\nGWAS$GWASInfo\n\n$call\nrunSingleTraitGwas(gData = gData, traits = \"ASC_Score\", kinshipMethod = \"vanRaden\", \n    thrType = \"fixed\", LODThr = 3.5)\n\n$remlAlgo\n[1] \"EMMA\"\n\n$thrType\n[1] \"fixed\"\n\n$MAF\n[1] 0.01\n\n$GLSMethod\n[1] \"single\"\n\n$kinshipMethod\n[1] \"vanRaden\"\n\n$varComp\n$varComp$phenotypic_data\n$varComp$phenotypic_data$ASC_Score\n      Vg       Ve \n0.646051 1.895564 \n\n\n\n$genomicControl\n[1] FALSE\n\n$inflationFactor\n$inflationFactor$phenotypic_data\nASC_Score \n0.8854797 \n\n\nFor a quick overview of the results, e.g. the number of significant SNPs, use the summary function.\n\nsummary(GWAS)\n\nphenotypic_data:\n    Traits analysed: ASC_Score \n\n    Data are available for 1087 SNPs.\n     0 of them were not analyzed because their minor allele frequency is below 0.01 \n\n    GLSMethod: single \n    kinshipMethod: vanRaden \n\n    Trait: ASC_Score \n\n        Mixed model with only polygenic effects, and no marker effects:\n        Genetic variance: 0.646051 \n        Residual variance: 1.895564 \n\n        LOD-threshold: 3.5 \n        Number of significant SNPs: 2 \n        Smallest p-value among the significant SNPs: 6.81679e-05 \n        Largest p-value among the significant SNPs: 0.0002511666 (LOD-score: 3.600038)\n\n        No genomic control correction was applied\n        Genomic control inflation-factor: 0.885",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "05_GWAS/02_Single_Trait_GWAS.html#plots",
+    "href": "05_GWAS/02_Single_Trait_GWAS.html#plots",
+    "title": "19  Module 5.2: Single Trait GWAS",
+    "section": "19.8 Plots",
+    "text": "19.8 Plots\n\n19.8.1 QQ-Plot\nA QQ-plot of the observed against the expected log10(p) values. Most of the SNPs are expected to have no effect, resulting in P-values uniformly distributed on [0,1], and leading to the identity function (y=x) on the log10(p) scale. Deviations from this line should only occur on the right side of the plot, for a small number of SNPs with an effect on the phenotype (and possibly SNPs in LD).\n\nplot(GWAS, plotType = 'qq', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n19.8.2 Manhattan Plot\nA Manhattan plot of GWAS. Significant SNPs are marked in red. Plot only 5% of SNPs with a LOD below 2 (lod = 2)\n\nplot(GWAS, plotType = 'manhattan', trait = trait_name)\n\n\n\n\n\n\n\n\n\n\n19.8.3 QTL Plot\nA qtl plot of GWAS. The significant SNPs are marked by circles at their genomic positions, with diameter proportional to the estimated effect size. Colors indicate the direction of the effect: green when the allele increases the trait value, and blue when it decreases the value.\n\nplot(GWAS, plotType = 'qtl')",
+    "crumbs": [
+      "Genome Wide Association Studies (GWAS)",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Module 5.2: Single Trait GWAS</span>"
+    ]
+  },
+  {
+    "objectID": "06_GS/01_Genomic_Selection.html",
+    "href": "06_GS/01_Genomic_Selection.html",
+    "title": "20  Module 6.1: Genomic Selection",
+    "section": "",
+    "text": "20.1 Read, Filter and Impute Marker Data\nGenomic selection enables early and accurate prediction of complex traits based on genome-wide SNP data. This can allow us to predict performance immediately after genotyping seedlings, which can speed up selection decisions and reduce the cost of field trials. We will be using the rrBBLUP package for this part, which is a is a package for genomic prediction with the ridge regression best linear unbiased prediction or RR-BLUP mixed linear model (Endelman, 2011). One application is to estimate marker effects by ridge regression; alternatively, BLUPs can be calculated based on an additive relationship matrix or a Gaussian kernel.\nThe genotypic matrix for rrBLUP has to be coded as {-1, 0, 1}, meaning we will need a conversion step if our data is not yet in that format. Moreover, we will be carrying out a mean value imputation.\n# Importing genotypic data\ngeno_file &lt;- 'data/barley_genbank_2388variants_554individuals_biallelic.hmp.txt.gz'\n\ngeno_data &lt;- read.csv(geno_file, sep = \"\\t\")\n\n# Show the first 50 rows/columns only\ncreate_dt(geno_data[1:50,1:50])\nM &lt;- geno_data[, -c(1:11)]\nrownames(M) &lt;- geno_data[, 1]\nM &lt;- t(M)\n\n# Reformatting matrix to numeric\nM &lt;- ASRgenomics::snp.recode(M, na.string = 'NN', rename.markers = FALSE)$Mrecode\n\nA total of 87800 values were identified as missing with the string NN and were replaced by NA.\n\n\nMatrix M was recoded from bi-allelic nucleotide bases to numeric.\n# Filtering genotypic matrix\nM &lt;- ASRgenomics::qc.filtering(M, \n                               marker.callrate = 0.1, \n                               ind.callrate = 0.2, \n                               maf = 0.05, \n                               impute = TRUE)$M.clean\n\nInitial marker matrix M contains 554 individuals and 2388 markers.\n\n\nA total of 674 markers were removed because their proportion of missing values was equal or larger than 0.1.\n\n\nA total of 5 individuals were removed because their proportion of missing values was equal or larger than 0.2.\n\n\nA total of 34 markers were removed because their MAF was smaller than 0.05.\n\n\nA total of 0 markers were removed because their heterozygosity was larger than 1.\n\n\nA total of 0 markers were removed because their |F| was larger than 1.\n\n\nFinal cleaned marker matrix M contains 2.84% of missing SNPs.\n\n\nFinal cleaned marker matrix M contains 549 individuals and 1680 markers.\n\n\nA total of 26221 missing values were imputed, corresponding to 2.84% of the total number of SNPs.\n\n# Reformatting to required format\nM &lt;- as.matrix(M) - 1\n\n# Show the first 50 rows/columns only\ncreate_dt(M[1:50,1:50])",
+    "crumbs": [
+      "Genomic Selection",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
+    ]
+  },
+  {
+    "objectID": "06_GS/01_Genomic_Selection.html#read-and-align-phenotypic-data",
+    "href": "06_GS/01_Genomic_Selection.html#read-and-align-phenotypic-data",
+    "title": "20  Module 6.1: Genomic Selection",
+    "section": "20.2 Read and Align Phenotypic Data",
+    "text": "20.2 Read and Align Phenotypic Data\n\n# Importing phenotypic data\npheno_file &lt;- 'barley_genbank_phenotypic_mean_data.csv'\n\npheno_data &lt;- read.csv(pheno_file)\n\npheno_data &lt;- merge(pheno_data, as.data.frame(rownames(M)), by.x = 'sample_id', by.y = 1, all.y = TRUE)\n\n# Extracting requires trait\ny &lt;- pheno_data$Yield\n\n# Printing phenotypic data\ncreate_dt(pheno_data)",
+    "crumbs": [
+      "Genomic Selection",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
+    ]
+  },
+  {
+    "objectID": "06_GS/01_Genomic_Selection.html#model-1",
+    "href": "06_GS/01_Genomic_Selection.html#model-1",
+    "title": "20  Module 6.1: Genomic Selection",
+    "section": "20.3 Model 1",
+    "text": "20.3 Model 1\nThe first model assumes that all marker effects are normally distributed and have identical variance. Parameters are estimated as a solution to the optimization problem. Predictions from this method are equivalent to BLUP values from an animal model (i.e., GBLUP). The observed relationship matrix is calculated from the markers using the formula by VanRaden (2008).\n\n# Fitting a Model using rrBLUP (case 1: all SNPs in the random effect)\nGS &lt;- rrBLUP::mixed.solve(y, Z = M, X = NULL, method = 'REML')\n\n# Obtaining predictions\npredGS &lt;- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u \n\n# Printing predictions\ncreate_dt(cbind(round(predGS, 3), y))\n\n\n\n\n\n\n# Plotting predictions\nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n20.3.1 Goodness of Fit Statistics\n\n# Heritability\n# Trait variance\n(var_y  &lt;- var(y, na.rm = TRUE))\n\n[1] 2.107743\n\n# Error variance\n(var_e  &lt;- GS$Ve)\n\n[1] 1.465679\n\n# Proportion of explained variance (High = good fit, potential heritability)\n(h2_GS &lt;- 1 - var_e / var_y)\n\n[1] 0.3046215\n\nAnas_table &lt;- cbind(rownames(M), y, predGS)\n\n# Predictive ability (High = good prediction accuracy)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.7800125",
+    "crumbs": [
+      "Genomic Selection",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
+    ]
+  },
+  {
+    "objectID": "06_GS/01_Genomic_Selection.html#model-2",
+    "href": "06_GS/01_Genomic_Selection.html#model-2",
+    "title": "20  Module 6.1: Genomic Selection",
+    "section": "20.4 Model 2",
+    "text": "20.4 Model 2\nThis model handles some markers as having a fixed effect (e.g. significant SNPs from GWAS output). It splits the genotypic data into X matrix (fixed effects) and Z matrix (random effects). To calculate the REML solution for the model you solve y = X b + Z u + e. We predict BLUE(b) and BLUP(u) solutions for the fixed and random effects, respectively, using standard formulas (Searle et al. 1992).\n\n# Defining markers\nmarkers &lt;- c('S7H_63131260', 'S5H_573915992')\nSNPs    &lt;- colnames(M)\n\n# Filtering matrices\nX &lt;- M[, SNPs %in% markers]\nZ &lt;- M[,!SNPs %in% markers]\n\n# Fitting a Model using rrBLUP by exclude markers from the Z matrix (for the Random effects) and include them in the X matrix (for the fixed effect)\nGS &lt;- rrBLUP::mixed.solve(y, Z = Z, X = X, method = 'REML')\n\n# Obtaining predictions\npredGS &lt;- X %*% GS$beta + Z %*% GS$u \n\n# Printing predictions\ncreate_dt(cbind(round(predGS, 3), y))\n\n\n\n\n\n\n# Plot to verify \nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n20.4.1 Goodness of Fit Statistics\n\n# Heritability (GS)\n# Trait variance\n(var_y  &lt;- var(y, na.rm = TRUE))\n\n[1] 2.107743\n\n# Error variance\n(var_e  &lt;- GS$Ve)\n\n[1] 1.018018\n\n# Proportion of explained variance (High = good fit, potential heritability)\n(h2_GS &lt;- 1 - var_e / var_y)\n\n[1] 0.5170105\n\n# Predictive Ability (correlation between actual and predicted response)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n          [,1]\n[1,] 0.8952614",
+    "crumbs": [
+      "Genomic Selection",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
+    ]
+  },
+  {
+    "objectID": "06_GS/01_Genomic_Selection.html#k-fold-cross-validation",
+    "href": "06_GS/01_Genomic_Selection.html#k-fold-cross-validation",
+    "title": "20  Module 6.1: Genomic Selection",
+    "section": "20.5 K-Fold Cross Validation",
+    "text": "20.5 K-Fold Cross Validation\n\n# Set the total number of folds, and get the total number of individuals\nk &lt;- 5\nn &lt;- length(y)\n\n# Set randomly the fold group for each observation \n# That tells when it will be used for validation\ngroup &lt;- sample(rep(1:k, length.out = n), n)\nhead(group, 20)\n\n [1] 5 1 3 2 1 4 2 4 1 4 4 4 2 4 3 3 2 5 1 5\n\ntable(group)\n\ngroup\n  1   2   3   4   5 \n110 110 110 110 109 \n\n\n\n# An empty matrix to save calculated heritability in each fold, and GS prediction that calculated when individual be in validation group\npredGS &lt;- matrix(data = NA, nrow = n, ncol = 1)\nh2_cv  &lt;- matrix(data = NA, nrow = k, ncol = 1)\n\nfor (g in 1:k) { \n  # Reset response variable, and exclude validation set values for the given k fold\n  y_cv &lt;- y\n  y_cv[group == g] &lt;- NA\n  \n  # Fitting a Model using rrBLUP (model 1: all SNPs in the random effect)\n  # GS &lt;- mixed.solve(y_cv, Z = M, X = NULL, method = 'REML')\n  # predGS_cv &lt;- matrix(data = GS$beta, nrow = length(y), ncol = 1) + M %*% GS$u \n  \n  # Model 2: have some markers to be handled as a fixed effect\n  GS &lt;- rrBLUP::mixed.solve(y_cv, Z = Z, X = X, method = 'REML')\n  \n  # Obtaining predictions\n  predGS_cv &lt;- X %*% GS$beta + Z %*% GS$u \n  \n  # Heritability (GS)\n  var_y    &lt;- var(y_cv, na.rm = TRUE)\n  var_e    &lt;- GS$Ve\n  h2_cv[g] &lt;- 1 - var_e / var_y\n  \n  # Get the GS prediction for all validation set individuals\n  predGS[group == g] &lt;- predGS_cv[group == g]\n}\n\n# Plot to verify \nplot(y, predGS)\n\n\n\n\n\n\n\n\n\n# Heritability (GS cross-validation)\nh2_cv\n\n          [,1]\n[1,] 0.5669156\n[2,] 0.4867977\n[3,] 0.5506054\n[4,] 0.5487734\n[5,] 0.5748752\n\nmean(h2_cv)\n\n[1] 0.5455935\n\n# Predictive Ability (correlation between actual and predicted response)\n(PA &lt;- cor(y, predGS, method = 'pearson', use = 'complete.obs'))\n\n         [,1]\n[1,] 0.398479",
+    "crumbs": [
+      "Genomic Selection",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
+    ]
+  },
+  {
+    "objectID": "06_GS/01_Genomic_Selection.html#predict-breeding-values",
+    "href": "06_GS/01_Genomic_Selection.html#predict-breeding-values",
+    "title": "20  Module 6.1: Genomic Selection",
+    "section": "20.6 Predict Breeding Values",
+    "text": "20.6 Predict Breeding Values\n\n# Calculate the additive relationship matrix (it is the kinship matrix multiplied by 2) it can also perform imputation for missing marker data by \n# Define impute.method (mean or EM) (see also: min.MAF, max.missing, and return.imputed parameters)\nA &lt;- rrBLUP::A.mat(M)\nheatmap(A)\n\n\n\n\n\n\n\n\n\nGS &lt;- rrBLUP::mixed.solve(y, K = A.mat(M), SE = TRUE)\n\n# Genomic Estimated Breeding Value (GEBV)\nGEBV &lt;- cbind(round(GS$u, 3), round(GS$u.SE, 3))\n\ncolnames(GEBV) &lt;- c('GEBV', 'SE')\n\ncreate_dt(GEBV)",
+    "crumbs": [
+      "Genomic Selection",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Module 6.1: Genomic Selection</span>"
     ]
   }
 ]

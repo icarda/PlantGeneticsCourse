@@ -37,8 +37,7 @@ book:
     - part: "Core Genomic Concepts"
       chapters:
         - 03_Genomic_Concepts/01_SNPs_Genotypes.qmd
-        - 03_Genomic_Concepts/02_QBMS.qmd
-        - 03_Genomic_Concepts/03_Filtering_SNP_Data.qmd
+        - 03_Genomic_Concepts/02_Filtering_SNP_Data.qmd
     - part: "Population Structure and Relatedness"
       chapters:
         - 04_Pop_Structure/01_Kinship_Relatedness.qmd

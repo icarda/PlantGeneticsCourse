@@ -9,10 +9,11 @@
 
 1.  **Install R:** Go to [CRAN (the Comprehensive R Archive Network)](https://cran.r-project.org/) and download the latest version for your operating system (Windows, macOS, Linux). Follow the installation instructions.
 2.  **Install RStudio:** Go to the [Posit website](https://posit.co/download/rstudio-desktop/) and download the free RStudio Desktop version for your operating system. Install it after installing R.
-3.  **Install Quarto:** Go to [Quarto's website](https://quarto.org/docs/get-started/) and download and install Quarto for your system. RStudio often bundles Quarto, but installing the latest version is good practice.
-4.  **(For PDF Output) Install LaTeX:** Open RStudio, go to the Console panel, and type the following commands one by one, pressing Enter after each:
+3.  **Install RTools:** RTools can be installed from the [CRAN website](https://cran.r-project.org/bin/windows/Rtools/). You need to install the version corresponding to the R version you have installed through its installer.
+4.  **Install Quarto:** Go to [Quarto's website](https://quarto.org/docs/get-started/) and download and install Quarto for your system. RStudio often bundles Quarto, but installing the latest version is good practice.
+5.  **(For PDF Output) Install LaTeX:** Open RStudio, go to the Console panel, and type the following commands one by one, pressing Enter after each:
 
-```         
+```{r tinytex, eval=FALSE}
 # Run these lines in the R Console 
 install.packages("tinytex") 
 # Run only once if you don't have it 
